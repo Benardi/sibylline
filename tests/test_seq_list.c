@@ -7,7 +7,10 @@
 SeqList* sl;
 Register reg;
 
-// = (SeqList*) malloc(sizeof(SeqList));
+void setup(void);
+void teardown(void);
+Suite * make_seq_list_suite(void);
+
 
 void setup(void) {
   sl = (SeqList*) malloc(sizeof(SeqList));
@@ -241,17 +244,6 @@ START_TEST(test_remove_elem_4) {
   ck_assert_int_eq(sl->nElem, 3);
   ck_assert_int_eq(sl->A[0].key, 1);
   ck_assert_int_eq(sl->A[1].key, 7);
-  ck_assert_int_eq(sl->A[2].key, -2);
-}
-END_TEST
-
-START_TEST(test_show_list) {
-  init_seq_list(sl);
-  sl->A[0].key = 7;
-  sl->A[1].key = 1;
-  sl->A[2].key = 7;
-  sl->A[3].key = -2;
-  sl->nElem = 4;
   ck_assert_int_eq(sl->A[2].key, -2);
 }
 END_TEST
