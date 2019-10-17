@@ -6,6 +6,7 @@ Data Structures and Algorithms written in C
 
 [![BSD licensed](https://img.shields.io/github/license/vndmtrx/check-cmake-example.svg)](https://github.com/vndmtrx/check-cmake-example/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/Benardi/sibylline.svg?branch=master)](https://travis-ci.org/Benardi/sibylline)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FBenardi%2Fsibylline.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FBenardi%2Fsibylline?ref=badge_shield)
 
 ***
 
@@ -89,6 +90,9 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## License
 
 This project is licensed under the BSD-3 Clause License - see the [LICENSE.md](LICENSE.md) file for details
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FBenardi%2Fsibylline.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FBenardi%2Fsibylline?ref=badge_large)
 
 ## Acknowledgments
 
