@@ -77,7 +77,14 @@ If you wish to change the deployment location you may edit the `CMakeLists.txt` 
 
 install(TARGETS sibylline DESTINATION lib)
 ```
+## Documentation 
+To generate documentation make sure to install Doxygen. Once inside the folder type the below command
+to generate the documentation:
 
+```
+doxygen ./docs/Doxyfile.in
+```
+The documentation will be generated in the doc_doxygen folder under html & latex folders.
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/Benardi/sibylline/tags). 
