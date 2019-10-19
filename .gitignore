@@ -46,3 +46,6 @@ CTestTestfile.cmake
 
 # Build folder
 build/
+
+#Documentation Folder
+doc_doxygen/
