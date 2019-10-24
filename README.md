@@ -1,3 +1,8 @@
+  <img src="https://raw.githubusercontent.com/Benardi/sibylline/master/sibylline_icon.png"
+       alt="sibylline logo"
+       align="center"
+       width="200px">
+
 # Sibylline
 
 Data Structures and Algorithms written in C
