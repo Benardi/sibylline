@@ -1,7 +1,6 @@
-  <img src="https://raw.githubusercontent.com/Benardi/sibylline/master/sibylline_icon.png"
+  <img src="https://raw.githubusercontent.com/Benardi/sibylline/master/sibylline_icon_wide.png"
        alt="sibylline logo"
-       align="center"
-       width="200px">
+       align="center">
 
 # Sibylline
 
