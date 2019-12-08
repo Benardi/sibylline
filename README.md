@@ -1,7 +1,6 @@
-  <img src="https://raw.githubusercontent.com/Benardi/sibylline/master/sibylline_icon.png"
+  <img src="https://raw.githubusercontent.com/Benardi/sibylline/master/sibylline_icon_wide.png"
        alt="sibylline logo"
-       align="center"
-       width="200px">
+       align="center">
 
 # Sibylline
 
@@ -9,9 +8,18 @@ Data Structures and Algorithms written in C
 
 ## Status
 
-[![BSD licensed](https://img.shields.io/github/license/vndmtrx/check-cmake-example.svg)](https://github.com/vndmtrx/check-cmake-example/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/Benardi/sibylline.svg?branch=master)](https://travis-ci.org/Benardi/sibylline)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FBenardi%2Fsibylline.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FBenardi%2Fsibylline?ref=badge_shield)
+<p align="center">
+    <a href="https://github.com/vndmtrx/check-cmake-example/blob/master/LICENSE">
+        <img src="https://img.shields.io/github/license/vndmtrx/check-cmake-example.svg"
+            alt="BSD licensed"/>
+    </a>
+    <a href="https://travis-ci.org/Benardi/sibylline">
+        <img src="https://travis-ci.org/Benardi/sibylline.svg?branch=master"
+            alt="Build Status"/>
+    <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FBenardi%2Fsibylline?ref=badge_small" alt="FOSSA Status">
+        <img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FBenardi%2Fsibylline.svg?type=small"/>
+    </a>
+</p>
 
 ***
 
