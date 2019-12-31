@@ -71,6 +71,19 @@ int size(SeqList* sl);
  */
 bool insert_elem(SeqList* sl, Register reg, int i);
 
+/** @brief Inserts register in Sequential List whilst
+ *         ensuring the List stays sorted. 
+ *
+ *  If the Sequential List is already filled up it is   
+ *  kept unchanged and false is returned. Else, the element
+ *  is inserted and true returned.
+ *
+ *  @param pointer Sequential List 
+ *  @param struct element that contains key
+ *  @return whether element could be inserted
+ */
+bool insert_sorted(SeqList* sl, Register reg);
+
 /** @brief Sequentially searchs a Sequential List and
  *         returns index of first occurrence.
  *
@@ -84,6 +97,19 @@ bool insert_elem(SeqList* sl, Register reg, int i);
  *  @return Index of first match
  */
 int seq_search(SeqList* sl, Key k);
+
+/** @brief Performs binary search on a Sequential List
+ *         under the assumption it is sorted.
+ *
+ *  Performs binary search on a sorted Sequential List. 
+ *  Returns index of first matched occurrence of given
+ *  Register key, else returns -1. 
+ * 
+ *  @param pointer Sequential List
+ *  @param int Key to be found
+ *  @return Index of first match
+ */
+int binary_search(SeqList* sl, Key k);
 
 /** @brief Sequentially searchs a Sequential List and
  *         returns index of first occurrence.

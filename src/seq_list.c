@@ -39,6 +39,7 @@ int sentinel_search(SeqList* sl, Key k)
 {
   int i = 0;
   sl->A[sl->nElem].key = k;
+ 
   while (sl->A[i].key != k) {
     i++;
   }
@@ -52,19 +53,26 @@ int sentinel_search(SeqList* sl, Key k)
 
 bool insert_sorted(SeqList* sl, Register reg)
 {
+  int pos;
+
   if (sl->nElem >= MAX) {
     return false;
   }
-  int pos = sl->nElem;
+  
+  pos = sl->nElem;
+
   while(pos > 0 && sl->A[pos-1].key > reg.key) {
     sl->A[pos] = sl->A[pos - 1];
     pos--;
   }
+
   sl->A[pos] = reg;
   sl->nElem++;
+  
+  return true;
 }
 
-bool binary_search(SeqList* sl, Key k) 
+int binary_search(SeqList* sl, Key k) 
 {
   int left, right, middle;
   left = 0;
