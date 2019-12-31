@@ -84,7 +84,12 @@ int binary_search(SeqList* sl, Key k)
       return middle;
     }
     else {
-      right = middle - 1;
+      if (sl->A[middle].key < k) {
+        left = middle + 1;
+      }
+      else {
+        right = middle - 1;
+      }
     }
   }
 
