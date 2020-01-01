@@ -1,8 +1,8 @@
-#include <stdlib.h>
-#include <stdint.h>
-#include <malloc.h>
-#include <check.h>
-#include <seq_list.h>
+#include<stdlib.h>
+#include<stdint.h>
+#include<malloc.h>
+#include<check.h>
+#include<seq_list.h>
 
 SeqList *sl;
 Register reg;

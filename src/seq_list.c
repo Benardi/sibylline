@@ -1,5 +1,3 @@
-#include <stdbool.h>
-#include <malloc.h>
 #include <stdio.h>
 #include <seq_list.h>
 
