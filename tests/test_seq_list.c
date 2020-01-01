@@ -215,6 +215,7 @@ END_TEST
 
 START_TEST(test_insert_sorted_4)
 {
+  init_seq_list(sl);
   reg.key = 10;
   bool result1 = insert_sorted(sl, reg);
 

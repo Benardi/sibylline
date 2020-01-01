@@ -13,7 +13,7 @@
 
 #include <stdbool.h>
 
-#define MAX 50
+#define MAX 20
 
 typedef int Key;
 typedef struct
