@@ -13,7 +13,7 @@
 
 #include <stdbool.h>
 
-#define MAX 50
+#define MAX 20
 
 typedef int Key;
 typedef struct
@@ -31,7 +31,7 @@ typedef struct
  *  Sets the attribute nElems of a Sequential List given
  *  as a pointer to 0.
  *
- *  @param pointer Sequential List to be initialized
+ *  @param sl Sequential List as pointer
  *  @return Void
  */
 void init_seq_list(SeqList* sl);
@@ -41,7 +41,7 @@ void init_seq_list(SeqList* sl);
  *  Sets the attribute nElems of a Sequential List (that has
  *  been used before) given as a pointer to 0.
  *
- *  @param pointer Sequential List to be reinitialized
+ *  @param sl Sequential List as pointer
  *  @return Void
  */
 void reinit_seq_list(SeqList* sl);
@@ -51,7 +51,7 @@ void reinit_seq_list(SeqList* sl);
  *  Calculates the size of a initialized Sequential List, 
  *  undefined behavior if not properly initialized
  *
- *  @param pointer Sequential List 
+ *  @param sl Sequential List as pointer
  *  @return The size of the Sequential List
  */
 int size(SeqList* sl);
@@ -64,10 +64,10 @@ int size(SeqList* sl);
  *  kept unchanged and false is returned. Else, the element
  *  is inserted and true returned.
  *
- *  @param pointer Sequential List 
- *  @param struct element that contains key
- *  @param int position where to insert 
- *  @return whether element could be inserted
+ *  @param sl Sequential List as a pointer. 
+ *  @param reg element that contains key.
+ *  @param i position where to insert 
+ *  @return Whether element could be inserted
  */
 bool insert_elem(SeqList* sl, Register reg, int i);
 
@@ -78,9 +78,9 @@ bool insert_elem(SeqList* sl, Register reg, int i);
  *  kept unchanged and false is returned. Else, the element
  *  is inserted and true returned.
  *
- *  @param pointer Sequential List 
- *  @param struct element that contains key
- *  @return whether element could be inserted
+ *  @param sl Sequential List as pointer
+ *  @param reg element that contains key
+ *  @return Whether element could be inserted
  */
 bool insert_sorted(SeqList* sl, Register reg);
 
@@ -92,8 +92,8 @@ bool insert_sorted(SeqList* sl, Register reg);
  *  occurrence that matches given Register key, else
  *  returns -1. 
  * 
- *  @param pointer Sequential List
- *  @param int Key to be found
+ *  @param sl Sequential List as pointer
+ *  @param k Key to be found
  *  @return Index of first match
  */
 int seq_search(SeqList* sl, Key k);
@@ -105,8 +105,8 @@ int seq_search(SeqList* sl, Key k);
  *  Returns index of first matched occurrence of given
  *  Register key, else returns -1. 
  * 
- *  @param pointer Sequential List
- *  @param int Key to be found
+ *  @param sl Sequential List as pointer
+ *  @param k Key to be found
  *  @return Index of first match
  */
 int binary_search(SeqList* sl, Key k);
@@ -120,8 +120,8 @@ int binary_search(SeqList* sl, Key k);
  *  index of first occurrence that matches given 
  *  Register key, else returns -1. 
  * 
- *  @param pointer Sequential List
- *  @param int Key to be found
+ *  @param sl Sequential List as pointer
+ *  @param k Key to be found
  *  @return Index of first match
  */
 int sentinel_search(SeqList* sl, Key k);
@@ -135,9 +135,9 @@ int sentinel_search(SeqList* sl, Key k);
  *  elements to the right to keep Sequential List 
  *  contiguous. Else, keeps Sequential List untouched. 
  *
- *  @param int Key to be found
- *  @param pointer Sequential List 
- *  @return whetjer element could be removed
+ *  @param k Key to be found
+ *  @param sl Sequential List as pointer
+ *  @return Wheter element could be removed
  */
 bool remove_elem(Key key, SeqList* sl);
 
@@ -147,7 +147,7 @@ bool remove_elem(Key key, SeqList* sl);
  *  ascending order of index, printing the key of
  *  each existing element separated by a blank space.  
  * 
- *  @param pointer Sequential List 
+ *  @param sl Sequential List as pointer
  *  @return Void
  */
 void show_list(SeqList* sl);
