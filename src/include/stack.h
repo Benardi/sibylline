@@ -66,13 +66,14 @@ bool push(Stack* stk, Register reg);
 
 /** @brief Removes element from stack and returns it. 
  *
- *  If there's at least one element in stack removes 
- *  and returns it as a pointer. Otherwise does not 
- *  change stack and returns a @c NULL pointer. 
+ *  If there's at least one element in stack removes it,
+ *  puts its value into given point and returns true.
+ *  Otherwise doesn't update pointer and returns false. 
  *
  *  @param stk Stack as a pointer 
+ *  @param removed pointer to hold value of removed element
  *  @return Whether an element could be popped
  */
-Register* pop(Stack* stk);
+bool pop(Stack* stk, Register* removed);
 
 #endif /* STACK_H */

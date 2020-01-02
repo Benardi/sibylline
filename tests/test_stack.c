@@ -6,6 +6,8 @@
 
 Stack *stk;
 Register reg;
+Register* element1;
+Register* element2;
 
 void setup(void);
 void teardown(void);
@@ -13,12 +15,16 @@ Suite *make_stack_suite(void);
 
 void setup(void)
 {
-  stk = (Stack *)malloc(sizeof(Stack));
+  stk = (Stack*) malloc(sizeof(Stack));
+  element1 = (Register*) malloc(sizeof(Register));
+  element2 = (Register*) malloc(sizeof(Register));
 }
 
 void teardown(void)
 {
   free(stk);
+  free(element1);
+  free(element2);
 }
 
 START_TEST(test_init_stack_1)
@@ -117,59 +123,56 @@ END_TEST
 
 START_TEST(test_stack_pop_1)
 {
-  Register* element;
+  bool result;
 
   init_stack(stk);
-  element = pop(stk);
-  ck_assert_int_eq(element == NULL, true);
+  result = pop(stk, element1);
+  
+  ck_assert_int_eq(result, false);
 }
 END_TEST
 
 START_TEST(test_stack_pop_2)
 {
-  Register* element1;
-  Register* element2;
-  Register* element3;
+  bool result1, result2, result3;
 
   init_stack(stk);
-
-  element1 = pop(stk);
+  result1 = pop(stk, element1); /* Doesn't write to pointer address*/
   reg.key = 7;
   push(stk, reg);
-  element2 = pop(stk);
-  element3 = pop(stk);
+  result2 = pop(stk, element1); /* Writes to pointer address*/
+  result3 = pop(stk, element1); /* Doesn't write to pointer address*/
  
-  ck_assert_int_eq(element1 == NULL, true);
-  ck_assert_int_eq(element2 == NULL, false);
-  ck_assert_int_eq(element2->key, 7);
-  ck_assert_int_eq(element3 == NULL, true);
+  ck_assert_int_eq(result1, false);
+  ck_assert_int_eq(result2, true);
+  ck_assert_int_eq(result3, false);
+
+  ck_assert_int_eq(element1->key, 7);
+
 }
 END_TEST
 
 START_TEST(test_stack_pop_3)
 {
-  Register* element1;
-  Register* element2;
-  Register* element3;
-
+  bool result1, result2, result3;
+ 
   init_stack(stk);
-
   reg.key = 7;
   push(stk, reg);
   reg.key = -5;
   push(stk, reg);
 
-  element1 = pop(stk);
-  element2 = pop(stk);
-  element3 = pop(stk);
- 
-  ck_assert_int_eq(element1 == NULL, false);
-  ck_assert_int_eq(element1->key, -5);
+  result1 = pop(stk, element1);
+  result2 = pop(stk, element2);
+  result3 = pop(stk, element2);
 
-  ck_assert_int_eq(element2 == NULL, false);
+  ck_assert_int_eq(result1, true);
+  ck_assert_int_eq(result2, true);
+  ck_assert_int_eq(result3, false);
+
+  ck_assert_int_eq(element1->key, -5);
   ck_assert_int_eq(element2->key, 7);
 
-  ck_assert_int_eq(element3 == NULL, true);
 }
 END_TEST
 

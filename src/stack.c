@@ -40,13 +40,14 @@ bool push(Stack* stk, Register reg)
 }
 
 
-Register* pop(Stack* stk)
+bool pop(Stack* stk, Register* removed)
 {
   if (stack_empty(stk)) {
-    return NULL;
+    return false;
   }
   else {
     stk->top = stk->top - 1;
-    return &(stk->A[stk->top + 1]); /* pointer to position */
+    *removed = stk->A[stk->top + 1];
+    return true;
   }
 }
