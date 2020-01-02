@@ -4,10 +4,11 @@
 #include <check.h>
 #include <stack.h>
 
-Stack *stk;
+Stack* stk;
 Register reg;
 Register* element1;
 Register* element2;
+int i;
 
 void setup(void);
 void teardown(void);
@@ -94,7 +95,6 @@ END_TEST
 
 START_TEST(test_stack_full_3)
 {
-  int i;
   bool result = true;
 
   reg.key = -10;

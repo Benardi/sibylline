@@ -20,6 +20,9 @@ typedef struct
 } Queue;
 
 void init_queue(Queue *q);
+bool queue_empty(Queue *q);
+bool queue_full(Queue *q);
 bool enqueue(Queue* q, Register reg);
-bool dequeue(Queue *q);
+bool dequeue(Queue *q, Register* removed);
+
 #endif
