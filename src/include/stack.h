@@ -1,3 +1,12 @@
+/**
+ * @file stack.h
+ * @author Benardi Nunes <benardinunes@gmail.com>
+ * @date 1 Jan 2020
+ * @brief Header file for Stack module.
+ *
+ * Defines the constant MAX number of elements, the structs Key, Register 
+ * and Stack and the prototypes for the subroutines of the Stack module.
+ */
 #ifndef STACK_H
 #define STACK_H
 
@@ -24,7 +33,7 @@ typedef struct
  *  Sets the attribute top to -1. Existing elements are
  *  ignored.
  *
- *  @param pointer Stack to be initialized
+ *  @param stk Stack as a pointer
  *  @return Void
  */
 void init_stack(Stack* stk);
@@ -67,11 +76,11 @@ bool push(Stack* stk, Register reg);
 /** @brief Removes element from stack and returns it. 
  *
  *  If there's at least one element in stack removes it,
- *  puts its value into given point and returns true.
+ *  puts its value into given pointer and returns true.
  *  Otherwise doesn't update pointer and returns false. 
  *
  *  @param stk Stack as a pointer 
- *  @param removed pointer to hold value of removed element
+ *  @param removed Pointer to hold value of removed element
  *  @return Whether an element could be popped
  */
 bool pop(Stack* stk, Register* removed);
