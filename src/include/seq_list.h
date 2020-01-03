@@ -65,8 +65,8 @@ int size(SeqList* sl);
  *  is inserted and true returned.
  *
  *  @param sl Sequential List as a pointer. 
- *  @param reg element that contains key.
- *  @param i position where to insert 
+ *  @param reg Element that contains key.
+ *  @param i Position where to insert 
  *  @return Whether element could be inserted
  */
 bool insert_elem(SeqList* sl, Register reg, int i);
@@ -79,7 +79,7 @@ bool insert_elem(SeqList* sl, Register reg, int i);
  *  is inserted and true returned.
  *
  *  @param sl Sequential List as pointer
- *  @param reg element that contains key
+ *  @param reg Element that contains key
  *  @return Whether element could be inserted
  */
 bool insert_sorted(SeqList* sl, Register reg);
