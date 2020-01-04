@@ -18,13 +18,15 @@
 typedef int Key;
 typedef struct
 {
-  Key key;  /* Key that maps the register */
-} Register;
+  Key key; /* Key that maps the register */
+}
+Register;
 typedef struct
 {
-  Register A[MAX+1]; /* Array that stores the elements */
-  int nElem; /* Current number of elements in Sequential List */
-} SeqList;
+  Register A[MAX + 1]; /* Array that stores the elements */
+  int nElem;           /* Current number of elements in Sequential List */
+}
+SeqList;
 
 /** @brief Initializes Sequential List with 0 elements.
  *
