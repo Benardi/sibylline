@@ -30,127 +30,127 @@ SeqList;
 
 /** @brief Initializes Sequential List with 0 elements.
  *
- *  Sets the attribute nElems of a Sequential List given
- *  as a pointer to 0.
+ * Sets the attribute nElems of a Sequential List given
+ * as a pointer to 0.
  *
- *  @param sl Sequential List as pointer
- *  @return Void
+ * @param sl Sequential List as pointer
+ * @return Void
  */
 void init_seq_list(SeqList* sl);
 
 /** @brief Reinitializes Sequential List with 0 elements.
  *
- *  Sets the attribute nElems of a Sequential List (that has
- *  been used before) given as a pointer to 0.
+ * Sets the attribute nElems of a Sequential List (that has
+ * been used before) given as a pointer to 0.
  *
- *  @param sl Sequential List as pointer
- *  @return Void
+ * @param sl Sequential List as pointer
+ * @return Void
  */
 void reinit_seq_list(SeqList* sl);
 
 /** @brief Calculates the size of a Sequential List.
  *
- *  Calculates the size of a initialized Sequential List, 
- *  undefined behavior if not properly initialized
+ * Calculates the size of a initialized Sequential List, 
+ * undefined behavior if not properly initialized
  *
- *  @param sl Sequential List as pointer
- *  @return The size of the Sequential List
+ * @param sl Sequential List as pointer
+ * @return The size of the Sequential List
  */
 int size(SeqList* sl);
 
 /** @brief Inserts register in Sequential List at given
  *         position. 
  *
- *  If given position is invalid (bigger than MAX/nElems
- *  or less than zero) the Sequential List is 
- *  kept unchanged and false is returned. Else, the element
- *  is inserted and true returned.
+ * If given position is invalid (bigger than MAX/nElems
+ * or less than zero) the Sequential List is 
+ * kept unchanged and false is returned. Else, the element
+ * is inserted and true returned.
  *
- *  @param sl Sequential List as a pointer. 
- *  @param reg Element that contains key.
- *  @param i Position where to insert 
- *  @return Whether element could be inserted
+ * @param sl Sequential List as a pointer. 
+ * @param reg Element that contains key.
+ * @param i Position where to insert 
+ * @return Whether element could be inserted
  */
 bool insert_elem(SeqList* sl, Register reg, int i);
 
 /** @brief Inserts register in Sequential List whilst
  *         ensuring the List stays sorted. 
  *
- *  If the Sequential List is already filled up it is   
- *  kept unchanged and false is returned. Else, the element
- *  is inserted and true returned.
+ * If the Sequential List is already filled up it is   
+ * kept unchanged and false is returned. Else, the element
+ * is inserted and true returned.
  *
- *  @param sl Sequential List as pointer
- *  @param reg Element that contains key
- *  @return Whether element could be inserted
+ * @param sl Sequential List as pointer
+ * @param reg Element that contains key
+ * @return Whether element could be inserted
  */
 bool insert_sorted(SeqList* sl, Register reg);
 
 /** @brief Sequentially searchs a Sequential List and
  *         returns index of first occurrence.
  *
- *  Sequentially iterates over Sequential List in
- *  ascending order of index. Returns index of first
- *  occurrence that matches given Register key, else
- *  returns -1. 
+ * Sequentially iterates over Sequential List in
+ * ascending order of index. Returns index of first
+ * occurrence that matches given Register key, else
+ * returns -1. 
  * 
- *  @param sl Sequential List as pointer
- *  @param k Key to be found
- *  @return Index of first match
+ * @param sl Sequential List as pointer
+ * @param k Key to be found
+ * @return Index of first match
  */
 int seq_search(SeqList* sl, Key k);
 
 /** @brief Performs binary search on a Sequential List
  *         under the assumption it is sorted.
  *
- *  Performs binary search on a sorted Sequential List. 
- *  Returns index of first matched occurrence of given
- *  Register key, else returns -1. 
+ * Performs binary search on a sorted Sequential List. 
+ * Returns index of first matched occurrence of given
+ * Register key, else returns -1. 
  * 
- *  @param sl Sequential List as pointer
- *  @param k Key to be found
- *  @return Index of first match
+ * @param sl Sequential List as pointer
+ * @param k Key to be found
+ * @return Index of first match
  */
 int binary_search(SeqList* sl, Key k);
 
 /** @brief Sequentially searchs a Sequential List and
  *         returns index of first occurrence.
- *  
- *  Sequentially iterates over Sequential List in
- *  ascending order of index. Sentinel is appended to
- *  List to allow a more efficient search. Returns 
- *  index of first occurrence that matches given 
- *  Register key, else returns -1. 
  * 
- *  @param sl Sequential List as pointer
- *  @param k Key to be found
- *  @return Index of first match
+ * Sequentially iterates over Sequential List in
+ * ascending order of index. Sentinel is appended to
+ * List to allow a more efficient search. Returns 
+ * index of first occurrence that matches given 
+ * Register key, else returns -1. 
+ * 
+ * @param sl Sequential List as pointer
+ * @param k Key to be found
+ * @return Index of first match
  */
 int sentinel_search(SeqList* sl, Key k);
 
 /** @brief Sequentially searchs a Sequential List and
  *         removes first occurrence.
  *
- *  Sequentially iterates over Sequential List in
- *  ascending order of index. Removes first occurrence
- *  that matches given Register key and shifts remaining
- *  elements to the right to keep Sequential List 
- *  contiguous. Else, keeps Sequential List untouched. 
+ * Sequentially iterates over Sequential List in
+ * ascending order of index. Removes first occurrence
+ * that matches given Register key and shifts remaining
+ * elements to the right to keep Sequential List 
+ * contiguous. Else, keeps Sequential List untouched. 
  *
- *  @param k Key to be found
- *  @param sl Sequential List as pointer
- *  @return Wheter element could be removed
+ * @param k Key to be found
+ * @param sl Sequential List as pointer
+ * @return Wheter element could be removed
  */
 bool remove_elem(Key key, SeqList* sl);
 
 /** @brief Prints elements in Sequential List
  *
- *  Sequentially iterates over Sequential List in
- *  ascending order of index, printing the key of
- *  each existing element separated by a blank space.  
+ * Sequentially iterates over Sequential List in
+ * ascending order of index, printing the key of
+ * each existing element separated by a blank space.  
  * 
- *  @param sl Sequential List as pointer
- *  @return Void
+ * @param sl Sequential List as pointer
+ * @return Void
  */
 void show_list(SeqList* sl);
 
