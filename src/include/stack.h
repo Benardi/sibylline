@@ -11,7 +11,6 @@
 #define STACK_H
 
 #include <stdbool.h>
-#include <stddef.h>
 
 #define MAX 20
 

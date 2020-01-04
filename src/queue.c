@@ -1,22 +1,22 @@
 #include <queue.h>
 
-void init_queue(Queue *q)
+void init_queue(Queue* q)
 {
   q->head = 0;
   q->tail = 0;
 }
 
-bool queue_empty(Queue *q)
+bool queue_empty(Queue* q)
 {
   return q->head == q->tail;
 }
 
-bool queue_full(Queue *q)
+bool queue_full(Queue* q)
 {
   return q->head == ((q->tail + 1) % (MAX));
 }
 
-bool enqueue(Queue *q, Register reg)
+bool enqueue(Queue* q, Register reg)
 {
   if (queue_full(q)) {
     return false;
@@ -36,7 +36,7 @@ bool enqueue(Queue *q, Register reg)
   }
 }
 
-bool dequeue(Queue *q, Register *removed)
+bool dequeue(Queue* q, Register* removed)
 {
   if (queue_empty(q))
   {
