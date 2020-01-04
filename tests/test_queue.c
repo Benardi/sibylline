@@ -7,8 +7,7 @@
 Queue* q;
 Register reg;
 Register* el;
-int i; 
-
+int i;
 
 void setup(void);
 void teardown(void);
@@ -16,323 +15,326 @@ Suite *make_stack_suite(void);
 
 void setup(void)
 {
-  q = (Queue*) malloc(sizeof(Queue));
-  el = (Register*) malloc(sizeof(Register));
+    q = malloc(sizeof(Queue));
+    el = malloc(sizeof(Register));
 }
 
 void teardown(void)
 {
-  free(q);
+    free(q);
 }
 
 START_TEST(test_init_queue_1)
 {
-  init_queue(q);
-  ck_assert_int_eq(q->head, 0);
-  ck_assert_int_eq(q->tail, 0);
+    init_queue(q);
+    ck_assert_int_eq(q->head, 0);
+    ck_assert_int_eq(q->tail, 0);
 }
 END_TEST
 
 START_TEST(test_init_queue_2)
 {
-  reg.key = 10;
-  init_queue(q);
-  enqueue(q, reg);
-  init_queue(q);
+    reg.key = 10;
+    init_queue(q);
+    enqueue(q, reg);
+    init_queue(q);
 
-  ck_assert_int_eq(q->head, 0);
-  ck_assert_int_eq(q->tail, 0);
+    ck_assert_int_eq(q->head, 0);
+    ck_assert_int_eq(q->tail, 0);
 }
 END_TEST
 
 START_TEST(test_init_queue_3)
 {
-  reg.key = 10;
-  init_queue(q);
-  dequeue(q, el);
+    reg.key = 10;
+    init_queue(q);
+    dequeue(q, el);
 
-  ck_assert_int_eq(q->head, 0);
-  ck_assert_int_eq(q->tail, 0);
+    ck_assert_int_eq(q->head, 0);
+    ck_assert_int_eq(q->tail, 0);
 }
 END_TEST
 
 START_TEST(test_queue_empty_1)
 {
-  init_queue(q);
+    init_queue(q);
 
-  ck_assert_int_eq(queue_empty(q), true);
+    ck_assert_int_eq(queue_empty(q), true);
 }
 END_TEST
 
 START_TEST(test_queue_empty_2)
 {
-  bool result;
+    bool result;
 
-  init_queue(q);
-  result = enqueue(q, reg);
+    init_queue(q);
+    result = enqueue(q, reg);
 
-  ck_assert_int_eq(result, true);
-  ck_assert_int_eq(queue_empty(q), false);
+    ck_assert_int_eq(result, true);
+    ck_assert_int_eq(queue_empty(q), false);
 }
 END_TEST
 
 START_TEST(test_queue_empty_3)
 {
-  bool result1, result2;
+    bool result1, result2;
 
-  init_queue(q);
+    init_queue(q);
 
-  ck_assert_int_eq(queue_empty(q), true);
+    ck_assert_int_eq(queue_empty(q), true);
 
-  result1 = enqueue(q, reg);
+    result1 = enqueue(q, reg);
 
-  ck_assert_int_eq(result1, true);
-  ck_assert_int_eq(queue_empty(q), false);
+    ck_assert_int_eq(result1, true);
+    ck_assert_int_eq(queue_empty(q), false);
 
-  result2 = dequeue(q, el);
+    result2 = dequeue(q, el);
 
-  ck_assert_int_eq(result2, true);
-  ck_assert_int_eq(queue_empty(q), true);
+    ck_assert_int_eq(result2, true);
+    ck_assert_int_eq(queue_empty(q), true);
 }
 END_TEST
 
 START_TEST(test_queue_full_1)
 {
-  init_queue(q);
-  ck_assert_int_eq(queue_full(q), false);
+    init_queue(q);
+    ck_assert_int_eq(queue_full(q), false);
 }
 END_TEST
 
 START_TEST(test_queue_full_2)
 {
-  bool result = true;
+    bool result = true;
 
-  reg.key = -10;
-  init_queue(q);
+    reg.key = -10;
+    init_queue(q);
 
-  for (i = 0; i < (MAX - 2); i++) {
-    result = result && enqueue(q, reg);
-  }
+    for (i = 0; i < (MAX - 2); i++)
+    {
+        result = result && enqueue(q, reg);
+    }
 
-  ck_assert_int_eq(result, true);
-  ck_assert_int_eq(queue_full(q), false);
-
+    ck_assert_int_eq(result, true);
+    ck_assert_int_eq(queue_full(q), false);
 }
 END_TEST
 
 START_TEST(test_queue_full_3)
 {
-  bool result = true;
+    bool result = true;
 
-  reg.key = -10;
-  init_queue(q);
+    reg.key = -10;
+    init_queue(q);
 
-  /* Filling up the queue */
-  for (i = 0; i < (MAX - 1); i++) {
-    result = result && enqueue(q, reg);
-  }
+    /* Filling up the queue */
+    for (i = 0; i < (MAX - 1); i++)
+    {
+        result = result && enqueue(q, reg);
+    }
 
-  ck_assert_int_eq(result, true);
-  ck_assert_int_eq(queue_full(q), true);
+    ck_assert_int_eq(result, true);
+    ck_assert_int_eq(queue_full(q), true);
 
-  /* Queue overflow */
-  result = enqueue(q, reg);
-  ck_assert_int_eq(result, false);
-  ck_assert_int_eq(queue_full(q), true);
-
+    /* Queue overflow */
+    result = enqueue(q, reg);
+    ck_assert_int_eq(result, false);
+    ck_assert_int_eq(queue_full(q), true);
 }
 END_TEST
 
 START_TEST(test_enqueue_1)
-  bool result;
-  init_queue(q);
-  reg.key = 8;
-  result = enqueue(q, reg);
+bool result;
+init_queue(q);
+reg.key = 8;
+result = enqueue(q, reg);
 
-  ck_assert_int_eq(result, true);
-  ck_assert_int_eq(q->tail, 1);
-  ck_assert_int_eq(q->A[(q->head)].key, 8);
+ck_assert_int_eq(result, true);
+ck_assert_int_eq(q->tail, 1);
+ck_assert_int_eq(q->A[(q->head)].key, 8);
 END_TEST
 
 START_TEST(test_enqueue_2)
-  bool result1, result2;
-  init_queue(q);
-  reg.key = 8;
-  result1 = enqueue(q, reg);
-  reg.key = -15;
-  result2 = enqueue(q, reg);
+bool result1, result2;
+init_queue(q);
+reg.key = 8;
+result1 = enqueue(q, reg);
+reg.key = -15;
+result2 = enqueue(q, reg);
 
-  ck_assert_int_eq(result1, true);
-  ck_assert_int_eq(result2, true);
+ck_assert_int_eq(result1, true);
+ck_assert_int_eq(result2, true);
 
-  ck_assert_int_eq(q->tail, 2);
-  ck_assert_int_eq(q->A[(q->tail -1)].key, -15);
-  ck_assert_int_eq(q->A[(q->head)].key, 8);
+ck_assert_int_eq(q->tail, 2);
+ck_assert_int_eq(q->A[(q->tail - 1)].key, -15);
+ck_assert_int_eq(q->A[(q->head)].key, 8);
 END_TEST
 
 START_TEST(test_dequeue_1)
-  bool result;
-  init_queue(q);
-  result = dequeue(q, el);
+bool result;
+init_queue(q);
+result = dequeue(q, el);
 
-  ck_assert_int_eq(result, false);
+ck_assert_int_eq(result, false);
 END_TEST
 
 START_TEST(test_dequeue_2)
-  bool result;
-  init_queue(q);
+bool result;
+init_queue(q);
 
-  reg.key = -247;
-  enqueue(q, reg);
-  result = dequeue(q, el);
+reg.key = -247;
+enqueue(q, reg);
+result = dequeue(q, el);
 
-  ck_assert_int_eq(result, true);
-  ck_assert_int_eq(el->key, -247);  
+ck_assert_int_eq(result, true);
+ck_assert_int_eq(el->key, -247);
 END_TEST
 
 START_TEST(test_dequeue_3)
-  bool result;
-  init_queue(q);
+bool result;
+init_queue(q);
 
-  reg.key = -247;
-  enqueue(q, reg);
-  dequeue(q, el);
-  result = dequeue(q, el); /* el is not overwritten */
+reg.key = -247;
+enqueue(q, reg);
+dequeue(q, el);
+result = dequeue(q, el); /* el is not overwritten */
 
-  ck_assert_int_eq(result, false);
-  ck_assert_int_eq(el->key, -247);  
+ck_assert_int_eq(result, false);
+ck_assert_int_eq(el->key, -247);
 END_TEST
 
 START_TEST(test_recreate_1)
-  init_queue(q);
-  
-  for (i = 0; i < 14; i++) {
+init_queue(q);
+
+for (i = 0; i < 14; i++)
+{
     enqueue(q, reg);
-  }
+}
 
-  reg.key = 15;
-  enqueue(q, reg);
-  reg.key = 6;
-  enqueue(q, reg);
-  reg.key = 9;
-  enqueue(q, reg);
-  reg.key = 8;
-  enqueue(q, reg);
-  reg.key = 4;
-  enqueue(q, reg);
+reg.key = 15;
+enqueue(q, reg);
+reg.key = 6;
+enqueue(q, reg);
+reg.key = 9;
+enqueue(q, reg);
+reg.key = 8;
+enqueue(q, reg);
+reg.key = 4;
+enqueue(q, reg);
 
-  for (i = 0; i < 14; i++) {
+for (i = 0; i < 14; i++)
+{
     dequeue(q, el);
-  }
+}
 
-  ck_assert_int_eq(q->A[14].key, 15);
-  ck_assert_int_eq(q->A[15].key, 6);
-  ck_assert_int_eq(q->A[16].key, 9);
-  ck_assert_int_eq(q->A[17].key, 8);
-  ck_assert_int_eq(q->A[18].key, 4);
+ck_assert_int_eq(q->A[14].key, 15);
+ck_assert_int_eq(q->A[15].key, 6);
+ck_assert_int_eq(q->A[16].key, 9);
+ck_assert_int_eq(q->A[17].key, 8);
+ck_assert_int_eq(q->A[18].key, 4);
 
-  ck_assert_int_eq(q->tail, 19);
-  ck_assert_int_eq(q->head, 14);
+ck_assert_int_eq(q->tail, 19);
+ck_assert_int_eq(q->head, 14);
 END_TEST
 
 START_TEST(test_recreate_2)
-  init_queue(q);
-  
-  for (i = 0; i < 14; i++) {
+init_queue(q);
+
+for (i = 0; i < 14; i++)
+{
     enqueue(q, reg);
-  }
+}
 
-  reg.key = 15;
-  enqueue(q, reg);
-  reg.key = 6;
-  enqueue(q, reg);
-  reg.key = 9;
-  enqueue(q, reg);
-  reg.key = 8;
-  enqueue(q, reg);
-  reg.key = 4;
-  enqueue(q, reg);
+reg.key = 15;
+enqueue(q, reg);
+reg.key = 6;
+enqueue(q, reg);
+reg.key = 9;
+enqueue(q, reg);
+reg.key = 8;
+enqueue(q, reg);
+reg.key = 4;
+enqueue(q, reg);
 
-  for (i = 0; i < 14; i++) {
+for (i = 0; i < 14; i++)
+{
     dequeue(q, el);
-  }
+}
 
-  reg.key = 17;
-  enqueue(q, reg);
-  reg.key = 3;
-  enqueue(q, reg);
-  reg.key = 5;
-  enqueue(q, reg);
-  dequeue(q, el);
+reg.key = 17;
+enqueue(q, reg);
+reg.key = 3;
+enqueue(q, reg);
+reg.key = 5;
+enqueue(q, reg);
+dequeue(q, el);
 
+ck_assert_int_eq(q->A[14].key, 15); /* Has been removed */
+ck_assert_int_eq(q->A[15].key, 6);
+ck_assert_int_eq(q->A[16].key, 9);
+ck_assert_int_eq(q->A[17].key, 8);
+ck_assert_int_eq(q->A[18].key, 4);
+ck_assert_int_eq(q->A[19].key, 17);
+ck_assert_int_eq(q->A[0].key, 3);
+ck_assert_int_eq(q->A[1].key, 5);
 
-  ck_assert_int_eq(q->A[14].key, 15); /* Has been removed */
-  ck_assert_int_eq(q->A[15].key, 6);
-  ck_assert_int_eq(q->A[16].key, 9);
-  ck_assert_int_eq(q->A[17].key, 8);
-  ck_assert_int_eq(q->A[18].key, 4);
-  ck_assert_int_eq(q->A[19].key, 17);
-  ck_assert_int_eq(q->A[0].key, 3);
-  ck_assert_int_eq(q->A[1].key, 5);
+ck_assert_int_eq(q->tail, 2);
+ck_assert_int_eq(q->head, 15);
 
-  ck_assert_int_eq(q->tail, 2);
-  ck_assert_int_eq(q->head, 15);
-
-  ck_assert_int_eq(q->A[q->head].key, 6);
-  ck_assert_int_eq(q->A[q->tail - 1].key, 5);
+ck_assert_int_eq(q->A[q->head].key, 6);
+ck_assert_int_eq(q->A[q->tail - 1].key, 5);
 END_TEST
 
 Suite *make_stack_suite(void)
 {
-  Suite *s;
-  TCase *tc_core;
+    Suite *s;
+    TCase *tc_core;
 
-  s = suite_create("Queue Test Suite");
+    s = suite_create("Queue Test Suite");
 
-  /* Creation test case */
-  tc_core = tcase_create("Test Cases with Setup and Teardown");
+    /* Creation test case */
+    tc_core = tcase_create("Test Cases with Setup and Teardown");
 
-  tcase_add_checked_fixture(tc_core, setup, teardown);
+    tcase_add_checked_fixture(tc_core, setup, teardown);
 
-  tcase_add_test(tc_core, test_init_queue_1);
-  tcase_add_test(tc_core, test_init_queue_2);
-  tcase_add_test(tc_core, test_init_queue_3);
+    tcase_add_test(tc_core, test_init_queue_1);
+    tcase_add_test(tc_core, test_init_queue_2);
+    tcase_add_test(tc_core, test_init_queue_3);
 
-  tcase_add_test(tc_core, test_queue_empty_1);
-  tcase_add_test(tc_core, test_queue_empty_2);
-  tcase_add_test(tc_core, test_queue_empty_3);
+    tcase_add_test(tc_core, test_queue_empty_1);
+    tcase_add_test(tc_core, test_queue_empty_2);
+    tcase_add_test(tc_core, test_queue_empty_3);
 
-  tcase_add_test(tc_core, test_queue_full_1);
-  tcase_add_test(tc_core, test_queue_full_2);
-  tcase_add_test(tc_core, test_queue_full_3);
+    tcase_add_test(tc_core, test_queue_full_1);
+    tcase_add_test(tc_core, test_queue_full_2);
+    tcase_add_test(tc_core, test_queue_full_3);
 
-  tcase_add_test(tc_core, test_enqueue_1);
-  tcase_add_test(tc_core, test_enqueue_2);
+    tcase_add_test(tc_core, test_enqueue_1);
+    tcase_add_test(tc_core, test_enqueue_2);
 
-  tcase_add_test(tc_core, test_dequeue_1);
-  tcase_add_test(tc_core, test_dequeue_2);
-  tcase_add_test(tc_core, test_dequeue_3);
+    tcase_add_test(tc_core, test_dequeue_1);
+    tcase_add_test(tc_core, test_dequeue_2);
+    tcase_add_test(tc_core, test_dequeue_3);
 
-  tcase_add_test(tc_core, test_recreate_1);
-  tcase_add_test(tc_core, test_recreate_2);
+    tcase_add_test(tc_core, test_recreate_1);
+    tcase_add_test(tc_core, test_recreate_2);
 
-  suite_add_tcase(s, tc_core);
+    suite_add_tcase(s, tc_core);
 
-  return s;
+    return s;
 }
 
 int main(void)
 {
-  int number_failed;
-  SRunner *sr;
+    int number_failed;
+    SRunner *sr;
 
-  sr = srunner_create(make_stack_suite());
-  srunner_set_fork_status(sr, CK_NOFORK);
-  srunner_set_log(sr, "test.log");
-  srunner_set_xml(sr, "test.xml");
-  srunner_run_all(sr, CK_VERBOSE);
+    sr = srunner_create(make_stack_suite());
+    srunner_set_fork_status(sr, CK_NOFORK);
+    srunner_set_log(sr, "test.log");
+    srunner_set_xml(sr, "test.xml");
+    srunner_run_all(sr, CK_VERBOSE);
 
-  number_failed = srunner_ntests_failed(sr);
-  srunner_free(sr);
-  return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
+    number_failed = srunner_ntests_failed(sr);
+    srunner_free(sr);
+    return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
