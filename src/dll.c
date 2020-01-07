@@ -1,7 +1,7 @@
-#include <doubly_ll.h>
+#include <dll.h>
 #include <malloc.h>
 
-DoublyLinkedList* list_search(DoublyLinkedList** head, Key k)
+DoublyLinkedList* dll_search(DoublyLinkedList** head, Key k)
 {
     DoublyLinkedList* searched;
     DoublyLinkedList* node;
@@ -21,7 +21,7 @@ DoublyLinkedList* list_search(DoublyLinkedList** head, Key k)
     return searched;
 }
 
-DoublyLinkedList* list_insert(DoublyLinkedList** head, Key k)
+DoublyLinkedList* dll_insert(DoublyLinkedList** head, Key k)
 {
     DoublyLinkedList* node;
     node = malloc(sizeof(DoublyLinkedList*));
@@ -37,7 +37,7 @@ DoublyLinkedList* list_insert(DoublyLinkedList** head, Key k)
     return node;
 }
 
-void list_delete(DoublyLinkedList** head, DoublyLinkedList* to_remove)
+void dll_delete(DoublyLinkedList** head, DoublyLinkedList* to_remove)
 {
     if (to_remove->prev != NULL)
     {
