@@ -30,41 +30,38 @@ typedef struct DoublyLinkedList
 }
 DoublyLinkedList;
 
-/** @brief Inserts element to front of Linked List.
+/** @brief Inserts node at front of Linked List.
  *  
- * Inserts element to front of Linked List. If other 
- * elements already exist in list new element becomes
- * new head and existing elements are linked to new one. 
- * Returns pointer to added element and updates double
- * pointer with new head of the linked list.
+ * Inserts node to front of Linked List. If other nodes already exist in list
+ * new node becomes new head and existing nodes are linked to new one. Returns
+ * pointer to added node and updates double pointer with new head of the
+ * linked list.
  *
  * @param head Double pointer to head of linked list. 
- * @param k Key for Register of inserted element.
+ * @param k Key for Register of inserted node.
  * @return Pointer to inserted node.
  */
 DoublyLinkedList* dll_insert(DoublyLinkedList** head, Key k);
 
 /** @brief Retrieves node in linked list via key. 
  *
- * Iterates sequentially over linked list. If node with
- * given key exists returns pointer to it, otherwise
- * returns @c NULL.
+ * Iterates sequentially over linked list. If node with given key exists
+ * returns pointer to it, otherwise returns @c NULL.
  *
  * @param head Double pointer to head of linked list. 
- * @param k Key for Register of inserted element.
+ * @param k Key for Register of inserted node.
  * @return Pointer to retrieved node.
  */
 DoublyLinkedList* dll_search(DoublyLinkedList** head, Key k);
 
 /** @brief Deletes given node from linked list. 
  *
- * Removes a node given via pointer from linked list.
- * List is amended to make up for absence of removed
- * node. Allocated memory for node pointer is not freed.
- * It's up to user to free memory allocated to pointer.
+ * Removes a node given via pointer from linked list. List is amended to make
+ * up for absence of removed node. Allocated memory for node pointer is not
+ * freed. It's up to user to free memory allocated to pointer.
  *
  * @param head Double pointer to head of linked list. 
- * @param k key for Register of inserted element.
+ * @param k Key for Register of inserted node.
  * @return Void
  */
 void dll_delete(DoublyLinkedList** head, DoublyLinkedList* to_remove);

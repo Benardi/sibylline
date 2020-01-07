@@ -7,18 +7,6 @@ void cddl_init(CircularDoublyLinkedList* nil)
     nil->prev = nil;    
 }
 
-CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil, Key k)
-{
-    CircularDoublyLinkedList* node;
-
-    node = nil->next;
-    while ((node != nil) && (node->data.key != k))
-    {
-        node = node->next;
-    }
-    return node;
-}
-
 CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil, Key k)
 {
     CircularDoublyLinkedList* node;
@@ -30,6 +18,18 @@ CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil, Key k)
     nil->next = node;
     node->prev = nil;
 
+    return node;
+}
+
+CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil, Key k)
+{
+    CircularDoublyLinkedList* node;
+
+    node = nil->next;
+    while ((node != nil) && (node->data.key != k))
+    {
+        node = node->next;
+    }
     return node;
 }
 
