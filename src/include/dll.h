@@ -1,5 +1,5 @@
 /**
- * @file doubly_ll.h
+ * @file dll.h
  * @author Benardi Nunes <benardinunes@gmail.com>
  * @date 2 Jan 2020
  * @brief Header file for Doubly Linked List module.
@@ -8,8 +8,8 @@
  * and DoublyLinkedList and the prototypes for the subroutines of the
  * DoublyLinkedList module.
  */
-#ifndef DOUBLY_LL_H
-#define DOUBLY_LL_H
+#ifndef DLL_H
+#define DLL_H
 
 #include <stddef.h>
 #include <stdbool.h>
@@ -42,7 +42,7 @@ DoublyLinkedList;
  * @param k Key for Register of inserted element.
  * @return Pointer to inserted node.
  */
-DoublyLinkedList* list_insert(DoublyLinkedList** head, Key k);
+DoublyLinkedList* dll_insert(DoublyLinkedList** head, Key k);
 
 /** @brief Retrieves node in linked list via key. 
  *
@@ -54,7 +54,7 @@ DoublyLinkedList* list_insert(DoublyLinkedList** head, Key k);
  * @param k Key for Register of inserted element.
  * @return Pointer to retrieved node.
  */
-DoublyLinkedList* list_search(DoublyLinkedList** head, Key k);
+DoublyLinkedList* dll_search(DoublyLinkedList** head, Key k);
 
 /** @brief Deletes given node from linked list. 
  *
@@ -67,6 +67,6 @@ DoublyLinkedList* list_search(DoublyLinkedList** head, Key k);
  * @param k key for Register of inserted element.
  * @return Void
  */
-void list_delete(DoublyLinkedList** head, DoublyLinkedList* to_remove);
+void dll_delete(DoublyLinkedList** head, DoublyLinkedList* to_remove);
 
 #endif
