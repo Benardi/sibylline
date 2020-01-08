@@ -3,22 +3,15 @@
 
 DoublyLinkedList* dll_search(DoublyLinkedList** head, Key k)
 {
-    DoublyLinkedList* searched;
     DoublyLinkedList* node;
 
-    searched = NULL;
-    node = (DoublyLinkedList* )(*head);
-    while (node != NULL)
+    node = (*head);
+    while ((node != NULL) && (node->data.key != k))
     {
-        if (node->data.key == k)
-        {
-            searched = node;
-            break;
-        }
-        node = (DoublyLinkedList*)node->next;
+        node = node->next;
     }
 
-    return searched;
+    return node;
 }
 
 DoublyLinkedList* dll_insert(DoublyLinkedList** head, Key k)
