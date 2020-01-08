@@ -1,18 +1,17 @@
 /**
  * @file dll.h
  * @author Benardi Nunes <benardinunes@gmail.com>
- * @date 2 Jan 2020
- * @brief Header file for Doubly Linked List module.
+ * @date 7 Jan 2020
+ * @brief Header file for Singly Linked List module.
  *
  * Defines the constant MAX number of elements, the structs Key, Register
- * and DoublyLinkedList and the prototypes for the subroutines of the
- * DoublyLinkedList module.
+ * and SinglyLinkedList and the prototypes for the subroutines of the
+ * SinglyLinkedList module.
  */
-#ifndef DLL_H
-#define DLL_H
+#ifndef SLL_H
+#define SLL_H
 
 #include <stddef.h>
-#include <stdbool.h>
 
 typedef int Key;
 
@@ -22,13 +21,12 @@ typedef struct
 }
 Register;
 
-typedef struct DoublyLinkedList
+typedef struct SinglyLinkedList
 {
-  struct DoublyLinkedList *prev;
-  struct DoublyLinkedList *next;
+  struct SinglyLinkedList *next;
   Register data;
 }
-DoublyLinkedList;
+SinglyLinkedList;
 
 /** @brief Inserts node at front of Linked List.
  *  
@@ -41,7 +39,7 @@ DoublyLinkedList;
  * @param k Key for Register of inserted node.
  * @return Pointer to inserted node.
  */
-DoublyLinkedList* dll_insert(DoublyLinkedList** head, Key k);
+SinglyLinkedList* sll_insert(SinglyLinkedList** head, Key k);
 
 /** @brief Retrieves node from linked list via key. 
  *
@@ -52,7 +50,7 @@ DoublyLinkedList* dll_insert(DoublyLinkedList** head, Key k);
  * @param k Key for Register of inserted node.
  * @return Pointer to retrieved node.
  */
-DoublyLinkedList* dll_search(DoublyLinkedList** head, Key k);
+SinglyLinkedList* sll_search(SinglyLinkedList** head, Key k);
 
 /** @brief Deletes given node from linked list. 
  *
@@ -64,6 +62,6 @@ DoublyLinkedList* dll_search(DoublyLinkedList** head, Key k);
  * @param k Key for Register of inserted node.
  * @return Void
  */
-void dll_delete(DoublyLinkedList** head, DoublyLinkedList* to_remove);
+void sll_delete(SinglyLinkedList** head, SinglyLinkedList* to_remove);
 
 #endif
