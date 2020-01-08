@@ -32,7 +32,7 @@ DoublyLinkedList;
 
 /** @brief Inserts node at front of Linked List.
  *  
- * Inserts node to front of Linked List. If other nodes already exist in list
+ * Inserts node at front of Linked List. If other nodes already exist in list
  * new node becomes new head and existing nodes are linked to new one. Returns
  * pointer to added node and updates double pointer with new head of the
  * linked list.
@@ -43,7 +43,7 @@ DoublyLinkedList;
  */
 DoublyLinkedList* dll_insert(DoublyLinkedList** head, Key k);
 
-/** @brief Retrieves node in linked list via key. 
+/** @brief Retrieves node from linked list via key. 
  *
  * Iterates sequentially over linked list. If node with given key exists
  * returns pointer to it, otherwise returns @c NULL.
@@ -58,7 +58,7 @@ DoublyLinkedList* dll_search(DoublyLinkedList** head, Key k);
  *
  * Removes a node given via pointer from linked list. List is amended to make
  * up for absence of removed node. Allocated memory for node pointer is not
- * freed. It's up to user to free memory allocated to pointer.
+ * freed. It's up to the user to free memory allocated to pointer.
  *
  * @param head Double pointer to head of linked list. 
  * @param k Key for Register of inserted node.

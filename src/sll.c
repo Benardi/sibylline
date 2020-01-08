@@ -1,6 +1,17 @@
 #include <malloc.h>
 #include <sll.h>
 
+SinglyLinkedList* sll_insert(SinglyLinkedList** head, Key k)
+{
+    SinglyLinkedList* node;
+    node = malloc(sizeof(SinglyLinkedList));
+    node->data.key = k;
+    node->next = (*head);
+
+    (*head) = node;
+    return node;
+}
+
 SinglyLinkedList* sll_search(SinglyLinkedList** head, Key k)
 {
     SinglyLinkedList* node;
@@ -10,17 +21,6 @@ SinglyLinkedList* sll_search(SinglyLinkedList** head, Key k)
     {
         node = node->next;
     }
-    return node;
-}
-
-SinglyLinkedList* sll_insert(SinglyLinkedList** head, Key k)
-{
-    SinglyLinkedList* node;
-    node = malloc(sizeof(SinglyLinkedList));
-    node->data.key = k;
-    node->next = (*head);
-
-    (*head) = node;
     return node;
 }
 

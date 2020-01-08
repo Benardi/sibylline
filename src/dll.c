@@ -1,19 +1,6 @@
 #include <dll.h>
 #include <malloc.h>
 
-DoublyLinkedList* dll_search(DoublyLinkedList** head, Key k)
-{
-    DoublyLinkedList* node;
-
-    node = (*head);
-    while ((node != NULL) && (node->data.key != k))
-    {
-        node = node->next;
-    }
-
-    return node;
-}
-
 DoublyLinkedList* dll_insert(DoublyLinkedList** head, Key k)
 {
     DoublyLinkedList* node;
@@ -27,6 +14,19 @@ DoublyLinkedList* dll_insert(DoublyLinkedList** head, Key k)
         (*head)->prev = node;
     }
     *head = node;
+    return node;
+}
+
+DoublyLinkedList* dll_search(DoublyLinkedList** head, Key k)
+{
+    DoublyLinkedList* node;
+
+    node = (*head);
+    while ((node != NULL) && (node->data.key != k))
+    {
+        node = node->next;
+    }
+
     return node;
 }
 
