@@ -61,7 +61,7 @@ DoublyLinkedList* dll_search(DoublyLinkedList** head, Key k);
  * freed. It's up to the user to free memory allocated to pointer.
  *
  * @param head Double pointer to head of linked list. 
- * @param k Key for Register of inserted node.
+ * @param to_remove Pointer to node to be removed.
  * @return Void
  */
 void dll_delete(DoublyLinkedList** head, DoublyLinkedList* to_remove);
