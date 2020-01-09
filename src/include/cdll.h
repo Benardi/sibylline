@@ -29,21 +29,22 @@ typedef struct CircularDoublyLinkedList
 }
 CircularDoublyLinkedList;
 
-/** @brief Inits nil node to create valid linked list.
+/** @brief Inits nil node to create valid Circular Doubly Linked List.
  *  
- * Sets nil node as its own next and previous node to create valid linked
- * list. If nodes have already been inserted they lose their link to nil node
- * but the memory allocated to them is not freed.
+ * Sets nil node as its own next and previous node to create valid Circular
+ * Doubly Linked List. If nodes have already been inserted they lose their
+ * link to nil node but the memory allocated to them is not freed.
  *
  * @param nil Pointer to nil node. 
  * @return Void.
  */
 void cdll_init(CircularDoublyLinkedList* nil);
 
-/** @brief Inserts node to front of Linked List, as 'next' for nil node.
+/** @brief Inserts node to front of Circular Doubly Linked List, as 'next' for
+ * nil node.
  *  
- * Inserts node to front of Linked List, being a circular list node is
- * put after nil node. New node becomes new 'next' of the nil node and
+ * Inserts node to front of Circular Doubly Linked List, being a circular list
+ * node is put after nil node. New node becomes new 'next' of the nil node and
  * existing node if they existed are linked to the new one. Returns 
  * pointer to inserted node.
  *
@@ -53,10 +54,10 @@ void cdll_init(CircularDoublyLinkedList* nil);
  */
 CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil, Key k);
 
-/** @brief Retrieves node in linked list via key. 
+/** @brief Retrieves node in Circular Doubly Linked List via key. 
  *
- * Iterates sequentially over linked list. If node with given key exists
- * returns pointer to it, otherwise returns pointer to nil node.
+ * Iterates sequentially over Circular Doubly Linked List. If node with given
+ * key exists returns pointer to it, otherwise returns pointer to nil node.
  *
  * @param nil Pointer to nil node. 
  * @param k Key for Register of inserted node.
@@ -64,14 +65,13 @@ CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil, Key k);
  */
 CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil, Key k);
 
-/** @brief Deletes given node from linked list. 
+/** @brief Deletes given node from Circular Doubly Linked List. 
  *
- * Removes a node given via pointer from linked list. List is amended to make
- * up for absence of removed node. Allocated memory for node pointer is not
- * freed. It's up to user to free memory allocated to pointer.
+ * Removes a node given via pointer from Circular Doubly Linked List. List is
+ * amended to make up for absence of removed node. Allocated memory for node
+ * pointer is not freed. It's up to user to free memory allocated to pointer.
  *
- * @param nil Pointer to nil node. 
- * @param k Key for Register of inserted node.
+ * @param to_remove Pointer to node to be removed.
  * @return Void
  */
 void cdll_delete(CircularDoublyLinkedList* to_remove);
