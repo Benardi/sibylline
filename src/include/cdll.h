@@ -4,22 +4,14 @@
  * @date 6 Jan 2020
  * @brief Header file for Circular Doubly Linked List module.
  *
- * Defines the constant MAX number of elements, the structs Key, Register
- * and CircularDoublyLinkedList and the prototypes for the subroutines of the
- * CircularDoublyLinkedList module.
+ * Defines the the CircularDoublyLinkedList and the prototypes for the
+ * routines of the CircularDoublyLinkedList module.
  */
 #ifndef CDLL_H
 #define CDLL_H
 
 #include <stddef.h>
-
-typedef int Key;
-
-typedef struct
-{
-  Key key; /* Key that maps the register */
-}
-Register;
+#include <register.h>
 
 typedef struct CircularDoublyLinkedList
 {
