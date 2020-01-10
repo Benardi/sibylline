@@ -21,6 +21,7 @@ void setup(void)
 
 void teardown(void)
 {
+    free(el);
     free(q);
 }
 

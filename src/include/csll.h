@@ -4,22 +4,14 @@
  * @date 9 Jan 2020
  * @brief Header file for Circular Singly Linked List module.
  *
- * Defines the constant MAX number of elements, the structs Key, Register
- * and DoublyLinkedList and the prototypes for the subroutines of the
- * CircularSinglyLinkedList module.
+ * Defines the structDoublyLinkedList and the prototypes for the routines of
+ * the CircularSinglyLinkedList module.
  */
 #ifndef CSLL_H
 #define CSLL_H
 
 #include <stddef.h>
-
-typedef int Key;
-
-typedef struct
-{
-  Key key; /* Key that maps the register */
-}
-Register;
+#include <register.h>
 
 typedef struct CircularSinglyLinkedList
 {

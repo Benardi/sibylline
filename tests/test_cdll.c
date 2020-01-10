@@ -28,7 +28,6 @@ START_TEST(test_cdll_insert_1)
     CircularDoublyLinkedList* node1;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -54,8 +53,6 @@ START_TEST(test_cdll_insert_2)
     CircularDoublyLinkedList* node2;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    node2 = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -94,9 +91,6 @@ START_TEST(test_cdll_insert_3)
     CircularDoublyLinkedList* node3;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    node2 = malloc(sizeof(CircularDoublyLinkedList*));
-    node3 = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, -2);
@@ -143,8 +137,6 @@ START_TEST(test_cdll_search_1)
     CircularDoublyLinkedList* retrieved;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    retrieved = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -177,8 +169,6 @@ START_TEST(test_cdll_search_2)
     CircularDoublyLinkedList* retrieved;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    retrieved = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -210,9 +200,6 @@ START_TEST(test_cdll_search_3)
     CircularDoublyLinkedList* retrieved;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    node2 = malloc(sizeof(CircularDoublyLinkedList*));
-    retrieved = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -259,9 +246,6 @@ START_TEST(test_cdll_search_4)
     CircularDoublyLinkedList* retrieved;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    node2 = malloc(sizeof(CircularDoublyLinkedList*));
-    retrieved = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -309,9 +293,6 @@ START_TEST(test_cdll_search_5)
     CircularDoublyLinkedList* retrieved;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    node2 = malloc(sizeof(CircularDoublyLinkedList*));
-    retrieved = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -363,10 +344,6 @@ START_TEST(test_cdll_search_6)
     CircularDoublyLinkedList* retrieved;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    node2 = malloc(sizeof(CircularDoublyLinkedList*));
-    node3 = malloc(sizeof(CircularDoublyLinkedList*));
-    retrieved = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, -2);
@@ -423,10 +400,6 @@ START_TEST(test_cdll_search_7)
     CircularDoublyLinkedList* retrieved;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    node2 = malloc(sizeof(CircularDoublyLinkedList*));
-    node3 = malloc(sizeof(CircularDoublyLinkedList*));
-    retrieved = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, -2);
@@ -489,10 +462,6 @@ START_TEST(test_cdll_search_8)
     CircularDoublyLinkedList* retrieved;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    node2 = malloc(sizeof(CircularDoublyLinkedList*));
-    node3 = malloc(sizeof(CircularDoublyLinkedList*));
-    retrieved = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, -2);
@@ -547,7 +516,6 @@ START_TEST(test_cdll_delete_1)
     CircularDoublyLinkedList* node1;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -579,8 +547,6 @@ START_TEST(test_cdll_delete_2)
     CircularDoublyLinkedList* node2;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    node2 = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -633,8 +599,6 @@ START_TEST(test_cdll_delete_3)
     CircularDoublyLinkedList* node2;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    node2 = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -688,9 +652,6 @@ START_TEST(test_cdll_delete_4)
     CircularDoublyLinkedList* node3;
 
     nil = malloc(sizeof(CircularDoublyLinkedList*));
-    node1 = malloc(sizeof(CircularDoublyLinkedList*));
-    node2 = malloc(sizeof(CircularDoublyLinkedList*));
-    node3 = malloc(sizeof(CircularDoublyLinkedList*));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, -2);
