@@ -286,7 +286,6 @@ START_TEST(test_csll_search_1)
     CircularSinglyLinkedList* retrieved;
 
     tail = malloc(sizeof(CircularSinglyLinkedList**));
-    retrieved = malloc(sizeof(CircularSinglyLinkedList*));
 
     *tail = NULL;
     retrieved = csll_search(tail, 10);
@@ -311,7 +310,6 @@ START_TEST(test_csll_search_2)
     node1 = malloc(sizeof(CircularSinglyLinkedList*));
     node2 = malloc(sizeof(CircularSinglyLinkedList*));
     node3 = malloc(sizeof(CircularSinglyLinkedList*));
-    retrieved = malloc(sizeof(CircularSinglyLinkedList*));
 
     *tail = NULL;
     node1 = csll_insert_begin(tail, 15);
@@ -386,7 +384,6 @@ START_TEST(test_csll_search_3)
     node1 = malloc(sizeof(CircularSinglyLinkedList*));
     node2 = malloc(sizeof(CircularSinglyLinkedList*));
     node3 = malloc(sizeof(CircularSinglyLinkedList*));
-    retrieved = malloc(sizeof(CircularSinglyLinkedList*));
 
     *tail = NULL;
     node1 = csll_insert_begin(tail, 15);
@@ -461,7 +458,6 @@ START_TEST(test_csll_search_4)
     node1 = malloc(sizeof(CircularSinglyLinkedList*));
     node2 = malloc(sizeof(CircularSinglyLinkedList*));
     node3 = malloc(sizeof(CircularSinglyLinkedList*));
-    retrieved = malloc(sizeof(CircularSinglyLinkedList*));
 
     *tail = NULL;
     node1 = csll_insert_begin(tail, 15);
@@ -530,7 +526,6 @@ START_TEST(test_csll_search_5)
     node1 = malloc(sizeof(CircularSinglyLinkedList*));
     node2 = malloc(sizeof(CircularSinglyLinkedList*));
     node3 = malloc(sizeof(CircularSinglyLinkedList*));
-    retrieved = malloc(sizeof(CircularSinglyLinkedList*));
 
     *tail = NULL;
     node1 = csll_insert_begin(tail, 15);
@@ -605,7 +600,6 @@ START_TEST(test_csll_search_6)
     node1 = malloc(sizeof(CircularSinglyLinkedList*));
     node2 = malloc(sizeof(CircularSinglyLinkedList*));
     node3 = malloc(sizeof(CircularSinglyLinkedList*));
-    retrieved = malloc(sizeof(CircularSinglyLinkedList*));
 
     *tail = NULL;
     node1 = csll_insert_end(tail, 15);
@@ -684,7 +678,6 @@ START_TEST(test_csll_search_7)
     node1 = malloc(sizeof(CircularSinglyLinkedList*));
     node2 = malloc(sizeof(CircularSinglyLinkedList*));
     node3 = malloc(sizeof(CircularSinglyLinkedList*));
-    retrieved = malloc(sizeof(CircularSinglyLinkedList*));
 
     *tail = NULL;
     node1 = csll_insert_end(tail, 15);
@@ -762,7 +755,6 @@ START_TEST(test_csll_search_8)
     node1 = malloc(sizeof(CircularSinglyLinkedList*));
     node2 = malloc(sizeof(CircularSinglyLinkedList*));
     node3 = malloc(sizeof(CircularSinglyLinkedList*));
-    retrieved = malloc(sizeof(CircularSinglyLinkedList*));
 
     *tail = NULL;
     node1 = csll_insert_end(tail, 15);
@@ -840,7 +832,6 @@ START_TEST(test_csll_search_9)
     node1 = malloc(sizeof(CircularSinglyLinkedList*));
     node2 = malloc(sizeof(CircularSinglyLinkedList*));
     node3 = malloc(sizeof(CircularSinglyLinkedList*));
-    retrieved = malloc(sizeof(CircularSinglyLinkedList*));
 
     *tail = NULL;
     node1 = csll_insert_end(tail, 15);

@@ -5,22 +5,9 @@
 #include <stdbool.h>
 #include <dll.h>
 
-DoublyLinkedList* node;
 Register reg;
 
-void setup(void);
-void teardown(void);
 Suite *make_dll_suite(void);
-
-void setup(void)
-{
-    node = malloc(sizeof(DoublyLinkedList*));
-}
-
-void teardown(void)
-{
-    free(node);
-}
 
 START_TEST(test_dll_insert_1)
 {
@@ -42,6 +29,9 @@ START_TEST(test_dll_insert_1)
     ck_assert_int_eq((*head) == NULL, false);
     ck_assert_int_eq((*head)->prev == NULL, true);
     ck_assert_int_eq((*head)->next == NULL, true);
+
+    free(node1);
+    free(head);
 }
 END_TEST
 
@@ -81,6 +71,10 @@ START_TEST(test_dll_insert_2)
     ck_assert_int_eq(node2->next == NULL, false);
     ck_assert_int_eq(node2->data.key, 30);
     ck_assert_int_eq(node2->next->prev->data.key, 30);
+
+    free(node2);
+    free(node1);
+    free(head);
 }
 END_TEST
 
@@ -144,22 +138,35 @@ START_TEST(test_dll_insert_3)
     ck_assert_int_eq(node4->prev == NULL, true);
     ck_assert_int_eq(node4->next == NULL, false);
     ck_assert_int_eq(node4->next->data.key, -12);
+
+    free(node4);
+    free(node3);
+    free(node2);
+    free(node1);
+    free(head);
 }
 END_TEST
 
 START_TEST(test_dll_search_1)
 {
     DoublyLinkedList* retrieved;
+    DoublyLinkedList* node1;
+    DoublyLinkedList* node2;
+    DoublyLinkedList* node3;
+    DoublyLinkedList* node4;
     DoublyLinkedList** head;
 
-    retrieved = malloc(sizeof(DoublyLinkedList*));
+    node1 = malloc(sizeof(DoublyLinkedList*));
+    node2 = malloc(sizeof(DoublyLinkedList*));
+    node3 = malloc(sizeof(DoublyLinkedList*));
+    node4 = malloc(sizeof(DoublyLinkedList*));
     head = malloc(sizeof(DoublyLinkedList**));
 
     *head = NULL;
-    dll_insert(head, -67);
-    dll_insert(head, 30);
-    dll_insert(head, -12);
-    dll_insert(head, 0);
+    node1 = dll_insert(head, -67);
+    node2 = dll_insert(head, 30);
+    node3 = dll_insert(head, -12);
+    node4 = dll_insert(head, 0);
     retrieved = dll_search(head, 30);
 
     ck_assert_int_eq(retrieved == NULL, false);
@@ -170,46 +177,72 @@ START_TEST(test_dll_search_1)
     ck_assert_int_eq(retrieved->prev->data.key, -12);
     ck_assert_int_eq(retrieved->prev->prev->data.key, 0);
 
-    free(retrieved);
+    free(node4);
+    free(node3);
+    free(node2);
+    free(node1);
+    free(head);
 }
 END_TEST
 
 START_TEST(test_dll_search_2)
 {
     DoublyLinkedList* retrieved;
+    DoublyLinkedList* node1;
+    DoublyLinkedList* node2;
+    DoublyLinkedList* node3;
+    DoublyLinkedList* node4;
     DoublyLinkedList** head;
 
-    retrieved = malloc(sizeof(DoublyLinkedList*));
+    node1 = malloc(sizeof(DoublyLinkedList*));
+    node2 = malloc(sizeof(DoublyLinkedList*));
+    node3 = malloc(sizeof(DoublyLinkedList*));
+    node4 = malloc(sizeof(DoublyLinkedList*));
     head = malloc(sizeof(DoublyLinkedList**));
 
     *head = NULL;
-    dll_insert(head, 23);
-    dll_insert(head, 5);
-    dll_insert(head, -17);
-    dll_insert(head, -10);
+    node1 = dll_insert(head, 23);
+    node2 = dll_insert(head, 5);
+    node3 = dll_insert(head, -17);
+    node4 = dll_insert(head, -10);
     retrieved = dll_search(head, 25);
 
     ck_assert_int_eq(retrieved == NULL, true);
 
-    free(retrieved);
+    free(node4);
+    free(node3);
+    free(node2);
+    free(node1);
+    free(head);
 }
 END_TEST
 
 START_TEST(test_dll_search_3)
 {
     DoublyLinkedList* retrieved;
+    DoublyLinkedList* node1;
+    DoublyLinkedList* node2;
+    DoublyLinkedList* node3;
+    DoublyLinkedList* node4;
+    DoublyLinkedList* node5;
+    DoublyLinkedList* node6;
     DoublyLinkedList** head;
 
-    retrieved = malloc(sizeof(DoublyLinkedList*));
+    node1 = malloc(sizeof(DoublyLinkedList*));
+    node2 = malloc(sizeof(DoublyLinkedList*));
+    node3 = malloc(sizeof(DoublyLinkedList*));
+    node4 = malloc(sizeof(DoublyLinkedList*));
+    node5 = malloc(sizeof(DoublyLinkedList*));
+    node6 = malloc(sizeof(DoublyLinkedList*));
     head = malloc(sizeof(DoublyLinkedList**));
 
     *head = NULL;
-    dll_insert(head, -67);
-    dll_insert(head, 30);
-    dll_insert(head, -12);
-    dll_insert(head, 0);
-    dll_insert(head, 20);
-    dll_insert(head, -189);
+    node1 = dll_insert(head, -67);
+    node2 = dll_insert(head, 30);
+    node3 = dll_insert(head, -12);
+    node4 = dll_insert(head, 0);
+    node5 = dll_insert(head, 20);
+    node6 = dll_insert(head, -189);
     retrieved = dll_search(head, -67);
 
     ck_assert_int_eq(retrieved == NULL, false);
@@ -222,25 +255,42 @@ START_TEST(test_dll_search_3)
     ck_assert_int_eq(retrieved->prev->prev->prev->prev->data.key, 20);
     ck_assert_int_eq(retrieved->prev->prev->prev->prev->prev->data.key, -189);
 
-    free(retrieved);
+    free(node6);
+    free(node5);
+    free(node4);
+    free(node3);
+    free(node2);
+    free(node1);
+    free(head);
 }
 END_TEST
 
 START_TEST(test_dll_search_4)
 {
     DoublyLinkedList* retrieved;
+    DoublyLinkedList* node1;
+    DoublyLinkedList* node2;
+    DoublyLinkedList* node3;
+    DoublyLinkedList* node4;
+    DoublyLinkedList* node5;
+    DoublyLinkedList* node6;
     DoublyLinkedList** head;
 
-    retrieved = malloc(sizeof(DoublyLinkedList*));
+    node1 = malloc(sizeof(DoublyLinkedList*));
+    node2 = malloc(sizeof(DoublyLinkedList*));
+    node3 = malloc(sizeof(DoublyLinkedList*));
+    node4 = malloc(sizeof(DoublyLinkedList*));
+    node5 = malloc(sizeof(DoublyLinkedList*));
+    node6 = malloc(sizeof(DoublyLinkedList*));
     head = malloc(sizeof(DoublyLinkedList**));
 
     *head = NULL;
-    dll_insert(head, -67);
-    dll_insert(head, 30);
-    dll_insert(head, -12);
-    dll_insert(head, 0);
-    dll_insert(head, 20);
-    dll_insert(head, -189);
+    node1 = dll_insert(head, -67);
+    node2 = dll_insert(head, 30);
+    node3 = dll_insert(head, -12);
+    node4 = dll_insert(head, 0);
+    node5 = dll_insert(head, 20);
+    node6 = dll_insert(head, -189);
     retrieved = dll_search(head, -189);
 
     ck_assert_int_eq(retrieved == NULL, false);
@@ -253,7 +303,13 @@ START_TEST(test_dll_search_4)
     ck_assert_int_eq(retrieved->next->next->next->next->data.key, 30);
     ck_assert_int_eq(retrieved->next->next->next->next->next->data.key, -67);
 
-    free(retrieved);
+    free(node6);
+    free(node5);
+    free(node4);
+    free(node3);
+    free(node2);
+    free(node1);
+    free(head);
 }
 END_TEST
 
@@ -296,7 +352,9 @@ START_TEST(test_dll_delete_1)
     ck_assert_int_eq((*head)->next == NULL, true);
     ck_assert_int_eq((*head)->prev == NULL, true);
 
+    free(node2);
     free(node1);
+    free(head);
 }
 END_TEST
 
@@ -340,6 +398,8 @@ START_TEST(test_dll_delete_2)
     ck_assert_int_eq((*head)->prev == NULL, true);
 
     free(node2);
+    free(node1);
+    free(head);
 }
 END_TEST
 
@@ -371,6 +431,7 @@ START_TEST(test_dll_delete_3)
     ck_assert_int_eq((*head) == NULL, true);
 
     free(node1);
+    free(head);
 }
 END_TEST
 
@@ -431,6 +492,11 @@ START_TEST(test_dll_delete_4)
     ck_assert_int_eq(node1->prev == NULL, false);
     ck_assert_int_eq(node1->next == NULL, true);
     ck_assert_int_eq(node1->prev->data.key, 150);
+
+    free(node3);
+    free(node2);
+    free(node1);
+    free(head);
 }
 END_TEST
 
@@ -463,6 +529,7 @@ START_TEST(test_dll_delete_5)
     ck_assert_int_eq((*head)->next->data.key, 25);
 
     free(node);
+    free(head);
 }
 END_TEST
 
@@ -490,8 +557,8 @@ START_TEST(test_dll_delete_6)
     ck_assert_int_eq((*head)->prev == NULL, true);
     ck_assert_int_eq((*head)->next == NULL, true);
 
-    free(node1);
     free(node2);
+    free(node1);
     free(head);
 }
 END_TEST
@@ -504,9 +571,7 @@ Suite *make_dll_suite(void)
     s = suite_create("DoublyLinkedList Test Suite");
 
     /* Creation test case */
-    tc_core = tcase_create("Test Cases with Setup and Teardown");
-
-    tcase_add_checked_fixture(tc_core, setup, teardown);
+    tc_core = tcase_create("Test Cases without Setup and Teardown");
 
     tcase_add_test(tc_core, test_dll_insert_1);
     tcase_add_test(tc_core, test_dll_insert_2);

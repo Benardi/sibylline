@@ -143,15 +143,14 @@ START_TEST(test_sll_search_2)
 {
     SinglyLinkedList** head;
     SinglyLinkedList* node1;
-    SinglyLinkedList* node2;
+    SinglyLinkedList* retrieved;
 
     head = malloc(sizeof(SinglyLinkedList**));
     node1 = malloc(sizeof(SinglyLinkedList*));
-    node2 = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
-    node2 = sll_search(head, 200);
+    retrieved = sll_search(head, 200);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -162,10 +161,10 @@ START_TEST(test_sll_search_2)
     ck_assert_int_eq((*head)->data.key, 200);
     ck_assert_int_eq(node1->data.key, 200);
 
-    ck_assert_int_eq((*head) == node2, true);
-    ck_assert_int_eq(node2->next == NULL, true);
-    ck_assert_int_eq(node2->data.key, 200);
-    ck_assert_int_eq(node2 == node1, true);
+    ck_assert_int_eq((*head) == retrieved, true);
+    ck_assert_int_eq(retrieved->next == NULL, true);
+    ck_assert_int_eq(retrieved->data.key, 200);
+    ck_assert_int_eq(retrieved == node1, true);
 
     free(node1);
     free(head);
@@ -198,6 +197,7 @@ START_TEST(test_sll_search_3)
     ck_assert_int_eq(node2 == NULL, true);
 
     free(node1);
+    free(node2);
     free(head);
 }
 END_TEST
@@ -212,7 +212,6 @@ START_TEST(test_sll_search_4)
     head = malloc(sizeof(SinglyLinkedList**));
     node1 = malloc(sizeof(SinglyLinkedList*));
     node2 = malloc(sizeof(SinglyLinkedList*));
-    retrieved = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -255,7 +254,6 @@ START_TEST(test_sll_search_5)
     head = malloc(sizeof(SinglyLinkedList**));
     node1 = malloc(sizeof(SinglyLinkedList*));
     node2 = malloc(sizeof(SinglyLinkedList*));
-    retrieved = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -297,7 +295,6 @@ START_TEST(test_sll_search_6)
     head = malloc(sizeof(SinglyLinkedList**));
     node1 = malloc(sizeof(SinglyLinkedList*));
     node2 = malloc(sizeof(SinglyLinkedList*));
-    retrieved = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -340,7 +337,6 @@ START_TEST(test_sll_search_7)
     node2 = malloc(sizeof(SinglyLinkedList*));
     node3 = malloc(sizeof(SinglyLinkedList*));
     node4 = malloc(sizeof(SinglyLinkedList*));
-    retrieved = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -397,7 +393,6 @@ START_TEST(test_sll_search_8)
     node2 = malloc(sizeof(SinglyLinkedList*));
     node3 = malloc(sizeof(SinglyLinkedList*));
     node4 = malloc(sizeof(SinglyLinkedList*));
-    retrieved = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -459,7 +454,6 @@ START_TEST(test_sll_search_9)
     node2 = malloc(sizeof(SinglyLinkedList*));
     node3 = malloc(sizeof(SinglyLinkedList*));
     node4 = malloc(sizeof(SinglyLinkedList*));
-    retrieved = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
