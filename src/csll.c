@@ -7,7 +7,7 @@ CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
 {
     CircularSinglyLinkedList* node;
 
-    node = malloc(sizeof(CircularSinglyLinkedList*));
+    node = malloc(sizeof(CircularSinglyLinkedList));
     node->data.key = k;
 
     if ((*tail) == NULL)
@@ -29,7 +29,7 @@ CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
 {
     CircularSinglyLinkedList* node;
 
-    node = malloc(sizeof(CircularSinglyLinkedList*));
+    node = malloc(sizeof(CircularSinglyLinkedList));
     node->data.key = k;
 
     if ((*tail) == NULL)

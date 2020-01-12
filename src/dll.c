@@ -4,7 +4,7 @@
 DoublyLinkedList* dll_insert(DoublyLinkedList** head, Key k)
 {
     DoublyLinkedList* node;
-    node = malloc(sizeof(DoublyLinkedList*));
+    node = malloc(sizeof(DoublyLinkedList));
     node->data.key = k;
     node->next = *head;
     node->prev = NULL;

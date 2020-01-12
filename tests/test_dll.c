@@ -14,7 +14,7 @@ START_TEST(test_dll_insert_1)
     DoublyLinkedList* node1;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     node1 = dll_insert(head, -150);
@@ -40,7 +40,7 @@ START_TEST(test_dll_insert_2)
     DoublyLinkedList* node2;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     node1 = dll_insert(head, 10);
@@ -83,7 +83,7 @@ START_TEST(test_dll_insert_3)
     DoublyLinkedList* node4;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     node1 = dll_insert(head, -67);
@@ -149,7 +149,7 @@ START_TEST(test_dll_search_1)
     DoublyLinkedList* node4;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     node1 = dll_insert(head, -67);
@@ -183,7 +183,7 @@ START_TEST(test_dll_search_2)
     DoublyLinkedList* node4;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     node1 = dll_insert(head, 23);
@@ -213,7 +213,7 @@ START_TEST(test_dll_search_3)
     DoublyLinkedList* node6;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     node1 = dll_insert(head, -67);
@@ -255,7 +255,7 @@ START_TEST(test_dll_search_4)
     DoublyLinkedList* node6;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     node1 = dll_insert(head, -67);
@@ -292,7 +292,7 @@ START_TEST(test_dll_delete_1)
     DoublyLinkedList* node2;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     node1 = dll_insert(head, -67);
@@ -335,7 +335,7 @@ START_TEST(test_dll_delete_2)
     DoublyLinkedList* node2;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     node1 = dll_insert(head, -67);
@@ -377,7 +377,7 @@ START_TEST(test_dll_delete_3)
     DoublyLinkedList* node1;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     node1 = dll_insert(head, -67);
@@ -410,7 +410,7 @@ START_TEST(test_dll_delete_4)
     DoublyLinkedList* node3;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     node1 = dll_insert(head, 25);
@@ -470,7 +470,7 @@ START_TEST(test_dll_delete_5)
     DoublyLinkedList* node;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     dll_insert(head, 25);
@@ -503,7 +503,7 @@ START_TEST(test_dll_delete_6)
     DoublyLinkedList* node2;
     DoublyLinkedList** head;
 
-    head = malloc(sizeof(DoublyLinkedList**));
+    head = malloc(sizeof(DoublyLinkedList*));
 
     *head = NULL;
     dll_insert(head, 25);
