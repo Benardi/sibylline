@@ -5,29 +5,33 @@
 #include <stdbool.h>
 #include <cdll.h>
 
-CircularDoublyLinkedList* node;
+CircularDoublyLinkedList* nil;
 
+void setup(void);
+void teardown(void);
 Suite *make_cdll_suite(void);
+
+void setup(void)
+{
+    nil = malloc(sizeof(CircularDoublyLinkedList));
+}
+
+void teardown(void)
+{
+    free(nil);
+}
 
 START_TEST(test_cdll_init_1)
 {
-    CircularDoublyLinkedList* nil;
-    nil = malloc(sizeof(CircularDoublyLinkedList));
-    
     cdll_init(nil);
     ck_assert_int_eq(nil->next == nil, true);
     ck_assert_int_eq(nil->prev == nil, true);
-
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_insert_1)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -42,17 +46,13 @@ START_TEST(test_cdll_insert_1)
     ck_assert_int_eq(node1->data.key, 17);
 
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_insert_2)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* node2;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -79,18 +79,14 @@ START_TEST(test_cdll_insert_2)
 
     free(node2);
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_insert_3)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* node2;
     CircularDoublyLinkedList* node3;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, -2);
@@ -126,17 +122,13 @@ START_TEST(test_cdll_insert_3)
     free(node3);
     free(node2);
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_search_1)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* retrieved;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -158,17 +150,13 @@ START_TEST(test_cdll_search_1)
     ck_assert_int_eq(retrieved == node1, true);
 
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_search_2)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* retrieved;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -188,18 +176,14 @@ START_TEST(test_cdll_search_2)
     ck_assert_int_eq(retrieved == nil, true);
 
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_search_3)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* node2;
     CircularDoublyLinkedList* retrieved;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -234,18 +218,14 @@ START_TEST(test_cdll_search_3)
 
     free(node2);
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_search_4)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* node2;
     CircularDoublyLinkedList* retrieved;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -281,18 +261,14 @@ START_TEST(test_cdll_search_4)
 
     free(node2);
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_search_5)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* node2;
     CircularDoublyLinkedList* retrieved;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -328,22 +304,17 @@ START_TEST(test_cdll_search_5)
     ck_assert_int_eq(retrieved->prev->prev->prev == retrieved, true);
     ck_assert_int_eq(retrieved == nil, true);
 
-
     free(node2);
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_search_6)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* node2;
     CircularDoublyLinkedList* node3;
     CircularDoublyLinkedList* retrieved;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, -2);
@@ -387,19 +358,15 @@ START_TEST(test_cdll_search_6)
     free(node3);
     free(node2);
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_search_7)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* node2;
     CircularDoublyLinkedList* node3;
     CircularDoublyLinkedList* retrieved;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, -2);
@@ -449,19 +416,15 @@ START_TEST(test_cdll_search_7)
     free(node3);
     free(node2);
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_search_8)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* node2;
     CircularDoublyLinkedList* node3;
     CircularDoublyLinkedList* retrieved;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, -2);
@@ -506,16 +469,12 @@ START_TEST(test_cdll_search_8)
     free(node3);
     free(node2);
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_delete_1)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -536,17 +495,13 @@ START_TEST(test_cdll_delete_1)
     ck_assert_int_eq(node1->data.key, 17);
 
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_delete_2)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* node2;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -588,17 +543,13 @@ START_TEST(test_cdll_delete_2)
 
     free(node2);
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_delete_3)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* node2;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, 17);
@@ -640,18 +591,14 @@ START_TEST(test_cdll_delete_3)
 
     free(node2);
     free(node1);
-    free(nil);
 }
 END_TEST
 
 START_TEST(test_cdll_delete_4)
 {
-    CircularDoublyLinkedList* nil;
     CircularDoublyLinkedList* node1;
     CircularDoublyLinkedList* node2;
     CircularDoublyLinkedList* node3;
-
-    nil = malloc(sizeof(CircularDoublyLinkedList));
 
     cdll_init(nil);
     node1 = cdll_insert(nil, -2);
@@ -709,7 +656,6 @@ START_TEST(test_cdll_delete_4)
     free(node3);
     free(node2);
     free(node1);
-    free(nil);
 }
 END_TEST
 
@@ -721,7 +667,9 @@ Suite *make_cdll_suite(void)
     s = suite_create("DoublyLinkedList Test Suite");
 
     /* Creation test case */
-    tc_core = tcase_create("Test Cases with no Setup/Teardown");
+    tc_core = tcase_create("Test Cases with Setup/Teardown");
+
+    tcase_add_checked_fixture(tc_core, setup, teardown);
 
     tcase_add_test(tc_core, test_cdll_init_1);
 

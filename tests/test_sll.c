@@ -5,14 +5,25 @@
 #include <stdbool.h>
 #include <sll.h>
 
+SinglyLinkedList** head;
+
+void setup(void);
+void teardown(void);
 Suite *make_sll_suite(void);
+
+void setup(void)
+{
+    head = malloc(sizeof(SinglyLinkedList*));
+}
+
+void teardown(void)
+{
+    free(head);
+}
 
 START_TEST(test_sll_insert_1)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -27,17 +38,13 @@ START_TEST(test_sll_insert_1)
     ck_assert_int_eq(node1->data.key, 200);
 
     free(node1);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_insert_2)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -59,19 +66,15 @@ START_TEST(test_sll_insert_2)
 
     free(node1);
     free(node2);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_insert_3)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* node3;
     SinglyLinkedList* node4;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -107,16 +110,12 @@ START_TEST(test_sll_insert_3)
     free(node2);
     free(node3);
     free(node4);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_search_1)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_search(head, 100);
@@ -127,17 +126,13 @@ START_TEST(test_sll_search_1)
     ck_assert_int_eq(node1 == (*head), true);
 
     free(node1);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_search_2)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* retrieved;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -158,17 +153,13 @@ START_TEST(test_sll_search_2)
     ck_assert_int_eq(retrieved == node1, true);
 
     free(node1);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_search_3)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -187,18 +178,14 @@ START_TEST(test_sll_search_3)
 
     free(node1);
     free(node2);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_search_4)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* retrieved;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -227,18 +214,14 @@ START_TEST(test_sll_search_4)
 
     free(node1);
     free(node2);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_search_5)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* retrieved;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -266,18 +249,14 @@ START_TEST(test_sll_search_5)
 
     free(node1);
     free(node2);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_search_6)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* retrieved;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -302,20 +281,16 @@ START_TEST(test_sll_search_6)
 
     free(node1);
     free(node2);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_search_7)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* node3;
     SinglyLinkedList* node4;
     SinglyLinkedList* retrieved;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -354,20 +329,16 @@ START_TEST(test_sll_search_7)
     free(node2);
     free(node3);
     free(node4);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_search_8)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* node3;
     SinglyLinkedList* node4;
     SinglyLinkedList* retrieved;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -411,20 +382,16 @@ START_TEST(test_sll_search_8)
     free(node2);
     free(node3);
     free(node4);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_search_9)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* node3;
     SinglyLinkedList* node4;
     SinglyLinkedList* retrieved;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -467,16 +434,12 @@ START_TEST(test_sll_search_9)
     free(node2);
     free(node3);
     free(node4);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_delete_1)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -496,17 +459,13 @@ START_TEST(test_sll_delete_1)
     ck_assert_int_eq((*head) == NULL, true);
 
     free(node1);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_delete_2)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -536,17 +495,13 @@ START_TEST(test_sll_delete_2)
 
     free(node1);
     free(node2);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_delete_3)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -576,17 +531,13 @@ START_TEST(test_sll_delete_3)
 
     free(node1);
     free(node2);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_delete_4)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -614,17 +565,13 @@ START_TEST(test_sll_delete_4)
 
     free(node1);
     free(node2);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_delete_5)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -652,19 +599,15 @@ START_TEST(test_sll_delete_5)
 
     free(node1);
     free(node2);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_delete_6)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* node3;
     SinglyLinkedList* node4;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -723,19 +666,15 @@ START_TEST(test_sll_delete_6)
     free(node2);
     free(node3);
     free(node4);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_delete_7)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* node3;
     SinglyLinkedList* node4;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -794,19 +733,15 @@ START_TEST(test_sll_delete_7)
     free(node2);
     free(node3);
     free(node4);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_delete_8)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* node3;
     SinglyLinkedList* node4;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -865,19 +800,15 @@ START_TEST(test_sll_delete_8)
     free(node2);
     free(node3);
     free(node4);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_delete_9)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* node3;
     SinglyLinkedList* node4;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -936,19 +867,15 @@ START_TEST(test_sll_delete_9)
     free(node2);
     free(node3);
     free(node4);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_delete_10)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* node3;
     SinglyLinkedList* node4;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -1005,19 +932,15 @@ START_TEST(test_sll_delete_10)
     free(node2);
     free(node3);
     free(node4);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_delete_11)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* node3;
     SinglyLinkedList* node4;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -1074,19 +997,15 @@ START_TEST(test_sll_delete_11)
     free(node2);
     free(node3);
     free(node4);
-    free(head);
 }
 END_TEST
 
 START_TEST(test_sll_delete_12)
 {
-    SinglyLinkedList** head;
     SinglyLinkedList* node1;
     SinglyLinkedList* node2;
     SinglyLinkedList* node3;
     SinglyLinkedList* node4;
-
-    head = malloc(sizeof(SinglyLinkedList*));
 
     *head = NULL;
     node1 = sll_insert(head, 200);
@@ -1135,7 +1054,6 @@ START_TEST(test_sll_delete_12)
     free(node2);
     free(node3);
     free(node4);
-    free(head);
 }
 END_TEST
 
@@ -1148,6 +1066,8 @@ Suite *make_sll_suite(void)
 
     /* Creation test case */
     tc_core = tcase_create("Test Cases with no Setup/Teardown");
+
+    tcase_add_checked_fixture(tc_core, setup, teardown);
 
     tcase_add_test(tc_core, test_sll_insert_1);
     tcase_add_test(tc_core, test_sll_insert_2);    
