@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <sll.h>
 
+Register* reg;
 SinglyLinkedList** head;
 
 void setup(void);
@@ -13,11 +14,13 @@ Suite *make_sll_suite(void);
 
 void setup(void)
 {
+    reg = malloc(sizeof(Register));
     head = malloc(sizeof(SinglyLinkedList*));
 }
 
 void teardown(void)
 {
+    free(reg);
     free(head);
 }
 
@@ -26,7 +29,8 @@ START_TEST(test_sll_insert_1)
     SinglyLinkedList* node1;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -47,8 +51,10 @@ START_TEST(test_sll_insert_2)
     SinglyLinkedList* node2;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, 250);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = 250;
+    node2 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -77,10 +83,14 @@ START_TEST(test_sll_insert_3)
     SinglyLinkedList* node4;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, -80);
-    node3 = sll_insert(head, 33);
-    node4 = sll_insert(head, -730);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = -80;
+    node2 = sll_insert(head, *reg);
+    reg->key = 33;
+    node3 = sll_insert(head, *reg);
+    reg->key = -730;
+    node4 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -135,7 +145,8 @@ START_TEST(test_sll_search_2)
     SinglyLinkedList* retrieved;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
     retrieved = sll_search(head, 200);
 
     ck_assert_int_eq(head == NULL, false);
@@ -162,7 +173,8 @@ START_TEST(test_sll_search_3)
     SinglyLinkedList* node2;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
     node2 = sll_search(head, -35);
 
     ck_assert_int_eq(head == NULL, false);
@@ -188,8 +200,10 @@ START_TEST(test_sll_search_4)
     SinglyLinkedList* retrieved;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, 250);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = 250;
+    node2 = sll_insert(head, *reg);
     retrieved = sll_search(head, 200);
 
     ck_assert_int_eq(head == NULL, false);
@@ -224,8 +238,10 @@ START_TEST(test_sll_search_5)
     SinglyLinkedList* retrieved;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, 250);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = 250;
+    node2 = sll_insert(head, *reg);
     retrieved = sll_search(head, 250);
 
     ck_assert_int_eq(head == NULL, false);
@@ -259,8 +275,10 @@ START_TEST(test_sll_search_6)
     SinglyLinkedList* retrieved;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, 250);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = 250;
+    node2 = sll_insert(head, *reg);
     retrieved = sll_search(head, 0);
 
     ck_assert_int_eq(head == NULL, false);
@@ -293,10 +311,14 @@ START_TEST(test_sll_search_7)
     SinglyLinkedList* retrieved;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, -80);
-    node3 = sll_insert(head, 33);
-    node4 = sll_insert(head, -730);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = -80;
+    node2 = sll_insert(head, *reg);
+    reg->key = 33;
+    node3 = sll_insert(head, *reg);
+    reg->key = -730;
+    node4 = sll_insert(head, *reg);
     retrieved = sll_search(head, 10);
 
     ck_assert_int_eq(head == NULL, false);
@@ -341,10 +363,14 @@ START_TEST(test_sll_search_8)
     SinglyLinkedList* retrieved;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, -80);
-    node3 = sll_insert(head, 33);
-    node4 = sll_insert(head, -730);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = -80;
+    node2 = sll_insert(head, *reg);
+    reg->key = 33;
+    node3 = sll_insert(head, *reg);
+    reg->key = -730;
+    node4 = sll_insert(head, *reg);
     retrieved = sll_search(head, 33);
 
     ck_assert_int_eq(head == NULL, false);
@@ -394,10 +420,14 @@ START_TEST(test_sll_search_9)
     SinglyLinkedList* retrieved;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, -80);
-    node3 = sll_insert(head, 33);
-    node4 = sll_insert(head, -730);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = -80;
+    node2 = sll_insert(head, *reg);
+    reg->key = 33;
+    node3 = sll_insert(head, *reg);
+    reg->key = -730;
+    node4 = sll_insert(head, *reg);
     retrieved = sll_search(head, 200);
 
     ck_assert_int_eq(head == NULL, false);
@@ -442,7 +472,8 @@ START_TEST(test_sll_delete_1)
     SinglyLinkedList* node1;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -468,8 +499,10 @@ START_TEST(test_sll_delete_2)
     SinglyLinkedList* node2;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, 250);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = 250;
+    node2 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -504,8 +537,10 @@ START_TEST(test_sll_delete_3)
     SinglyLinkedList* node2;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, 250);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = 250;
+    node2 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -540,8 +575,10 @@ START_TEST(test_sll_delete_4)
     SinglyLinkedList* node2;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, 250);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = 250;
+    node2 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -574,8 +611,10 @@ START_TEST(test_sll_delete_5)
     SinglyLinkedList* node2;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, 250);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = 250;
+    node2 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -610,10 +649,14 @@ START_TEST(test_sll_delete_6)
     SinglyLinkedList* node4;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, -80);
-    node3 = sll_insert(head, 33);
-    node4 = sll_insert(head, -730);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = -80;
+    node2 = sll_insert(head, *reg);
+    reg->key = 33;
+    node3 = sll_insert(head, *reg);
+    reg->key = -730;
+    node4 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -677,10 +720,14 @@ START_TEST(test_sll_delete_7)
     SinglyLinkedList* node4;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, -80);
-    node3 = sll_insert(head, 33);
-    node4 = sll_insert(head, -730);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = -80;
+    node2 = sll_insert(head, *reg);
+    reg->key = 33;
+    node3 = sll_insert(head, *reg);
+    reg->key = -730;
+    node4 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -744,10 +791,14 @@ START_TEST(test_sll_delete_8)
     SinglyLinkedList* node4;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, -80);
-    node3 = sll_insert(head, 33);
-    node4 = sll_insert(head, -730);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = -80;
+    node2 = sll_insert(head, *reg);
+    reg->key = 33;
+    node3 = sll_insert(head, *reg);
+    reg->key = -730;
+    node4 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -811,10 +862,14 @@ START_TEST(test_sll_delete_9)
     SinglyLinkedList* node4;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, -80);
-    node3 = sll_insert(head, 33);
-    node4 = sll_insert(head, -730);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = -80;
+    node2 = sll_insert(head, *reg);
+    reg->key = 33;
+    node3 = sll_insert(head, *reg);
+    reg->key = -730;
+    node4 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -878,10 +933,14 @@ START_TEST(test_sll_delete_10)
     SinglyLinkedList* node4;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, -80);
-    node3 = sll_insert(head, 33);
-    node4 = sll_insert(head, -730);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = -80;
+    node2 = sll_insert(head, *reg);
+    reg->key = 33;
+    node3 = sll_insert(head, *reg);
+    reg->key = -730;
+    node4 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -943,10 +1002,14 @@ START_TEST(test_sll_delete_11)
     SinglyLinkedList* node4;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, -80);
-    node3 = sll_insert(head, 33);
-    node4 = sll_insert(head, -730);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = -80;
+    node2 = sll_insert(head, *reg);
+    reg->key = 33;
+    node3 = sll_insert(head, *reg);
+    reg->key = -730;
+    node4 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);
@@ -1008,10 +1071,14 @@ START_TEST(test_sll_delete_12)
     SinglyLinkedList* node4;
 
     *head = NULL;
-    node1 = sll_insert(head, 200);
-    node2 = sll_insert(head, -80);
-    node3 = sll_insert(head, 33);
-    node4 = sll_insert(head, -730);
+    reg->key = 200;
+    node1 = sll_insert(head, *reg);
+    reg->key = -80;
+    node2 = sll_insert(head, *reg);
+    reg->key = 33;
+    node3 = sll_insert(head, *reg);
+    reg->key = -730;
+    node4 = sll_insert(head, *reg);
 
     ck_assert_int_eq(head == NULL, false);
     ck_assert_int_eq((*head) == NULL, false);

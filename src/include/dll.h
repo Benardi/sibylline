@@ -30,10 +30,10 @@ DoublyLinkedList;
  * the linked list.
  *
  * @param head Double pointer to head of Doubly Linked List. 
- * @param k Key for Register of inserted node.
+ * @param reg Register of inserted node.
  * @return Pointer to inserted node.
  */
-DoublyLinkedList* dll_insert(DoublyLinkedList** head, Key k);
+DoublyLinkedList* dll_insert(DoublyLinkedList** head, Register reg);
 
 /** @brief Retrieves node from Doubly Linked List via key. 
  *

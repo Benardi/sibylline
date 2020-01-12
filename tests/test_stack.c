@@ -5,9 +5,8 @@
 #include <stack.h>
 
 Stack* stk;
-Register reg;
-Register* element1;
-Register* element2;
+Register* reg;
+
 int i;
 
 void setup(void);
@@ -16,16 +15,14 @@ Suite *make_stack_suite(void);
 
 void setup(void)
 {
+    reg = malloc(sizeof(Register));
     stk = malloc(sizeof(Stack));
-    element1 = malloc(sizeof(Register));
-    element2 = malloc(sizeof(Register));
 }
 
 void teardown(void)
 {
+    free(reg);
     free(stk);
-    free(element1);
-    free(element2);
 }
 
 START_TEST(test_init_stack_1)
@@ -58,9 +55,9 @@ END_TEST
 
 START_TEST(test_stack_empty_3)
 {
-    reg.key = 10;
+    reg->key = 10;
     init_stack(stk);
-    stk->A[0] = reg;
+    stk->A[0] = *reg;
     stk->top = 0;
     ck_assert_int_eq(stack_empty(stk), false);
 }
@@ -68,9 +65,9 @@ END_TEST
 
 START_TEST(test_stack_empty_4)
 {
-    reg.key = 10;
+    reg->key = 10;
     init_stack(stk);
-    stk->A[0] = reg;
+    stk->A[0] = *reg;
     stk->top = 0;
     init_stack(stk);
     ck_assert_int_eq(stack_empty(stk), true);
@@ -86,9 +83,9 @@ END_TEST
 
 START_TEST(test_stack_full_2)
 {
-    reg.key = -10;
+    reg->key = -10;
     init_stack(stk);
-    push(stk, reg);
+    push(stk, *reg);
     ck_assert_int_eq(stack_full(stk), false);
 }
 END_TEST
@@ -97,25 +94,25 @@ START_TEST(test_stack_full_3)
 {
     bool result = true;
 
-    reg.key = -10;
+    reg->key = -10;
     init_stack(stk);
 
     /* Filling up the stack */
     for (i = 0; i < MAX - 1; i++)
     {
-        result = result && push(stk, reg);
+        result = result && push(stk, *reg);
     }
 
     ck_assert_int_eq(result, true);
     ck_assert_int_eq(stack_full(stk), false);
 
     /* Last available position */
-    result = push(stk, reg);
+    result = push(stk, *reg);
     ck_assert_int_eq(result, true);
     ck_assert_int_eq(stack_full(stk), true);
 
     /* Stack overflow */
-    result = push(stk, reg);
+    result = push(stk, *reg);
     ck_assert_int_eq(result, false);
     ck_assert_int_eq(stack_full(stk), true);
 }
@@ -126,7 +123,7 @@ START_TEST(test_stack_pop_1)
     bool result;
 
     init_stack(stk);
-    result = pop(stk, element1);
+    result = pop(stk, reg);
 
     ck_assert_int_eq(result, false);
 }
@@ -137,40 +134,49 @@ START_TEST(test_stack_pop_2)
     bool result1, result2, result3;
 
     init_stack(stk);
-    result1 = pop(stk, element1); /* Doesn't write to pointer address*/
-    reg.key = 7;
-    push(stk, reg);
-    result2 = pop(stk, element1); /* Writes to pointer address*/
-    result3 = pop(stk, element1); /* Doesn't write to pointer address*/
+    result1 = pop(stk, reg); /* Doesn't write to pointer address*/
+    reg->key = 7;
+    push(stk, *reg);
+    result2 = pop(stk, reg); /* Writes to pointer address*/
+    result3 = pop(stk, reg); /* Doesn't write to pointer address*/
 
     ck_assert_int_eq(result1, false);
     ck_assert_int_eq(result2, true);
     ck_assert_int_eq(result3, false);
 
-    ck_assert_int_eq(element1->key, 7);
+    ck_assert_int_eq(reg->key, 7);
 }
 END_TEST
 
 START_TEST(test_stack_pop_3)
 {
+    Register* el1;
+    Register* el2;
+    
+    el1 = malloc(sizeof(Register));
+    el2 = malloc(sizeof(Register));
+
     bool result1, result2, result3;
 
     init_stack(stk);
-    reg.key = 7;
-    push(stk, reg);
-    reg.key = -5;
-    push(stk, reg);
+    reg->key = 7;
+    push(stk, *reg);
+    reg->key = -5;
+    push(stk, *reg);
 
-    result1 = pop(stk, element1);
-    result2 = pop(stk, element2);
-    result3 = pop(stk, element2);
+    result1 = pop(stk, el1);
+    result2 = pop(stk, el2);
+    result3 = pop(stk, el2);
 
     ck_assert_int_eq(result1, true);
     ck_assert_int_eq(result2, true);
     ck_assert_int_eq(result3, false);
 
-    ck_assert_int_eq(element1->key, -5);
-    ck_assert_int_eq(element2->key, 7);
+    ck_assert_int_eq(el1->key, -5);
+    ck_assert_int_eq(el2->key, 7);
+
+    free(el1);
+    free(el2);
 }
 END_TEST
 

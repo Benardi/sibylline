@@ -123,7 +123,7 @@ bool insert_elem(SeqList* sl, Register reg, int i)
     }
 }
 
-bool remove_elem(Key key, SeqList* sl)
+bool remove_elem(SeqList* sl, Key key)
 {
     int pos, j;
     pos = seq_search(sl, key);

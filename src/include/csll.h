@@ -27,10 +27,11 @@ CircularSinglyLinkedList;
  * pointer to added node.
  *
  * @param tail Double pointer to tail of Circular Singly Linked List. 
- * @param k Key for Register of inserted node.
+ * @param reg Register of inserted node.
  * @return Pointer to inserted node.
  */
-CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail, Key k);
+CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
+                                            Register reg);
 
 /** @brief Inserts node at end of Circular Singly Linked List.
  *  
@@ -40,10 +41,11 @@ CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail, Key
  * pointer with new tail of the linked list.
  *
  * @param tail Double pointer to tail of Circular Singly Linked List. 
- * @param k Key for Register of inserted node.
+ * @param reg Register of inserted node.
  * @return Pointer to inserted node.
  */
-CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail, Key k);
+CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
+                                          Register reg);
 
 /** @brief Retrieves node from Circular Singly Linked List via key. 
  *

@@ -1,11 +1,11 @@
 #include <malloc.h>
 #include <sll.h>
 
-SinglyLinkedList* sll_insert(SinglyLinkedList** head, Key k)
+SinglyLinkedList* sll_insert(SinglyLinkedList** head, Register reg)
 {
     SinglyLinkedList* node;
     node = malloc(sizeof(SinglyLinkedList));
-    node->data.key = k;
+    node->data = reg;
     node->next = (*head);
 
     (*head) = node;
