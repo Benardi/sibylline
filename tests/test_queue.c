@@ -5,7 +5,6 @@
 #include <queue.h>
 
 Queue* q;
-Register reg;
 Register* el;
 int i;
 
@@ -35,9 +34,9 @@ END_TEST
 
 START_TEST(test_init_queue_2)
 {
-    reg.key = 10;
+    el->key = 10;
     init_queue(q);
-    enqueue(q, reg);
+    enqueue(q, *el);
     init_queue(q);
 
     ck_assert_int_eq(q->head, 0);
@@ -47,7 +46,6 @@ END_TEST
 
 START_TEST(test_init_queue_3)
 {
-    reg.key = 10;
     init_queue(q);
     dequeue(q, el);
 
@@ -69,7 +67,7 @@ START_TEST(test_queue_empty_2)
     bool result;
 
     init_queue(q);
-    result = enqueue(q, reg);
+    result = enqueue(q, *el);
 
     ck_assert_int_eq(result, true);
     ck_assert_int_eq(queue_empty(q), false);
@@ -84,7 +82,7 @@ START_TEST(test_queue_empty_3)
 
     ck_assert_int_eq(queue_empty(q), true);
 
-    result1 = enqueue(q, reg);
+    result1 = enqueue(q, *el);
 
     ck_assert_int_eq(result1, true);
     ck_assert_int_eq(queue_empty(q), false);
@@ -107,12 +105,12 @@ START_TEST(test_queue_full_2)
 {
     bool result = true;
 
-    reg.key = -10;
+    el->key = -10;
     init_queue(q);
 
     for (i = 0; i < (MAX - 2); i++)
     {
-        result = result && enqueue(q, reg);
+        result = result && enqueue(q, *el);
     }
 
     ck_assert_int_eq(result, true);
@@ -124,20 +122,20 @@ START_TEST(test_queue_full_3)
 {
     bool result = true;
 
-    reg.key = -10;
+    el->key = -10;
     init_queue(q);
 
     /* Filling up the queue */
     for (i = 0; i < (MAX - 1); i++)
     {
-        result = result && enqueue(q, reg);
+        result = result && enqueue(q, *el);
     }
 
     ck_assert_int_eq(result, true);
     ck_assert_int_eq(queue_full(q), true);
 
     /* Queue overflow */
-    result = enqueue(q, reg);
+    result = enqueue(q, *el);
     ck_assert_int_eq(result, false);
     ck_assert_int_eq(queue_full(q), true);
 }
@@ -146,8 +144,8 @@ END_TEST
 START_TEST(test_enqueue_1)
 bool result;
 init_queue(q);
-reg.key = 8;
-result = enqueue(q, reg);
+el->key = 8;
+result = enqueue(q, *el);
 
 ck_assert_int_eq(result, true);
 ck_assert_int_eq(q->tail, 1);
@@ -157,10 +155,10 @@ END_TEST
 START_TEST(test_enqueue_2)
 bool result1, result2;
 init_queue(q);
-reg.key = 8;
-result1 = enqueue(q, reg);
-reg.key = -15;
-result2 = enqueue(q, reg);
+el->key = 8;
+result1 = enqueue(q, *el);
+el->key = -15;
+result2 = enqueue(q, *el);
 
 ck_assert_int_eq(result1, true);
 ck_assert_int_eq(result2, true);
@@ -182,8 +180,8 @@ START_TEST(test_dequeue_2)
 bool result;
 init_queue(q);
 
-reg.key = -247;
-enqueue(q, reg);
+el->key = -247;
+enqueue(q, *el);
 result = dequeue(q, el);
 
 ck_assert_int_eq(result, true);
@@ -194,8 +192,8 @@ START_TEST(test_dequeue_3)
 bool result;
 init_queue(q);
 
-reg.key = -247;
-enqueue(q, reg);
+el->key = -247;
+enqueue(q, *el);
 dequeue(q, el);
 result = dequeue(q, el); /* el is not overwritten */
 
@@ -208,19 +206,19 @@ init_queue(q);
 
 for (i = 0; i < 14; i++)
 {
-    enqueue(q, reg);
+    enqueue(q, *el);
 }
 
-reg.key = 15;
-enqueue(q, reg);
-reg.key = 6;
-enqueue(q, reg);
-reg.key = 9;
-enqueue(q, reg);
-reg.key = 8;
-enqueue(q, reg);
-reg.key = 4;
-enqueue(q, reg);
+el->key = 15;
+enqueue(q, *el);
+el->key = 6;
+enqueue(q, *el);
+el->key = 9;
+enqueue(q, *el);
+el->key = 8;
+enqueue(q, *el);
+el->key = 4;
+enqueue(q, *el);
 
 for (i = 0; i < 14; i++)
 {
@@ -242,31 +240,31 @@ init_queue(q);
 
 for (i = 0; i < 14; i++)
 {
-    enqueue(q, reg);
+    enqueue(q, *el);
 }
 
-reg.key = 15;
-enqueue(q, reg);
-reg.key = 6;
-enqueue(q, reg);
-reg.key = 9;
-enqueue(q, reg);
-reg.key = 8;
-enqueue(q, reg);
-reg.key = 4;
-enqueue(q, reg);
+el->key = 15;
+enqueue(q, *el);
+el->key = 6;
+enqueue(q, *el);
+el->key = 9;
+enqueue(q, *el);
+el->key = 8;
+enqueue(q, *el);
+el->key = 4;
+enqueue(q, *el);
 
 for (i = 0; i < 14; i++)
 {
     dequeue(q, el);
 }
 
-reg.key = 17;
-enqueue(q, reg);
-reg.key = 3;
-enqueue(q, reg);
-reg.key = 5;
-enqueue(q, reg);
+el->key = 17;
+enqueue(q, *el);
+el->key = 3;
+enqueue(q, *el);
+el->key = 5;
+enqueue(q, *el);
 dequeue(q, el);
 
 ck_assert_int_eq(q->A[14].key, 15); /* Has been removed */

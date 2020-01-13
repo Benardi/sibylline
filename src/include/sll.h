@@ -28,10 +28,10 @@ SinglyLinkedList;
  * the Singly Linked List.
  *
  * @param head Double pointer to head of Singly Linked List. 
- * @param k Key for Register of inserted node.
+ * @param reg Register of inserted node.
  * @return Pointer to inserted node.
  */
-SinglyLinkedList* sll_insert(SinglyLinkedList** head, Key k);
+SinglyLinkedList* sll_insert(SinglyLinkedList** head, Register reg);
 
 /** @brief Retrieves node from Singly Linked List via key. 
  *

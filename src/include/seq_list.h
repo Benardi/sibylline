@@ -126,7 +126,7 @@ int sentinel_search(SeqList* sl, Key k);
  * @param sl Sequential List as pointer
  * @return Wheter element could be removed
  */
-bool remove_elem(Key key, SeqList* sl);
+bool remove_elem(SeqList* sl, Key key);
 
 /** @brief Prints elements in Sequential List
  *

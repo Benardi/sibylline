@@ -5,17 +5,32 @@
 #include <stdbool.h>
 #include <csll.h>
 
+Register* reg;
+CircularSinglyLinkedList** tail;
+
+void setup(void);
+void teardown(void);
 Suite *make_dll_suite(void);
+
+void setup(void)
+{
+    reg = malloc(sizeof(Register));
+    tail = malloc(sizeof(CircularSinglyLinkedList*));
+}
+
+void teardown(void)
+{
+    free(reg);
+    free(tail);
+}
 
 START_TEST(test_csll_insert_begin_1)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -29,21 +44,19 @@ START_TEST(test_csll_insert_begin_1)
     ck_assert_int_eq(node1 == (*tail), true);
 
     free(node1);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_insert_begin_2)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -72,23 +85,22 @@ START_TEST(test_csll_insert_begin_2)
 
     free(node1);
     free(node2);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_insert_begin_3)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -132,19 +144,16 @@ START_TEST(test_csll_insert_begin_3)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_insert_end_1)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_end(tail, 15);
+    reg->key = 15;
+    node1 = csll_insert_end(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -158,21 +167,19 @@ START_TEST(test_csll_insert_end_1)
     ck_assert_int_eq(node1 == (*tail), true);
 
     free(node1);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_insert_end_2)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_end(tail, 15);
-    node2 = csll_insert_end(tail, -25);
+    reg->key = 15;
+    node1 = csll_insert_end(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_end(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -202,23 +209,22 @@ START_TEST(test_csll_insert_end_2)
 
     free(node1);
     free(node2);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_insert_end_3)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_end(tail, 15);
-    node2 = csll_insert_end(tail, -25);
-    node3 = csll_insert_end(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_end(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_end(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_end(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -264,16 +270,12 @@ START_TEST(test_csll_insert_end_3)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_search_1)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* retrieved;
-
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
 
     *tail = NULL;
     retrieved = csll_search(tail, 10);
@@ -281,25 +283,23 @@ START_TEST(test_csll_search_1)
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, true);
     ck_assert_int_eq(retrieved == NULL, true);
-
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_search_2)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
     CircularSinglyLinkedList* retrieved;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -353,24 +353,23 @@ START_TEST(test_csll_search_2)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_search_3)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
     CircularSinglyLinkedList* retrieved;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -424,24 +423,23 @@ START_TEST(test_csll_search_3)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_search_4)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
     CircularSinglyLinkedList* retrieved;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -489,24 +487,23 @@ START_TEST(test_csll_search_4)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_search_5)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
     CircularSinglyLinkedList* retrieved;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -560,24 +557,23 @@ START_TEST(test_csll_search_5)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_search_6)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
     CircularSinglyLinkedList* retrieved;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_end(tail, 15);
-    node2 = csll_insert_end(tail, -25);
-    node3 = csll_insert_end(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_end(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_end(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_end(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -635,24 +631,23 @@ START_TEST(test_csll_search_6)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_search_7)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
     CircularSinglyLinkedList* retrieved;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_end(tail, 15);
-    node2 = csll_insert_end(tail, -25);
-    node3 = csll_insert_end(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_end(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_end(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_end(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -709,24 +704,23 @@ START_TEST(test_csll_search_7)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_search_8)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
     CircularSinglyLinkedList* retrieved;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_end(tail, 15);
-    node2 = csll_insert_end(tail, -25);
-    node3 = csll_insert_end(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_end(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_end(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_end(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -783,24 +777,23 @@ START_TEST(test_csll_search_8)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_search_9)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
     CircularSinglyLinkedList* retrieved;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_end(tail, 15);
-    node2 = csll_insert_end(tail, -25);
-    node3 = csll_insert_end(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_end(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_end(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_end(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -850,19 +843,16 @@ START_TEST(test_csll_search_9)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_1)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -881,19 +871,16 @@ START_TEST(test_csll_delete_1)
     ck_assert_int_eq((*tail) == NULL, true);
 
     free(node1);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_2)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_end(tail, 15);
+    reg->key = 15;
+    node1 = csll_insert_end(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -912,23 +899,22 @@ START_TEST(test_csll_delete_2)
     ck_assert_int_eq((*tail) == NULL, true);
 
     free(node1);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_3)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -999,23 +985,22 @@ START_TEST(test_csll_delete_3)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_4)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -1088,23 +1073,22 @@ START_TEST(test_csll_delete_4)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_5)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -1166,23 +1150,22 @@ START_TEST(test_csll_delete_5)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_6)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -1244,23 +1227,22 @@ START_TEST(test_csll_delete_6)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_7)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -1322,23 +1304,22 @@ START_TEST(test_csll_delete_7)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_8)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -1400,23 +1381,22 @@ START_TEST(test_csll_delete_8)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_9)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -1467,23 +1447,22 @@ START_TEST(test_csll_delete_9)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_10)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -1534,23 +1513,22 @@ START_TEST(test_csll_delete_10)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_11)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -1601,23 +1579,22 @@ START_TEST(test_csll_delete_11)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_12)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -1668,23 +1645,22 @@ START_TEST(test_csll_delete_12)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_delete_13)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -1735,23 +1711,22 @@ START_TEST(test_csll_delete_13)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_insert_begin_end_1)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_begin(tail, 15);
-    node2 = csll_insert_end(tail, -25);
-    node3 = csll_insert_begin(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_begin(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_end(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_begin(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -1795,23 +1770,22 @@ START_TEST(test_csll_insert_begin_end_1)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
 START_TEST(test_csll_insert_begin_end_2)
 {
-    CircularSinglyLinkedList** tail;
     CircularSinglyLinkedList* node1;
     CircularSinglyLinkedList* node2;
     CircularSinglyLinkedList* node3;
 
-    tail = malloc(sizeof(CircularSinglyLinkedList**));
-
     *tail = NULL;
-    node1 = csll_insert_end(tail, 15);
-    node2 = csll_insert_begin(tail, -25);
-    node3 = csll_insert_end(tail, 0);
+    reg->key = 15;
+    node1 = csll_insert_end(tail, *reg);
+    reg->key = -25;
+    node2 = csll_insert_begin(tail, *reg);
+    reg->key = 0;
+    node3 = csll_insert_end(tail, *reg);
 
     ck_assert_int_eq(tail == NULL, false);
     ck_assert_int_eq((*tail) == NULL, false);
@@ -1857,7 +1831,6 @@ START_TEST(test_csll_insert_begin_end_2)
     free(node1);
     free(node2);
     free(node3);
-    free(tail);
 }
 END_TEST
 
@@ -1871,6 +1844,8 @@ Suite *make_dll_suite(void)
 
     /* Creation test case */
     tc_core = tcase_create("Test Cases with Setup and Teardown");
+
+    tcase_add_checked_fixture(tc_core, setup, teardown);
 
     tcase_add_test(tc_core, test_csll_insert_begin_1);
     tcase_add_test(tc_core, test_csll_insert_begin_2);
