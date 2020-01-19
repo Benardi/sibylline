@@ -4,7 +4,7 @@
 #include <check.h>
 #include <seq_list.h>
 
-SeqList* sl;
+SeqList* sl; 
 Register* reg;
 
 void setup(void);
@@ -108,10 +108,12 @@ END_TEST
 
 START_TEST(test_insert_elem_1)
 {
+    bool result;
+
     init_seq_list(sl);
 
     reg->key = 13;
-    bool result = insert_elem(sl, *reg, 0);
+    result = insert_elem(sl, *reg, 0);
 
     ck_assert_int_eq(result, true);
     ck_assert_int_eq(sl->nElem, 1);
@@ -121,13 +123,16 @@ END_TEST
 
 START_TEST(test_insert_elem_2)
 {
+    bool result1;
+    bool result2;
+
     init_seq_list(sl);
 
     reg->key = -8;
-    bool result1 = insert_elem(sl, *reg, 0);
+    result1 = insert_elem(sl, *reg, 0);
 
     reg->key = 7;
-    bool result2 = insert_elem(sl, *reg, 1);
+    result2 = insert_elem(sl, *reg, 1);
 
     ck_assert_int_eq(result1, true);
     ck_assert_int_eq(result2, true);
@@ -139,13 +144,16 @@ END_TEST
 
 START_TEST(test_insert_elem_3)
 {
+    bool result1;
+    bool result2;
+
     init_seq_list(sl);
 
     reg->key = -8;
-    bool result1 = insert_elem(sl, *reg, 0);
+    result1 = insert_elem(sl, *reg, 0);
 
     reg->key = 7;
-    bool result2 = insert_elem(sl, *reg, 2);
+    result2 = insert_elem(sl, *reg, 2);
 
     ck_assert_int_eq(result1, true);
     ck_assert_int_eq(result2, false);
@@ -156,10 +164,12 @@ END_TEST
 
 START_TEST(test_insert_elem_4)
 {
+    bool result;
+    
     init_seq_list(sl);
 
     reg->key = -8;
-    bool result = insert_elem(sl, *reg, -1);
+    result = insert_elem(sl, *reg, -1);
 
     ck_assert_int_eq(result, false);
     ck_assert_int_eq(sl->nElem, 0);
@@ -168,10 +178,12 @@ END_TEST
 
 START_TEST(test_insert_sorted_1)
 {
+    bool result;
+
     init_seq_list(sl);
 
     reg->key = 13;
-    bool result = insert_sorted(sl, *reg);
+    result = insert_sorted(sl, *reg);
 
     ck_assert_int_eq(result, true);
     ck_assert_int_eq(sl->nElem, 1);
@@ -181,13 +193,16 @@ END_TEST
 
 START_TEST(test_insert_sorted_2)
 {
+    bool result1;
+    bool result2;
+
     init_seq_list(sl);
 
     reg->key = 7;
-    bool result2 = insert_sorted(sl, *reg);
+    result2 = insert_sorted(sl, *reg);
 
     reg->key = -8;
-    bool result1 = insert_sorted(sl, *reg);
+    result1 = insert_sorted(sl, *reg);
 
     ck_assert_int_eq(result1, true);
     ck_assert_int_eq(result2, true);
@@ -199,13 +214,16 @@ END_TEST
 
 START_TEST(test_insert_sorted_3)
 {
+    bool result1;
+    bool result2;
+
     init_seq_list(sl);
 
     reg->key = -8;
-    bool result1 = insert_sorted(sl, *reg);
+    result1 = insert_sorted(sl, *reg);
 
     reg->key = -10;
-    bool result2 = insert_sorted(sl, *reg);
+    result2 = insert_sorted(sl, *reg);
 
     ck_assert_int_eq(result1, true);
     ck_assert_int_eq(result2, true);
@@ -217,15 +235,20 @@ END_TEST
 
 START_TEST(test_insert_sorted_4)
 {
+    bool result1;
+    bool result2;
+    bool result3;
+
     init_seq_list(sl);
+    
     reg->key = 10;
-    bool result1 = insert_sorted(sl, *reg);
+    result1 = insert_sorted(sl, *reg);
 
     reg->key = -8;
-    bool result2 = insert_sorted(sl, *reg);
+    result2 = insert_sorted(sl, *reg);
 
     reg->key = 0;
-    bool result3 = insert_sorted(sl, *reg);
+    result3 = insert_sorted(sl, *reg);
 
     ck_assert_int_eq(result1, true);
     ck_assert_int_eq(result2, true);
@@ -365,11 +388,13 @@ END_TEST
 
 START_TEST(test_remove_elem_1)
 {
+    bool result;
+
     init_seq_list(sl);
     sl->A[0].key = 20;
     sl->nElem = 1;
 
-    bool result = remove_elem(sl, 20);
+    result = remove_elem(sl, 20);
 
     ck_assert_int_eq(result, true);
     ck_assert_int_eq(sl->nElem, 0);
@@ -378,12 +403,14 @@ END_TEST
 
 START_TEST(test_remove_elem_2)
 {
+    bool result;
+
     init_seq_list(sl);
     sl->A[0].key = 0;
     sl->A[1].key = 1;
     sl->nElem = 2;
 
-    bool result = remove_elem(sl, 2);
+    result = remove_elem(sl, 2);
 
     ck_assert_int_eq(result, false);
 }
@@ -391,6 +418,7 @@ END_TEST
 
 START_TEST(test_remove_elem_3)
 {
+    bool result;
     init_seq_list(sl);
     sl->A[0].key = 0;
     sl->A[1].key = -1;
@@ -398,7 +426,7 @@ START_TEST(test_remove_elem_3)
     sl->A[3].key = -3;
     sl->nElem = 4;
 
-    bool result = remove_elem(sl, 2);
+    result = remove_elem(sl, 2);
 
     ck_assert_int_eq(result, true);
     ck_assert_int_eq(sl->nElem, 3);
@@ -410,6 +438,8 @@ END_TEST
 
 START_TEST(test_remove_elem_4)
 {
+    bool result;
+
     init_seq_list(sl);
     sl->A[0].key = 7;
     sl->A[1].key = 1;
@@ -417,7 +447,7 @@ START_TEST(test_remove_elem_4)
     sl->A[3].key = -2;
     sl->nElem = 4;
 
-    bool result = remove_elem(sl, 7);
+    result = remove_elem(sl, 7);
 
     ck_assert_int_eq(result, true);
     ck_assert_int_eq(sl->nElem, 3);
