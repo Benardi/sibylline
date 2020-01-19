@@ -7,7 +7,7 @@
 Stack* stk;
 Register* reg;
 
-int i;
+int i; 
 
 void setup(void);
 void teardown(void);
@@ -42,6 +42,8 @@ END_TEST
 
 START_TEST(test_stack_empty_1)
 {
+    stk->top = 0;
+
     ck_assert_int_eq(stack_empty(stk), false);
 }
 END_TEST
@@ -150,13 +152,13 @@ END_TEST
 
 START_TEST(test_stack_pop_3)
 {
+    bool result1, result2, result3;
     Register* el1;
     Register* el2;
-    
+
     el1 = malloc(sizeof(Register));
     el2 = malloc(sizeof(Register));
 
-    bool result1, result2, result3;
 
     init_stack(stk);
     reg->key = 7;
