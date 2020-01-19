@@ -5511,6 +5511,108 @@ START_TEST(test_bst_tree_search_30)
 }
 END_TEST
 
+START_TEST(test_bst_tree_search_31)
+{
+    BinarySearchTree* node1;
+    BinarySearchTree* node2;
+    BinarySearchTree* node3;
+    BinarySearchTree* node4;
+    BinarySearchTree* node5;
+    BinarySearchTree* node6;
+    BinarySearchTree* retrieved;
+
+    (*root) = NULL;
+
+    reg->key = 12;
+    node1 = tree_insert(root, *reg);
+    reg->key = 9;
+    node2 = tree_insert(root, *reg);
+    reg->key = 2;
+    node3 = tree_insert(root, *reg);
+    reg->key = 0;
+    node4 = tree_insert(root, *reg);
+    reg->key = 5;
+    node5 = tree_insert(root, *reg);
+    reg->key = 3;
+    node6 = tree_insert(root, *reg);
+
+    ck_assert_int_eq(root == NULL, false);
+    ck_assert_int_eq((*root) == NULL, false);
+
+    ck_assert_int_eq((*root)->p == NULL, true);
+    ck_assert_int_eq((*root)->left == NULL, false);
+    ck_assert_int_eq((*root)->right == NULL, true);
+    ck_assert_int_eq((*root)->data.key, 12);
+
+    ck_assert_int_eq((*root)->left->p == NULL, false);
+    ck_assert_int_eq((*root)->left->left == NULL, false);
+    ck_assert_int_eq((*root)->left->right == NULL, true);
+    ck_assert_int_eq((*root)->left->data.key, 9);
+
+    ck_assert_int_eq((*root)->left->left->p == NULL, false);
+    ck_assert_int_eq((*root)->left->left->left == NULL, false);
+    ck_assert_int_eq((*root)->left->left->right == NULL, false);
+    ck_assert_int_eq((*root)->left->left->data.key, 2);
+
+    ck_assert_int_eq((*root)->left->left->left->p == NULL, false);
+    ck_assert_int_eq((*root)->left->left->left->left == NULL, true);
+    ck_assert_int_eq((*root)->left->left->left->right == NULL, true);
+    ck_assert_int_eq((*root)->left->left->left->data.key, 0);
+
+    ck_assert_int_eq((*root)->left->left->right->p == NULL, false);
+    ck_assert_int_eq((*root)->left->left->right->left == NULL, false);
+    ck_assert_int_eq((*root)->left->left->right->right == NULL, true);
+    ck_assert_int_eq((*root)->left->left->right->data.key, 5);
+
+    ck_assert_int_eq((*root)->left->left->right->left->p == NULL, false);
+    ck_assert_int_eq((*root)->left->left->right->left->left == NULL, true);
+    ck_assert_int_eq((*root)->left->left->right->left->right == NULL, true);
+    ck_assert_int_eq((*root)->left->left->right->left->data.key, 3);
+
+    ck_assert_int_eq(node1->p == NULL, true);
+    ck_assert_int_eq(node1->left == NULL, false);
+    ck_assert_int_eq(node1->right == NULL, true);
+    ck_assert_int_eq(node1->data.key, 12);
+
+    ck_assert_int_eq(node2->p == NULL, false);
+    ck_assert_int_eq(node2->left == NULL, false);
+    ck_assert_int_eq(node2->right == NULL, true);
+    ck_assert_int_eq(node2->data.key, 9);
+
+    ck_assert_int_eq(node3->p == NULL, false);
+    ck_assert_int_eq(node3->left == NULL, false);
+    ck_assert_int_eq(node3->right == NULL, false);
+    ck_assert_int_eq(node3->data.key, 2);
+
+    ck_assert_int_eq(node4->p == NULL, false);
+    ck_assert_int_eq(node4->left == NULL, true);
+    ck_assert_int_eq(node4->right == NULL, true);
+    ck_assert_int_eq(node4->data.key, 0);
+
+    ck_assert_int_eq(node5->p == NULL, false);
+    ck_assert_int_eq(node5->left == NULL, false);
+    ck_assert_int_eq(node5->right == NULL, true);
+    ck_assert_int_eq(node5->data.key, 5);
+
+    ck_assert_int_eq(node6->p == NULL, false);
+    ck_assert_int_eq(node6->left == NULL, true);
+    ck_assert_int_eq(node6->right == NULL, true);
+    ck_assert_int_eq(node6->data.key, 3);
+
+    retrieved = tree_search(node3, 9);
+
+    ck_assert_int_eq(retrieved == NULL, true);
+
+    free(node6);
+    free(node5);
+    free(node4);
+    free(node3);
+    free(node2);
+    free(node1);
+}
+END_TEST
+
+
 START_TEST(test_bst_iterative_tree_search_1)
 {
     BinarySearchTree* node1;
@@ -8323,7 +8425,109 @@ START_TEST(test_bst_iterative_tree_search_30)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_1)
+START_TEST(test_bst_iterative_tree_search_31)
+{
+    BinarySearchTree* node1;
+    BinarySearchTree* node2;
+    BinarySearchTree* node3;
+    BinarySearchTree* node4;
+    BinarySearchTree* node5;
+    BinarySearchTree* node6;
+    BinarySearchTree* retrieved;
+
+    (*root) = NULL;
+
+    reg->key = 12;
+    node1 = tree_insert(root, *reg);
+    reg->key = 9;
+    node2 = tree_insert(root, *reg);
+    reg->key = 2;
+    node3 = tree_insert(root, *reg);
+    reg->key = 0;
+    node4 = tree_insert(root, *reg);
+    reg->key = 5;
+    node5 = tree_insert(root, *reg);
+    reg->key = 3;
+    node6 = tree_insert(root, *reg);
+
+    ck_assert_int_eq(root == NULL, false);
+    ck_assert_int_eq((*root) == NULL, false);
+
+    ck_assert_int_eq((*root)->p == NULL, true);
+    ck_assert_int_eq((*root)->left == NULL, false);
+    ck_assert_int_eq((*root)->right == NULL, true);
+    ck_assert_int_eq((*root)->data.key, 12);
+
+    ck_assert_int_eq((*root)->left->p == NULL, false);
+    ck_assert_int_eq((*root)->left->left == NULL, false);
+    ck_assert_int_eq((*root)->left->right == NULL, true);
+    ck_assert_int_eq((*root)->left->data.key, 9);
+
+    ck_assert_int_eq((*root)->left->left->p == NULL, false);
+    ck_assert_int_eq((*root)->left->left->left == NULL, false);
+    ck_assert_int_eq((*root)->left->left->right == NULL, false);
+    ck_assert_int_eq((*root)->left->left->data.key, 2);
+
+    ck_assert_int_eq((*root)->left->left->left->p == NULL, false);
+    ck_assert_int_eq((*root)->left->left->left->left == NULL, true);
+    ck_assert_int_eq((*root)->left->left->left->right == NULL, true);
+    ck_assert_int_eq((*root)->left->left->left->data.key, 0);
+
+    ck_assert_int_eq((*root)->left->left->right->p == NULL, false);
+    ck_assert_int_eq((*root)->left->left->right->left == NULL, false);
+    ck_assert_int_eq((*root)->left->left->right->right == NULL, true);
+    ck_assert_int_eq((*root)->left->left->right->data.key, 5);
+
+    ck_assert_int_eq((*root)->left->left->right->left->p == NULL, false);
+    ck_assert_int_eq((*root)->left->left->right->left->left == NULL, true);
+    ck_assert_int_eq((*root)->left->left->right->left->right == NULL, true);
+    ck_assert_int_eq((*root)->left->left->right->left->data.key, 3);
+
+    ck_assert_int_eq(node1->p == NULL, true);
+    ck_assert_int_eq(node1->left == NULL, false);
+    ck_assert_int_eq(node1->right == NULL, true);
+    ck_assert_int_eq(node1->data.key, 12);
+
+    ck_assert_int_eq(node2->p == NULL, false);
+    ck_assert_int_eq(node2->left == NULL, false);
+    ck_assert_int_eq(node2->right == NULL, true);
+    ck_assert_int_eq(node2->data.key, 9);
+
+    ck_assert_int_eq(node3->p == NULL, false);
+    ck_assert_int_eq(node3->left == NULL, false);
+    ck_assert_int_eq(node3->right == NULL, false);
+    ck_assert_int_eq(node3->data.key, 2);
+
+    ck_assert_int_eq(node4->p == NULL, false);
+    ck_assert_int_eq(node4->left == NULL, true);
+    ck_assert_int_eq(node4->right == NULL, true);
+    ck_assert_int_eq(node4->data.key, 0);
+
+    ck_assert_int_eq(node5->p == NULL, false);
+    ck_assert_int_eq(node5->left == NULL, false);
+    ck_assert_int_eq(node5->right == NULL, true);
+    ck_assert_int_eq(node5->data.key, 5);
+
+    ck_assert_int_eq(node6->p == NULL, false);
+    ck_assert_int_eq(node6->left == NULL, true);
+    ck_assert_int_eq(node6->right == NULL, true);
+    ck_assert_int_eq(node6->data.key, 3);
+
+    retrieved = iterative_tree_search(node3, 9);
+
+    ck_assert_int_eq(retrieved == NULL, true);
+
+    free(node6);
+    free(node5);
+    free(node4);
+    free(node3);
+    free(node2);
+    free(node1);
+}
+END_TEST
+
+
+START_TEST(test_bst_tree_successor_1)
 {
     BinarySearchTree* scsr;
 
@@ -8332,13 +8536,13 @@ START_TEST(test_bst_tree_sucessor_1)
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == NULL, true);
 
-    scsr = tree_sucessor(*root);
+    scsr = tree_successor(*root);
     
     ck_assert_int_eq(scsr == NULL, true);
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_2)
+START_TEST(test_bst_tree_successor_2)
 {
     BinarySearchTree* node1;
     BinarySearchTree* scsr;
@@ -8360,7 +8564,7 @@ START_TEST(test_bst_tree_sucessor_2)
     ck_assert_int_eq(node1->right == NULL, true);
     ck_assert_int_eq(node1->data.key, 10);
 
-    scsr = tree_sucessor(*root);
+    scsr = tree_successor(*root);
 
     ck_assert_int_eq(scsr == NULL, true);
 
@@ -8368,7 +8572,7 @@ START_TEST(test_bst_tree_sucessor_2)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_3)
+START_TEST(test_bst_tree_successor_3)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -8404,7 +8608,7 @@ START_TEST(test_bst_tree_sucessor_3)
     ck_assert_int_eq(node2->right == NULL, true);
     ck_assert_int_eq(node2->data.key, 10);
 
-    scsr = tree_sucessor(node1);
+    scsr = tree_successor(node1);
 
     ck_assert_int_eq(scsr->p == NULL, false);
     ck_assert_int_eq(scsr->left == NULL, true);
@@ -8417,7 +8621,7 @@ START_TEST(test_bst_tree_sucessor_3)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_4)
+START_TEST(test_bst_tree_successor_4)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -8453,7 +8657,7 @@ START_TEST(test_bst_tree_sucessor_4)
     ck_assert_int_eq(node2->right == NULL, true);
     ck_assert_int_eq(node2->data.key, 10);
 
-    scsr = tree_sucessor(node2);
+    scsr = tree_successor(node2);
 
     ck_assert_int_eq(scsr == NULL, true);
 
@@ -8462,7 +8666,7 @@ START_TEST(test_bst_tree_sucessor_4)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_5)
+START_TEST(test_bst_tree_successor_5)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -8498,7 +8702,7 @@ START_TEST(test_bst_tree_sucessor_5)
     ck_assert_int_eq(node2->right == NULL, true);
     ck_assert_int_eq(node2->data.key, 5);
 
-    scsr = tree_sucessor(node1);
+    scsr = tree_successor(node1);
 
     ck_assert_int_eq(scsr == NULL, true);
 
@@ -8507,7 +8711,7 @@ START_TEST(test_bst_tree_sucessor_5)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_6)
+START_TEST(test_bst_tree_successor_6)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -8543,7 +8747,7 @@ START_TEST(test_bst_tree_sucessor_6)
     ck_assert_int_eq(node2->right == NULL, true);
     ck_assert_int_eq(node2->data.key, 5);
 
-    scsr = tree_sucessor(node2);
+    scsr = tree_successor(node2);
 
     ck_assert_int_eq(scsr->p == NULL, true);
     ck_assert_int_eq(scsr->left == NULL, false);
@@ -8556,7 +8760,7 @@ START_TEST(test_bst_tree_sucessor_6)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_7)
+START_TEST(test_bst_tree_successor_7)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -8595,7 +8799,7 @@ START_TEST(test_bst_tree_sucessor_7)
     ck_assert_int_eq((*root)->right->left->right == NULL, true);
     ck_assert_int_eq((*root)->right->left->data.key, 10);
 
-    scsr = tree_sucessor(node1);
+    scsr = tree_successor(node1);
 
     ck_assert_int_eq(scsr->p == NULL, false);
     ck_assert_int_eq(scsr->left == NULL, true);
@@ -8609,7 +8813,7 @@ START_TEST(test_bst_tree_sucessor_7)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_8)
+START_TEST(test_bst_tree_successor_8)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -8648,7 +8852,7 @@ START_TEST(test_bst_tree_sucessor_8)
     ck_assert_int_eq((*root)->right->left->right == NULL, true);
     ck_assert_int_eq((*root)->right->left->data.key, 10);
 
-    scsr = tree_sucessor(node2);
+    scsr = tree_successor(node2);
 
     ck_assert_int_eq(scsr == NULL, true);
 
@@ -8658,7 +8862,7 @@ START_TEST(test_bst_tree_sucessor_8)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_9)
+START_TEST(test_bst_tree_successor_9)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -8697,7 +8901,7 @@ START_TEST(test_bst_tree_sucessor_9)
     ck_assert_int_eq((*root)->right->left->right == NULL, true);
     ck_assert_int_eq((*root)->right->left->data.key, 10);
 
-    scsr = tree_sucessor(node3);
+    scsr = tree_successor(node3);
 
     ck_assert_int_eq(scsr->p == NULL, false);
     ck_assert_int_eq(scsr->left == NULL, false);
@@ -8711,7 +8915,7 @@ START_TEST(test_bst_tree_sucessor_9)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_10)
+START_TEST(test_bst_tree_successor_10)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -8812,7 +9016,7 @@ START_TEST(test_bst_tree_sucessor_10)
     ck_assert_int_eq(node7->right == NULL, true);
     ck_assert_int_eq(node7->data.key, 5);
 
-    scsr = tree_sucessor(node1);
+    scsr = tree_successor(node1);
 
     ck_assert_int_eq(scsr->p == NULL, false);
     ck_assert_int_eq(scsr->left == NULL, true);
@@ -8830,7 +9034,7 @@ START_TEST(test_bst_tree_sucessor_10)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_11)
+START_TEST(test_bst_tree_successor_11)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -8931,7 +9135,7 @@ START_TEST(test_bst_tree_sucessor_11)
     ck_assert_int_eq(node7->right == NULL, true);
     ck_assert_int_eq(node7->data.key, 5);
 
-    scsr = tree_sucessor(node5);
+    scsr = tree_successor(node5);
 
     ck_assert_int_eq(scsr->p == NULL, false);
     ck_assert_int_eq(scsr->left == NULL, false);
@@ -8949,7 +9153,7 @@ START_TEST(test_bst_tree_sucessor_11)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_12)
+START_TEST(test_bst_tree_successor_12)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -9076,7 +9280,7 @@ START_TEST(test_bst_tree_sucessor_12)
     ck_assert_int_eq(node9->right == NULL, true);
     ck_assert_int_eq(node9->data.key, 13);
 
-    scsr = tree_sucessor(node4);
+    scsr = tree_successor(node4);
 
     ck_assert_int_eq(scsr->p == NULL, true);
     ck_assert_int_eq(scsr->left == NULL, false);
@@ -9096,7 +9300,7 @@ START_TEST(test_bst_tree_sucessor_12)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_13)
+START_TEST(test_bst_tree_successor_13)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -9223,7 +9427,7 @@ START_TEST(test_bst_tree_sucessor_13)
     ck_assert_int_eq(node9->right == NULL, true);
     ck_assert_int_eq(node9->data.key, 13);
 
-    scsr = tree_sucessor(node1);
+    scsr = tree_successor(node1);
 
     ck_assert_int_eq(scsr->p == NULL, false);
     ck_assert_int_eq(scsr->left == NULL, true);
@@ -9243,7 +9447,7 @@ START_TEST(test_bst_tree_sucessor_13)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_14)
+START_TEST(test_bst_tree_successor_14)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -9370,7 +9574,7 @@ START_TEST(test_bst_tree_sucessor_14)
     ck_assert_int_eq(node9->right == NULL, true);
     ck_assert_int_eq(node9->data.key, 13);
 
-    scsr = tree_sucessor(node8);
+    scsr = tree_successor(node8);
 
     ck_assert_int_eq(scsr->p == NULL, false);
     ck_assert_int_eq(scsr->left == NULL, false);
@@ -9390,7 +9594,7 @@ START_TEST(test_bst_tree_sucessor_14)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_15)
+START_TEST(test_bst_tree_successor_15)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -9478,7 +9682,7 @@ START_TEST(test_bst_tree_sucessor_15)
     ck_assert_int_eq(node6->right == NULL, true);
     ck_assert_int_eq(node6->data.key, 3);
 
-    scsr = tree_sucessor(node5);
+    scsr = tree_successor(node5);
 
     ck_assert_int_eq(scsr->p == NULL, false);
     ck_assert_int_eq(scsr->left == NULL, false);
@@ -9495,7 +9699,7 @@ START_TEST(test_bst_tree_sucessor_15)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_16)
+START_TEST(test_bst_tree_successor_16)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -9596,7 +9800,7 @@ START_TEST(test_bst_tree_sucessor_16)
     ck_assert_int_eq(node7->right == NULL, true);
     ck_assert_int_eq(node7->data.key, 3);
 
-    scsr = tree_sucessor(node4);
+    scsr = tree_successor(node4);
 
     ck_assert_int_eq(scsr == NULL, true);
 
@@ -9610,7 +9814,7 @@ START_TEST(test_bst_tree_sucessor_16)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_17)
+START_TEST(test_bst_tree_successor_17)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -9725,7 +9929,7 @@ START_TEST(test_bst_tree_sucessor_17)
     ck_assert_int_eq(node7->right == NULL, true);
     ck_assert_int_eq(node7->data.key, 150);
 
-    scsr = tree_sucessor(node7);
+    scsr = tree_successor(node7);
 
     ck_assert_int_eq(scsr == NULL, true);
 
@@ -9739,7 +9943,7 @@ START_TEST(test_bst_tree_sucessor_17)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_18)
+START_TEST(test_bst_tree_successor_18)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -9854,7 +10058,7 @@ START_TEST(test_bst_tree_sucessor_18)
     ck_assert_int_eq(node7->right == NULL, true);
     ck_assert_int_eq(node7->data.key, 150);
 
-    scsr = tree_sucessor(node4);
+    scsr = tree_successor(node4);
 
     ck_assert_int_eq(scsr->p == NULL, false);
     ck_assert_int_eq(scsr->left == NULL, true);
@@ -9872,7 +10076,7 @@ START_TEST(test_bst_tree_sucessor_18)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_19)
+START_TEST(test_bst_tree_successor_19)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -9985,7 +10189,7 @@ START_TEST(test_bst_tree_sucessor_19)
     ck_assert_int_eq(node7->right == NULL, true);
     ck_assert_int_eq(node7->data.key, -30);
 
-    scsr = tree_sucessor(node1);
+    scsr = tree_successor(node1);
 
     ck_assert_int_eq(scsr == NULL, true);
 
@@ -9999,7 +10203,7 @@ START_TEST(test_bst_tree_sucessor_19)
 }
 END_TEST
 
-START_TEST(test_bst_tree_sucessor_20)
+START_TEST(test_bst_tree_successor_20)
 {
     BinarySearchTree* node1;
     BinarySearchTree* node2;
@@ -10112,7 +10316,7 @@ START_TEST(test_bst_tree_sucessor_20)
     ck_assert_int_eq(node7->right == NULL, true);
     ck_assert_int_eq(node7->data.key, -30);
 
-    scsr = tree_sucessor(node4);
+    scsr = tree_successor(node4);
 
     ck_assert_int_eq(scsr->p == NULL, false);
     ck_assert_int_eq(scsr->left == NULL, false);
@@ -14205,6 +14409,7 @@ Suite *make_bst_suite(void)
     tcase_add_test(tc_core, test_bst_tree_search_28);
     tcase_add_test(tc_core, test_bst_tree_search_29);
     tcase_add_test(tc_core, test_bst_tree_search_30);
+    tcase_add_test(tc_core, test_bst_tree_search_31);
 
     tcase_add_test(tc_core, test_bst_iterative_tree_search_1);
     tcase_add_test(tc_core, test_bst_iterative_tree_search_2);
@@ -14236,27 +14441,28 @@ Suite *make_bst_suite(void)
     tcase_add_test(tc_core, test_bst_iterative_tree_search_28);
     tcase_add_test(tc_core, test_bst_iterative_tree_search_29);
     tcase_add_test(tc_core, test_bst_iterative_tree_search_30);
+    tcase_add_test(tc_core, test_bst_iterative_tree_search_31);
 
-    tcase_add_test(tc_core, test_bst_tree_sucessor_1);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_2);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_3);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_4);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_5);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_6);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_7);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_8);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_9);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_10);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_11);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_12);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_13);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_14);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_15);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_16);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_17);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_18);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_19);
-    tcase_add_test(tc_core, test_bst_tree_sucessor_20);
+    tcase_add_test(tc_core, test_bst_tree_successor_1);
+    tcase_add_test(tc_core, test_bst_tree_successor_2);
+    tcase_add_test(tc_core, test_bst_tree_successor_3);
+    tcase_add_test(tc_core, test_bst_tree_successor_4);
+    tcase_add_test(tc_core, test_bst_tree_successor_5);
+    tcase_add_test(tc_core, test_bst_tree_successor_6);
+    tcase_add_test(tc_core, test_bst_tree_successor_7);
+    tcase_add_test(tc_core, test_bst_tree_successor_8);
+    tcase_add_test(tc_core, test_bst_tree_successor_9);
+    tcase_add_test(tc_core, test_bst_tree_successor_10);
+    tcase_add_test(tc_core, test_bst_tree_successor_11);
+    tcase_add_test(tc_core, test_bst_tree_successor_12);
+    tcase_add_test(tc_core, test_bst_tree_successor_13);
+    tcase_add_test(tc_core, test_bst_tree_successor_14);
+    tcase_add_test(tc_core, test_bst_tree_successor_15);
+    tcase_add_test(tc_core, test_bst_tree_successor_16);
+    tcase_add_test(tc_core, test_bst_tree_successor_17);
+    tcase_add_test(tc_core, test_bst_tree_successor_18);
+    tcase_add_test(tc_core, test_bst_tree_successor_19);
+    tcase_add_test(tc_core, test_bst_tree_successor_20);
 
     tcase_add_test(tc_core, test_bst_tree_predecessor_1);
     tcase_add_test(tc_core, test_bst_tree_predecessor_2);

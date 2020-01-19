@@ -31,6 +31,55 @@ void preorder_tree_walk(BinarySearchTree* node)
     }
 }
 
+BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg)
+{
+    BinarySearchTree* node;
+    BinarySearchTree* parent;
+    BinarySearchTree* current;
+
+    node = malloc(sizeof(BinarySearchTree));
+    node->data = reg;
+    node->right = NULL;
+    node->left = NULL;
+    node->p = NULL;
+    
+    current = (*root);
+    parent = NULL;
+
+    if ((*root) == NULL)
+    {
+        (*root) = node; 
+    }
+    else
+    {
+        while (current != NULL)
+        {
+            parent = current;
+            if (node->data.key < current->data.key)
+            {
+                current = current->left;
+            }
+            else
+            {
+                current = current->right;
+            }
+        }
+
+        node->p = parent;
+
+        if (node->data.key < parent->data.key)
+        {
+            parent->left = node;
+        }
+        else
+        {
+            parent->right = node;
+        }
+    }
+
+    return node;
+}
+
 BinarySearchTree* tree_search(BinarySearchTree* node, Key k)
 {
     if ((node == NULL) || (node->data.key == k))
@@ -99,7 +148,7 @@ BinarySearchTree* tree_maximum(BinarySearchTree* root)
     return node;
 }
 
-BinarySearchTree* tree_sucessor(BinarySearchTree* node)
+BinarySearchTree* tree_successor(BinarySearchTree* node)
 {   
     if (node == NULL)
     {
@@ -147,55 +196,6 @@ BinarySearchTree* tree_predecessor(BinarySearchTree* node)
         }    
         return scsr;
     }
-}
-
-BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg)
-{
-    BinarySearchTree* node;
-    BinarySearchTree* parent;
-    BinarySearchTree* current;
-
-    node = malloc(sizeof(BinarySearchTree));
-    node->data = reg;
-    node->right = NULL;
-    node->left = NULL;
-    node->p = NULL;
-    
-    current = (*root);
-    parent = NULL;
-
-    if ((*root) == NULL)
-    {
-        (*root) = node; 
-    }
-    else
-    {
-        while (current != NULL)
-        {
-            parent = current;
-            if (node->data.key < current->data.key)
-            {
-                current = current->left;
-            }
-            else
-            {
-                current = current->right;
-            }
-        }
-
-        node->p = parent;
-
-        if (node->data.key < parent->data.key)
-        {
-            parent->left = node;
-        }
-        else
-        {
-            parent->right = node;
-        }
-    }
-
-    return node;
 }
 
 static void transplant(BinarySearchTree** root, BinarySearchTree* node1, BinarySearchTree* node2)
