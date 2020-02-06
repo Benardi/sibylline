@@ -125,10 +125,9 @@ BinarySearchTree* tree_predecessor(BinarySearchTree* node);
  * Removes given node from Binary Search Tree. Removal is done as to preserve
  * properties of a Binary Search Tree. Attributes of removed node are not 
  * changed, thus although not connected to Binary Search Tree it may point to
- * nodes in it. It's up to user to update attributes of removed node if needed
- * for some reason or to free it. If root node is replaced, pointer to pointer
- * is updated. If Binary Search Tree becomes empty, pointer to pointer is set
- * to @c NULL. 
+ * nodes in it. It's up to user to either free the node or make use of its
+ * attributes. If root node is replaced, pointer to pointer is updated. If
+ * Binary Search Tree becomes empty, pointer to pointer is set to @c NULL. 
  *
  * @param node Pointer to pointer to root of tree. 
  * @param node Pointer to node to be deleted. 
