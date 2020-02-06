@@ -50,7 +50,6 @@ START_TEST(test_rbt_init_rbtree_1)
 }
 END_TEST
 
-
 START_TEST(test_rbt_left_rotate_1)
 {
     RedBlackTree* node1;
@@ -2247,7 +2246,6 @@ START_TEST(test_rbt_insert_11)
     ck_assert_int_eq((*root)->right->p == node3, true);
     ck_assert_int_eq((*root)->right == node2, true);
 
-
     free(node3);
     free(node2);
     free(node1);
@@ -2280,7 +2278,6 @@ START_TEST(test_rbt_delete_1)
     ck_assert_int_eq((*root)->p == nil, true);
     ck_assert_int_eq((*root) == node1, true);
 
-
     rb_delete(root, nil, node1);
 
     ck_assert_int_eq(root == NULL, false);
@@ -2290,7 +2287,6 @@ START_TEST(test_rbt_delete_1)
     free(nil);
 }
 END_TEST
-
 
 START_TEST(test_rbt_delete_2)
 {
@@ -2809,7 +2805,6 @@ START_TEST(test_rbt_delete_7)
     ck_assert_int_eq((*root)->right->right->right == nil, true);
     ck_assert_int_eq((*root)->right->right->p == node6, true);
     ck_assert_int_eq((*root)->right->right == node3, true);
-
 
     free(node6);
     free(node5);
@@ -3384,7 +3379,6 @@ START_TEST(test_rbt_delete_11)
     ck_assert_int_eq((*root)->right->left->right == nil, true);
     ck_assert_int_eq((*root)->right->left->p == node2, true);
     ck_assert_int_eq((*root)->right->left == node3, true);
-
 
     free(node6);
     free(node5);

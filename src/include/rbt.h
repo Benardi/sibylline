@@ -16,7 +16,6 @@ typedef struct RedBlackTree
 }
 RedBlackTree;
 
-
 /** @brief Sets nil's attributes. Assigns nil to root.
  * 
  * Sets attributes of nil/sentinel node to correct values. Assigns nil
@@ -77,7 +76,6 @@ RedBlackTree* rb_tree_minimum(RedBlackTree* root, RedBlackTree* nil);
  * @return Pointer to inserted node. 
  */
 RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Register reg);
-
 
 /** @brief Removes given node from Red Black Tree.
  * 
