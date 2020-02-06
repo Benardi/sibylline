@@ -16,6 +16,8 @@ typedef struct RedBlackTree
 }
 RedBlackTree;
 
+void init_rbtree(RedBlackTree** root, RedBlackTree* nil);
+
 /* Assumes node->left != NIL and (*root)->p == NIL */
 void left_rotate(RedBlackTree** root, RedBlackTree* nil, RedBlackTree* node);
 

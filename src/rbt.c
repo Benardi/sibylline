@@ -1,6 +1,16 @@
 #include <malloc.h>
 #include <rbt.h>
 
+void init_rbtree(RedBlackTree** root, RedBlackTree* nil)
+{
+    nil->p = nil;
+    nil->left = nil;
+    nil->right = nil;
+    nil->color = BLACK;
+
+    (*root) = nil;
+}
+
 void left_rotate(RedBlackTree** root, RedBlackTree* nil, RedBlackTree* node)
 {
     RedBlackTree* right_child;

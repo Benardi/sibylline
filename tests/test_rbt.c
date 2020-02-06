@@ -24,6 +24,33 @@ void teardown(void)
     free(root);
 }
 
+START_TEST(test_rbt_init_rbtree_1)
+{
+    RedBlackTree* nil;
+
+    nil = malloc(sizeof(RedBlackTree));
+
+    init_rbtree(root, nil);
+
+    ck_assert_int_eq(root == NULL, false);
+    ck_assert_int_eq((*root) == NULL, false);
+
+    ck_assert_int_eq(nil->left == nil, true);
+    ck_assert_int_eq(nil->right == nil, true);
+    ck_assert_int_eq(nil->p == nil, true);
+    ck_assert_int_eq(nil->color == BLACK, true);
+
+    ck_assert_int_eq((*root)->left == nil, true);
+    ck_assert_int_eq((*root)->right == nil, true);
+    ck_assert_int_eq((*root)->p == nil, true);
+    ck_assert_int_eq((*root)->color == BLACK, true);
+    ck_assert_int_eq((*root) == nil, true);
+
+    free(nil);
+}
+END_TEST
+
+
 START_TEST(test_rbt_left_rotate_1)
 {
     RedBlackTree* node1;
@@ -38,14 +65,10 @@ START_TEST(test_rbt_left_rotate_1)
     node3 = malloc(sizeof(RedBlackTree));
     node4 = malloc(sizeof(RedBlackTree));
     node5 = malloc(sizeof(RedBlackTree));
+
     nil = malloc(sizeof(RedBlackTree));
 
-    (*root) = nil;
-
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
+    init_rbtree(root, nil);
 
     node1->data.key = 5;
     node2->data.key = 15;
@@ -156,14 +179,10 @@ START_TEST(test_rbt_right_rotate_1)
     node3 = malloc(sizeof(RedBlackTree));
     node4 = malloc(sizeof(RedBlackTree));
     node5 = malloc(sizeof(RedBlackTree));
+
     nil = malloc(sizeof(RedBlackTree));
 
-    (*root) = nil;
-
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
+    init_rbtree(root, nil);
 
     node1->data.key = 5;
     node2->data.key = 15;
@@ -269,12 +288,7 @@ START_TEST(test_rbt_insert_1)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == nil, true);
@@ -1815,12 +1829,7 @@ START_TEST(test_rbt_insert_7)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == nil, true);
@@ -1930,12 +1939,7 @@ START_TEST(test_rbt_insert_8)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == nil, true);
@@ -2016,12 +2020,7 @@ START_TEST(test_rbt_insert_9)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == nil, true);
@@ -2102,12 +2101,7 @@ START_TEST(test_rbt_insert_10)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == nil, true);
@@ -2188,12 +2182,7 @@ START_TEST(test_rbt_insert_11)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == nil, true);
@@ -2273,12 +2262,7 @@ START_TEST(test_rbt_delete_1)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == nil, true);
@@ -2317,12 +2301,7 @@ START_TEST(test_rbt_delete_2)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == nil, true);
@@ -2390,12 +2369,7 @@ START_TEST(test_rbt_delete_3)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == nil, true);
@@ -2467,12 +2441,7 @@ START_TEST(test_rbt_delete_4)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == nil, true);
@@ -2561,12 +2530,7 @@ START_TEST(test_rbt_delete_5)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == nil, true);
@@ -2655,12 +2619,7 @@ START_TEST(test_rbt_delete_6)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     ck_assert_int_eq(root == NULL, false);
     ck_assert_int_eq((*root) == nil, true);
@@ -2751,12 +2710,7 @@ START_TEST(test_rbt_delete_7)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     reg->key = 10;
     node1 = rb_insert(root, nil, *reg);
@@ -2879,12 +2833,7 @@ START_TEST(test_rbt_delete_8)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     reg->key = 6;
     node1 = rb_insert(root, nil, *reg);
@@ -3084,12 +3033,7 @@ START_TEST(test_rbt_delete_9)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     reg->key = 50;
     node1 = rb_insert(root, nil, *reg);
@@ -3210,12 +3154,7 @@ START_TEST(test_rbt_delete_10)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     reg->key = 1;
     node1 = rb_insert(root, nil, *reg);
@@ -3346,12 +3285,7 @@ START_TEST(test_rbt_delete_11)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     reg->key = 500;
     node1 = rb_insert(root, nil, *reg);
@@ -3473,12 +3407,7 @@ START_TEST(test_rbt_delete_12)
 
     nil = malloc(sizeof(RedBlackTree));
 
-    nil->p = nil;
-    nil->left = nil;
-    nil->right = nil;
-    nil->color = BLACK;
-
-    (*root) = nil;
+    init_rbtree(root, nil);
 
     reg->key = 10;
     node1 = rb_insert(root, nil, *reg);
@@ -3607,6 +3536,8 @@ Suite *make_rbt_suite(void)
     tc_core = tcase_create("Test Cases with Setup and Teardown");
 
     tcase_add_checked_fixture(tc_core, setup, teardown);
+
+    tcase_add_test(tc_core, test_rbt_init_rbtree_1);
 
     tcase_add_test(tc_core, test_rbt_left_rotate_1);
     tcase_add_test(tc_core, test_rbt_right_rotate_1);
