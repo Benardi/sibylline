@@ -1,7 +1,9 @@
 #include <malloc.h>
 #include <limits.h>
+#include <time.h>
 #include <math.h>
 #include <sort.h>
+#include <stdlib.h>
 
 # define INFINITY INT_MAX
 
@@ -131,6 +133,7 @@ void inplace_merge_sort(int array[], int start, int end)
         inplace_merge(array, start, middle, end);
     }
 }
+
 static void swap(int array[], int pos1, int pos2)
 {
     int temp;
@@ -170,4 +173,39 @@ void quick_sort(int array[], int start, int end)
         quick_sort(array, start, middle - 1);
         quick_sort(array, middle + 1, end);
     }
+}
+
+static int sample(int lower, int upper)
+{
+    int num;
+
+    num = lower + rand() % (upper - lower); 
+
+    return num;
+}
+
+int rand_partition(int array[], int start, int end)
+{
+    int i;
+    i = sample(start, end);
+    swap(array, end, i);
+    return partition(array, start, end);
+}
+
+static void random_quick_sort(int array[], int start, int end)
+{
+    int middle;
+
+    if (start < end)
+    {
+        middle = rand_partition(array, start, end);
+        random_quick_sort(array, start, middle - 1);
+        random_quick_sort(array, middle + 1, end);
+    }
+}
+
+void rand_quick_sort(int array[], int start, int end, unsigned int seed)
+{
+    srand(seed);
+    random_quick_sort(array, start, end);
 }
