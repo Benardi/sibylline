@@ -209,3 +209,34 @@ void rand_quick_sort(int array[], int start, int end, unsigned int seed)
     srand(seed);
     random_quick_sort(array, start, end);
 }
+
+static int max(int array[], int start, int end)
+{
+    int i, max_idx, max_val;
+
+    max_val = INT_MIN;
+    max_idx = -1;
+
+    for (i = start; i <= end; i++)
+    {
+        if (max_val < array[i])
+        {
+            max_val = array[i];
+            max_idx = i;
+        }
+    }
+
+    return max_idx;
+}
+
+void selection_sort(int array[], int start, int end)
+{
+    int i;
+    int max_idx;
+
+    for (i = 0; i < (end - start); i++)
+    {
+        max_idx = max(array, start, end - i);
+        swap(array, max_idx, end - i);
+    }
+}
