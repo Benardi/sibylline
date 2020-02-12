@@ -21,6 +21,19 @@
  */
 void insertion_sort(int array[], int start, int end);
 
+/** @brief Combines two sorted sequences into a sorted one.
+ *
+ * The procedure assumes that the subarrays array[start, middle] and
+ * array[middle + 1, end] are in sorted order. It merges them to form
+ * a single sorted subarray that replaces the current subarray
+ * A[start, end]. This version makes use of auxiliary structures.
+ *
+ * @param array array of integer containing two sequences.
+ * @param start position of first element of first sequence.
+ * @param middle position of last element of first sequence.
+ * @param end position of last element of second sequence.
+ * @return Void
+ */
 void merge(int array[], int start, int middle, int end);
 
 /** @brief Sorts given array via Merge Sort procedure.
@@ -36,6 +49,19 @@ void merge(int array[], int start, int middle, int end);
  */
 void merge_sort(int array[], int start, int end);
 
+/** @brief Combines two sorted sequences into a sorted one in-place.
+ *
+ * The procedure assumes that the subarrays array[start, middle] and
+ * array[middle + 1, end] are in sorted order. It merges them to form
+ * a single sorted subarray that replaces the current subarray
+ * A[start, end]. This version makes no use of auxiliary structures. 
+ *
+ * @param array array of integer containing two sequences.
+ * @param start position of first element of first sequence.
+ * @param middle position of last element of first sequence.
+ * @param end position of last element of second sequence.
+ * @return Void
+ */
 void inplace_merge(int array[], int start, int middle, int end);
 
 /** @brief Sorts given array via in place Merge Sort procedure.
@@ -51,6 +77,17 @@ void inplace_merge(int array[], int start, int middle, int end);
  */
 void inplace_merge_sort(int array[], int start, int end);
 
+/** @brief Reorders array elements around elected pivot (last element).
+ *
+ * Elects last element as pivot. Moves elements around to ensure that
+ * elements smaller than the pivot are to its left and that elements
+ * bigger than the pivot are to its right.
+ *
+ * @param array array of integer numbers to be partitioned around pivot.
+ * @param start position of first array element to be partitioned.
+ * @param end position of last array element to be partitioned.
+ * @return new position of the elected pivot 
+ */
 int partition(int array[], int start, int end);
 
 /** @brief Sorts given array via Quick Sort procedure.
@@ -66,6 +103,17 @@ int partition(int array[], int start, int end);
  */
 void quick_sort(int array[], int start, int end);
 
+/** @brief Reorders array elements around randomly elected pivot.
+ *
+ * Randomly elects element as pivot. Moves elements around to ensure that
+ * elements smaller than the pivot are to its left and that elements
+ * bigger than the pivot are to its right.
+ *
+ * @param array array of integer numbers to be partitioned around pivot.
+ * @param start position of first array element to be partitioned.
+ * @param end position of last array element to be partitioned.
+ * @return new position of the elected pivot 
+ */
 int rand_partition(int array[], int start, int end);
 
 /** @brief Sorts given array via Random Quick Sort procedure.
