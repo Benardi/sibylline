@@ -12,9 +12,10 @@ int seed = 23;
 START_TEST(test_insertion_sort_1)
 {
     int array[] = {5, 2, 4, 6, 1, 3};
-    int length = 6;
+    int start = 0;
+    int end = 5;
 
-    insertion_sort(array, length);
+    insertion_sort(array, start, end);
 
     ck_assert_int_eq(array[0], 1);
     ck_assert_int_eq(array[1], 2);
@@ -28,9 +29,10 @@ END_TEST
 START_TEST(test_insertion_sort_2)
 {
     int array[] = {5};
-    int length = 1;
+    int start = 0;
+    int end = 0;
 
-    insertion_sort(array, length);
+    insertion_sort(array, start, end);
 
     ck_assert_int_eq(array[0], 5);
 }
@@ -39,9 +41,10 @@ END_TEST
 START_TEST(test_insertion_sort_3)
 {
     int array[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
-    int length = 11;
+    int start = 0;
+    int end = 10;
 
-    insertion_sort(array, length);
+    insertion_sort(array, start, end);
 
     ck_assert_int_eq(array[0], -200);
     ck_assert_int_eq(array[1], -20);
@@ -60,9 +63,10 @@ END_TEST
 START_TEST(test_insertion_sort_4)
 {
     int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    int length = 10;
+    int start = 0;
+    int end = 9;
 
-    insertion_sort(array, length);
+    insertion_sort(array, start, end);
 
     ck_assert_int_eq(array[0], 0);
     ck_assert_int_eq(array[1], 1);
@@ -80,9 +84,235 @@ END_TEST
 START_TEST(test_insertion_sort_5)
 {
     int array[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-    int length = 10;
+    int start = 0;
+    int end = 9;
+    
+    insertion_sort(array, start, end);
 
-    insertion_sort(array, length);
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_6)
+{
+    int array[] = {2, 4, 1, 5, 7, 2, 3, 6};
+    int start = 2;
+    int end = 7;
+
+    insertion_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 2);
+    ck_assert_int_eq(array[1], 4);
+    ck_assert_int_eq(array[2], 1);
+    ck_assert_int_eq(array[3], 2);
+    ck_assert_int_eq(array[4], 3);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_7)
+{
+    int array[] = {2, 4, 5, 1, 2, 3, 7, 6};
+    int start = 0;
+    int end = 5;
+
+    insertion_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 1);
+    ck_assert_int_eq(array[1], 2);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 7);
+    ck_assert_int_eq(array[7], 6);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_8)
+{
+    int array[] = {2, 4, 1, 5, 2, 3, 7, 6};
+    int start = 2;
+    int end = 5;
+
+    insertion_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 2);
+    ck_assert_int_eq(array[1], 4);
+    ck_assert_int_eq(array[2], 1);
+    ck_assert_int_eq(array[3], 2);
+    ck_assert_int_eq(array[4], 3);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 7);
+    ck_assert_int_eq(array[7], 6);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_9)
+{
+    int array[] = {0, 2, 3, 4, 55, 300, 700, -200,
+                   -100, -80, -7, 30, 150, 570};
+    int start = 0;
+    int end = 13;
+
+    insertion_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], -200);
+    ck_assert_int_eq(array[1], -100);
+    ck_assert_int_eq(array[2], -80);
+    ck_assert_int_eq(array[3], -7);
+    ck_assert_int_eq(array[4], 0);
+    ck_assert_int_eq(array[5], 2);
+    ck_assert_int_eq(array[6], 3);
+    ck_assert_int_eq(array[7], 4);
+    ck_assert_int_eq(array[8], 30);
+    ck_assert_int_eq(array[9], 55);
+    ck_assert_int_eq(array[10], 150);
+    ck_assert_int_eq(array[11], 300);
+    ck_assert_int_eq(array[12], 570);
+    ck_assert_int_eq(array[13], 700);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_10)
+{
+    int array[] = {0, 2, 3, 4, 55, 300, 700, -200,
+                   -100, -80, -7, 30, 150, 570};
+    int start = 2;
+    int end = 11;
+
+    insertion_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 2);
+    ck_assert_int_eq(array[2], -200);
+    ck_assert_int_eq(array[3], -100);
+    ck_assert_int_eq(array[4], -80);
+    ck_assert_int_eq(array[5], -7);
+    ck_assert_int_eq(array[6], 3);
+    ck_assert_int_eq(array[7], 4);
+    ck_assert_int_eq(array[8], 30);
+    ck_assert_int_eq(array[9], 55);
+    ck_assert_int_eq(array[10], 300);
+    ck_assert_int_eq(array[11], 700);
+    ck_assert_int_eq(array[12], 150);
+    ck_assert_int_eq(array[13], 570);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_11)
+{
+    int array[] = {3, 15, 20, 30, 50, 75, -75, -50, -30, -20, -15, -3};
+    int start = 0;
+    int end = 11;
+
+    insertion_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], -75);
+    ck_assert_int_eq(array[1], -50);
+    ck_assert_int_eq(array[2], -30);
+    ck_assert_int_eq(array[3], -20);
+    ck_assert_int_eq(array[4], -15);
+    ck_assert_int_eq(array[5], -3);
+    ck_assert_int_eq(array[6], 3);
+    ck_assert_int_eq(array[7], 15);
+    ck_assert_int_eq(array[8], 20);
+    ck_assert_int_eq(array[9], 30);
+    ck_assert_int_eq(array[10], 50);
+    ck_assert_int_eq(array[11], 75);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_12)
+{
+    int array[] = {5, 2, 4, 6, 1, 3};
+    int start = 0;
+    int end = 5;
+
+    insertion_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 1);
+    ck_assert_int_eq(array[1], 2);
+    ck_assert_int_eq(array[2], 3);
+    ck_assert_int_eq(array[3], 4);
+    ck_assert_int_eq(array[4], 5);
+    ck_assert_int_eq(array[5], 6);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_13)
+{
+    int array[] = {5};
+    int start = 0;
+    int end = 0;
+
+    insertion_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 5);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_14)
+{
+    int array[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
+    int start = 0;
+    int end = 10;
+
+    insertion_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], -200);
+    ck_assert_int_eq(array[1], -20);
+    ck_assert_int_eq(array[2], -10);
+    ck_assert_int_eq(array[3], -5);
+    ck_assert_int_eq(array[4], 0);
+    ck_assert_int_eq(array[5], 15);
+    ck_assert_int_eq(array[6], 30);
+    ck_assert_int_eq(array[7], 50);
+    ck_assert_int_eq(array[8], 75);
+    ck_assert_int_eq(array[9], 100);
+    ck_assert_int_eq(array[10], 200);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_15)
+{
+    int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int start = 0;
+    int end = 9;
+
+    insertion_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_16)
+{
+    int array[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+    int start = 0;
+    int end = 9;
+
+    insertion_sort(array, start, end);
 
     ck_assert_int_eq(array[0], 0);
     ck_assert_int_eq(array[1], 1);
@@ -489,6 +719,99 @@ START_TEST(test_merge_sort_11)
 }
 END_TEST
 
+START_TEST(test_merge_sort_12)
+{
+    int array[] = {5, 2, 4, 6, 1, 3};
+    int start = 0;
+    int end = 5;
+
+    merge_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 1);
+    ck_assert_int_eq(array[1], 2);
+    ck_assert_int_eq(array[2], 3);
+    ck_assert_int_eq(array[3], 4);
+    ck_assert_int_eq(array[4], 5);
+    ck_assert_int_eq(array[5], 6);
+}
+END_TEST
+
+START_TEST(test_merge_sort_13)
+{
+    int array[] = {5};
+    int start = 0;
+    int end = 0;
+
+    merge_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 5);
+}
+END_TEST
+
+START_TEST(test_merge_sort_14)
+{
+    int array[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
+    int start = 0;
+    int end = 10;
+
+    merge_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], -200);
+    ck_assert_int_eq(array[1], -20);
+    ck_assert_int_eq(array[2], -10);
+    ck_assert_int_eq(array[3], -5);
+    ck_assert_int_eq(array[4], 0);
+    ck_assert_int_eq(array[5], 15);
+    ck_assert_int_eq(array[6], 30);
+    ck_assert_int_eq(array[7], 50);
+    ck_assert_int_eq(array[8], 75);
+    ck_assert_int_eq(array[9], 100);
+    ck_assert_int_eq(array[10], 200);
+}
+END_TEST
+
+START_TEST(test_merge_sort_15)
+{
+    int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int start = 0;
+    int end = 9;
+
+    merge_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
+}
+END_TEST
+
+START_TEST(test_merge_sort_16)
+{
+    int array[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+    int start = 0;
+    int end = 9;
+
+    merge_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
+}
+END_TEST
+
 START_TEST(test_inplace_merge_1)
 {
     int array[] = {2, 4, 5, 7, 1, 2, 3, 6};
@@ -881,6 +1204,100 @@ START_TEST(test_inplace_merge_sort_11)
 }
 END_TEST
 
+START_TEST(test_inplace_merge_sort_12)
+{
+    int array[] = {5, 2, 4, 6, 1, 3};
+    int start = 0;
+    int end = 5;
+
+    inplace_merge_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 1);
+    ck_assert_int_eq(array[1], 2);
+    ck_assert_int_eq(array[2], 3);
+    ck_assert_int_eq(array[3], 4);
+    ck_assert_int_eq(array[4], 5);
+    ck_assert_int_eq(array[5], 6);
+}
+END_TEST
+
+START_TEST(test_inplace_merge_sort_13)
+{
+    int array[] = {5};
+    int start = 0;
+    int end = 0;
+
+    inplace_merge_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 5);
+}
+END_TEST
+
+START_TEST(test_inplace_merge_sort_14)
+{
+    int array[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
+    int start = 0;
+    int end = 10;
+
+    inplace_merge_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], -200);
+    ck_assert_int_eq(array[1], -20);
+    ck_assert_int_eq(array[2], -10);
+    ck_assert_int_eq(array[3], -5);
+    ck_assert_int_eq(array[4], 0);
+    ck_assert_int_eq(array[5], 15);
+    ck_assert_int_eq(array[6], 30);
+    ck_assert_int_eq(array[7], 50);
+    ck_assert_int_eq(array[8], 75);
+    ck_assert_int_eq(array[9], 100);
+    ck_assert_int_eq(array[10], 200);
+}
+END_TEST
+
+START_TEST(test_inplace_merge_sort_15)
+{
+    int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int start = 0;
+    int end = 9;
+
+    inplace_merge_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
+}
+END_TEST
+
+START_TEST(test_inplace_merge_sort_16)
+{
+    int array[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+    int start = 0;
+    int end = 9;
+
+    inplace_merge_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
+}
+END_TEST
+
+
 START_TEST(test_partition_1)
 {
     int middle;
@@ -1224,6 +1641,99 @@ START_TEST(test_quick_sort_11)
     ck_assert_int_eq(array[9], 30);
     ck_assert_int_eq(array[10], 50);
     ck_assert_int_eq(array[11], 75);
+}
+END_TEST
+
+START_TEST(test_quick_sort_12)
+{
+    int array[] = {5, 2, 4, 6, 1, 3};
+    int start = 0;
+    int end = 5;
+
+    quick_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 1);
+    ck_assert_int_eq(array[1], 2);
+    ck_assert_int_eq(array[2], 3);
+    ck_assert_int_eq(array[3], 4);
+    ck_assert_int_eq(array[4], 5);
+    ck_assert_int_eq(array[5], 6);
+}
+END_TEST
+
+START_TEST(test_quick_sort_13)
+{
+    int array[] = {5};
+    int start = 0;
+    int end = 0;
+
+    quick_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 5);
+}
+END_TEST
+
+START_TEST(test_quick_sort_14)
+{
+    int array[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
+    int start = 0;
+    int end = 10;
+
+    quick_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], -200);
+    ck_assert_int_eq(array[1], -20);
+    ck_assert_int_eq(array[2], -10);
+    ck_assert_int_eq(array[3], -5);
+    ck_assert_int_eq(array[4], 0);
+    ck_assert_int_eq(array[5], 15);
+    ck_assert_int_eq(array[6], 30);
+    ck_assert_int_eq(array[7], 50);
+    ck_assert_int_eq(array[8], 75);
+    ck_assert_int_eq(array[9], 100);
+    ck_assert_int_eq(array[10], 200);
+}
+END_TEST
+
+START_TEST(test_quick_sort_15)
+{
+    int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int start = 0;
+    int end = 9;
+
+    quick_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
+}
+END_TEST
+
+START_TEST(test_quick_sort_16)
+{
+    int array[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+    int start = 0;
+    int end = 9;
+
+    quick_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
 }
 END_TEST
 
@@ -1589,6 +2099,99 @@ START_TEST(test_rand_quick_sort_11)
 }
 END_TEST
 
+START_TEST(test_rand_quick_sort_12)
+{
+    int array[] = {5, 2, 4, 6, 1, 3};
+    int start = 0;
+    int end = 5;
+
+    rand_quick_sort(array, start, end, seed);
+
+    ck_assert_int_eq(array[0], 1);
+    ck_assert_int_eq(array[1], 2);
+    ck_assert_int_eq(array[2], 3);
+    ck_assert_int_eq(array[3], 4);
+    ck_assert_int_eq(array[4], 5);
+    ck_assert_int_eq(array[5], 6);
+}
+END_TEST
+
+START_TEST(test_rand_quick_sort_13)
+{
+    int array[] = {5};
+    int start = 0;
+    int end = 0;
+
+    rand_quick_sort(array, start, end, seed);
+
+    ck_assert_int_eq(array[0], 5);
+}
+END_TEST
+
+START_TEST(test_rand_quick_sort_14)
+{
+    int array[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
+    int start = 0;
+    int end = 10;
+
+    rand_quick_sort(array, start, end, seed);
+
+    ck_assert_int_eq(array[0], -200);
+    ck_assert_int_eq(array[1], -20);
+    ck_assert_int_eq(array[2], -10);
+    ck_assert_int_eq(array[3], -5);
+    ck_assert_int_eq(array[4], 0);
+    ck_assert_int_eq(array[5], 15);
+    ck_assert_int_eq(array[6], 30);
+    ck_assert_int_eq(array[7], 50);
+    ck_assert_int_eq(array[8], 75);
+    ck_assert_int_eq(array[9], 100);
+    ck_assert_int_eq(array[10], 200);
+}
+END_TEST
+
+START_TEST(test_rand_quick_sort_15)
+{
+    int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int start = 0;
+    int end = 9;
+
+    rand_quick_sort(array, start, end, seed);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
+}
+END_TEST
+
+START_TEST(test_rand_quick_sort_16)
+{
+    int array[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+    int start = 0;
+    int end = 9;
+
+    rand_quick_sort(array, start, end, seed);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
+}
+END_TEST
+
 START_TEST(test_selection_sort_1)
 {
     int array[] = {5, 2, 4, 6, 1, 3};
@@ -1811,6 +2414,99 @@ START_TEST(test_selection_sort_11)
     ck_assert_int_eq(array[9], 30);
     ck_assert_int_eq(array[10], 50);
     ck_assert_int_eq(array[11], 75);
+}
+END_TEST
+
+START_TEST(test_selection_sort_12)
+{
+    int array[] = {5, 2, 4, 6, 1, 3};
+    int start = 0;
+    int end = 5;
+
+    selection_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 1);
+    ck_assert_int_eq(array[1], 2);
+    ck_assert_int_eq(array[2], 3);
+    ck_assert_int_eq(array[3], 4);
+    ck_assert_int_eq(array[4], 5);
+    ck_assert_int_eq(array[5], 6);
+}
+END_TEST
+
+START_TEST(test_selection_sort_13)
+{
+    int array[] = {5};
+    int start = 0;
+    int end = 0;
+
+    selection_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 5);
+}
+END_TEST
+
+START_TEST(test_selection_sort_14)
+{
+    int array[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
+    int start = 0;
+    int end = 10;
+
+    selection_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], -200);
+    ck_assert_int_eq(array[1], -20);
+    ck_assert_int_eq(array[2], -10);
+    ck_assert_int_eq(array[3], -5);
+    ck_assert_int_eq(array[4], 0);
+    ck_assert_int_eq(array[5], 15);
+    ck_assert_int_eq(array[6], 30);
+    ck_assert_int_eq(array[7], 50);
+    ck_assert_int_eq(array[8], 75);
+    ck_assert_int_eq(array[9], 100);
+    ck_assert_int_eq(array[10], 200);
+}
+END_TEST
+
+START_TEST(test_selection_sort_15)
+{
+    int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int start = 0;
+    int end = 9;
+
+    selection_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
+}
+END_TEST
+
+START_TEST(test_selection_sort_16)
+{
+    int array[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+    int start = 0;
+    int end = 9;
+
+    selection_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
 }
 END_TEST
 
@@ -2039,6 +2735,99 @@ START_TEST(test_bubble_sort_11)
 }
 END_TEST
 
+START_TEST(test_bubble_sort_12)
+{
+    int array[] = {5, 2, 4, 6, 1, 3};
+    int start = 0;
+    int end = 5;
+
+    bubble_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 1);
+    ck_assert_int_eq(array[1], 2);
+    ck_assert_int_eq(array[2], 3);
+    ck_assert_int_eq(array[3], 4);
+    ck_assert_int_eq(array[4], 5);
+    ck_assert_int_eq(array[5], 6);
+}
+END_TEST
+
+START_TEST(test_bubble_sort_13)
+{
+    int array[] = {5};
+    int start = 0;
+    int end = 0;
+
+    bubble_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 5);
+}
+END_TEST
+
+START_TEST(test_bubble_sort_14)
+{
+    int array[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
+    int start = 0;
+    int end = 10;
+
+    bubble_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], -200);
+    ck_assert_int_eq(array[1], -20);
+    ck_assert_int_eq(array[2], -10);
+    ck_assert_int_eq(array[3], -5);
+    ck_assert_int_eq(array[4], 0);
+    ck_assert_int_eq(array[5], 15);
+    ck_assert_int_eq(array[6], 30);
+    ck_assert_int_eq(array[7], 50);
+    ck_assert_int_eq(array[8], 75);
+    ck_assert_int_eq(array[9], 100);
+    ck_assert_int_eq(array[10], 200);
+}
+END_TEST
+
+START_TEST(test_bubble_sort_15)
+{
+    int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int start = 0;
+    int end = 9;
+
+    bubble_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
+}
+END_TEST
+
+START_TEST(test_bubble_sort_16)
+{
+    int array[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+    int start = 0;
+    int end = 9;
+
+    bubble_sort(array, start, end);
+
+    ck_assert_int_eq(array[0], 0);
+    ck_assert_int_eq(array[1], 1);
+    ck_assert_int_eq(array[2], 2);
+    ck_assert_int_eq(array[3], 3);
+    ck_assert_int_eq(array[4], 4);
+    ck_assert_int_eq(array[5], 5);
+    ck_assert_int_eq(array[6], 6);
+    ck_assert_int_eq(array[7], 7);
+    ck_assert_int_eq(array[8], 8);
+    ck_assert_int_eq(array[9], 9);
+}
+END_TEST
+
 Suite *make_rbt_suite(void)
 {
     Suite *s;
@@ -2053,6 +2842,17 @@ Suite *make_rbt_suite(void)
     tcase_add_test(tc_core, test_insertion_sort_3);
     tcase_add_test(tc_core, test_insertion_sort_4);
     tcase_add_test(tc_core, test_insertion_sort_5);
+    tcase_add_test(tc_core, test_insertion_sort_6);
+    tcase_add_test(tc_core, test_insertion_sort_7);
+    tcase_add_test(tc_core, test_insertion_sort_8);
+    tcase_add_test(tc_core, test_insertion_sort_9);
+    tcase_add_test(tc_core, test_insertion_sort_10);
+    tcase_add_test(tc_core, test_insertion_sort_11);
+    tcase_add_test(tc_core, test_insertion_sort_12);
+    tcase_add_test(tc_core, test_insertion_sort_13);
+    tcase_add_test(tc_core, test_insertion_sort_14);
+    tcase_add_test(tc_core, test_insertion_sort_15);
+    tcase_add_test(tc_core, test_insertion_sort_16);
 
     tcase_add_test(tc_core, test_merge_1);
     tcase_add_test(tc_core, test_merge_2);
@@ -2076,7 +2876,12 @@ Suite *make_rbt_suite(void)
     tcase_add_test(tc_core, test_merge_sort_9);
     tcase_add_test(tc_core, test_merge_sort_10);
     tcase_add_test(tc_core, test_merge_sort_11);
-    
+    tcase_add_test(tc_core, test_merge_sort_12);
+    tcase_add_test(tc_core, test_merge_sort_13);
+    tcase_add_test(tc_core, test_merge_sort_14);
+    tcase_add_test(tc_core, test_merge_sort_15);
+    tcase_add_test(tc_core, test_merge_sort_16);
+
     tcase_add_test(tc_core, test_inplace_merge_1);
     tcase_add_test(tc_core, test_inplace_merge_2);
     tcase_add_test(tc_core, test_inplace_merge_3);
@@ -2099,6 +2904,12 @@ Suite *make_rbt_suite(void)
     tcase_add_test(tc_core, test_inplace_merge_sort_9);
     tcase_add_test(tc_core, test_inplace_merge_sort_10);
     tcase_add_test(tc_core, test_inplace_merge_sort_11);
+    tcase_add_test(tc_core, test_inplace_merge_sort_11);
+    tcase_add_test(tc_core, test_inplace_merge_sort_12);
+    tcase_add_test(tc_core, test_inplace_merge_sort_13);
+    tcase_add_test(tc_core, test_inplace_merge_sort_14);
+    tcase_add_test(tc_core, test_inplace_merge_sort_15);
+    tcase_add_test(tc_core, test_inplace_merge_sort_16);
 
     tcase_add_test(tc_core, test_partition_1);
     tcase_add_test(tc_core, test_partition_2);
@@ -2117,6 +2928,11 @@ Suite *make_rbt_suite(void)
     tcase_add_test(tc_core, test_quick_sort_9);
     tcase_add_test(tc_core, test_quick_sort_10);
     tcase_add_test(tc_core, test_quick_sort_11);
+    tcase_add_test(tc_core, test_quick_sort_12);
+    tcase_add_test(tc_core, test_quick_sort_13);
+    tcase_add_test(tc_core, test_quick_sort_14);
+    tcase_add_test(tc_core, test_quick_sort_15);
+    tcase_add_test(tc_core, test_quick_sort_16);
 
     tcase_add_test(tc_core, test_rand_partition_1);
     tcase_add_test(tc_core, test_rand_partition_2);
@@ -2135,6 +2951,11 @@ Suite *make_rbt_suite(void)
     tcase_add_test(tc_core, test_rand_quick_sort_9);
     tcase_add_test(tc_core, test_rand_quick_sort_10);
     tcase_add_test(tc_core, test_rand_quick_sort_11);
+    tcase_add_test(tc_core, test_rand_quick_sort_12);
+    tcase_add_test(tc_core, test_rand_quick_sort_13);
+    tcase_add_test(tc_core, test_rand_quick_sort_14);
+    tcase_add_test(tc_core, test_rand_quick_sort_15);
+    tcase_add_test(tc_core, test_rand_quick_sort_16);
 
     tcase_add_test(tc_core, test_selection_sort_1);
     tcase_add_test(tc_core, test_selection_sort_2);
@@ -2147,6 +2968,11 @@ Suite *make_rbt_suite(void)
     tcase_add_test(tc_core, test_selection_sort_9);
     tcase_add_test(tc_core, test_selection_sort_10);
     tcase_add_test(tc_core, test_selection_sort_11);
+    tcase_add_test(tc_core, test_selection_sort_12);
+    tcase_add_test(tc_core, test_selection_sort_13);
+    tcase_add_test(tc_core, test_selection_sort_14);
+    tcase_add_test(tc_core, test_selection_sort_15);
+    tcase_add_test(tc_core, test_selection_sort_16);
  
     tcase_add_test(tc_core, test_bubble_sort_1);
     tcase_add_test(tc_core, test_bubble_sort_2);
@@ -2159,6 +2985,11 @@ Suite *make_rbt_suite(void)
     tcase_add_test(tc_core, test_bubble_sort_9);
     tcase_add_test(tc_core, test_bubble_sort_10);
     tcase_add_test(tc_core, test_bubble_sort_11);
+    tcase_add_test(tc_core, test_bubble_sort_12);
+    tcase_add_test(tc_core, test_bubble_sort_13);
+    tcase_add_test(tc_core, test_bubble_sort_14);
+    tcase_add_test(tc_core, test_bubble_sort_15);
+    tcase_add_test(tc_core, test_bubble_sort_16);
 
     suite_add_tcase(s, tc_core);
 

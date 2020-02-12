@@ -7,15 +7,15 @@
 
 # define INFINITY INT_MAX
 
-void insertion_sort(int array[], int length)
+void insertion_sort(int array[], int start, int end)
 {
     int j, i, key;
 
-    for (j = 1; j < length; j++)
+    for (j = start + 1; j <= end; j++)
     {
         key = array[j];
         i = j - 1; /* last element of sorted deck */
-        while (i > -1 && array[i] > key)
+        while (i > (start - 1) && array[i] > key)
         {
             array[i + 1] = array[i];
             i = i - 1;
