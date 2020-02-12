@@ -16,5 +16,6 @@ int rand_partition(int array[], int start, int end);
 void rand_quick_sort(int array[], int start, int end, unsigned int seed);
 
 void selection_sort(int array[], int start, int end);
+void bubble_sort(int array[], int start, int end);
 
 #endif

@@ -240,3 +240,19 @@ void selection_sort(int array[], int start, int end)
         swap(array, max_idx, end - i);
     }
 }
+
+void bubble_sort(int array[], int start, int end)
+{
+    int i, j;
+
+    for (i = start; i < end; i++)
+    {
+        for (j = end; j > i;  j--)
+        {
+            if (array[j] < array[j - 1])
+            {
+                swap(array, j, j - 1);
+            }
+        }
+    }
+}
