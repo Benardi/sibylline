@@ -12588,6 +12588,8 @@ START_TEST(test_bst_tree_delete_6)
     ck_assert_int_eq(removed->right == node3, true);
     ck_assert_int_eq(removed->data.key, 15);
 
+    free(node5);
+    free(node4);
     free(node3);
     free(node2);
     free(node1);
@@ -12732,6 +12734,8 @@ START_TEST(test_bst_tree_delete_7)
     ck_assert_int_eq(removed->right == NULL, true);
     ck_assert_int_eq(removed->data.key, 5);
 
+    free(node5);
+    free(node4);
     free(node3);
     free(node2);
     free(node1);
