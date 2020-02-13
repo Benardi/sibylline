@@ -387,6 +387,7 @@ START_TEST(test_rbt_insert_1)
     ck_assert_int_eq((*root)->right->p == node2, true);
     ck_assert_int_eq((*root)->right == node1, true);
 
+    free(node3);
     free(node2);
     free(node1);
     free(nil);
