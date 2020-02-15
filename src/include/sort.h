@@ -14,9 +14,9 @@
  * Applies Insertion Sort procedure to sort all array elements
  * in ascending order.
  *
- * @param array array of integer numbers to be sorted
- * @param start position of first array element to be sorted.
- * @param end position of last array element to be sorted.
+ * @param array Array of integer numbers to be sorted
+ * @param start Position of first array element to be sorted.
+ * @param end Position of last array element to be sorted.
  * @return Void
  */
 void insertion_sort(int array[], int start, int end);
@@ -28,10 +28,10 @@ void insertion_sort(int array[], int start, int end);
  * a single sorted subarray that replaces the current subarray
  * A[start, end]. This version makes use of auxiliary structures.
  *
- * @param array array of integer containing two sequences.
- * @param start position of first element of first sequence.
- * @param middle position of last element of first sequence.
- * @param end position of last element of second sequence.
+ * @param array Array of integer containing two sequences.
+ * @param start Position of first element of first sequence.
+ * @param middle Position of last element of first sequence.
+ * @param end Position of last element of second sequence.
  * @return Void
  */
 void merge(int array[], int start, int middle, int end);
@@ -42,9 +42,9 @@ void merge(int array[], int start, int middle, int end);
  * in ascending order. Merge Sort makes use of the procedure
  * 'merge' to successfully sort the array.
  *
- * @param array array of integer numbers to be sorted
- * @param start position of first array element to be sorted.
- * @param end position of last array element to be sorted.
+ * @param array Array of integer numbers to be sorted
+ * @param start Position of first array element to be sorted.
+ * @param end Position of last array element to be sorted.
  * @return Void
  */
 void merge_sort(int array[], int start, int end);
@@ -56,10 +56,10 @@ void merge_sort(int array[], int start, int end);
  * a single sorted subarray that replaces the current subarray
  * A[start, end]. This version makes no use of auxiliary structures. 
  *
- * @param array array of integer containing two sequences.
- * @param start position of first element of first sequence.
- * @param middle position of last element of first sequence.
- * @param end position of last element of second sequence.
+ * @param array Array of integer containing two sequences.
+ * @param start Position of first element of first sequence.
+ * @param middle Position of last element of first sequence.
+ * @param end Position of last element of second sequence.
  * @return Void
  */
 void inplace_merge(int array[], int start, int middle, int end);
@@ -70,9 +70,9 @@ void inplace_merge(int array[], int start, int middle, int end);
  * elements in ascending order. Merge Sort makes use of the
  * procedure 'in place merge' to successfully sort the array.
  *
- * @param array array of integer numbers to be sorted
- * @param start position of first array element to be sorted.
- * @param end position of last array element to be sorted.
+ * @param array Array of integer numbers to be sorted
+ * @param start Position of first array element to be sorted.
+ * @param end Position of last array element to be sorted.
  * @return Void
  */
 void inplace_merge_sort(int array[], int start, int end);
@@ -83,10 +83,10 @@ void inplace_merge_sort(int array[], int start, int end);
  * elements smaller than the pivot are to its left and that elements
  * bigger than the pivot are to its right.
  *
- * @param array array of integer numbers to be partitioned around pivot.
- * @param start position of first array element to be partitioned.
- * @param end position of last array element to be partitioned.
- * @return new position of the elected pivot 
+ * @param array Array of integer numbers to be partitioned around pivot.
+ * @param start Position of first array element to be partitioned.
+ * @param end Position of last array element to be partitioned.
+ * @return New position of the elected pivot 
  */
 int partition(int array[], int start, int end);
 
@@ -96,9 +96,9 @@ int partition(int array[], int start, int end);
  * elements in ascending order. Quick Sort makes use of the
  * procedure 'partition' to successfully sort array.
  *
- * @param array array of integer numbers to be sorted
- * @param start position of first array element to be sorted.
- * @param end position of last array element to be sorted.
+ * @param array Array of integer numbers to be sorted
+ * @param start Position of first array element to be sorted.
+ * @param end Position of last array element to be sorted.
  * @return Void
  */
 void quick_sort(int array[], int start, int end);
@@ -109,10 +109,10 @@ void quick_sort(int array[], int start, int end);
  * elements smaller than the pivot are to its left and that elements
  * bigger than the pivot are to its right.
  *
- * @param array array of integer numbers to be partitioned around pivot.
- * @param start position of first array element to be partitioned.
- * @param end position of last array element to be partitioned.
- * @return new position of the elected pivot 
+ * @param array Array of integer numbers to be partitioned around pivot.
+ * @param start Position of first array element to be partitioned.
+ * @param end Position of last array element to be partitioned.
+ * @return New position of the elected pivot 
  */
 int rand_partition(int array[], int start, int end);
 
@@ -122,10 +122,10 @@ int rand_partition(int array[], int start, int end);
  * elements in ascending order. Random Quick Sort makes use of the
  * procedure 'random partition' to successfully sort the array.
  *
- * @param array array of integer numbers to be sorted
- * @param start position of first array element to be sorted.
- * @param end position of last array element to be sorted.
- * @param seed value used to ensure procedure is reproducible.
+ * @param array Array of integer numbers to be sorted
+ * @param start Position of first array element to be sorted.
+ * @param end Position of last array element to be sorted.
+ * @param seed Value used to ensure procedure is reproducible.
  * @return Void
  */
 void rand_quick_sort(int array[], int start, int end, unsigned int seed);
@@ -135,9 +135,9 @@ void rand_quick_sort(int array[], int start, int end, unsigned int seed);
  * Applies the Selection Sort procedure to sort all array
  * elements in ascending order.
  * 
- * @param array array of integer numbers to be sorted
- * @param start position of first array element to be sorted.
- * @param end position of last array element to be sorted.
+ * @param array Array of integer numbers to be sorted
+ * @param start Position of first array element to be sorted.
+ * @param end Position of last array element to be sorted.
  * @return Void
  */
 void selection_sort(int array[], int start, int end);
@@ -147,9 +147,9 @@ void selection_sort(int array[], int start, int end);
  * Applies the Bubble Sort procedure to sort all array
  * elements in ascending order.
  *
- * @param array array of integer numbers to be sorted
- * @param start position of first array element to be sorted.
- * @param end position of last array element to be sorted.
+ * @param array Array of integer numbers to be sorted
+ * @param start Position of first array element to be sorted.
+ * @param end Position of last array element to be sorted.
  * @return Void
  */
 void bubble_sort(int array[], int start, int end);
