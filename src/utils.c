@@ -21,15 +21,6 @@ int max(int array[], int start, int end)
     return max_idx;
 }
 
-int sample(int lower, int upper)
-{
-    int num;
-
-    num = lower + rand() % (upper - lower); 
-
-    return num;
-}
-
 void swap(int array[], int pos1, int pos2)
 {
     int temp;
@@ -37,4 +28,13 @@ void swap(int array[], int pos1, int pos2)
     temp = array[pos1];
     array[pos1] = array[pos2];
     array[pos2] = temp;
+}
+
+int sample(int lower, int upper)
+{
+    int num;
+
+    num = lower + rand() % (upper - lower); 
+
+    return num;
 }
