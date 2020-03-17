@@ -11,7 +11,7 @@
 
 /** @brief Sorts given array via Insertion Sort procedure.
  *
- * Applies Insertion Sort procedure to sort all array elements
+ * Applies Insertion Sort procedure to sort array elements
  * in ascending order.
  *
  * @param array Array of integer numbers to be sorted
@@ -38,7 +38,7 @@ void merge(int array[], int start, int middle, int end);
 
 /** @brief Sorts given array via Merge Sort procedure.
  *
- * Applies Merge Sort procedure to sort all array elements
+ * Applies Merge Sort procedure to sort array elements
  * in ascending order. Merge Sort makes use of the procedure
  * 'merge' to successfully sort the array.
  *
@@ -66,7 +66,7 @@ void inplace_merge(int array[], int start, int middle, int end);
 
 /** @brief Sorts given array via in place Merge Sort procedure.
  *
- * Applies the in place Merge Sort procedure to sort all array
+ * Applies the in place Merge Sort procedure to sort array
  * elements in ascending order. Merge Sort makes use of the
  * procedure 'in place merge' to successfully sort the array.
  *
@@ -92,7 +92,7 @@ int partition(int array[], int start, int end);
 
 /** @brief Sorts given array via Quick Sort procedure.
  *
- * Applies the Quick Sort procedure to sort all array
+ * Applies the Quick Sort procedure to sort array
  * elements in ascending order. Quick Sort makes use of the
  * procedure 'partition' to successfully sort array.
  *
@@ -118,7 +118,7 @@ int rand_partition(int array[], int start, int end);
 
 /** @brief Sorts given array via Random Quick Sort procedure.
  *
- * Applies the Random Quick Sort procedure to sort all array
+ * Applies the Random Quick Sort procedure to sort array
  * elements in ascending order. Random Quick Sort makes use of the
  * procedure 'random partition' to successfully sort the array.
  *
@@ -132,7 +132,7 @@ void rand_quick_sort(int array[], int start, int end, unsigned int seed);
 
 /** @brief Sorts given array via Selection Sort procedure.
  *
- * Applies the Selection Sort procedure to sort all array
+ * Applies the Selection Sort procedure to sort array
  * elements in ascending order.
  * 
  * @param array Array of integer numbers to be sorted
@@ -144,7 +144,7 @@ void selection_sort(int array[], int start, int end);
 
 /** @brief Sorts given array via Bubble Sort procedure.
  *
- * Applies the Bubble Sort procedure to sort all array
+ * Applies the Bubble Sort procedure to sort array
  * elements in ascending order.
  *
  * @param array Array of integer numbers to be sorted
@@ -154,6 +154,15 @@ void selection_sort(int array[], int start, int end);
  */
 void bubble_sort(int array[], int start, int end);
 
+/** @brief Sorts given array via Heap Sort procedure.
+ *
+ * Applies the Heap Sort procedure to sort all elements
+ * in array in ascending order.
+ *
+ * @param array Array of integer numbers to be sorted
+ * @param length Number of elements in array.
+ * @return Void
+ */
 void heap_sort(int array[], int length);
 
 #endif
