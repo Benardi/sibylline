@@ -3,6 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <utils.h>
+#include <heap.h>
 #include <sort.h>
 
 # define INFINITY INT_MAX
@@ -217,5 +218,20 @@ void bubble_sort(int array[], int start, int end)
                 swap(array, j, j - 1);
             }
         }
+    }
+}
+
+void heap_sort(int array[], int length)
+{
+    int i, heap_size;
+
+    build_max_heap(array, length);
+    
+    heap_size = length;
+    for(i = length - 1; i > 0; i--)
+    {
+        swap(array, 0, i);
+        heap_size --;
+        max_heapify(array, heap_size, 0);
     }
 }

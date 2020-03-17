@@ -154,4 +154,6 @@ void selection_sort(int array[], int start, int end);
  */
 void bubble_sort(int array[], int start, int end);
 
+void heap_sort(int array[], int length);
+
 #endif
