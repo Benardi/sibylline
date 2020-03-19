@@ -10,7 +10,7 @@ DoublyLinkedList** head;
 
 void setup(void);
 void teardown(void);
-Suite *make_dll_suite(void);
+Suite *make_test_suite(void);
 
 void setup(void)
 {
@@ -536,7 +536,7 @@ START_TEST(test_dll_delete_6)
 }
 END_TEST
 
-Suite *make_dll_suite(void)
+Suite *make_test_suite(void)
 {
     Suite *s;
     TCase *tc_core;
@@ -574,7 +574,7 @@ int main(void)
     int number_failed;
     SRunner *sr;
 
-    sr = srunner_create(make_dll_suite());
+    sr = srunner_create(make_test_suite());
     srunner_set_fork_status(sr, CK_NOFORK);
     srunner_set_log(sr, "test.log");
     srunner_set_xml(sr, "test.xml");

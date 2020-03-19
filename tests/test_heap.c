@@ -4,17 +4,7 @@
 #include <check.h>
 #include <heap.h>
 
-void setup(void);
-void teardown(void);
-Suite *make_stack_suite(void);
-
-void setup(void)
-{
-}
-
-void teardown(void)
-{
-}
+Suite *make_test_suite(void);
 
 START_TEST(test_max_heapify_1)
 {
@@ -354,7 +344,7 @@ START_TEST(test_build_max_heap_8)
 }
 END_TEST
 
-Suite *make_stack_suite(void)
+Suite *make_test_suite(void)
 {
     Suite *s;
     TCase *tc_core;
@@ -363,8 +353,6 @@ Suite *make_stack_suite(void)
 
     /* Creation test case */
     tc_core = tcase_create("Test Cases with Setup and Teardown");
-
-    tcase_add_checked_fixture(tc_core, setup, teardown);
 
     tcase_add_test(tc_core, test_max_heapify_1);
     tcase_add_test(tc_core, test_max_heapify_2);
@@ -396,7 +384,7 @@ int main(void)
     int number_failed;
     SRunner *sr;
 
-    sr = srunner_create(make_stack_suite());
+    sr = srunner_create(make_test_suite());
     srunner_set_fork_status(sr, CK_NOFORK);
     srunner_set_log(sr, "test.log");
     srunner_set_xml(sr, "test.xml");

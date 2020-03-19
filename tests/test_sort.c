@@ -5,7 +5,7 @@
 #include <check.h>
 #include <sort.h>
 
-Suite *make_rbt_suite(void);
+Suite *make_test_suite(void);
 
 int seed = 23;
 
@@ -3068,7 +3068,7 @@ START_TEST(test_heap_sort_13)
 }
 END_TEST
 
-Suite *make_rbt_suite(void)
+Suite *make_test_suite(void)
 {
     Suite *s;
     TCase *tc_core;
@@ -3255,7 +3255,7 @@ int main(void)
     int number_failed;
     SRunner *sr;
 
-    sr = srunner_create(make_rbt_suite());
+    sr = srunner_create(make_test_suite());
     srunner_set_fork_status(sr, CK_NOFORK);
     srunner_set_log(sr, "test.log");
     srunner_set_xml(sr, "test.xml");
