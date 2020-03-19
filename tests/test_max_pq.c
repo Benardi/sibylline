@@ -407,6 +407,395 @@ START_TEST(test_max_heap_insert_5)
 }
 END_TEST
 
+START_TEST(test_heap_maximum_1)
+{
+    int maximum;
+    int array[] = {50, 30, 35, 13, 26, 20, 22, -10, 1000};
+    
+    maximum = heap_maximum(array);
+
+    ck_assert_int_eq(maximum, 50);
+}
+END_TEST
+
+START_TEST(test_heap_maximum_2)
+{
+    int maximum;
+    int array[] = {56, 28, 43, 16, 21, 12, 8, 0, 0};
+    
+    maximum = heap_maximum(array);
+
+    ck_assert_int_eq(maximum, 56);
+}
+END_TEST
+
+START_TEST(test_heap_maximum_3)
+{
+    int maximum;
+    int array[] = {70, 63, 65, 50, 57, 53, 51, 30, 42, 18, 24, 13, 36, 8, 26};
+    
+    maximum = heap_maximum(array);
+
+    ck_assert_int_eq(maximum, 70);
+}
+END_TEST
+
+START_TEST(test_heap_extract_max_1)
+{
+    bool result;
+    int* heap_size;
+    int* extracted;
+    int array[] = {50, 30, 35, 13, 26, 20, 22, -10, 1000};
+
+    heap_size = malloc(sizeof(int));
+    extracted = malloc(sizeof(int));
+    (*heap_size) = 0; 
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, false);
+    ck_assert_int_eq(*heap_size, 0);
+    
+    ck_assert_int_eq(array[0], 50);
+    ck_assert_int_eq(array[1], 30);
+    ck_assert_int_eq(array[2], 35);
+    ck_assert_int_eq(array[3], 13);
+    ck_assert_int_eq(array[4], 26);
+    ck_assert_int_eq(array[5], 20);
+    ck_assert_int_eq(array[6], 22);
+    ck_assert_int_eq(array[7], -10);
+    ck_assert_int_eq(array[8], 1000);
+
+    free(heap_size);
+    free(extracted);
+}
+END_TEST
+
+START_TEST(test_heap_extract_max_2)
+{
+    bool result;
+    int* heap_size;
+    int* extracted;
+    int array[] = {34};
+
+    heap_size = malloc(sizeof(int));
+    extracted = malloc(sizeof(int));
+    (*heap_size) = 1; 
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, true);
+    ck_assert_int_eq(*heap_size, 0);
+    ck_assert_int_eq(*extracted, 34);
+    
+    ck_assert_int_eq(array[0], 34);
+
+    free(heap_size);
+    free(extracted);
+}
+END_TEST
+
+START_TEST(test_heap_extract_max_3)
+{
+    bool result;
+    int* heap_size;
+    int* extracted;
+    int array[] = {50, 30, 35, 13, 26, 20, 22, -10, 1000};
+
+    heap_size = malloc(sizeof(int));
+    extracted = malloc(sizeof(int));
+    (*heap_size) = 7; 
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, true);
+    ck_assert_int_eq(*heap_size, 6);
+    ck_assert_int_eq(*extracted, 50);
+    
+    ck_assert_int_eq(array[0], 35);
+    ck_assert_int_eq(array[1], 30);
+    ck_assert_int_eq(array[2], 22);
+    ck_assert_int_eq(array[3], 13);
+    ck_assert_int_eq(array[4], 26);
+    ck_assert_int_eq(array[5], 20);
+    ck_assert_int_eq(array[6], 22);
+    ck_assert_int_eq(array[7], -10);
+    ck_assert_int_eq(array[8], 1000);
+
+    free(heap_size);
+    free(extracted);
+}
+END_TEST
+
+START_TEST(test_heap_extract_max_4)
+{
+    bool result;
+    int* heap_size;
+    int* extracted;
+    int array[] = {35, 30, 22, 13, 26, 20, 22, -10, 1000};
+
+    heap_size = malloc(sizeof(int));
+    extracted = malloc(sizeof(int));
+    (*heap_size) = 6; 
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, true);
+    ck_assert_int_eq(*heap_size, 5);
+    ck_assert_int_eq(*extracted, 35);
+    
+    ck_assert_int_eq(array[0], 30);
+    ck_assert_int_eq(array[1], 26);
+    ck_assert_int_eq(array[2], 22);
+    ck_assert_int_eq(array[3], 13);
+    ck_assert_int_eq(array[4], 20);
+    ck_assert_int_eq(array[5], 20);
+    ck_assert_int_eq(array[6], 22);
+    ck_assert_int_eq(array[7], -10);
+    ck_assert_int_eq(array[8], 1000);
+
+    free(heap_size);
+    free(extracted);
+}
+END_TEST
+
+START_TEST(test_heap_extract_max_5)
+{
+    bool result;
+    int* heap_size;
+    int* extracted;
+    int array[] = {30, 26, 22, 13, 20, 20, 22, -10, 1000};
+
+    heap_size = malloc(sizeof(int));
+    extracted = malloc(sizeof(int));
+    (*heap_size) = 5; 
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, true);
+    ck_assert_int_eq(*heap_size, 4);
+    ck_assert_int_eq(*extracted, 30);
+    
+    ck_assert_int_eq(array[0], 26);
+    ck_assert_int_eq(array[1], 20);
+    ck_assert_int_eq(array[2], 22);
+    ck_assert_int_eq(array[3], 13);
+    ck_assert_int_eq(array[4], 20);
+    ck_assert_int_eq(array[5], 20);
+    ck_assert_int_eq(array[6], 22);
+    ck_assert_int_eq(array[7], -10);
+    ck_assert_int_eq(array[8], 1000);
+
+    free(heap_size);
+    free(extracted);
+}
+END_TEST
+
+START_TEST(test_heap_extract_max_6)
+{
+    bool result;
+    int* heap_size;
+    int* extracted;
+    int array[] = {26, 20, 22, 13, 20, 20, 22, -10, 1000};
+
+    heap_size = malloc(sizeof(int));
+    extracted = malloc(sizeof(int));
+    (*heap_size) = 4;
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, true);
+    ck_assert_int_eq(*heap_size, 3);
+    ck_assert_int_eq(*extracted, 26);
+    
+    ck_assert_int_eq(array[0], 22);
+    ck_assert_int_eq(array[1], 20);
+    ck_assert_int_eq(array[2], 13);
+    ck_assert_int_eq(array[3], 13);
+    ck_assert_int_eq(array[4], 20);
+    ck_assert_int_eq(array[5], 20);
+    ck_assert_int_eq(array[6], 22);
+    ck_assert_int_eq(array[7], -10);
+    ck_assert_int_eq(array[8], 1000);
+
+    free(heap_size);
+    free(extracted);
+}
+END_TEST
+
+START_TEST(test_heap_extract_max_7)
+{
+    bool result;
+    int* heap_size;
+    int* extracted;
+    int array[] = {22, 20, 13, 13, 20, 20, 22, -10, 1000};
+
+    heap_size = malloc(sizeof(int));
+    extracted = malloc(sizeof(int));
+    (*heap_size) = 3;
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, true);
+    ck_assert_int_eq(*heap_size, 2);
+    ck_assert_int_eq(*extracted, 22);
+    
+    ck_assert_int_eq(array[0], 20);
+    ck_assert_int_eq(array[1], 13);
+    ck_assert_int_eq(array[2], 13);
+    ck_assert_int_eq(array[3], 13);
+    ck_assert_int_eq(array[4], 20);
+    ck_assert_int_eq(array[5], 20);
+    ck_assert_int_eq(array[6], 22);
+    ck_assert_int_eq(array[7], -10);
+    ck_assert_int_eq(array[8], 1000);
+
+    free(heap_size);
+    free(extracted);
+}
+END_TEST
+
+START_TEST(test_heap_extract_max_8)
+{
+    bool result;
+    int* heap_size;
+    int* extracted;
+    int array[] = {20, 13, 13, 13, 20, 20, 22, -10, 1000};
+
+    heap_size = malloc(sizeof(int));
+    extracted = malloc(sizeof(int));
+    (*heap_size) = 2;
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, true);
+    ck_assert_int_eq(*heap_size, 1);
+    ck_assert_int_eq(*extracted, 20);
+    
+    ck_assert_int_eq(array[0], 13);
+    ck_assert_int_eq(array[1], 13);
+    ck_assert_int_eq(array[2], 13);
+    ck_assert_int_eq(array[3], 13);
+    ck_assert_int_eq(array[4], 20);
+    ck_assert_int_eq(array[5], 20);
+    ck_assert_int_eq(array[6], 22);
+    ck_assert_int_eq(array[7], -10);
+    ck_assert_int_eq(array[8], 1000);
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, true);
+    ck_assert_int_eq(*heap_size, 0);
+    ck_assert_int_eq(*extracted, 13);
+
+    ck_assert_int_eq(array[0], 13);
+    ck_assert_int_eq(array[1], 13);
+    ck_assert_int_eq(array[2], 13);
+    ck_assert_int_eq(array[3], 13);
+    ck_assert_int_eq(array[4], 20);
+    ck_assert_int_eq(array[5], 20);
+    ck_assert_int_eq(array[6], 22);
+    ck_assert_int_eq(array[7], -10);
+    ck_assert_int_eq(array[8], 1000);
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, false);
+    ck_assert_int_eq(*heap_size, 0);
+
+    ck_assert_int_eq(array[0], 13);
+    ck_assert_int_eq(array[1], 13);
+    ck_assert_int_eq(array[2], 13);
+    ck_assert_int_eq(array[3], 13);
+    ck_assert_int_eq(array[4], 20);
+    ck_assert_int_eq(array[5], 20);
+    ck_assert_int_eq(array[6], 22);
+    ck_assert_int_eq(array[7], -10);
+    ck_assert_int_eq(array[8], 1000);
+
+    free(heap_size);
+    free(extracted);
+}
+END_TEST
+
+START_TEST(test_heap_extract_max_9)
+{
+    bool result;
+    int* heap_size;
+    int* extracted;
+    int array[] = {13, 13, 13, 13, 20, 20, 22, -10, 1000};
+
+    heap_size = malloc(sizeof(int));
+    extracted = malloc(sizeof(int));
+    (*heap_size) = 1;
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, true);
+    ck_assert_int_eq(*heap_size, 0);
+    ck_assert_int_eq(*extracted, 13);
+
+    ck_assert_int_eq(array[0], 13);
+    ck_assert_int_eq(array[1], 13);
+    ck_assert_int_eq(array[2], 13);
+    ck_assert_int_eq(array[3], 13);
+    ck_assert_int_eq(array[4], 20);
+    ck_assert_int_eq(array[5], 20);
+    ck_assert_int_eq(array[6], 22);
+    ck_assert_int_eq(array[7], -10);
+    ck_assert_int_eq(array[8], 1000);
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, false);
+    ck_assert_int_eq(*heap_size, 0);
+
+    ck_assert_int_eq(array[0], 13);
+    ck_assert_int_eq(array[1], 13);
+    ck_assert_int_eq(array[2], 13);
+    ck_assert_int_eq(array[3], 13);
+    ck_assert_int_eq(array[4], 20);
+    ck_assert_int_eq(array[5], 20);
+    ck_assert_int_eq(array[6], 22);
+    ck_assert_int_eq(array[7], -10);
+    ck_assert_int_eq(array[8], 1000);
+
+    free(heap_size);
+    free(extracted);
+}
+END_TEST
+
+START_TEST(test_heap_extract_max_10)
+{
+    bool result;
+    int* heap_size;
+    int* extracted;
+    int array[] = {13, 13, 13, 13, 20, 20, 22, -10, 1000};
+
+    heap_size = malloc(sizeof(int));
+    extracted = malloc(sizeof(int));
+    (*heap_size) = 0;
+
+    result = heap_extract_max(array, heap_size, extracted);
+
+    ck_assert_int_eq(result, false);
+    ck_assert_int_eq(*heap_size, 0);
+
+    ck_assert_int_eq(array[0], 13);
+    ck_assert_int_eq(array[1], 13);
+    ck_assert_int_eq(array[2], 13);
+    ck_assert_int_eq(array[3], 13);
+    ck_assert_int_eq(array[4], 20);
+    ck_assert_int_eq(array[5], 20);
+    ck_assert_int_eq(array[6], 22);
+    ck_assert_int_eq(array[7], -10);
+    ck_assert_int_eq(array[8], 1000);
+
+    free(heap_size);
+    free(extracted);
+}
+END_TEST
+
 Suite *make_test_suite(void)
 {
     Suite *s;
@@ -435,7 +824,22 @@ Suite *make_test_suite(void)
     tcase_add_test(tc_core, test_max_heap_insert_3);
     tcase_add_test(tc_core, test_max_heap_insert_4);
     tcase_add_test(tc_core, test_max_heap_insert_5);
-    
+
+    tcase_add_test(tc_core, test_heap_maximum_1);
+    tcase_add_test(tc_core, test_heap_maximum_2);
+    tcase_add_test(tc_core, test_heap_maximum_3);
+
+    tcase_add_test(tc_core, test_heap_extract_max_1);
+    tcase_add_test(tc_core, test_heap_extract_max_2);
+    tcase_add_test(tc_core, test_heap_extract_max_3);
+    tcase_add_test(tc_core, test_heap_extract_max_4);
+    tcase_add_test(tc_core, test_heap_extract_max_5);
+    tcase_add_test(tc_core, test_heap_extract_max_6);
+    tcase_add_test(tc_core, test_heap_extract_max_7);
+    tcase_add_test(tc_core, test_heap_extract_max_8);
+    tcase_add_test(tc_core, test_heap_extract_max_9);
+    tcase_add_test(tc_core, test_heap_extract_max_10);
+
     suite_add_tcase(s, tc_core);
 
     return s;
