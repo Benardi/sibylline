@@ -3,7 +3,7 @@
  * @author Benardi Nunes <benardinunes@gmail.com>
  * @date 12 Feb 2020
  * @brief Header file for Sort module.
- * 
+ *
  * Defines routines employed to sort an array of numbers.
  */
 #ifndef SORT_H
@@ -54,7 +54,7 @@ void merge_sort(int array[], int start, int end);
  * The procedure assumes that the subarrays array[start, middle] and
  * array[middle + 1, end] are in sorted order. It merges them to form
  * a single sorted subarray that replaces the current subarray
- * A[start, end]. This version makes no use of auxiliary structures. 
+ * A[start, end]. This version makes no use of auxiliary structures.
  *
  * @param array Array of integer containing two sequences.
  * @param start Position of first element of first sequence.
@@ -86,7 +86,7 @@ void inplace_merge_sort(int array[], int start, int end);
  * @param array Array of integer numbers to be partitioned around pivot.
  * @param start Position of first array element to be partitioned.
  * @param end Position of last array element to be partitioned.
- * @return New position of the elected pivot 
+ * @return New position of the elected pivot
  */
 int partition(int array[], int start, int end);
 
@@ -112,7 +112,7 @@ void quick_sort(int array[], int start, int end);
  * @param array Array of integer numbers to be partitioned around pivot.
  * @param start Position of first array element to be partitioned.
  * @param end Position of last array element to be partitioned.
- * @return New position of the elected pivot 
+ * @return New position of the elected pivot
  */
 int rand_partition(int array[], int start, int end);
 
@@ -134,7 +134,7 @@ void rand_quick_sort(int array[], int start, int end, unsigned int seed);
  *
  * Applies the Selection Sort procedure to sort array
  * elements in ascending order.
- * 
+ *
  * @param array Array of integer numbers to be sorted
  * @param start Position of first array element to be sorted.
  * @param end Position of last array element to be sorted.

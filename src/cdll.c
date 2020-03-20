@@ -1,40 +1,41 @@
-#include <malloc.h>
 #include <cdll.h>
+#include <malloc.h>
 
 void cdll_init(CircularDoublyLinkedList* nil)
 {
-    nil->next = nil;
-    nil->prev = nil;    
+  nil->next = nil;
+  nil->prev = nil;
 }
 
-CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil, Register reg)
+CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
+                                      Register reg)
 {
-    CircularDoublyLinkedList* node;
-    node = malloc(sizeof(CircularDoublyLinkedList));
-    node->data = reg;
-     
-    node->next = nil->next;
-    nil->next->prev = node;
-    nil->next = node;
-    node->prev = nil;
+  CircularDoublyLinkedList* node;
+  node = malloc(sizeof(CircularDoublyLinkedList));
+  node->data = reg;
 
-    return node;
+  node->next = nil->next;
+  nil->next->prev = node;
+  nil->next = node;
+  node->prev = nil;
+
+  return node;
 }
 
 CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil, Key k)
 {
-    CircularDoublyLinkedList* node;
+  CircularDoublyLinkedList* node;
 
-    node = nil->next;
-    while ((node != nil) && (node->data.key != k))
+  node = nil->next;
+  while ((node != nil) && (node->data.key != k))
     {
-        node = node->next;
+      node = node->next;
     }
-    return node;
+  return node;
 }
 
 void cdll_delete(CircularDoublyLinkedList* to_remove)
 {
-    (to_remove->prev)->next = to_remove->next;
-    (to_remove->next)->prev = to_remove->prev;
+  (to_remove->prev)->next = to_remove->next;
+  (to_remove->next)->prev = to_remove->prev;
 }

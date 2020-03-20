@@ -1,221 +1,221 @@
-#include <malloc.h>
+#include <heap.h>
 #include <limits.h>
+#include <malloc.h>
 #include <math.h>
+#include <sort.h>
 #include <stdlib.h>
 #include <utils.h>
-#include <heap.h>
-#include <sort.h>
 
-# define INFINITY INT_MAX
+#define INFINITY INT_MAX
 
 void insertion_sort(int array[], int start, int end)
 {
-    int j, i, key;
+  int j, i, key;
 
-    for (j = start + 1; j <= end; j++)
+  for (j = start + 1; j <= end; j++)
     {
-        key = array[j];
-        i = j - 1; /* last element of sorted deck */
-        while (i > (start - 1) && array[i] > key)
+      key = array[j];
+      i = j - 1; /* last element of sorted deck */
+      while (i > (start - 1) && array[i] > key)
         {
-            array[i + 1] = array[i];
-            i = i - 1;
+          array[i + 1] = array[i];
+          i = i - 1;
         }
-        array[i + 1] = key;
+      array[i + 1] = key;
     }
 }
 
 void merge(int array[], int start, int middle, int end)
 {
-    int* left;
-    int* right;
-    int n1, n2;
-    int i, j, k;
+  int* left;
+  int* right;
+  int n1, n2;
+  int i, j, k;
 
-    n1 = middle - start + 1;
-    n2 = end - middle;
+  n1 = middle - start + 1;
+  n2 = end - middle;
 
-    left = malloc((n1 + 1)  * sizeof(int));
-    right = malloc((n2 + 1) * sizeof(int));
+  left = malloc((n1 + 1) * sizeof(int));
+  right = malloc((n2 + 1) * sizeof(int));
 
-    /* populate left array */
-    for (i = 0; i < n1; i++)
+  /* populate left array */
+  for (i = 0; i < n1; i++)
     {
-        left[i] = array[start + i];
+      left[i] = array[start + i];
     }
 
-    /* populate right array */
-    for (j = 0; j < n2; j++)
+  /* populate right array */
+  for (j = 0; j < n2; j++)
     {
-        right[j] = array[middle + j + 1];
+      right[j] = array[middle + j + 1];
     }
 
-    left[n1] = INFINITY;
-    right[n2] = INFINITY;
+  left[n1] = INFINITY;
+  right[n2] = INFINITY;
 
-    i = j = 0;
+  i = j = 0;
 
-    /* transfer values to array in correct order */
-    for (k = start; k <= end; k++)
+  /* transfer values to array in correct order */
+  for (k = start; k <= end; k++)
     {
-        if (left[i] <= right[j])
+      if (left[i] <= right[j])
         {
-            array[k] =  left[i];
-            i++;    
+          array[k] = left[i];
+          i++;
         }
-        else
+      else
         {
-            array[k] = right[j];
-            j++;
+          array[k] = right[j];
+          j++;
         }
     }
 
-    free(left);
-    free(right);
+  free(left);
+  free(right);
 }
 
 void merge_sort(int array[], int start, int end)
 {
-    int middle;
+  int middle;
 
-    if (start < end)
+  if (start < end)
     {
-        middle = floor((start + end) / 2);
-        merge_sort(array, start, middle);
-        merge_sort(array, middle + 1, end);
-        merge(array, start, middle, end);
+      middle = floor((start + end) / 2);
+      merge_sort(array, start, middle);
+      merge_sort(array, middle + 1, end);
+      merge(array, start, middle, end);
     }
 }
 
 static void shift_right_array(int array[], int start, int end)
 {
-    int i;
-       
-    for (i = end; i > start; i--)
+  int i;
+
+  for (i = end; i > start; i--)
     {
-        array[i] = array[i-1];
+      array[i] = array[i - 1];
     }
 }
 
 void inplace_merge(int array[], int start, int middle, int end)
 {
-    int start1, start2, moved;
+  int start1, start2, moved;
 
-    start1 = start;
-    start2 = middle + 1;
+  start1 = start;
+  start2 = middle + 1;
 
-    while (start1 <= middle && start2 <= end)
+  while (start1 <= middle && start2 <= end)
     {
-        if (array[start1] < array[start2])
+      if (array[start1] < array[start2])
         {
-            start1++;
+          start1++;
         }
-        else
+      else
         {
-            moved = array[start2];
-            shift_right_array(array, start1, start2);
-            array[start1] = moved;
-            start2++;
-            start1++;
-            middle++;
+          moved = array[start2];
+          shift_right_array(array, start1, start2);
+          array[start1] = moved;
+          start2++;
+          start1++;
+          middle++;
         }
     }
 }
 
 void inplace_merge_sort(int array[], int start, int end)
 {
-    int middle;
+  int middle;
 
-    if (start < end)
+  if (start < end)
     {
-        middle = floor((start + end) / 2);
-        inplace_merge_sort(array, start, middle);
-        inplace_merge_sort(array, middle + 1, end);
-        inplace_merge(array, start, middle, end);
+      middle = floor((start + end) / 2);
+      inplace_merge_sort(array, start, middle);
+      inplace_merge_sort(array, middle + 1, end);
+      inplace_merge(array, start, middle, end);
     }
 }
 
 int partition(int array[], int start, int end)
 {
-    int i, j, pivot;
+  int i, j, pivot;
 
-    pivot = array[end];
-    i = start - 1;
+  pivot = array[end];
+  i = start - 1;
 
-    for (j = start; j < end; j++)
+  for (j = start; j < end; j++)
     {
-        if (array[j] <= pivot)
+      if (array[j] <= pivot)
         {
-            i++;
-            swap(array, i, j);
+          i++;
+          swap(array, i, j);
         }
     }
-    swap(array, i + 1, end);
+  swap(array, i + 1, end);
 
-    return i + 1;
+  return i + 1;
 }
 
 void quick_sort(int array[], int start, int end)
 {
-    int middle;
+  int middle;
 
-    if (start < end)
+  if (start < end)
     {
-        middle = partition(array, start, end);
-        quick_sort(array, start, middle - 1);
-        quick_sort(array, middle + 1, end);
+      middle = partition(array, start, end);
+      quick_sort(array, start, middle - 1);
+      quick_sort(array, middle + 1, end);
     }
 }
 
 int rand_partition(int array[], int start, int end)
 {
-    int i;
-    i = sample(start, end);
-    swap(array, end, i);
-    return partition(array, start, end);
+  int i;
+  i = sample(start, end);
+  swap(array, end, i);
+  return partition(array, start, end);
 }
 
 static void random_quick_sort(int array[], int start, int end)
 {
-    int middle;
+  int middle;
 
-    if (start < end)
+  if (start < end)
     {
-        middle = rand_partition(array, start, end);
-        random_quick_sort(array, start, middle - 1);
-        random_quick_sort(array, middle + 1, end);
+      middle = rand_partition(array, start, end);
+      random_quick_sort(array, start, middle - 1);
+      random_quick_sort(array, middle + 1, end);
     }
 }
 
 void rand_quick_sort(int array[], int start, int end, unsigned int seed)
 {
-    srand(seed);
-    random_quick_sort(array, start, end);
+  srand(seed);
+  random_quick_sort(array, start, end);
 }
 
 void selection_sort(int array[], int start, int end)
 {
-    int i;
-    int max_idx;
+  int i;
+  int max_idx;
 
-    for (i = 0; i < (end - start); i++)
+  for (i = 0; i < (end - start); i++)
     {
-        max_idx = max(array, start, end - i);
-        swap(array, max_idx, end - i);
+      max_idx = max(array, start, end - i);
+      swap(array, max_idx, end - i);
     }
 }
 
 void bubble_sort(int array[], int start, int end)
 {
-    int i, j;
+  int i, j;
 
-    for (i = start; i < end; i++)
+  for (i = start; i < end; i++)
     {
-        for (j = end; j > i;  j--)
+      for (j = end; j > i; j--)
         {
-            if (array[j] < array[j - 1])
+          if (array[j] < array[j - 1])
             {
-                swap(array, j, j - 1);
+              swap(array, j, j - 1);
             }
         }
     }
@@ -223,15 +223,15 @@ void bubble_sort(int array[], int start, int end)
 
 void heap_sort(int array[], int length)
 {
-    int i, heap_size;
+  int i, heap_size;
 
-    build_max_heap(array, length);
-    
-    heap_size = length;
-    for(i = length - 1; i > 0; i--)
+  build_max_heap(array, length);
+
+  heap_size = length;
+  for (i = length - 1; i > 0; i--)
     {
-        swap(array, 0, i);
-        heap_size --;
-        max_heapify(array, heap_size, 0);
+      swap(array, 0, i);
+      heap_size--;
+      max_heapify(array, heap_size, 0);
     }
 }

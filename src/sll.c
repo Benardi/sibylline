@@ -3,47 +3,47 @@
 
 SinglyLinkedList* sll_insert(SinglyLinkedList** head, Register reg)
 {
-    SinglyLinkedList* node;
-    node = malloc(sizeof(SinglyLinkedList));
-    node->data = reg;
-    node->next = (*head);
+  SinglyLinkedList* node;
+  node = malloc(sizeof(SinglyLinkedList));
+  node->data = reg;
+  node->next = (*head);
 
-    (*head) = node;
-    return node;
+  (*head) = node;
+  return node;
 }
 
 SinglyLinkedList* sll_search(SinglyLinkedList** head, Key k)
 {
-    SinglyLinkedList* node;
+  SinglyLinkedList* node;
 
-    node = (*head);
-    while ((node != NULL) && (node->data.key != k))
+  node = (*head);
+  while ((node != NULL) && (node->data.key != k))
     {
-        node = node->next;
+      node = node->next;
     }
-    return node;
+  return node;
 }
 
 void sll_delete(SinglyLinkedList** head, SinglyLinkedList* to_remove)
 {
-    if ((*head) != NULL)
+  if ((*head) != NULL)
     {
-        if (to_remove == (*head))
+      if (to_remove == (*head))
         {
-            (*head) = (*head)->next;
+          (*head) = (*head)->next;
         }
-        else
+      else
         {
-            SinglyLinkedList* node;
+          SinglyLinkedList* node;
 
-            node = (*head);
-            while ((node->next != NULL) && (node->next != to_remove))
+          node = (*head);
+          while ((node->next != NULL) && (node->next != to_remove))
             {
-                node = node->next;
+              node = node->next;
             }
-            if (node->next != NULL)
+          if (node->next != NULL)
             {
-                node->next = (node->next)->next;
+              node->next = (node->next)->next;
             }
         }
     }
