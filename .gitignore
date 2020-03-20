@@ -49,3 +49,6 @@ build/
 
 #Documentation Folder
 doc_doxygen/
+
+# Visual Studio Code Configuration
+.vscode/
