@@ -4,7 +4,7 @@
 #include <check.h>
 #include <utils.h>
 
-Suite *make_stack_suite(void);
+Suite *make_test_suite(void);
 
 START_TEST(test_swap_1)
 {
@@ -305,7 +305,7 @@ START_TEST(test_sample_5)
 
 }END_TEST
 
-Suite *make_stack_suite(void)
+Suite *make_test_suite(void)
 {
     Suite *s;
     TCase *tc_core;
@@ -352,7 +352,7 @@ int main(void)
     int number_failed;
     SRunner *sr;
 
-    sr = srunner_create(make_stack_suite());
+    sr = srunner_create(make_test_suite());
     srunner_set_fork_status(sr, CK_NOFORK);
     srunner_set_log(sr, "test.log");
     srunner_set_xml(sr, "test.xml");
