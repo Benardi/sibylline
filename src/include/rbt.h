@@ -1,7 +1,7 @@
 /**
- * @file bst.h
+ * @file rbt.h
  * @author Benardi Nunes <benardinunes@gmail.com>
- * @date 2 Jan 2020
+ * @date 5 Feb 2020
  * @brief Header file for Red Black Tree module.
  * 
  * Defines the  struct RedBlackTree and the prototypes for the routines
