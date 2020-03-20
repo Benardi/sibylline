@@ -2,59 +2,59 @@
 
 void init_queue(Queue* q)
 {
-    q->head = 0;
-    q->tail = 0;
+  q->head = 0;
+  q->tail = 0;
 }
 
 bool queue_empty(Queue* q)
 {
-    return q->head == q->tail;
+  return q->head == q->tail;
 }
 
 bool queue_full(Queue* q)
 {
-    return q->head == ((q->tail + 1) % (MAX));
+  return q->head == ((q->tail + 1) % (MAX));
 }
 
 bool enqueue(Queue* q, Register reg)
 {
-    if (queue_full(q))
+  if (queue_full(q))
     {
-        return false;
+      return false;
     }
-    else
+  else
     {
-        q->A[q->tail] = reg;
+      q->A[q->tail] = reg;
 
-        if (q->tail == (MAX - 1))
+      if (q->tail == (MAX - 1))
         {
-            q->tail = 0;
+          q->tail = 0;
         }
-        else
+      else
         {
-            q->tail++;
+          q->tail++;
         }
-        return true;
+      return true;
     }
 }
 
 bool dequeue(Queue* q, Register* removed)
 {
-    if (queue_empty(q))
+  if (queue_empty(q))
     {
-        return false;
+      return false;
     }
-    else
+  else
     {
-        *removed = q->A[q->head];
-        if (q->head == (MAX - 1))
+      *removed = q->A[q->head];
+      if (q->head == (MAX - 1))
         {
-            q->head = 0;
+          q->head = 0;
         }
-        else
+      else
         {
-            q->head++;
+          q->head++;
         }
-        return true;
+      return true;
     }
 }

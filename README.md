@@ -77,7 +77,6 @@ set(BUILD_SHARED_LIBS ON)
 
 ```
 
-
 The location of the shared library will be made available in the file `sibylline/build/install_manifest.txt`
 * This will install the shared library at `/usr/local/lib/libsibylline.so` in Unix machines.
 
@@ -99,6 +98,15 @@ to generate the documentation:
 doxygen ./docs/Doxyfile
 ```
 The documentation will be generated in the doc_doxygen folder under html & latex folders.
+
+## Code formatting 
+
+To format this project's source code we're using [clang-format](https://clang.llvm.org/docs/ClangFormat.html). To format all existing source code run the following command:
+
+```bash
+/bin/bash ./check_code_format.sh
+```
+
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/Benardi/sibylline/tags). 
@@ -107,15 +115,17 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 * **Benardi Nunes** - *Initial work* - [Benardi](https://github.com/Benardi)
 
+## Acknowledgments
+
+* **Eduardo Rolim** - check-cmake-example [example repo](https://github.com/vndmtrx/check-cmake-example)
+
+* **Fábio Silva** - lotterypp [automatic test discovery](https://github.com/ffosilva/lotopp)
+
+***
+
 ## License
 
 This project is licensed under the BSD-3 Clause License - see the [LICENSE.md](LICENSE.md) file for details
 
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FBenardi%2Fsibylline.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FBenardi%2Fsibylline?ref=badge_large)
-
-## Acknowledgments
-
-* **Eduardo Rolim** - check-cmake-example [example repo](https://github.com/vndmtrx/check-cmake-example)
-
-* **Fábio Silva** - lotterypp [automatic test discovery](https://github.com/ffosilva/lotopp)

@@ -1,156 +1,156 @@
-#include <stdio.h>
 #include <seq_list.h>
+#include <stdio.h>
 
 void init_seq_list(SeqList* sl)
 {
-    sl->nElem = 0;
+  sl->nElem = 0;
 }
 
 void reinit_seq_list(SeqList* sl)
 {
-    sl->nElem = 0;
+  sl->nElem = 0;
 }
 
 int size(SeqList* sl)
 {
-    return sl->nElem;
+  return sl->nElem;
 }
 
 int seq_search(SeqList* sl, Key key)
 {
-    int i = 0;
-    while (i < sl->nElem)
+  int i = 0;
+  while (i < sl->nElem)
     {
-        if (key == sl->A[i].key)
+      if (key == sl->A[i].key)
         {
-            return i;
+          return i;
         }
-        else
+      else
         {
-            i++;
+          i++;
         }
     }
-    return -1;
+  return -1;
 }
 
 int sentinel_search(SeqList* sl, Key k)
 {
-    int i = 0;
-    sl->A[sl->nElem].key = k;
+  int i = 0;
+  sl->A[sl->nElem].key = k;
 
-    while (sl->A[i].key != k)
+  while (sl->A[i].key != k)
     {
-        i++;
+      i++;
     }
-    if (i == sl->nElem)
+  if (i == sl->nElem)
     {
-        return -1;
+      return -1;
     }
-    else
+  else
     {
-        return i;
+      return i;
     }
 }
 
 bool insert_sorted(SeqList* sl, Register reg)
 {
-    int pos;
+  int pos;
 
-    if (sl->nElem >= MAX)
+  if (sl->nElem >= MAX)
     {
-        return false;
+      return false;
     }
 
-    pos = sl->nElem;
+  pos = sl->nElem;
 
-    while (pos > 0 && sl->A[pos - 1].key > reg.key)
+  while (pos > 0 && sl->A[pos - 1].key > reg.key)
     {
-        sl->A[pos] = sl->A[pos - 1];
-        pos--;
+      sl->A[pos] = sl->A[pos - 1];
+      pos--;
     }
 
-    sl->A[pos] = reg;
-    sl->nElem++;
+  sl->A[pos] = reg;
+  sl->nElem++;
 
-    return true;
+  return true;
 }
 
 int binary_search(SeqList* sl, Key k)
 {
-    int left, right, middle;
-    left = 0;
-    right = sl->nElem - 1;
+  int left, right, middle;
+  left = 0;
+  right = sl->nElem - 1;
 
-    while (left <= right)
+  while (left <= right)
     {
-        middle = (left + right) / 2;
-        if (sl->A[middle].key == k)
+      middle = (left + right) / 2;
+      if (sl->A[middle].key == k)
         {
-            return middle;
+          return middle;
         }
-        else
+      else
         {
-            if (sl->A[middle].key < k)
+          if (sl->A[middle].key < k)
             {
-                left = middle + 1;
+              left = middle + 1;
             }
-            else
+          else
             {
-                right = middle - 1;
+              right = middle - 1;
             }
         }
     }
 
-    return -1;
+  return -1;
 }
 
 bool insert_elem(SeqList* sl, Register reg, int i)
 {
-    int j;
-    if ((sl->nElem == MAX) || (i < 0) || (i > sl->nElem))
+  int j;
+  if ((sl->nElem == MAX) || (i < 0) || (i > sl->nElem))
     {
-        return false;
+      return false;
     }
-    else
+  else
     {
-        for (j = sl->nElem; j > i; j--)
+      for (j = sl->nElem; j > i; j--)
         {
-            sl->A[j] = sl->A[j - 1];
+          sl->A[j] = sl->A[j - 1];
         }
-        sl->A[i] = reg;
-        sl->nElem++;
-        return true;
+      sl->A[i] = reg;
+      sl->nElem++;
+      return true;
     }
 }
 
 bool remove_elem(SeqList* sl, Key key)
 {
-    int pos, j;
-    pos = seq_search(sl, key);
-    if (pos == -1)
+  int pos, j;
+  pos = seq_search(sl, key);
+  if (pos == -1)
     {
-        return false;
+      return false;
     }
-    else
+  else
     {
-        for (j = pos; j < sl->nElem - 1; j++)
+      for (j = pos; j < sl->nElem - 1; j++)
         {
-            sl->A[j] = sl->A[j + 1];
+          sl->A[j] = sl->A[j + 1];
         }
-        sl->nElem--;
-        return true;
+      sl->nElem--;
+      return true;
     }
 }
 
 void show_list(SeqList* sl)
 {
-    int i;
-    printf("List: \"");
+  int i;
+  printf("List: \"");
 
-    for (i = 0; i < sl->nElem - 1; i++)
-        printf("%i ", sl->A[i].key);
+  for (i = 0; i < sl->nElem - 1; i++)
+    printf("%i ", sl->A[i].key);
 
-    /* Last element isn't followed by blank space */
-    printf("%i", sl->A[sl->nElem - 1].key);
-    printf("\"\n");
+  /* Last element isn't followed by blank space */
+  printf("%i", sl->A[sl->nElem - 1].key);
+  printf("\"\n");
 }

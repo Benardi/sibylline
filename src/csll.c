@@ -1,116 +1,117 @@
+#include <csll.h>
 #include <malloc.h>
 #include <stdbool.h>
-#include <csll.h>
 
 CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
                                             Register reg)
 {
-    CircularSinglyLinkedList* node;
+  CircularSinglyLinkedList* node;
 
-    node = malloc(sizeof(CircularSinglyLinkedList));
-    node->data = reg;
+  node = malloc(sizeof(CircularSinglyLinkedList));
+  node->data = reg;
 
-    if ((*tail) == NULL)
+  if ((*tail) == NULL)
     {
-        (*tail) = node;
-        (*tail)->next = node;
+      (*tail) = node;
+      (*tail)->next = node;
     }
-    else
+  else
     {
-        node->next = (*tail)->next;  
-        (*tail)->next = node;      
+      node->next = (*tail)->next;
+      (*tail)->next = node;
     }
 
-    return node;
+  return node;
 }
 
 CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
                                           Register reg)
 {
-    CircularSinglyLinkedList* node;
+  CircularSinglyLinkedList* node;
 
-    node = malloc(sizeof(CircularSinglyLinkedList));
-    node->data = reg;
+  node = malloc(sizeof(CircularSinglyLinkedList));
+  node->data = reg;
 
-    if ((*tail) == NULL)
+  if ((*tail) == NULL)
     {
-        (*tail) = node;
-        (*tail)->next = node;
+      (*tail) = node;
+      (*tail)->next = node;
     }
-    else
+  else
     {
-        node->next = (*tail)->next;  
-        (*tail)->next = node;
-        (*tail) = node;
+      node->next = (*tail)->next;
+      (*tail)->next = node;
+      (*tail) = node;
     }
 
-    return node;
+  return node;
 }
 
 CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail, Key k)
 {
-    if ((*tail) == NULL)
+  if ((*tail) == NULL)
     {
-        return NULL;
+      return NULL;
     }
-    if ((*tail)->data.key == k)
+  if ((*tail)->data.key == k)
     {
-        return (*tail);
+      return (*tail);
     }
-    else
+  else
     {
-        CircularSinglyLinkedList* node;
-        node = (*tail)->next;
-        while (node != (*tail) && (node->data.key != k))
+      CircularSinglyLinkedList* node;
+      node = (*tail)->next;
+      while (node != (*tail) && (node->data.key != k))
         {
-            node = node->next;
+          node = node->next;
         }
-        
-        if (node == (*tail)){
-            node = NULL;
+
+      if (node == (*tail))
+        {
+          node = NULL;
         }
-        
-        return node;
+
+      return node;
     }
 }
 
 void csll_delete(CircularSinglyLinkedList** tail,
-                CircularSinglyLinkedList* to_remove)
+                 CircularSinglyLinkedList* to_remove)
 {
-    if ((*tail) != NULL)
+  if ((*tail) != NULL)
     {
-        bool is_tail;
-        is_tail = (to_remove == (*tail));    
+      bool is_tail;
+      is_tail = (to_remove == (*tail));
 
-        if (is_tail && (to_remove->next == to_remove))
+      if (is_tail && (to_remove->next == to_remove))
         {
-            (*tail) = NULL;
+          (*tail) = NULL;
         }
-        else
+      else
         {
-            CircularSinglyLinkedList* node;            
+          CircularSinglyLinkedList* node;
 
-            if (is_tail)
+          if (is_tail)
             {
-                node = (*tail)->next;
+              node = (*tail)->next;
 
-                while((node->next != (*tail)))
+              while ((node->next != (*tail)))
                 {
-                    node = node->next;
+                  node = node->next;
                 }
 
-                node->next = (*tail)->next;
-                (*tail) = node;
+              node->next = (*tail)->next;
+              (*tail) = node;
             }
-            else
+          else
             {
-                node = (*tail);
+              node = (*tail);
 
-                while((node->next != (*tail)) && (node->next != to_remove))
+              while ((node->next != (*tail)) && (node->next != to_remove))
                 {
-                    node = node->next;
+                  node = node->next;
                 }
-                node->next = node->next->next;
+              node->next = node->next->next;
             }
         }
     }

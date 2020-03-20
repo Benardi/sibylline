@@ -2,57 +2,57 @@
 
 void init_stack(Stack* stk)
 {
-    stk->top = -1;
+  stk->top = -1;
 }
 
 bool stack_empty(Stack* stk)
 {
-    if (stk->top == -1)
+  if (stk->top == -1)
     {
-        return true;
+      return true;
     }
-    else
+  else
     {
-        return false;
+      return false;
     }
 }
 
 bool stack_full(Stack* stk)
 {
-    if (stk->top == (MAX - 1))
+  if (stk->top == (MAX - 1))
     {
-        return true;
+      return true;
     }
-    else
+  else
     {
-        return false;
+      return false;
     }
 }
 
 bool push(Stack* stk, Register reg)
 {
-    if (stack_full(stk))
+  if (stack_full(stk))
     {
-        return false;
+      return false;
     }
-    else
+  else
     {
-        stk->top = stk->top + 1;
-        stk->A[stk->top] = reg;
-        return true;
+      stk->top = stk->top + 1;
+      stk->A[stk->top] = reg;
+      return true;
     }
 }
 
 bool pop(Stack* stk, Register* removed)
 {
-    if (stack_empty(stk))
+  if (stack_empty(stk))
     {
-        return false;
+      return false;
     }
-    else
+  else
     {
-        stk->top = stk->top - 1;
-        *removed = stk->A[stk->top + 1];
-        return true;
+      stk->top = stk->top - 1;
+      *removed = stk->A[stk->top + 1];
+      return true;
     }
 }

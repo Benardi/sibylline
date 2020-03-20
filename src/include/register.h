@@ -14,7 +14,6 @@ typedef int Key;
 typedef struct
 {
   Key key; /* Key that maps the register */
-}
-Register;
+} Register;
 
 #endif
