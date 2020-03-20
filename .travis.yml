@@ -13,7 +13,7 @@ before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y build-essential cmake check
   - sudo apt-get install -qq valgrind
-
+  - sudo apt install -y clang-format
 before_script:
   - mkdir build
 
@@ -22,3 +22,4 @@ script:
   - cmake ..
   - make
   - make test
+  - cd .. && bash ./check_code_format.sh
