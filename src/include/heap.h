@@ -1,4 +1,12 @@
-
+/**
+ * @file heap.h
+ * @author Benardi Nunes <benardinunes@gmail.com>
+ * @date 17 Mar 2020
+ * @brief Header file for Heap module.
+ *
+ * Defines the constant MINUS_INF, the parent, left and right MACROS and
+ * the prototypes for the routines of the Heap module.
+ */
 #ifndef HEAP_H
 #define HEAP_H
 

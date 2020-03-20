@@ -1,3 +1,12 @@
+/**
+ * @file bst.h
+ * @author Benardi Nunes <benardinunes@gmail.com>
+ * @date 2 Jan 2020
+ * @brief Header file for Binary Search Tree module.
+ * 
+ * Defines the  struct BinarySearchTree and the prototypes for the routines
+ * of the Binary Search Tree module.
+ */
 #ifndef BST_H
 #define BST_H
 
