@@ -38,3 +38,24 @@ int sample(int lower, int upper)
 
   return num;
 }
+
+int ipow(int base, int exp)
+{
+  int result = 1;
+  for (;;)
+    {
+      if (exp & 1)
+        result *= base;
+      exp >>= 1;
+      if (!exp)
+        break;
+      base *= base;
+    }
+
+  return result;
+}
+
+int nth_digit(int number, int nth, int base)
+{
+  return (number / ipow(base, nth - 1)) % base;
+}

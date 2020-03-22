@@ -3063,35 +3063,6 @@ START_TEST(test_counting_sort_1)
 }
 END_TEST
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 START_TEST(test_counting_sort_2)
 {
   int *out;
@@ -3366,29 +3337,8 @@ START_TEST(test_counting_sort_12)
   ck_assert_int_eq(out[9], 9);
 
   free(out);
-  }
+}
 END_TEST
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Suite *make_test_suite(void)
 {

@@ -45,4 +45,7 @@ int max(int array[], int start, int end);
  */
 int sample(int lower, int upper);
 
+int ipow(int base, int exp);
+int nth_digit(int number, int nth, int base);
+
 #endif

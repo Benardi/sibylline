@@ -322,6 +322,267 @@ START_TEST(test_sample_5)
 }
 END_TEST
 
+START_TEST(test_ipow_1)
+{
+  int base, exp, result;
+
+  base = 3;
+  exp = 9;
+
+  result = ipow(base, exp);
+
+  ck_assert_int_eq(result, 19683);
+}
+END_TEST
+
+START_TEST(test_ipow_2)
+{
+  int base, exp, result;
+
+  base = 27;
+  exp = 0;
+
+  result = ipow(base, exp);
+
+  ck_assert_int_eq(result, 1);
+}
+END_TEST
+
+START_TEST(test_ipow_3)
+{
+  int base, exp, result;
+
+  base = 0;
+  exp = 0;
+
+  result = ipow(base, exp);
+
+  ck_assert_int_eq(result, 1);
+}
+END_TEST
+
+START_TEST(test_ipow_4)
+{
+  int base, exp, result;
+
+  base = 0;
+  exp = 10;
+
+  result = ipow(base, exp);
+
+  ck_assert_int_eq(result, 0);
+}
+END_TEST
+
+START_TEST(test_ipow_5)
+{
+  int base, exp, result;
+
+  base = 12;
+  exp = 4;
+
+  result = ipow(base, exp);
+
+  ck_assert_int_eq(result, 20736);
+}
+END_TEST
+
+START_TEST(test_nth_digit_1)
+{
+  int number, nth, base, value;
+
+  number = 19324;
+  nth = 1;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, 4);
+}
+END_TEST
+
+START_TEST(test_nth_digit_2)
+{
+  int number, nth, base, value;
+
+  number = 19324;
+  nth = 2;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, 2);
+}
+END_TEST
+
+START_TEST(test_nth_digit_3)
+{
+  int number, nth, base, value;
+
+  number = 19324;
+  nth = 3;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, 3);
+}
+END_TEST
+
+START_TEST(test_nth_digit_4)
+{
+  int number, nth, base, value;
+
+  number = 19324;
+  nth = 4;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, 9);
+}
+END_TEST
+
+START_TEST(test_nth_digit_5)
+{
+  int number, nth, base, value;
+
+  number = 19324;
+  nth = 5;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, 1);
+}
+END_TEST
+
+START_TEST(test_nth_digit_6)
+{
+  int number, nth, base, value;
+
+  number = 19324;
+  nth = 10;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, 0);
+}
+END_TEST
+
+START_TEST(test_nth_digit_7)
+{
+  int number, nth, base, value;
+
+  number = 19324;
+  nth = 7;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, 0);
+}
+END_TEST
+
+START_TEST(test_nth_digit_8)
+{
+  int number, nth, base, value;
+
+  number = -52918;
+  nth = 1;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, -8);
+}
+END_TEST
+
+START_TEST(test_nth_digit_9)
+{
+  int number, nth, base, value;
+
+  number = -52918;
+  nth = 2;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, -1);
+}
+END_TEST
+
+START_TEST(test_nth_digit_10)
+{
+  int number, nth, base, value;
+
+  number = -52918;
+  nth = 3;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, -9);
+}
+END_TEST
+
+START_TEST(test_nth_digit_11)
+{
+  int number, nth, base, value;
+
+  number = -52918;
+  nth = 4;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, -2);
+}
+END_TEST
+
+START_TEST(test_nth_digit_12)
+{
+  int number, nth, base, value;
+
+  number = -52918;
+  nth = 5;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, -5);
+}
+END_TEST
+
+START_TEST(test_nth_digit_13)
+{
+  int number, nth, base, value;
+
+  number = -52918;
+  nth = 10;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, 0);
+}
+END_TEST
+
+START_TEST(test_nth_digit_14)
+{
+  int number, nth, base, value;
+
+  number = -52918;
+  nth = 7;
+  base = 10;
+
+  value = nth_digit(number, nth, base);
+
+  ck_assert_int_eq(value, 0);
+}
+END_TEST
+
 Suite *make_test_suite(void)
 {
   Suite *s;
@@ -358,6 +619,27 @@ Suite *make_test_suite(void)
   tcase_add_test(tc_core, test_sample_3);
   tcase_add_test(tc_core, test_sample_4);
   tcase_add_test(tc_core, test_sample_5);
+
+  tcase_add_test(tc_core, test_ipow_1);
+  tcase_add_test(tc_core, test_ipow_2);
+  tcase_add_test(tc_core, test_ipow_3);
+  tcase_add_test(tc_core, test_ipow_4);
+  tcase_add_test(tc_core, test_ipow_5);
+
+  tcase_add_test(tc_core, test_nth_digit_1);
+  tcase_add_test(tc_core, test_nth_digit_2);
+  tcase_add_test(tc_core, test_nth_digit_3);
+  tcase_add_test(tc_core, test_nth_digit_4);
+  tcase_add_test(tc_core, test_nth_digit_5);
+  tcase_add_test(tc_core, test_nth_digit_6);
+  tcase_add_test(tc_core, test_nth_digit_7);
+  tcase_add_test(tc_core, test_nth_digit_8);
+  tcase_add_test(tc_core, test_nth_digit_9);
+  tcase_add_test(tc_core, test_nth_digit_10);
+  tcase_add_test(tc_core, test_nth_digit_11);
+  tcase_add_test(tc_core, test_nth_digit_12);
+  tcase_add_test(tc_core, test_nth_digit_13);
+  tcase_add_test(tc_core, test_nth_digit_14);
 
   suite_add_tcase(s, tc_core);
 

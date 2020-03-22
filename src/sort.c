@@ -266,7 +266,7 @@ void counting_sort(int array[], int* out, int length, int upper_limit)
   for (i = length - 1; i > -1; i--)
     {
       out[occ[array[i]] - 1] = array[i];
-          /* CAUSES SEGFAULT */ /* MAKES VALGRIND FAIL */
+      /* CAUSES SEGFAULT */ /* MAKES VALGRIND FAIL */
       occ[array[i]] = occ[array[i]] - 1;
     }
 
