@@ -243,7 +243,7 @@ void counting_sort(int array[], int* out, int length, int upper_limit)
   int i;
   int* occ;
 
-  occ = malloc((upper_limit + 1) * sizeof(int)); /* MAKES VALGRIND FAIL */
+  occ = malloc((upper_limit + 1) * sizeof(int));
 
   for (i = 0; i <= upper_limit; i++)
     {
@@ -268,6 +268,45 @@ void counting_sort(int array[], int* out, int length, int upper_limit)
       out[occ[array[i]] - 1] = array[i];
       /* CAUSES SEGFAULT */ /* MAKES VALGRIND FAIL */
       occ[array[i]] = occ[array[i]] - 1;
+    }
+
+  free(occ);
+}
+
+/* will go from 0 to upper_limit (inclusive) */
+void counting_sort_by_nth_digit(int array[], int* out, int length, int n)
+{
+  int* occ;
+  int i, digit;
+  int upper_limit = 9;
+
+  occ = malloc((upper_limit + 1) * sizeof(int));
+
+  for (i = 0; i <= upper_limit; i++)
+    {
+      occ[i] = 0;
+    }
+
+  for (i = 0; i < length; i++)
+    {
+      digit = nth_digit(array[i], n, 10);
+      occ[digit] = occ[digit] + 1;
+    }
+  /* occ[0] contains how many times 0 occurs in array */
+
+  for (i = 1; i <= upper_limit; i++)
+    {
+      occ[i] = occ[i] + occ[i - 1];
+    }
+  /* occ[1] contains number of elements less than or equal to 1 in array */
+  /* occ[1] then represents where 1 should be at a sorted array */
+
+  for (i = length - 1; i > -1; i--)
+    {
+      digit = nth_digit(array[i], n, 10);
+      out[occ[digit] - 1] = array[i];
+      /* CAUSES SEGFAULT */ /* MAKES VALGRIND FAIL */
+      occ[digit] = occ[digit] - 1;
     }
 
   free(occ);

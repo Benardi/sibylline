@@ -166,5 +166,6 @@ void bubble_sort(int array[], int start, int end);
 void heap_sort(int array[], int length);
 
 void counting_sort(int array[], int* out, int length, int upper_limit);
+void counting_sort_by_nth_digit(int array[], int* out, int length, int n);
 
 #endif

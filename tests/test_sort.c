@@ -3340,6 +3340,177 @@ START_TEST(test_counting_sort_12)
 }
 END_TEST
 
+START_TEST(test_counting_sort_by_nth_digit_1)
+{
+  int *out;
+  int n = 1;
+  int length = 9;
+  int array[] = {81, 56, 47, 19, 24, 62, 93, 35, 8};
+
+  out = malloc((length) * sizeof(int));
+
+  counting_sort_by_nth_digit(array, out, length, n);
+
+  ck_assert_int_eq(out[0], 81);
+  ck_assert_int_eq(out[1], 62);
+  ck_assert_int_eq(out[2], 93);
+  ck_assert_int_eq(out[3], 24);
+  ck_assert_int_eq(out[4], 35);
+  ck_assert_int_eq(out[5], 56);
+  ck_assert_int_eq(out[6], 47);
+  ck_assert_int_eq(out[7], 8);
+  ck_assert_int_eq(out[8], 19);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_counting_sort_by_nth_digit_2)
+{
+  int *out;
+  int n = 2;
+  int length = 10;
+  int array[] = {160, 122, 128, 79, 77, 13, 99, 8, 26, 108};
+
+  out = malloc((length) * sizeof(int));
+
+  counting_sort_by_nth_digit(array, out, length, n);
+
+  ck_assert_int_eq(out[0], 8);
+  ck_assert_int_eq(out[1], 108);
+  ck_assert_int_eq(out[2], 13);
+  ck_assert_int_eq(out[3], 122);
+  ck_assert_int_eq(out[4], 128);
+  ck_assert_int_eq(out[5], 26);
+  ck_assert_int_eq(out[6], 160);
+  ck_assert_int_eq(out[7], 79);
+  ck_assert_int_eq(out[8], 77);
+  ck_assert_int_eq(out[9], 99);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_counting_sort_by_nth_digit_3)
+{
+  int *out;
+  int n = 1;
+  int length = 8;
+  int array[] = {170, 45, 75, 90, 802, 24, 2, 66};
+
+  out = malloc((length) * sizeof(int));
+
+  counting_sort_by_nth_digit(array, out, length, n);
+
+  ck_assert_int_eq(out[0], 170);
+  ck_assert_int_eq(out[1], 90);
+  ck_assert_int_eq(out[2], 802);
+  ck_assert_int_eq(out[3], 2);
+  ck_assert_int_eq(out[4], 24);
+  ck_assert_int_eq(out[5], 45);
+  ck_assert_int_eq(out[6], 75);
+  ck_assert_int_eq(out[7], 66);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_counting_sort_by_nth_digit_4)
+{
+  int *out;
+  int n = 2;
+  int length = 8;
+  int array[] = {170, 90, 802, 2, 24, 45, 75, 66};
+
+  out = malloc((length) * sizeof(int));
+
+  counting_sort_by_nth_digit(array, out, length, n);
+
+  ck_assert_int_eq(out[0], 802);
+  ck_assert_int_eq(out[1], 2);
+  ck_assert_int_eq(out[2], 24);
+  ck_assert_int_eq(out[3], 45);
+  ck_assert_int_eq(out[4], 66);
+  ck_assert_int_eq(out[5], 170);
+  ck_assert_int_eq(out[6], 75);
+  ck_assert_int_eq(out[7], 90);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_counting_sort_by_nth_digit_5)
+{
+  int *out;
+  int n = 3;
+  int length = 8;
+  int array[] = {802, 2, 24, 45, 66, 170, 75, 90};
+
+  out = malloc((length) * sizeof(int));
+
+  counting_sort_by_nth_digit(array, out, length, n);
+
+  ck_assert_int_eq(out[0], 2);
+  ck_assert_int_eq(out[1], 24);
+  ck_assert_int_eq(out[2], 45);
+  ck_assert_int_eq(out[3], 66);
+  ck_assert_int_eq(out[4], 75);
+  ck_assert_int_eq(out[5], 90);
+  ck_assert_int_eq(out[6], 170);
+  ck_assert_int_eq(out[7], 802);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_counting_sort_by_nth_digit_6)
+{
+  int *out;
+  int n = 1;
+  int length = 30;
+  int array[] = {698, 506, 619, 179, 524, 714, 890, 41,  358, 656,
+                 336, 755, 990, 242, 133, 258, 564, 338, 274, 305,
+                 984, 220, 656, 307, 359, 836, 495, 426, 847, 387};
+
+  out = malloc((length) * sizeof(int));
+
+  counting_sort_by_nth_digit(array, out, length, n);
+
+  ck_assert_int_eq(out[0], 890);
+  ck_assert_int_eq(out[1], 990);
+  ck_assert_int_eq(out[2], 220);
+  ck_assert_int_eq(out[3], 41);
+  ck_assert_int_eq(out[4], 242);
+  ck_assert_int_eq(out[5], 133);
+  ck_assert_int_eq(out[6], 524);
+  ck_assert_int_eq(out[7], 714);
+  ck_assert_int_eq(out[8], 564);
+  ck_assert_int_eq(out[9], 274);
+  ck_assert_int_eq(out[10], 984);
+  ck_assert_int_eq(out[11], 755);
+  ck_assert_int_eq(out[12], 305);
+  ck_assert_int_eq(out[13], 495);
+  ck_assert_int_eq(out[14], 506);
+  ck_assert_int_eq(out[15], 656);
+  ck_assert_int_eq(out[16], 336);
+  ck_assert_int_eq(out[17], 656);
+  ck_assert_int_eq(out[18], 836);
+  ck_assert_int_eq(out[19], 426);
+  ck_assert_int_eq(out[20], 307);
+  ck_assert_int_eq(out[21], 847);
+  ck_assert_int_eq(out[22], 387);
+  ck_assert_int_eq(out[23], 698);
+  ck_assert_int_eq(out[24], 358);
+  ck_assert_int_eq(out[25], 258);
+  ck_assert_int_eq(out[26], 338);
+  ck_assert_int_eq(out[27], 619);
+  ck_assert_int_eq(out[28], 179);
+  ck_assert_int_eq(out[29], 359);
+
+  free(out);
+}
+END_TEST
+
 Suite *make_test_suite(void)
 {
   Suite *s;
@@ -3528,6 +3699,13 @@ Suite *make_test_suite(void)
   tcase_add_test(tc_core, test_counting_sort_10);
   tcase_add_test(tc_core, test_counting_sort_11);
   tcase_add_test(tc_core, test_counting_sort_12);
+
+  tcase_add_test(tc_core, test_counting_sort_by_nth_digit_1);
+  tcase_add_test(tc_core, test_counting_sort_by_nth_digit_2);
+  tcase_add_test(tc_core, test_counting_sort_by_nth_digit_3);
+  tcase_add_test(tc_core, test_counting_sort_by_nth_digit_4);
+  tcase_add_test(tc_core, test_counting_sort_by_nth_digit_5);
+  tcase_add_test(tc_core, test_counting_sort_by_nth_digit_6);
 
   suite_add_tcase(s, tc_core);
 
