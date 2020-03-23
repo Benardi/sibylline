@@ -1,10 +1,10 @@
-#include <assert.h>
 #include <heap.h>
 #include <limits.h>
 #include <malloc.h>
 #include <math.h>
 #include <sort.h>
 #include <stdlib.h>
+#include <string.h>
 #include <utils.h>
 
 #define INFINITY INT_MAX
@@ -266,7 +266,6 @@ void counting_sort(int array[], int* out, int length, int upper_limit)
   for (i = length - 1; i > -1; i--)
     {
       out[occ[array[i]] - 1] = array[i];
-      /* CAUSES SEGFAULT */ /* MAKES VALGRIND FAIL */
       occ[array[i]] = occ[array[i]] - 1;
     }
 
@@ -274,6 +273,7 @@ void counting_sort(int array[], int* out, int length, int upper_limit)
 }
 
 /* will go from 0 to upper_limit (inclusive) */
+/* n: which of n digits to consider */
 void counting_sort_by_nth_digit(int array[], int* out, int length, int n)
 {
   int* occ;
@@ -305,9 +305,27 @@ void counting_sort_by_nth_digit(int array[], int* out, int length, int n)
     {
       digit = nth_digit(array[i], n, 10);
       out[occ[digit] - 1] = array[i];
-      /* CAUSES SEGFAULT */ /* MAKES VALGRIND FAIL */
       occ[digit] = occ[digit] - 1;
     }
 
   free(occ);
+}
+
+void radix_sort(int array[], int* out, int length, int max_decimal_place)
+{
+  int i, size;
+  int* temp;
+
+  size = length * sizeof(int);
+  temp = malloc(size);
+
+  memcpy(temp, array, size);
+
+  for (i = 1; i <= max_decimal_place; i++)
+    {
+      counting_sort_by_nth_digit(temp, out, length, i);
+      memcpy(temp, out, size);
+    }
+
+  free(temp);
 }

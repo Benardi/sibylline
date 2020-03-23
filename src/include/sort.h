@@ -168,4 +168,6 @@ void heap_sort(int array[], int length);
 void counting_sort(int array[], int* out, int length, int upper_limit);
 void counting_sort_by_nth_digit(int array[], int* out, int length, int n);
 
+void radix_sort(int array[], int* out, int length, int max_decimal_place);
+
 #endif

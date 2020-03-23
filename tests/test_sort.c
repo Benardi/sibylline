@@ -3511,6 +3511,305 @@ START_TEST(test_counting_sort_by_nth_digit_6)
 }
 END_TEST
 
+START_TEST(test_radix_sort_1)
+{
+  int *out;
+  int length = 6;
+  int max_decimal_place = 1;
+  int array[] = {5, 2, 4, 6, 1, 3};
+
+  out = malloc((length) * sizeof(int));
+
+  radix_sort(array, out, length, max_decimal_place);
+
+  ck_assert_int_eq(out[0], 1);
+  ck_assert_int_eq(out[1], 2);
+  ck_assert_int_eq(out[2], 3);
+  ck_assert_int_eq(out[3], 4);
+  ck_assert_int_eq(out[4], 5);
+  ck_assert_int_eq(out[5], 6);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_radix_sort_2)
+{
+  int *out;
+  int length = 1;
+  int max_decimal_place = 1;
+  int array[] = {5};
+
+  out = malloc((length) * sizeof(int));
+
+  radix_sort(array, out, length, max_decimal_place);
+
+  ck_assert_int_eq(out[0], 5);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_radix_sort_3)
+{
+  int *out;
+  int length = 11;
+  int max_decimal_place = 3;
+  int array[] = {10, 15, 5, 20, 50, 0, 100, 75, 30, 200, 2};
+
+  out = malloc((length) * sizeof(int));
+
+  radix_sort(array, out, length, max_decimal_place);
+
+  ck_assert_int_eq(out[0], 0);
+  ck_assert_int_eq(out[1], 2);
+  ck_assert_int_eq(out[2], 5);
+  ck_assert_int_eq(out[3], 10);
+  ck_assert_int_eq(out[4], 15);
+  ck_assert_int_eq(out[5], 20);
+  ck_assert_int_eq(out[6], 30);
+  ck_assert_int_eq(out[7], 50);
+  ck_assert_int_eq(out[8], 75);
+  ck_assert_int_eq(out[9], 100);
+  ck_assert_int_eq(out[10], 200);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_radix_sort_4)
+{
+  int *out;
+  int length = 10;
+  int max_decimal_place = 1;
+  int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+  out = malloc((length) * sizeof(int));
+
+  radix_sort(array, out, length, max_decimal_place);
+
+  ck_assert_int_eq(out[0], 0);
+  ck_assert_int_eq(out[1], 1);
+  ck_assert_int_eq(out[2], 2);
+  ck_assert_int_eq(out[3], 3);
+  ck_assert_int_eq(out[4], 4);
+  ck_assert_int_eq(out[5], 5);
+  ck_assert_int_eq(out[6], 6);
+  ck_assert_int_eq(out[7], 7);
+  ck_assert_int_eq(out[8], 8);
+  ck_assert_int_eq(out[9], 9);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_radix_sort_5)
+{
+  int *out;
+  int length = 10;
+  int max_decimal_place = 1;
+  int array[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+
+  out = malloc((length) * sizeof(int));
+
+  radix_sort(array, out, length, max_decimal_place);
+
+  ck_assert_int_eq(out[0], 0);
+  ck_assert_int_eq(out[1], 1);
+  ck_assert_int_eq(out[2], 2);
+  ck_assert_int_eq(out[3], 3);
+  ck_assert_int_eq(out[4], 4);
+  ck_assert_int_eq(out[5], 5);
+  ck_assert_int_eq(out[6], 6);
+  ck_assert_int_eq(out[7], 7);
+  ck_assert_int_eq(out[8], 8);
+  ck_assert_int_eq(out[9], 9);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_radix_sort_6)
+{
+  int *out;
+  int length = 6;
+  int max_decimal_place = 1;
+  int array[] = {2, 4, 5, 1, 2, 3, 7, 6};
+
+  out = malloc((length) * sizeof(int));
+
+  radix_sort(array, out, length, max_decimal_place);
+
+  ck_assert_int_eq(out[0], 1);
+  ck_assert_int_eq(out[1], 2);
+  ck_assert_int_eq(out[2], 2);
+  ck_assert_int_eq(out[3], 3);
+  ck_assert_int_eq(out[4], 4);
+  ck_assert_int_eq(out[5], 5);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_radix_sort_7)
+{
+  int *out;
+  int length = 14;
+  int max_decimal_place = 3;
+  int array[] = {0, 4, 2, 55, 300, 3, 700, 200, 100, 80, 7, 30, 150, 570};
+
+  out = malloc((length) * sizeof(int));
+
+  radix_sort(array, out, length, max_decimal_place);
+
+  ck_assert_int_eq(out[0], 0);
+  ck_assert_int_eq(out[1], 2);
+  ck_assert_int_eq(out[2], 3);
+  ck_assert_int_eq(out[3], 4);
+  ck_assert_int_eq(out[4], 7);
+  ck_assert_int_eq(out[5], 30);
+  ck_assert_int_eq(out[6], 55);
+  ck_assert_int_eq(out[7], 80);
+  ck_assert_int_eq(out[8], 100);
+  ck_assert_int_eq(out[9], 150);
+  ck_assert_int_eq(out[10], 200);
+  ck_assert_int_eq(out[11], 300);
+  ck_assert_int_eq(out[12], 570);
+  ck_assert_int_eq(out[13], 700);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_radix_sort_8)
+{
+  int *out;
+  int length = 12;
+  int max_decimal_place = 3;
+  int array[] = {3, 15, 20, 30, 50, 75, 750, 500, 300, 200, 150, 10};
+
+  out = malloc((length) * sizeof(int));
+
+  radix_sort(array, out, length, max_decimal_place);
+
+  ck_assert_int_eq(out[0], 3);
+  ck_assert_int_eq(out[1], 10);
+  ck_assert_int_eq(out[2], 15);
+  ck_assert_int_eq(out[3], 20);
+  ck_assert_int_eq(out[4], 30);
+  ck_assert_int_eq(out[5], 50);
+  ck_assert_int_eq(out[6], 75);
+  ck_assert_int_eq(out[7], 150);
+  ck_assert_int_eq(out[8], 200);
+  ck_assert_int_eq(out[9], 300);
+  ck_assert_int_eq(out[10], 500);
+  ck_assert_int_eq(out[11], 750);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_radix_sort_9)
+{
+  int *out;
+  int length = 6;
+  int max_decimal_place = 1;
+  int array[] = {5, 2, 4, 6, 1, 3};
+
+  out = malloc((length) * sizeof(int));
+
+  radix_sort(array, out, length, max_decimal_place);
+
+  ck_assert_int_eq(out[0], 1);
+  ck_assert_int_eq(out[1], 2);
+  ck_assert_int_eq(out[2], 3);
+  ck_assert_int_eq(out[3], 4);
+  ck_assert_int_eq(out[4], 5);
+  ck_assert_int_eq(out[5], 6);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_radix_sort_10)
+{
+  int *out;
+  int length = 11;
+  int max_decimal_place = 3;
+  int array[] = {10, 15, 5, 20, 50, 0, 100, 75, 30, 200, 122};
+
+  out = malloc((length) * sizeof(int));
+
+  radix_sort(array, out, length, max_decimal_place);
+
+  ck_assert_int_eq(out[0], 0);
+  ck_assert_int_eq(out[1], 5);
+  ck_assert_int_eq(out[2], 10);
+  ck_assert_int_eq(out[3], 15);
+  ck_assert_int_eq(out[4], 20);
+  ck_assert_int_eq(out[5], 30);
+  ck_assert_int_eq(out[6], 50);
+  ck_assert_int_eq(out[7], 75);
+  ck_assert_int_eq(out[8], 100);
+  ck_assert_int_eq(out[9], 122);
+  ck_assert_int_eq(out[10], 200);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_radix_sort_11)
+{
+  int *out;
+  int length = 10;
+  int max_decimal_place = 1;
+  int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+  out = malloc((length) * sizeof(int));
+
+  radix_sort(array, out, length, max_decimal_place);
+
+  ck_assert_int_eq(out[0], 0);
+  ck_assert_int_eq(out[1], 1);
+  ck_assert_int_eq(out[2], 2);
+  ck_assert_int_eq(out[3], 3);
+  ck_assert_int_eq(out[4], 4);
+  ck_assert_int_eq(out[5], 5);
+  ck_assert_int_eq(out[6], 6);
+  ck_assert_int_eq(out[7], 7);
+  ck_assert_int_eq(out[8], 8);
+  ck_assert_int_eq(out[9], 9);
+
+  free(out);
+}
+END_TEST
+
+START_TEST(test_radix_sort_12)
+{
+  int *out;
+  int length = 10;
+  int max_decimal_place = 1;
+  int array[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+
+  out = malloc((length) * sizeof(int));
+
+  radix_sort(array, out, length, max_decimal_place);
+
+  ck_assert_int_eq(out[0], 0);
+  ck_assert_int_eq(out[1], 1);
+  ck_assert_int_eq(out[2], 2);
+  ck_assert_int_eq(out[3], 3);
+  ck_assert_int_eq(out[4], 4);
+  ck_assert_int_eq(out[5], 5);
+  ck_assert_int_eq(out[6], 6);
+  ck_assert_int_eq(out[7], 7);
+  ck_assert_int_eq(out[8], 8);
+  ck_assert_int_eq(out[9], 9);
+
+  free(out);
+}
+END_TEST
+
 Suite *make_test_suite(void)
 {
   Suite *s;
@@ -3706,6 +4005,19 @@ Suite *make_test_suite(void)
   tcase_add_test(tc_core, test_counting_sort_by_nth_digit_4);
   tcase_add_test(tc_core, test_counting_sort_by_nth_digit_5);
   tcase_add_test(tc_core, test_counting_sort_by_nth_digit_6);
+
+  tcase_add_test(tc_core, test_radix_sort_1);
+  tcase_add_test(tc_core, test_radix_sort_2);
+  tcase_add_test(tc_core, test_radix_sort_3);
+  tcase_add_test(tc_core, test_radix_sort_4);
+  tcase_add_test(tc_core, test_radix_sort_5);
+  tcase_add_test(tc_core, test_radix_sort_6);
+  tcase_add_test(tc_core, test_radix_sort_7);
+  tcase_add_test(tc_core, test_radix_sort_8);
+  tcase_add_test(tc_core, test_radix_sort_9);
+  tcase_add_test(tc_core, test_radix_sort_10);
+  tcase_add_test(tc_core, test_radix_sort_11);
+  tcase_add_test(tc_core, test_radix_sort_12);
 
   suite_add_tcase(s, tc_core);
 
