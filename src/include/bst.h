@@ -10,8 +10,14 @@
 #ifndef BST_H
 #define BST_H
 
-#include <register.h>
 #include <stddef.h>
+/* #include <register.h>
+ */
+typedef struct
+{
+  void* key;
+  void* data;
+} Register;
 
 typedef struct BinarySearchTree
 {
@@ -81,7 +87,8 @@ BinarySearchTree* tree_maximum(BinarySearchTree* root);
  * @param reg Register with key and satellite data of inserted node.
  * @return Pointer to inserted node.
  */
-BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg);
+BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg,
+                              int (*compare)(void*, void*));
 
 /** @brief Searches Binary Search Tree recursively for node of matching key.
  *
@@ -92,7 +99,8 @@ BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg);
  * @param k Search key.
  * @return Pointer to found node.
  */
-BinarySearchTree* tree_search(BinarySearchTree* node, Key k);
+BinarySearchTree* tree_search(BinarySearchTree* node, void* key,
+                              int (*compare)(void*, void*));
 
 /** @brief Searches Binary Search Tree iteratively for node of matching key.
  *
@@ -103,7 +111,8 @@ BinarySearchTree* tree_search(BinarySearchTree* node, Key k);
  * @param k Search key.
  * @return Pointer to found node.
  */
-BinarySearchTree* iterative_tree_search(BinarySearchTree* root, Key k);
+BinarySearchTree* iterative_tree_search(BinarySearchTree* root, void* key,
+                                        int (*compare)(void*, void*));
 
 /** @brief Searches Binary Search Tree for successor node in terms of key.
  *

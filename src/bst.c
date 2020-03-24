@@ -6,7 +6,7 @@ void inorder_tree_walk(BinarySearchTree* node)
   if (node != NULL)
     {
       inorder_tree_walk(node->left);
-      printf("%d \n", node->data.key);
+      printf("%d \n", (*((int*)node->data.key)));
       inorder_tree_walk(node->right);
     }
 }
@@ -17,7 +17,7 @@ void postorder_tree_walk(BinarySearchTree* node)
     {
       postorder_tree_walk(node->left);
       postorder_tree_walk(node->right);
-      printf("%d \n", node->data.key);
+      printf("%d \n", (*((int*)node->data.key)));
     }
 }
 
@@ -25,13 +25,14 @@ void preorder_tree_walk(BinarySearchTree* node)
 {
   if (node != NULL)
     {
-      printf("%d \n", node->data.key);
+      printf("%d \n", (*((int*)node->data.key)));
       preorder_tree_walk(node->left);
       preorder_tree_walk(node->right);
     }
 }
 
-BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg)
+BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg,
+                              int (*compare)(void*, void*))
 {
   BinarySearchTree* node;
   BinarySearchTree* parent;
@@ -55,7 +56,7 @@ BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg)
       while (current != NULL)
         {
           parent = current;
-          if (node->data.key < current->data.key)
+          if (compare(node->data.key, current->data.key) == -1)
             {
               current = current->left;
             }
@@ -67,7 +68,7 @@ BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg)
 
       node->p = parent;
 
-      if (node->data.key < parent->data.key)
+      if (compare(node->data.key, parent->data.key) == -1)
         {
           parent->left = node;
         }
@@ -80,33 +81,35 @@ BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg)
   return node;
 }
 
-BinarySearchTree* tree_search(BinarySearchTree* node, Key k)
+BinarySearchTree* tree_search(BinarySearchTree* node, void* key,
+                              int (*compare)(void*, void*))
 {
-  if ((node == NULL) || (node->data.key == k))
+  if ((node == NULL) || (compare(key, node->data.key) == 0))
     {
       return node;
     }
   else
     {
-      if (k < node->data.key)
+      if (compare(key, node->data.key) == -1)
         {
-          return tree_search(node->left, k);
+          return tree_search(node->left, key, compare);
         }
       else
         {
-          return tree_search(node->right, k);
+          return tree_search(node->right, key, compare);
         }
     }
 }
 
-BinarySearchTree* iterative_tree_search(BinarySearchTree* root, Key k)
+BinarySearchTree* iterative_tree_search(BinarySearchTree* root, void* key,
+                                        int (*compare)(void*, void*))
 {
   BinarySearchTree* node;
 
   node = root;
-  while ((node != NULL) && (node->data.key != k))
+  while ((node != NULL) && (compare(key, node->data.key) != 0))
     {
-      if (k < node->data.key)
+      if (compare(key, node->data.key) == -1)
         {
           node = node->left;
         }
