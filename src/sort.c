@@ -1,11 +1,12 @@
-#include <heap.h>
 #include <limits.h>
 #include <malloc.h>
 #include <math.h>
-#include <sort.h>
 #include <stdlib.h>
 #include <string.h>
 #include <utils.h>
+#include <heap.h>
+#include <dll.h>
+#include <sort.h>
 
 #define INFINITY INT_MAX
 
@@ -328,4 +329,18 @@ void radix_sort(int array[], int* out, int length, int max_decimal_place)
     }
 
   free(temp);
+}
+
+void bucket_sort(int array[], int length)
+{
+  int i;
+  DoublyLinkedList*** buckets;
+
+  buckets = malloc(length * sizeof(DoublyLinkedList**));
+
+  for (i = 0; i < length; i++)
+  {
+    buckets[i] = NULL;
+  }
+
 }
