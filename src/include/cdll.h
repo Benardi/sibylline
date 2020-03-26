@@ -10,8 +10,14 @@
 #ifndef CDLL_H
 #define CDLL_H
 
-#include <register.h>
 #include <stddef.h>
+/* #include <register.h>
+ */
+typedef struct
+{
+  void* key;
+  void* data;
+} Register;
 
 typedef struct CircularDoublyLinkedList
 {
@@ -55,7 +61,8 @@ CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
  * @param k Key for Register of inserted node.
  * @return Pointer to retrieved node.
  */
-CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil, Key k);
+CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil, void* key,
+                                      int (*compare)(void*, void*));
 
 /** @brief Deletes given node from Circular Doubly Linked List.
  *
