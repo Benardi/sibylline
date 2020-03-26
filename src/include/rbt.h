@@ -10,7 +10,13 @@
 #ifndef RBT_H
 #define RBT_H
 
-#include <register.h>
+/* #include <register.h>
+ */
+typedef struct
+{
+  void* key;
+  void* data;
+} Register;
 
 typedef enum Color
 {
@@ -87,7 +93,8 @@ RedBlackTree* rb_tree_minimum(RedBlackTree* root, RedBlackTree* nil);
  * @param reg Register with key and satellite data of inserted node.
  * @return Pointer to inserted node.
  */
-RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Register reg);
+RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Register reg,
+                        int (*compare)(void*, void*));
 
 /** @brief Removes given node from Red Black Tree.
  *
