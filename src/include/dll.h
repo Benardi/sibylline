@@ -10,9 +10,9 @@
 #ifndef DLL_H
 #define DLL_H
 
-#include <stddef.h>
-#include <stdbool.h>
 #include <register.h>
+#include <stdbool.h>
+#include <stddef.h>
 
 typedef struct DoublyLinkedList
 {

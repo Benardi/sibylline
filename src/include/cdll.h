@@ -10,8 +10,8 @@
 #ifndef CDLL_H
 #define CDLL_H
 
-#include <stddef.h>
 #include <register.h>
+#include <stddef.h>
 
 typedef struct CircularDoublyLinkedList
 {

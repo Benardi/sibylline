@@ -11,7 +11,7 @@
 
 typedef struct
 {
-  void* key;  /* Key that maps the register */
+  void* key; /* Key that maps the register */
   void* data;
 } Register;
 

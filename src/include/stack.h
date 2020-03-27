@@ -10,8 +10,8 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include <stdbool.h>
 #include <register.h>
+#include <stdbool.h>
 
 #define MAX 20
 

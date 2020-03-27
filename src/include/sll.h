@@ -10,8 +10,8 @@
 #ifndef SLL_H
 #define SLL_H
 
-#include <stddef.h>
 #include <register.h>
+#include <stddef.h>
 
 typedef struct SinglyLinkedList
 {

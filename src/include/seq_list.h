@@ -10,8 +10,8 @@
 #ifndef SEQ_LIST_H
 #define SEQ_LIST_H
 
-#include <stdbool.h>
 #include <register.h>
+#include <stdbool.h>
 
 #define MAX 20
 

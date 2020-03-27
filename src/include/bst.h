@@ -10,8 +10,8 @@
 #ifndef BST_H
 #define BST_H
 
-#include <stddef.h>
 #include <register.h>
+#include <stddef.h>
 
 typedef struct BinarySearchTree
 {
