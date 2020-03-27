@@ -10,8 +10,14 @@
 #ifndef CSLL_H
 #define CSLL_H
 
-#include <register.h>
 #include <stddef.h>
+/* #include <register.h>
+ */
+typedef struct
+{
+  void* key;
+  void* data;
+} Register;
 
 typedef struct CircularSinglyLinkedList
 {
@@ -55,7 +61,7 @@ CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
  * @param k Key for Register of inserted node.
  * @return Pointer to retrieved node.
  */
-CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail, Key k);
+CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail, void* key, int (*compare)(void*, void*));
 
 /** @brief Deletes given node from Circular Singly Linked List.
  *

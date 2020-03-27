@@ -1,6 +1,6 @@
-#include <csll.h>
 #include <malloc.h>
 #include <stdbool.h>
+#include <csll.h>
 
 CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
                                             Register reg)
@@ -47,13 +47,13 @@ CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
   return node;
 }
 
-CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail, Key k)
+CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail, void* key, int (*compare)(void*, void*))
 {
   if ((*tail) == NULL)
     {
       return NULL;
     }
-  if ((*tail)->data.key == k)
+  if (compare((*tail)->data.key, key) == 0)
     {
       return (*tail);
     }
@@ -61,7 +61,7 @@ CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail, Key k)
     {
       CircularSinglyLinkedList* node;
       node = (*tail)->next;
-      while (node != (*tail) && (node->data.key != k))
+      while (node != (*tail) && compare(node->data.key, key) != 0)
         {
           node = node->next;
         }
