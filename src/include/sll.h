@@ -10,8 +10,14 @@
 #ifndef SLL_H
 #define SLL_H
 
-#include <register.h>
 #include <stddef.h>
+/* #include <register.h>
+ */
+typedef struct
+{
+  void* key;
+  void* data;
+} Register;
 
 typedef struct SinglyLinkedList
 {
@@ -41,7 +47,8 @@ SinglyLinkedList* sll_insert(SinglyLinkedList** head, Register reg);
  * @param k Key for Register of inserted node.
  * @return Pointer to retrieved node.
  */
-SinglyLinkedList* sll_search(SinglyLinkedList** head, Key k);
+SinglyLinkedList* sll_search(SinglyLinkedList** head, void* key,
+                             int (*compare)(void*, void*));
 
 /** @brief Deletes given node from Singly Linked List.
  *
