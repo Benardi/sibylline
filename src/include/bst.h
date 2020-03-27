@@ -11,13 +11,7 @@
 #define BST_H
 
 #include <stddef.h>
-/* #include <register.h>
- */
-typedef struct
-{
-  void* key;
-  void* data;
-} Register;
+#include <register.h>
 
 typedef struct BinarySearchTree
 {

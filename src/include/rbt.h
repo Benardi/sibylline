@@ -10,13 +10,7 @@
 #ifndef RBT_H
 #define RBT_H
 
-/* #include <register.h>
- */
-typedef struct
-{
-  void* key;
-  void* data;
-} Register;
+#include <register.h>
 
 typedef enum Color
 {

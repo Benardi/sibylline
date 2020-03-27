@@ -11,13 +11,7 @@
 #define QUEUE_H
 
 #include <stdbool.h>
-/* #include <register.h>
- */
-typedef struct
-{
-  void* key;
-  void* data;
-} Register;
+#include <register.h>
 
 #define MAX 20
 
