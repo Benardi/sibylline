@@ -10,9 +10,15 @@
 #ifndef DLL_H
 #define DLL_H
 
-#include <register.h>
 #include <stdbool.h>
 #include <stddef.h>
+/* #include <register.h>
+ */
+typedef struct
+{
+  void* key;
+  void* data;
+} Register;
 
 typedef struct DoublyLinkedList
 {
@@ -43,7 +49,8 @@ DoublyLinkedList* dll_insert(DoublyLinkedList** head, Register reg);
  * @param k Key for Register of inserted node.
  * @return Pointer to retrieved node.
  */
-DoublyLinkedList* dll_search(DoublyLinkedList** head, Key k);
+DoublyLinkedList* dll_search(DoublyLinkedList** head, void* key,
+                             int (*compare)(void*, void*));
 
 /** @brief Deletes given node from Doubly Linked List.
  *
