@@ -61,7 +61,8 @@ CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
  * @param k Key for Register of inserted node.
  * @return Pointer to retrieved node.
  */
-CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail, void* key, int (*compare)(void*, void*));
+CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail,
+                                      void* key, int (*compare)(void*, void*));
 
 /** @brief Deletes given node from Circular Singly Linked List.
  *

@@ -10,8 +10,14 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include <register.h>
 #include <stdbool.h>
+/* #include <register.h>
+ */
+typedef struct
+{
+  void* key;
+  void* data;
+} Register;
 
 #define MAX 20
 
