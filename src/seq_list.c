@@ -16,12 +16,12 @@ int size(SeqList* sl)
   return sl->nElem;
 }
 
-int seq_search(SeqList* sl, Key key)
+int seq_search(SeqList* sl, void* key, int (*compare)(void*, void*))
 {
   int i = 0;
   while (i < sl->nElem)
     {
-      if (key == sl->A[i].key)
+      if (compare(key, sl->A[i].key) == 0)
         {
           return i;
         }
@@ -33,12 +33,12 @@ int seq_search(SeqList* sl, Key key)
   return -1;
 }
 
-int sentinel_search(SeqList* sl, Key k)
+int sentinel_search(SeqList* sl, void* k, int (*compare)(void*, void*))
 {
   int i = 0;
   sl->A[sl->nElem].key = k;
 
-  while (sl->A[i].key != k)
+  while (compare(sl->A[i].key, k) != 0)
     {
       i++;
     }
@@ -52,7 +52,7 @@ int sentinel_search(SeqList* sl, Key k)
     }
 }
 
-bool insert_sorted(SeqList* sl, Register reg)
+bool insert_sorted(SeqList* sl, Register reg, int (*compare)(void*, void*))
 {
   int pos;
 
@@ -63,7 +63,7 @@ bool insert_sorted(SeqList* sl, Register reg)
 
   pos = sl->nElem;
 
-  while (pos > 0 && sl->A[pos - 1].key > reg.key)
+  while (pos > 0 && compare(sl->A[pos - 1].key, reg.key) == 1)
     {
       sl->A[pos] = sl->A[pos - 1];
       pos--;
@@ -75,7 +75,7 @@ bool insert_sorted(SeqList* sl, Register reg)
   return true;
 }
 
-int binary_search(SeqList* sl, Key k)
+int binary_search(SeqList* sl, void* k, int (*compare)(void*, void*))
 {
   int left, right, middle;
   left = 0;
@@ -84,13 +84,13 @@ int binary_search(SeqList* sl, Key k)
   while (left <= right)
     {
       middle = (left + right) / 2;
-      if (sl->A[middle].key == k)
+      if (compare(sl->A[middle].key, k) == 0)
         {
           return middle;
         }
       else
         {
-          if (sl->A[middle].key < k)
+          if (compare(sl->A[middle].key, k) == -1)
             {
               left = middle + 1;
             }
@@ -107,7 +107,7 @@ int binary_search(SeqList* sl, Key k)
 bool insert_elem(SeqList* sl, Register reg, int i)
 {
   int j;
-  if ((sl->nElem == MAX) || (i < 0) || (i > sl->nElem))
+  if (sl->nElem == MAX || i < 0 || i > sl->nElem)
     {
       return false;
     }
@@ -123,10 +123,10 @@ bool insert_elem(SeqList* sl, Register reg, int i)
     }
 }
 
-bool remove_elem(SeqList* sl, Key key)
+bool remove_elem(SeqList* sl, void* key, int (*compare)(void*, void*))
 {
   int pos, j;
-  pos = seq_search(sl, key);
+  pos = seq_search(sl, key, compare);
   if (pos == -1)
     {
       return false;
@@ -148,9 +148,9 @@ void show_list(SeqList* sl)
   printf("List: \"");
 
   for (i = 0; i < sl->nElem - 1; i++)
-    printf("%i ", sl->A[i].key);
+    printf("%i ", *((int*)sl->A[i].key));
 
   /* Last element isn't followed by blank space */
-  printf("%i", sl->A[sl->nElem - 1].key);
+  printf("%i", *((int*)sl->A[sl->nElem - 1].key));
   printf("\"\n");
 }

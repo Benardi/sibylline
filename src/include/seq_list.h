@@ -10,8 +10,14 @@
 #ifndef SEQ_LIST_H
 #define SEQ_LIST_H
 
-#include <register.h>
 #include <stdbool.h>
+/* #include <register.h>
+ */
+typedef struct
+{
+  void* key;
+  void* data;
+} Register;
 
 #define MAX 20
 
@@ -73,7 +79,7 @@ bool insert_elem(SeqList* sl, Register reg, int i);
  * @param reg Element that contains key
  * @return Whether element could be inserted
  */
-bool insert_sorted(SeqList* sl, Register reg);
+bool insert_sorted(SeqList* sl, Register reg, int (*compare)(void*, void*));
 
 /** @brief Sequentially searchs a Sequential List and returns
  * index of first occurrence.
@@ -86,7 +92,7 @@ bool insert_sorted(SeqList* sl, Register reg);
  * @param k Key to be found
  * @return Index of first match
  */
-int seq_search(SeqList* sl, Key k);
+int seq_search(SeqList* sl, void* key, int (*compare)(void*, void*));
 
 /** @brief Performs binary search on a Sequential List under the assumption it
  * is sorted.
@@ -98,7 +104,7 @@ int seq_search(SeqList* sl, Key k);
  * @param k Key to be found
  * @return Index of first match
  */
-int binary_search(SeqList* sl, Key k);
+int binary_search(SeqList* sl, void* k, int (*compare)(void*, void*));
 
 /** @brief Sequentially searchs a Sequential List and returns index of first
  * occurrence.
@@ -111,7 +117,7 @@ int binary_search(SeqList* sl, Key k);
  * @param k Key to be found
  * @return Index of first match
  */
-int sentinel_search(SeqList* sl, Key k);
+int sentinel_search(SeqList* sl, void* k, int (*compare)(void*, void*));
 
 /** @brief Sequentially searchs a Sequential List and removes first
  * occurrence.
@@ -125,7 +131,7 @@ int sentinel_search(SeqList* sl, Key k);
  * @param sl Sequential List as pointer
  * @return Wheter element could be removed
  */
-bool remove_elem(SeqList* sl, Key key);
+bool remove_elem(SeqList* sl, void* key, int (*compare)(void*, void*));
 
 /** @brief Prints elements in Sequential List
  *
