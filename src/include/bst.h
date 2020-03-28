@@ -75,35 +75,52 @@ BinarySearchTree* tree_maximum(BinarySearchTree* root);
  *
  * Inserts node with provided Register/Key in Binary Search Tree. Insertion
  * is done as to ensure properties of Binary Search Tree. Returns pointer to
- * inserted node.
+ * inserted node. The employed compare function must receive two void pointers
+ * as parameters and return an integer as result. If first parameter is bigger
+ * it should return 1, if first parameter is smaller it should return -1, if
+ * it's the same as the second parameter it should return 0.
  *
  * @param node Pointer to pointer to root of tree.
  * @param reg Register with key and satellite data of inserted node.
+ * @param compare Pointer to function that compares two void pointers.
  * @return Pointer to inserted node.
  */
-BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg);
+BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg,
+                              int (*compare)(void*, void*));
 
 /** @brief Searches Binary Search Tree recursively for node of matching key.
  *
  * Transverses tree recursively looking for a node that matches given key.
  * If there's one such node returns a pointer to it, else returns @c NULL.
+ * The employed compare function must receive two void pointers
+ * as parameters and return an integer as result. If first parameter
+ * is bigger it should return 1, if first parameter is smaller it should
+ * return -1, if it's the same as the second parameter it should return 0.
+ *
  *
  * @param node Pointer to node who serves as current starting point of search.
- * @param k Search key.
+ * @param key Search key.
  * @return Pointer to found node.
  */
-BinarySearchTree* tree_search(BinarySearchTree* node, Key k);
+BinarySearchTree* tree_search(BinarySearchTree* node, void* key,
+                              int (*compare)(void*, void*));
 
 /** @brief Searches Binary Search Tree iteratively for node of matching key.
  *
  * Transverses tree iteratively looking for a node that matches given key.
  * If there's one such node returns a pointer to it, else returns @c NULL.
+ * The employed compare function must receive two void pointers as parameters
+ * and return an integer as result. If first parameter is bigger it should
+ * return 1, if first parameter is smaller it should return -1, if it's the
+ * same as the second parameter it should return 0.
  *
  * @param root Pointer to root of tree to be taken into consideration.
- * @param k Search key.
+ * @param key Search key.
+ * @param compare Pointer to function that compares two void pointers.
  * @return Pointer to found node.
  */
-BinarySearchTree* iterative_tree_search(BinarySearchTree* root, Key k);
+BinarySearchTree* iterative_tree_search(BinarySearchTree* root, void* key,
+                                        int (*compare)(void*, void*));
 
 /** @brief Searches Binary Search Tree for successor node in terms of key.
  *
@@ -112,7 +129,6 @@ BinarySearchTree* iterative_tree_search(BinarySearchTree* root, Key k);
  * returns @c NULL.
  *
  * @param node Pointer to node whose successor must be found.
- * @param k Search key.
  * @return Pointer to successor node.
  */
 BinarySearchTree* tree_successor(BinarySearchTree* node);

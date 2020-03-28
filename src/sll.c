@@ -12,12 +12,13 @@ SinglyLinkedList* sll_insert(SinglyLinkedList** head, Register reg)
   return node;
 }
 
-SinglyLinkedList* sll_search(SinglyLinkedList** head, Key k)
+SinglyLinkedList* sll_search(SinglyLinkedList** head, void* key,
+                             int (*compare)(void*, void*))
 {
   SinglyLinkedList* node;
 
   node = (*head);
-  while ((node != NULL) && (node->data.key != k))
+  while ((node != NULL) && compare(node->data.key, key) != 0)
     {
       node = node->next;
     }

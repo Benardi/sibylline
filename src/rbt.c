@@ -132,7 +132,8 @@ static void rb_insert_fixup(RedBlackTree** root, RedBlackTree* nil,
   (*root)->color = BLACK;
 }
 
-RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Register reg)
+RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Register reg,
+                        int (*compare)(void*, void*))
 {
   RedBlackTree* node;
   RedBlackTree* parent;
@@ -157,7 +158,7 @@ RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Register reg)
       while (current != nil)
         {
           parent = current;
-          if (node->data.key < current->data.key)
+          if (compare(node->data.key, current->data.key) == -1)
             {
               current = current->left;
             }
@@ -169,7 +170,7 @@ RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Register reg)
 
       node->p = parent;
 
-      if (node->data.key < parent->data.key)
+      if (compare(node->data.key, parent->data.key) == -1)
         {
           parent->left = node;
         }

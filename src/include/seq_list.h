@@ -67,38 +67,52 @@ bool insert_elem(SeqList* sl, Register reg, int i);
  * sorted.
  *
  * If the Sequential List is already filled up it is kept unchanged and false
- * is returned. Else, the element is inserted and true returned.
+ * is returned. Else, the element is inserted and true returned. The employed
+ * compare function must receive two void pointers as parameters and return
+ * an integer as result. If first parameter is bigger it should return 1, if
+ * first parameter is smaller it should return -1, if it's the same as the
+ * second parameter it should return 0.
  *
  * @param sl Sequential List as pointer
  * @param reg Element that contains key
+ * @param compare Pointer to function that compares two void pointers.
  * @return Whether element could be inserted
  */
-bool insert_sorted(SeqList* sl, Register reg);
+bool insert_sorted(SeqList* sl, Register reg, int (*compare)(void*, void*));
 
 /** @brief Sequentially searchs a Sequential List and returns
  * index of first occurrence.
  *
  * Sequentially iterates over Sequential List in ascending order of index.
  * Returns index of first occurrence that matches given Register key, else
- * returns -1.
+ * returns -1. The employed compare function must receive two void pointers
+ * as parameters and return an integer as result. If first parameter is
+ * bigger it should return 1, if first parameter is smaller it should
+ * return -1, if it's the same as the second parameter it should return 0.
  *
  * @param sl Sequential List as pointer
- * @param k Key to be found
+ * @param key Key to be found
+ * @param compare Pointer to function that compares two void pointers.
  * @return Index of first match
  */
-int seq_search(SeqList* sl, Key k);
+int seq_search(SeqList* sl, void* key, int (*compare)(void*, void*));
 
 /** @brief Performs binary search on a Sequential List under the assumption it
  * is sorted.
  *
  * Performs binary search on a sorted Sequential List. Returns index of first
- * matched occurrence of given Register key, else returns -1.
+ * matched occurrence of given Register key, else returns -1. The employed
+ * compare function must receive two void pointers as parameters and return
+ * an integer as result. If first parameter is bigger it should return 1,
+ * if first parameter is smaller it should return -1, if it's the same as the
+ * second parameter it should return 0.
  *
  * @param sl Sequential List as pointer
- * @param k Key to be found
+ * @param key Key to be found
+ * @param compare Pointer to function that compares two void pointers.
  * @return Index of first match
  */
-int binary_search(SeqList* sl, Key k);
+int binary_search(SeqList* sl, void* k, int (*compare)(void*, void*));
 
 /** @brief Sequentially searchs a Sequential List and returns index of first
  * occurrence.
@@ -106,12 +120,17 @@ int binary_search(SeqList* sl, Key k);
  * Sequentially iterates over Sequential List in ascending order of index.
  * Sentinel is appended to List to allow a more efficient search. Returns
  * index of first occurrence that matches given Register key, else returns -1.
+ * The employed compare function must receive two void pointers as parameters
+ * and return an integer as result. If first parameter is bigger it should
+ * return 1, if first parameter is smaller it should return -1, if it's the
+ * same as the second parameter it should return 0.
  *
  * @param sl Sequential List as pointer
- * @param k Key to be found
+ * @param key Key to be found
+ * @param compare Pointer to function that compares two void pointers.
  * @return Index of first match
  */
-int sentinel_search(SeqList* sl, Key k);
+int sentinel_search(SeqList* sl, void* k, int (*compare)(void*, void*));
 
 /** @brief Sequentially searchs a Sequential List and removes first
  * occurrence.
@@ -119,13 +138,18 @@ int sentinel_search(SeqList* sl, Key k);
  * Sequentially iterates over Sequential List in ascending order of index.
  * Removes first occurrence that matches given Register key and shifts
  * remaining elements to the right to keep Sequential List contiguous.
- * Else, keeps Sequential List untouched.
+ * Else, keeps Sequential List untouched. The employed compare function must
+ * receive two void pointers as parameters and return an integer as result.
+ * If first parameter is bigger it should return 1, if first parameter is
+ * smaller it should return -1, if it's the same as the second parameter
+ * it should return 0.
  *
- * @param k Key to be found
  * @param sl Sequential List as pointer
+ * @param key Key to be found
+ * @param compare Pointer to function that compares two void pointers.
  * @return Wheter element could be removed
  */
-bool remove_elem(SeqList* sl, Key key);
+bool remove_elem(SeqList* sl, void* key, int (*compare)(void*, void*));
 
 /** @brief Prints elements in Sequential List
  *

@@ -35,13 +35,19 @@ SinglyLinkedList* sll_insert(SinglyLinkedList** head, Register reg);
 /** @brief Retrieves node from Singly Linked List via key.
  *
  * Iterates sequentially over Singly Linked List. If node with given key
- * exists returns pointer to it, otherwise returns @c NULL.
+ * exists returns pointer to it, otherwise returns @c NULL. The employed
+ * compare function must receive two void pointers as parameters and return
+ * an integer as result. If first parameter is bigger it should return 1, if
+ * first parameter is smaller it should return -1, if it's the same as the
+ * second parameter it should return 0.
  *
  * @param head Double pointer to head of Singly Linked List.
- * @param k Key for Register of inserted node.
+ * @param key Key for Register of inserted node.
+ * @param compare Pointer to function that compares two void pointers.
  * @return Pointer to retrieved node.
  */
-SinglyLinkedList* sll_search(SinglyLinkedList** head, Key k);
+SinglyLinkedList* sll_search(SinglyLinkedList** head, void* key,
+                             int (*compare)(void*, void*));
 
 /** @brief Deletes given node from Singly Linked List.
  *

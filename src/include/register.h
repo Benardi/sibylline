@@ -9,11 +9,10 @@
 #ifndef REGISTER_H
 #define REGISTER_H
 
-typedef int Key;
-
 typedef struct
 {
-  Key key; /* Key that maps the register */
+  void* key; /* Key that maps the register */
+  void* data;
 } Register;
 
 #endif

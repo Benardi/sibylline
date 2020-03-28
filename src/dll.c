@@ -17,12 +17,13 @@ DoublyLinkedList* dll_insert(DoublyLinkedList** head, Register reg)
   return node;
 }
 
-DoublyLinkedList* dll_search(DoublyLinkedList** head, Key k)
+DoublyLinkedList* dll_search(DoublyLinkedList** head, void* key,
+                             int (*compare)(void*, void*))
 {
   DoublyLinkedList* node;
 
   node = (*head);
-  while ((node != NULL) && (node->data.key != k))
+  while ((node != NULL) && compare(node->data.key, key) != 0)
     {
       node = node->next;
     }
