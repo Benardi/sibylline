@@ -96,7 +96,7 @@ BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg,
  * as parameters and return an integer as result. If first parameter
  * is bigger it should return 1, if first parameter is smaller it should
  * return -1, if it's the same as the second parameter it should return 0.
- *     
+ *
  *
  * @param node Pointer to node who serves as current starting point of search.
  * @param key Search key.
