@@ -31,6 +31,29 @@ DoublyLinkedList* dll_search(DoublyLinkedList** head, void* key,
   return node;
 }
 
+DoublyLinkedList* dll_get_nth(DoublyLinkedList** head, int n)
+{
+  int i;
+  DoublyLinkedList* current;
+
+  current = (*head);
+  if (n > -1)
+  {
+    i = 0;
+    while (current != NULL && i < n)
+    {
+      current = current->next;
+      i++;
+    } 
+  }
+  else
+  {
+    current = NULL;
+  }
+
+  return current;
+}
+
 void dll_delete(DoublyLinkedList** head, DoublyLinkedList* to_remove)
 {
   if (to_remove->prev != NULL)

@@ -20,7 +20,7 @@ set(SIBYLLINE_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/include)
 # Show all warning messages
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -Wextra -std=c89 -pedantic \
                    -Wmissing-prototypes -Wstrict-prototypes \
-                   -Wold-style-definition")
+                   -Wold-style-definition -lm")
 
 
 file(GLOB src ${SIBYLLINE_SRC_ROOT}/*.c)

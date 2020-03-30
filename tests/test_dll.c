@@ -633,6 +633,338 @@ START_TEST(test_dll_delete_6)
 }
 END_TEST
 
+START_TEST(test_dll_get_nth_1)
+{
+  int k1, k2;
+  DoublyLinkedList* node1;
+  DoublyLinkedList* node2;
+  DoublyLinkedList* retrieved;
+
+  k1 = -67;
+  k2 = 30;
+
+  *head = NULL;
+  reg->key = &k1;
+  node1 = dll_insert(head, *reg);
+  reg->key = &k2;
+  node2 = dll_insert(head, *reg);
+
+  ck_assert_int_eq(*((int*)node1->data.key), -67);
+  ck_assert_int_eq(node1 == NULL, false);
+  ck_assert_int_eq(node1->next == NULL, true);
+  ck_assert_int_eq(node1->prev == NULL, false);
+  ck_assert_int_eq(*((int*)node1->prev->next->data.key), -67);
+
+  ck_assert_int_eq(*((int*)node2->data.key), 30);
+  ck_assert_int_eq(node2 == NULL, false);
+  ck_assert_int_eq(node2->next == NULL, false);
+  ck_assert_int_eq(node2->prev == NULL, true);
+  ck_assert_int_eq(*((int*)node2->next->prev->data.key), 30);
+
+  ck_assert_int_eq((*head) == NULL, false);
+  ck_assert_int_eq((*head)->next == NULL, false);
+  ck_assert_int_eq((*head)->prev == NULL, true);
+  ck_assert_int_eq(*((int*)(*head)->data.key), 30);
+  ck_assert_int_eq(*((int*)(*head)->next->data.key), -67);
+  ck_assert_int_eq(*((int*)(*head)->next->prev->data.key), 30);
+
+  retrieved = dll_get_nth(head, 0);
+
+  ck_assert_int_eq(retrieved == NULL, false);
+  ck_assert_int_eq(retrieved->next == NULL, false);
+  ck_assert_int_eq(retrieved->prev == NULL, true);
+  ck_assert_int_eq(*((int*)retrieved->data.key), 30);
+  ck_assert_int_eq(*((int*)retrieved->next->data.key), -67);
+  ck_assert_int_eq(*((int*)retrieved->next->prev->data.key), 30);
+
+  free(node2);
+  free(node1);
+}
+END_TEST
+
+START_TEST(test_dll_get_nth_2)
+{
+  int k1, k2;
+  DoublyLinkedList* node1;
+  DoublyLinkedList* node2;
+  DoublyLinkedList* retrieved;
+
+  k1 = -67;
+  k2 = 30;
+
+  *head = NULL;
+  reg->key = &k1;
+  node1 = dll_insert(head, *reg);
+  reg->key = &k2;
+  node2 = dll_insert(head, *reg);
+
+  ck_assert_int_eq(*((int*)node1->data.key), -67);
+  ck_assert_int_eq(node1 == NULL, false);
+  ck_assert_int_eq(node1->next == NULL, true);
+  ck_assert_int_eq(node1->prev == NULL, false);
+  ck_assert_int_eq(*((int*)node1->prev->next->data.key), -67);
+
+  ck_assert_int_eq(*((int*)node2->data.key), 30);
+  ck_assert_int_eq(node2 == NULL, false);
+  ck_assert_int_eq(node2->next == NULL, false);
+  ck_assert_int_eq(node2->prev == NULL, true);
+  ck_assert_int_eq(*((int*)node2->next->prev->data.key), 30);
+
+  ck_assert_int_eq((*head) == NULL, false);
+  ck_assert_int_eq((*head)->next == NULL, false);
+  ck_assert_int_eq((*head)->prev == NULL, true);
+  ck_assert_int_eq(*((int*)(*head)->data.key), 30);
+  ck_assert_int_eq(*((int*)(*head)->next->data.key), -67);
+  ck_assert_int_eq(*((int*)(*head)->next->prev->data.key), 30);
+
+
+  retrieved = dll_get_nth(head, 1);
+
+  ck_assert_int_eq(*((int*)retrieved->data.key), -67);
+  ck_assert_int_eq(retrieved == NULL, false);
+  ck_assert_int_eq(retrieved->next == NULL, true);
+  ck_assert_int_eq(retrieved->prev == NULL, false);
+  ck_assert_int_eq(*((int*)retrieved->prev->next->data.key), -67);
+
+  free(node2);
+  free(node1);
+}
+END_TEST
+
+START_TEST(test_dll_get_nth_3)
+{
+  int k1, k2;
+  DoublyLinkedList* node1;
+  DoublyLinkedList* node2;
+  DoublyLinkedList* retrieved;
+
+  k1 = -67;
+  k2 = 30;
+
+  *head = NULL;
+  reg->key = &k1;
+  node1 = dll_insert(head, *reg);
+  reg->key = &k2;
+  node2 = dll_insert(head, *reg);
+
+  ck_assert_int_eq(*((int*)node1->data.key), -67);
+  ck_assert_int_eq(node1 == NULL, false);
+  ck_assert_int_eq(node1->next == NULL, true);
+  ck_assert_int_eq(node1->prev == NULL, false);
+  ck_assert_int_eq(*((int*)node1->prev->next->data.key), -67);
+
+  ck_assert_int_eq(*((int*)node2->data.key), 30);
+  ck_assert_int_eq(node2 == NULL, false);
+  ck_assert_int_eq(node2->next == NULL, false);
+  ck_assert_int_eq(node2->prev == NULL, true);
+  ck_assert_int_eq(*((int*)node2->next->prev->data.key), 30);
+
+  ck_assert_int_eq((*head) == NULL, false);
+  ck_assert_int_eq((*head)->next == NULL, false);
+  ck_assert_int_eq((*head)->prev == NULL, true);
+  ck_assert_int_eq(*((int*)(*head)->data.key), 30);
+  ck_assert_int_eq(*((int*)(*head)->next->data.key), -67);
+  ck_assert_int_eq(*((int*)(*head)->next->prev->data.key), 30);
+
+
+  retrieved = dll_get_nth(head, -1);
+
+  ck_assert_int_eq(retrieved == NULL, true);
+
+  free(node2);
+  free(node1);
+}
+END_TEST
+
+
+START_TEST(test_dll_get_nth_4)
+{
+  int k1, k2;
+  DoublyLinkedList* node1;
+  DoublyLinkedList* node2;
+  DoublyLinkedList* retrieved;
+
+  k1 = -67;
+  k2 = 30;
+
+  *head = NULL;
+  reg->key = &k1;
+  node1 = dll_insert(head, *reg);
+  reg->key = &k2;
+  node2 = dll_insert(head, *reg);
+
+  ck_assert_int_eq(*((int*)node1->data.key), -67);
+  ck_assert_int_eq(node1 == NULL, false);
+  ck_assert_int_eq(node1->next == NULL, true);
+  ck_assert_int_eq(node1->prev == NULL, false);
+  ck_assert_int_eq(*((int*)node1->prev->next->data.key), -67);
+
+  ck_assert_int_eq(*((int*)node2->data.key), 30);
+  ck_assert_int_eq(node2 == NULL, false);
+  ck_assert_int_eq(node2->next == NULL, false);
+  ck_assert_int_eq(node2->prev == NULL, true);
+  ck_assert_int_eq(*((int*)node2->next->prev->data.key), 30);
+
+  ck_assert_int_eq((*head) == NULL, false);
+  ck_assert_int_eq((*head)->next == NULL, false);
+  ck_assert_int_eq((*head)->prev == NULL, true);
+  ck_assert_int_eq(*((int*)(*head)->data.key), 30);
+  ck_assert_int_eq(*((int*)(*head)->next->data.key), -67);
+  ck_assert_int_eq(*((int*)(*head)->next->prev->data.key), 30);
+
+
+  retrieved = dll_get_nth(head, 2);
+
+  ck_assert_int_eq(retrieved == NULL, true);
+
+  free(node2);
+  free(node1);
+}
+END_TEST
+
+START_TEST(test_dll_get_nth_5)
+{
+  int k1;
+  DoublyLinkedList* node1;
+  DoublyLinkedList* retrieved;
+
+  k1 = -67;
+
+  *head = NULL;
+  reg->key = &k1;
+  node1 = dll_insert(head, *reg);
+
+  ck_assert_int_eq(*((int*)(*head)->data.key), -67);
+
+  ck_assert_int_eq(*((int*)node1->data.key), -67);
+  ck_assert_int_eq(node1 == NULL, false);
+  ck_assert_int_eq(node1->next == NULL, true);
+  ck_assert_int_eq(node1->prev == NULL, true);
+
+  ck_assert_int_eq(*((int*)(*head)->data.key), -67);
+  ck_assert_int_eq((*head) == NULL, false);
+  ck_assert_int_eq((*head)->next == NULL, true);
+  ck_assert_int_eq((*head)->prev == NULL, true);
+
+  dll_delete(head, node1);
+
+  ck_assert_int_eq((*head) == NULL, true);
+
+  retrieved = dll_get_nth(head, 0);
+
+  ck_assert_int_eq(retrieved == NULL, true);
+
+  free(node1);
+}
+END_TEST
+
+START_TEST(test_dll_get_nth_6)
+{
+  int k1, k2, k3;
+  DoublyLinkedList* node1;
+  DoublyLinkedList* node2;
+  DoublyLinkedList* node3;
+  DoublyLinkedList* retrieved;
+
+  k1 = 25;
+  k2 = 75;
+  k3 = 150;
+
+  *head = NULL;
+  reg->key = &k1;
+  node1 = dll_insert(head, *reg);
+  reg->key = &k2;
+  node2 = dll_insert(head, *reg);
+  reg->key = &k3;
+  node3 = dll_insert(head, *reg);
+
+  ck_assert_int_eq(*((int*)(*head)->data.key), 150);
+  ck_assert_int_eq((*head)->prev == NULL, true);
+  ck_assert_int_eq((*head)->next == NULL, false);
+  ck_assert_int_eq(*((int*)(*head)->next->data.key), 75);
+  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), 25);
+
+  ck_assert_int_eq(*((int*)node3->data.key), 150);
+  ck_assert_int_eq(node3->prev == NULL, true);
+  ck_assert_int_eq(node3->next == NULL, false);
+  ck_assert_int_eq(*((int*)node3->next->data.key), 75);
+  ck_assert_int_eq(*((int*)node3->next->next->data.key), 25);
+
+  ck_assert_int_eq(*((int*)node2->data.key), 75);
+  ck_assert_int_eq(node2->prev == NULL, false);
+  ck_assert_int_eq(node2->next == NULL, false);
+  ck_assert_int_eq(*((int*)node2->prev->data.key), 150);
+  ck_assert_int_eq(*((int*)node2->next->data.key), 25);
+
+  ck_assert_int_eq(*((int*)node1->data.key), 25);
+  ck_assert_int_eq(node1->prev == NULL, false);
+  ck_assert_int_eq(node1->next == NULL, true);
+  ck_assert_int_eq(*((int*)node1->prev->data.key), 75);
+  ck_assert_int_eq(*((int*)node1->prev->prev->data.key), 150);
+
+  retrieved = dll_get_nth(head, 2);
+
+  ck_assert_int_eq(*((int*)retrieved->data.key), 25);
+  ck_assert_int_eq(retrieved->prev == NULL, false);
+  ck_assert_int_eq(retrieved->next == NULL, true);
+  ck_assert_int_eq(*((int*)retrieved->prev->data.key), 75);
+  ck_assert_int_eq(*((int*)retrieved->prev->prev->data.key), 150);
+
+  free(node3);
+  free(node2);
+  free(node1);
+}
+END_TEST
+
+START_TEST(test_dll_get_nth_7)
+{
+  float k1, k2, k3, k4;
+  DoublyLinkedList* node;
+  DoublyLinkedList* node1;
+  DoublyLinkedList* node3;
+  DoublyLinkedList* retrieved;
+
+  k1 = 25.7;
+  k2 = 75.123;
+  k3 = 150.211;
+  k4 = 75.123;
+
+  *head = NULL;
+  reg->key = &k1;
+  node1 = dll_insert(head, *reg);
+  reg->key = &k2;
+  dll_insert(head, *reg);
+  reg->key = &k3;
+  node3 = dll_insert(head, *reg);
+
+  node = dll_search(head, &k4, compare);
+
+  ck_assert_float_eq(*((float*)(*head)->data.key), 150.211);
+  ck_assert_int_eq((*head)->prev == NULL, true);
+  ck_assert_int_eq((*head)->next == NULL, false);
+  ck_assert_float_eq(*((float*)(*head)->next->data.key), 75.123);
+  ck_assert_float_eq(*((float*)(*head)->next->next->data.key), 25.7);
+
+  dll_delete(head, node);
+
+  ck_assert_float_eq(*((float*)(*head)->data.key), 150.211);
+  ck_assert_int_eq((*head)->prev == NULL, true);
+  ck_assert_int_eq((*head)->next == NULL, false);
+  ck_assert_float_eq(*((float*)(*head)->next->data.key), 25.7);
+
+  retrieved = dll_get_nth(head, 1);
+
+  ck_assert_float_eq(*((float*)retrieved->data.key), 25.7);
+  ck_assert_int_eq(retrieved->prev == NULL, false);
+  ck_assert_int_eq(retrieved->next == NULL, true);
+  ck_assert_float_eq(*((float*)retrieved->prev->data.key), 150.211);
+
+  free(node);
+  free(node1);
+  free(node3);
+}
+END_TEST
+
 Suite* make_test_suite(void)
 {
   Suite* s;
@@ -661,6 +993,15 @@ Suite* make_test_suite(void)
   tcase_add_test(tc_core, test_dll_delete_5);
   tcase_add_test(tc_core, test_dll_delete_6);
 
+
+  tcase_add_test(tc_core, test_dll_get_nth_1);
+  tcase_add_test(tc_core, test_dll_get_nth_2);
+  tcase_add_test(tc_core, test_dll_get_nth_3);
+  tcase_add_test(tc_core, test_dll_get_nth_4);
+  tcase_add_test(tc_core, test_dll_get_nth_5);
+  tcase_add_test(tc_core, test_dll_get_nth_6);
+  tcase_add_test(tc_core, test_dll_get_nth_7);
+  
   suite_add_tcase(s, tc_core);
 
   return s;

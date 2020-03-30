@@ -63,4 +63,6 @@ DoublyLinkedList* dll_search(DoublyLinkedList** head, void* key,
  */
 void dll_delete(DoublyLinkedList** head, DoublyLinkedList* to_remove);
 
+DoublyLinkedList* dll_get_nth(DoublyLinkedList** head, int n);
+
 #endif
