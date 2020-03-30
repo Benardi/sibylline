@@ -14,17 +14,29 @@ before_install:
   - sudo apt-get install -y build-essential cmake
   - sudo apt-get install -qq valgrind
   - sudo apt install -y clang-format
+  - sudo apt-get install -qq automake
+  - sudo apt-get install -qq autoconf
+  - sudo apt install -y libtool
+  - sudo apt install libtool-bin
+  - sudo apt-get install -y pkg-config
+  - sudo apt-get install -y texinfo
   - sudo apt install libsubunit-dev
   - wget --no-check-certificate --content-disposition https://github.com/libcheck/check/releases/download/0.14.0/check-0.14.0.tar.gz
   - tar -xvf ./check-0.14.0.tar.gz
   - cd ./check-0.14.0
-  - ./configure --enable-subunit
-  - make && make check
+  - autoreconf --install
+  - ./configure
+  - sudo make
+  - sudo make check
   - sudo make install
+  - sudo ldconfig
   - cd .. 
 before_script:
   - mkdir build
-
+  - automake --version
+  - autoconf --version
+  - libtool --version
+  - pkg-config --version
 script:
   - cd build
   - cmake ..
