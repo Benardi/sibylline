@@ -14,10 +14,11 @@ before_install:
   - sudo apt-get install -y build-essential cmake
   - sudo apt-get install -qq valgrind
   - sudo apt install -y clang-format
+  - sudo apt install libsubunit-dev
   - wget --no-check-certificate --content-disposition https://github.com/libcheck/check/releases/download/0.14.0/check-0.14.0.tar.gz
   - tar -xvf ./check-0.14.0.tar.gz
   - cd ./check-0.14.0
-  - ./configure
+  - ./configure --enable-subunit
   - make && make check
   - sudo make install
   - cd .. 
@@ -28,5 +29,5 @@ script:
   - cd build
   - cmake ..
   - make
-  - make test
+  - make test VERBOSE=1
   - cd .. && bash ./check_code_format.sh
