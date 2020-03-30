@@ -6,8 +6,30 @@
 #include <stdlib.h>
 
 Suite *make_test_suite(void);
+int compare(void *key1, void *key2);
 
 int seed = 23;
+
+int compare(void *key1, void *key2)
+{
+  int result;
+  int k1 = *((int *)key1);
+  int k2 = *((int *)key2);
+
+  if (k1 > k2)
+    {
+      result = 1;
+    }
+  else if (k1 < k2)
+    {
+      result = -1;
+    }
+  else
+    {
+      result = 0;
+    }
+  return result;
+}
 
 START_TEST(test_insertion_sort_1)
 {
@@ -3810,6 +3832,728 @@ START_TEST(test_radix_sort_12)
 }
 END_TEST
 
+START_TEST(test_insertion_sort_gnrc_1)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6;
+  int length = 6;
+  int start = 0;
+  int end = 5;
+
+  k1 = 5;
+  k2 = 2;
+  k3 = 4;
+  k4 = 6;
+  k5 = 1;
+  k6 = 3;
+
+  array = malloc(length * sizeof(Register));
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), 1);
+  ck_assert_int_eq(*((int *)array[1].key), 2);
+  ck_assert_int_eq(*((int *)array[2].key), 3);
+  ck_assert_int_eq(*((int *)array[3].key), 4);
+  ck_assert_int_eq(*((int *)array[4].key), 5);
+  ck_assert_int_eq(*((int *)array[5].key), 6);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_2)
+{
+  Register *array;
+  int k1 = 5;
+  int length = 1;
+  int start = 0;
+  int end = 0;
+
+  array = malloc(length * sizeof(Register));
+
+  array[0].key = &k1;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), 5);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_3)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
+  int length = 11;
+  int start = 0;
+  int end = 10;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = -10;
+  k2 = 15;
+  k3 = -5;
+  k4 = -20;
+  k5 = 50;
+  k6 = 0;
+  k7 = 100;
+  k8 = 75;
+  k9 = 30;
+  k10 = 200;
+  k11 = -200;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+  array[10].key = &k11;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), -200);
+  ck_assert_int_eq(*((int *)array[1].key), -20);
+  ck_assert_int_eq(*((int *)array[2].key), -10);
+  ck_assert_int_eq(*((int *)array[3].key), -5);
+  ck_assert_int_eq(*((int *)array[4].key), 0);
+  ck_assert_int_eq(*((int *)array[5].key), 15);
+  ck_assert_int_eq(*((int *)array[6].key), 30);
+  ck_assert_int_eq(*((int *)array[7].key), 50);
+  ck_assert_int_eq(*((int *)array[8].key), 75);
+  ck_assert_int_eq(*((int *)array[9].key), 100);
+  ck_assert_int_eq(*((int *)array[10].key), 200);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_4)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int length = 10;
+  int start = 0;
+  int end = 9;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 0;
+  k2 = 1;
+  k3 = 2;
+  k4 = 3;
+  k5 = 4;
+  k6 = 5;
+  k7 = 6;
+  k8 = 7;
+  k9 = 8;
+  k10 = 9;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), 0);
+  ck_assert_int_eq(*((int *)array[1].key), 1);
+  ck_assert_int_eq(*((int *)array[2].key), 2);
+  ck_assert_int_eq(*((int *)array[3].key), 3);
+  ck_assert_int_eq(*((int *)array[4].key), 4);
+  ck_assert_int_eq(*((int *)array[5].key), 5);
+  ck_assert_int_eq(*((int *)array[6].key), 6);
+  ck_assert_int_eq(*((int *)array[7].key), 7);
+  ck_assert_int_eq(*((int *)array[8].key), 8);
+  ck_assert_int_eq(*((int *)array[9].key), 9);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_5)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int length = 10;
+  int start = 0;
+  int end = 9;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 9;
+  k2 = 8;
+  k3 = 7;
+  k4 = 6;
+  k5 = 5;
+  k6 = 4;
+  k7 = 3;
+  k8 = 2;
+  k9 = 1;
+  k10 = 0;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), 0);
+  ck_assert_int_eq(*((int *)array[1].key), 1);
+  ck_assert_int_eq(*((int *)array[2].key), 2);
+  ck_assert_int_eq(*((int *)array[3].key), 3);
+  ck_assert_int_eq(*((int *)array[4].key), 4);
+  ck_assert_int_eq(*((int *)array[5].key), 5);
+  ck_assert_int_eq(*((int *)array[6].key), 6);
+  ck_assert_int_eq(*((int *)array[7].key), 7);
+  ck_assert_int_eq(*((int *)array[8].key), 8);
+  ck_assert_int_eq(*((int *)array[9].key), 9);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_6)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6, k7, k8;
+  int length = 8;
+  int start = 2;
+  int end = 7;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 2;
+  k2 = 4;
+  k3 = 1;
+  k4 = 5;
+  k5 = 7;
+  k6 = 2;
+  k7 = 3;
+  k8 = 6;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), 2);
+  ck_assert_int_eq(*((int *)array[1].key), 4);
+  ck_assert_int_eq(*((int *)array[2].key), 1);
+  ck_assert_int_eq(*((int *)array[3].key), 2);
+  ck_assert_int_eq(*((int *)array[4].key), 3);
+  ck_assert_int_eq(*((int *)array[5].key), 5);
+  ck_assert_int_eq(*((int *)array[6].key), 6);
+  ck_assert_int_eq(*((int *)array[7].key), 7);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_7)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6, k7, k8;
+  int length = 8;
+  int start = 0;
+  int end = 5;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 2;
+  k2 = 4;
+  k3 = 5;
+  k4 = 1;
+  k5 = 2;
+  k6 = 3;
+  k7 = 7;
+  k8 = 6;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), 1);
+  ck_assert_int_eq(*((int *)array[1].key), 2);
+  ck_assert_int_eq(*((int *)array[2].key), 2);
+  ck_assert_int_eq(*((int *)array[3].key), 3);
+  ck_assert_int_eq(*((int *)array[4].key), 4);
+  ck_assert_int_eq(*((int *)array[5].key), 5);
+  ck_assert_int_eq(*((int *)array[6].key), 7);
+  ck_assert_int_eq(*((int *)array[7].key), 6);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_8)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6, k7, k8;
+  int length = 8;
+  int start = 2;
+  int end = 5;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 2;
+  k2 = 4;
+  k3 = 1;
+  k4 = 5;
+  k5 = 2;
+  k6 = 3;
+  k7 = 7;
+  k8 = 6;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), 2);
+  ck_assert_int_eq(*((int *)array[1].key), 4);
+  ck_assert_int_eq(*((int *)array[2].key), 1);
+  ck_assert_int_eq(*((int *)array[3].key), 2);
+  ck_assert_int_eq(*((int *)array[4].key), 3);
+  ck_assert_int_eq(*((int *)array[5].key), 5);
+  ck_assert_int_eq(*((int *)array[6].key), 7);
+  ck_assert_int_eq(*((int *)array[7].key), 6);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_9)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
+  int length = 14;
+  int start = 0;
+  int end = 13;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 0;
+  k2 = 2;
+  k3 = 3;
+  k4 = 4;
+  k5 = 55;
+  k6 = 300;
+  k7 = 700;
+  k8 = -200;
+  k9 = -100;
+  k10 = -80;
+  k11 = -7;
+  k12 = 30;
+  k13 = 150;
+  k14 = 570;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+  array[10].key = &k11;
+  array[11].key = &k12;
+  array[12].key = &k13;
+  array[13].key = &k14;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), -200);
+  ck_assert_int_eq(*((int *)array[1].key), -100);
+  ck_assert_int_eq(*((int *)array[2].key), -80);
+  ck_assert_int_eq(*((int *)array[3].key), -7);
+  ck_assert_int_eq(*((int *)array[4].key), 0);
+  ck_assert_int_eq(*((int *)array[5].key), 2);
+  ck_assert_int_eq(*((int *)array[6].key), 3);
+  ck_assert_int_eq(*((int *)array[7].key), 4);
+  ck_assert_int_eq(*((int *)array[8].key), 30);
+  ck_assert_int_eq(*((int *)array[9].key), 55);
+  ck_assert_int_eq(*((int *)array[10].key), 150);
+  ck_assert_int_eq(*((int *)array[11].key), 300);
+  ck_assert_int_eq(*((int *)array[12].key), 570);
+  ck_assert_int_eq(*((int *)array[13].key), 700);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_10)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
+  int length = 14;
+  int start = 2;
+  int end = 11;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 0;
+  k2 = 2;
+  k3 = 3;
+  k4 = 4;
+  k5 = 55;
+  k6 = 300;
+  k7 = 700;
+  k8 = -200;
+  k9 = -100;
+  k10 = -80;
+  k11 = -7;
+  k12 = 30;
+  k13 = 150;
+  k14 = 570;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+  array[10].key = &k11;
+  array[11].key = &k12;
+  array[12].key = &k13;
+  array[13].key = &k14;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), 0);
+  ck_assert_int_eq(*((int *)array[1].key), 2);
+  ck_assert_int_eq(*((int *)array[2].key), -200);
+  ck_assert_int_eq(*((int *)array[3].key), -100);
+  ck_assert_int_eq(*((int *)array[4].key), -80);
+  ck_assert_int_eq(*((int *)array[5].key), -7);
+  ck_assert_int_eq(*((int *)array[6].key), 3);
+  ck_assert_int_eq(*((int *)array[7].key), 4);
+  ck_assert_int_eq(*((int *)array[8].key), 30);
+  ck_assert_int_eq(*((int *)array[9].key), 55);
+  ck_assert_int_eq(*((int *)array[10].key), 300);
+  ck_assert_int_eq(*((int *)array[11].key), 700);
+  ck_assert_int_eq(*((int *)array[12].key), 150);
+  ck_assert_int_eq(*((int *)array[13].key), 570);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_11)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12;
+  int length = 12;
+  int start = 0;
+  int end = 11;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 3;
+  k2 = 15;
+  k3 = 20;
+  k4 = 30;
+  k5 = 50;
+  k6 = 75;
+  k7 = -75;
+  k8 = -50;
+  k9 = -30;
+  k10 = -20;
+  k11 = -15;
+  k12 = -3;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+  array[10].key = &k11;
+  array[11].key = &k12;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), -75);
+  ck_assert_int_eq(*((int *)array[1].key), -50);
+  ck_assert_int_eq(*((int *)array[2].key), -30);
+  ck_assert_int_eq(*((int *)array[3].key), -20);
+  ck_assert_int_eq(*((int *)array[4].key), -15);
+  ck_assert_int_eq(*((int *)array[5].key), -3);
+  ck_assert_int_eq(*((int *)array[6].key), 3);
+  ck_assert_int_eq(*((int *)array[7].key), 15);
+  ck_assert_int_eq(*((int *)array[8].key), 20);
+  ck_assert_int_eq(*((int *)array[9].key), 30);
+  ck_assert_int_eq(*((int *)array[10].key), 50);
+  ck_assert_int_eq(*((int *)array[11].key), 75);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_12)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6;
+  int length = 6;
+  int start = 0;
+  int end = 5;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 5;
+  k2 = 2;
+  k3 = 4;
+  k4 = 6;
+  k5 = 1;
+  k6 = 3;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), 1);
+  ck_assert_int_eq(*((int *)array[1].key), 2);
+  ck_assert_int_eq(*((int *)array[2].key), 3);
+  ck_assert_int_eq(*((int *)array[3].key), 4);
+  ck_assert_int_eq(*((int *)array[4].key), 5);
+  ck_assert_int_eq(*((int *)array[5].key), 6);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_13)
+{
+  Register *array;
+  int k1;
+  int length = 1;
+  int start = 0;
+  int end = 0;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 5;
+
+  array[0].key = &k1;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), 5);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_14)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
+  int length = 11;
+  int start = 0;
+  int end = 10;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = -10;
+  k2 = 15;
+  k3 = -5;
+  k4 = -20;
+  k5 = 50;
+  k6 = 0;
+  k7 = 100;
+  k8 = 75;
+  k9 = 30;
+  k10 = 200;
+  k11 = -200;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+  array[10].key = &k11;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), -200);
+  ck_assert_int_eq(*((int *)array[1].key), -20);
+  ck_assert_int_eq(*((int *)array[2].key), -10);
+  ck_assert_int_eq(*((int *)array[3].key), -5);
+  ck_assert_int_eq(*((int *)array[4].key), 0);
+  ck_assert_int_eq(*((int *)array[5].key), 15);
+  ck_assert_int_eq(*((int *)array[6].key), 30);
+  ck_assert_int_eq(*((int *)array[7].key), 50);
+  ck_assert_int_eq(*((int *)array[8].key), 75);
+  ck_assert_int_eq(*((int *)array[9].key), 100);
+  ck_assert_int_eq(*((int *)array[10].key), 200);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_15)
+{
+  Register *array;
+  int length = 10;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int start = 0;
+  int end = 9;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 0;
+  k2 = 1;
+  k3 = 2;
+  k4 = 3;
+  k5 = 4;
+  k6 = 5;
+  k7 = 6;
+  k8 = 7;
+  k9 = 8;
+  k10 = 9;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), 0);
+  ck_assert_int_eq(*((int *)array[1].key), 1);
+  ck_assert_int_eq(*((int *)array[2].key), 2);
+  ck_assert_int_eq(*((int *)array[3].key), 3);
+  ck_assert_int_eq(*((int *)array[4].key), 4);
+  ck_assert_int_eq(*((int *)array[5].key), 5);
+  ck_assert_int_eq(*((int *)array[6].key), 6);
+  ck_assert_int_eq(*((int *)array[7].key), 7);
+  ck_assert_int_eq(*((int *)array[8].key), 8);
+  ck_assert_int_eq(*((int *)array[9].key), 9);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_insertion_sort_gnrc_16)
+{
+  Register *array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int length = 10;
+  int start = 0;
+  int end = 9;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 9;
+  k2 = 8;
+  k3 = 7;
+  k4 = 6;
+  k5 = 5;
+  k6 = 4;
+  k7 = 3;
+  k8 = 2;
+  k9 = 1;
+  k10 = 0;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+
+  insertion_sort_gnrc(array, start, end, compare);
+
+  ck_assert_int_eq(*((int *)array[0].key), 0);
+  ck_assert_int_eq(*((int *)array[1].key), 1);
+  ck_assert_int_eq(*((int *)array[2].key), 2);
+  ck_assert_int_eq(*((int *)array[3].key), 3);
+  ck_assert_int_eq(*((int *)array[4].key), 4);
+  ck_assert_int_eq(*((int *)array[5].key), 5);
+  ck_assert_int_eq(*((int *)array[6].key), 6);
+  ck_assert_int_eq(*((int *)array[7].key), 7);
+  ck_assert_int_eq(*((int *)array[8].key), 8);
+  ck_assert_int_eq(*((int *)array[9].key), 9);
+
+  free(array);
+}
+END_TEST
+
 Suite *make_test_suite(void)
 {
   Suite *s;
@@ -4018,6 +4762,23 @@ Suite *make_test_suite(void)
   tcase_add_test(tc_core, test_radix_sort_10);
   tcase_add_test(tc_core, test_radix_sort_11);
   tcase_add_test(tc_core, test_radix_sort_12);
+
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_1);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_2);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_3);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_4);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_5);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_6);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_7);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_8);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_9);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_10);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_11);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_12);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_13);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_14);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_15);
+  tcase_add_test(tc_core, test_insertion_sort_gnrc_16);
 
   suite_add_tcase(s, tc_core);
 

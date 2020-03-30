@@ -1,12 +1,12 @@
+#include <dll.h>
+#include <heap.h>
 #include <limits.h>
 #include <malloc.h>
 #include <math.h>
+#include <sort.h>
 #include <stdlib.h>
 #include <string.h>
 #include <utils.h>
-#include <heap.h>
-#include <dll.h>
-#include <sort.h>
 
 #define INFINITY INT_MAX
 
@@ -331,7 +331,26 @@ void radix_sort(int array[], int* out, int length, int max_decimal_place)
   free(temp);
 }
 
-void bucket_sort(int array[], int length)
+void insertion_sort_gnrc(Register array[], int start, int end,
+                         int (*compare)(void*, void*))
+{
+  int j, i;
+  Register reg;
+
+  for (j = start + 1; j <= end; j++)
+    {
+      reg = array[j];
+      i = j - 1; /* last element of sorted deck */
+      while (i > (start - 1) && compare(array[i].key, reg.key) == 1)
+        {
+          array[i + 1] = array[i];
+          i = i - 1;
+        }
+      array[i + 1] = reg;
+    }
+}
+
+void bucket_sort(Register array[], int length)
 {
   int i;
   DoublyLinkedList*** buckets;
@@ -339,8 +358,12 @@ void bucket_sort(int array[], int length)
   buckets = malloc(length * sizeof(DoublyLinkedList**));
 
   for (i = 0; i < length; i++)
-  {
-    buckets[i] = NULL;
-  }
+    {
+      (*buckets[i]) = NULL;
+    }
 
+  for (i = 0; i < length; i++)
+    {
+      dll_insert(buckets[i], array[i]);
+    }
 }

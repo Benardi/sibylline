@@ -9,6 +9,8 @@
 #ifndef SORT_H
 #define SORT_H
 
+#include <register.h>
+
 /** @brief Sorts given array via Insertion Sort procedure.
  *
  * Applies Insertion Sort procedure to sort array elements
@@ -20,6 +22,9 @@
  * @return Void
  */
 void insertion_sort(int array[], int start, int end);
+
+void insertion_sort_gnrc(Register array[], int start, int end,
+                         int (*compare)(void*, void*));
 
 /** @brief Combines two sorted sequences into a sorted one.
  *
@@ -168,5 +173,5 @@ void heap_sort(int array[], int length);
 void counting_sort(int array[], int* out, int length, int upper_limit);
 void counting_sort_by_nth_digit(int array[], int* out, int length, int n);
 void radix_sort(int array[], int* out, int length, int max_decimal_place);
-void bucket_sort(int array[], int length);
+void bucket_sort(Register array[], int length);
 #endif
