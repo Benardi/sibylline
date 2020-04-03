@@ -10,6 +10,7 @@
 #define SORT_H
 
 #include <register.h>
+#include <dll.h>
 
 /** @brief Sorts given array via Insertion Sort procedure.
  *
@@ -173,5 +174,8 @@ void heap_sort(int array[], int length);
 void counting_sort(int array[], int* out, int length, int upper_limit);
 void counting_sort_by_nth_digit(int array[], int* out, int length, int n);
 void radix_sort(int array[], int* out, int length, int max_decimal_place);
+
+void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
+		                         int (*compare)(void*, void*));
 void bucket_sort(Register array[], int length);
 #endif

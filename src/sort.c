@@ -350,6 +350,34 @@ void insertion_sort_gnrc(Register array[], int start, int end,
     }
 }
 
+void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
+                         int (*compare)(void*, void*))
+{
+  int j, i, k;
+  Register reg;
+  DoublyLinkedList* current;
+
+  k = start + 1;
+  current = dll_get_nth(head, k);
+
+  for (j = start + 1; j <= end; j++)
+    {
+      current = dll_get_by_idx(current, k, j);
+      reg = current->data;
+      k = j;
+
+      i = j - 1; /* last element of sorted deck */
+      while (i > (start - 1) &&
+             compare(dll_get_by_idx(current, k, i)->data.key, reg.key) == 1)
+        {
+	  dll_get_by_idx(current, k, i+1)->data = dll_get_by_idx(current, k, i)->data;
+          i = i - 1;
+        }
+
+      dll_get_by_idx(current, k, i+1)->data = reg;
+    }
+}
+
 void bucket_sort(Register array[], int length)
 {
   int i;
