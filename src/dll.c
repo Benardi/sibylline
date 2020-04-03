@@ -53,6 +53,30 @@ DoublyLinkedList* dll_get_nth(DoublyLinkedList** head, int n)
 
   return current;
 }
+DoublyLinkedList* dll_get_by_idx(DoublyLinkedList* curt, int curt_idx, int end)
+{
+  int i = curt_idx;
+  DoublyLinkedList* current = curt;
+
+  if (end > curt_idx)
+  {
+    while (current != NULL && i < end)
+    {
+      current = current->next;
+      i++;
+    } 
+  }
+  else if (end < curt_idx)
+  {
+    while (current != NULL && i > end)
+    {
+      current = current->prev;
+      i--;
+    } 
+  }
+
+  return current;
+}
 
 void dll_delete(DoublyLinkedList** head, DoublyLinkedList* to_remove)
 {
