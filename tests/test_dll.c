@@ -717,7 +717,6 @@ START_TEST(test_dll_get_nth_2)
   ck_assert_int_eq(*((int*)(*head)->next->data.key), -67);
   ck_assert_int_eq(*((int*)(*head)->next->prev->data.key), 30);
 
-
   retrieved = dll_get_nth(head, 1);
 
   ck_assert_int_eq(*((int*)retrieved->data.key), -67);
@@ -766,7 +765,6 @@ START_TEST(test_dll_get_nth_3)
   ck_assert_int_eq(*((int*)(*head)->next->data.key), -67);
   ck_assert_int_eq(*((int*)(*head)->next->prev->data.key), 30);
 
-
   retrieved = dll_get_nth(head, -1);
 
   ck_assert_int_eq(retrieved == NULL, true);
@@ -775,7 +773,6 @@ START_TEST(test_dll_get_nth_3)
   free(node1);
 }
 END_TEST
-
 
 START_TEST(test_dll_get_nth_4)
 {
@@ -811,7 +808,6 @@ START_TEST(test_dll_get_nth_4)
   ck_assert_int_eq(*((int*)(*head)->data.key), 30);
   ck_assert_int_eq(*((int*)(*head)->next->data.key), -67);
   ck_assert_int_eq(*((int*)(*head)->next->prev->data.key), 30);
-
 
   retrieved = dll_get_nth(head, 2);
 
@@ -1645,7 +1641,6 @@ Suite* make_test_suite(void)
   tcase_add_test(tc_core, test_dll_delete_5);
   tcase_add_test(tc_core, test_dll_delete_6);
 
-
   tcase_add_test(tc_core, test_dll_get_nth_1);
   tcase_add_test(tc_core, test_dll_get_nth_2);
   tcase_add_test(tc_core, test_dll_get_nth_3);
@@ -1653,7 +1648,7 @@ Suite* make_test_suite(void)
   tcase_add_test(tc_core, test_dll_get_nth_5);
   tcase_add_test(tc_core, test_dll_get_nth_6);
   tcase_add_test(tc_core, test_dll_get_nth_7);
-  
+
   tcase_add_test(tc_core, test_dll_get_by_idx_1);
   tcase_add_test(tc_core, test_dll_get_by_idx_2);
   tcase_add_test(tc_core, test_dll_get_by_idx_3);
@@ -1664,7 +1659,7 @@ Suite* make_test_suite(void)
   tcase_add_test(tc_core, test_dll_get_by_idx_8);
   tcase_add_test(tc_core, test_dll_get_by_idx_9);
   tcase_add_test(tc_core, test_dll_get_by_idx_10);
-  
+
   suite_add_tcase(s, tc_core);
 
   return s;

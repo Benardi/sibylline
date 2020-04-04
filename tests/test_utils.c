@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <utils.h>
 
-Suite *make_test_suite(void);
+Suite* make_test_suite(void);
 
 START_TEST(test_swap_1)
 {
@@ -583,10 +583,10 @@ START_TEST(test_nth_digit_14)
 }
 END_TEST
 
-Suite *make_test_suite(void)
+Suite* make_test_suite(void)
 {
-  Suite *s;
-  TCase *tc_core;
+  Suite* s;
+  TCase* tc_core;
 
   s = suite_create("Utils Test Suite");
 
@@ -649,7 +649,7 @@ Suite *make_test_suite(void)
 int main(void)
 {
   int number_failed;
-  SRunner *sr;
+  SRunner* sr;
 
   sr = srunner_create(make_test_suite());
   srunner_set_fork_status(sr, CK_NOFORK);

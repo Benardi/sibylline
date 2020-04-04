@@ -4,20 +4,20 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-Queue *q;
-Register *el;
+Queue* q;
+Register* el;
 int i;
 
 void setup(void);
 void teardown(void);
-Suite *make_test_suite(void);
-int compare(void *key1, void *key2);
+Suite* make_test_suite(void);
+int compare(void* key1, void* key2);
 
-int compare(void *key1, void *key2)
+int compare(void* key1, void* key2)
 {
   int result;
-  int k1 = *((int *)key1);
-  int k2 = *((int *)key2);
+  int k1 = *((int*)key1);
+  int k2 = *((int*)key2);
 
   if (k1 > k2)
     {
@@ -186,7 +186,7 @@ START_TEST(test_enqueue_1)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(q->tail, 1);
-  ck_assert_int_eq(*((int *)q->A[(q->head)].key), 8);
+  ck_assert_int_eq(*((int*)q->A[(q->head)].key), 8);
 }
 END_TEST
 
@@ -208,8 +208,8 @@ START_TEST(test_enqueue_2)
   ck_assert_int_eq(result2, true);
 
   ck_assert_int_eq(q->tail, 2);
-  ck_assert_int_eq(*((int *)q->A[(q->tail - 1)].key), -15);
-  ck_assert_int_eq(*((int *)q->A[(q->head)].key), 8);
+  ck_assert_int_eq(*((int*)q->A[(q->tail - 1)].key), -15);
+  ck_assert_int_eq(*((int*)q->A[(q->head)].key), 8);
 }
 END_TEST
 
@@ -237,7 +237,7 @@ START_TEST(test_dequeue_2)
   result = dequeue(q, el);
 
   ck_assert_int_eq(result, true);
-  ck_assert_int_eq(*((int *)el->key), -247);
+  ck_assert_int_eq(*((int*)el->key), -247);
 }
 END_TEST
 
@@ -255,7 +255,7 @@ START_TEST(test_dequeue_3)
   result = dequeue(q, el); /* el is not overwritten */
 
   ck_assert_int_eq(result, false);
-  ck_assert_int_eq(*((int *)el->key), -247);
+  ck_assert_int_eq(*((int*)el->key), -247);
 }
 END_TEST
 
@@ -292,11 +292,11 @@ START_TEST(test_recreate_1)
       dequeue(q, el);
     }
 
-  ck_assert_int_eq(*((int *)q->A[14].key), 15);
-  ck_assert_int_eq(*((int *)q->A[15].key), 6);
-  ck_assert_int_eq(*((int *)q->A[16].key), 9);
-  ck_assert_int_eq(*((int *)q->A[17].key), 8);
-  ck_assert_int_eq(*((int *)q->A[18].key), 4);
+  ck_assert_int_eq(*((int*)q->A[14].key), 15);
+  ck_assert_int_eq(*((int*)q->A[15].key), 6);
+  ck_assert_int_eq(*((int*)q->A[16].key), 9);
+  ck_assert_int_eq(*((int*)q->A[17].key), 8);
+  ck_assert_int_eq(*((int*)q->A[18].key), 4);
 
   ck_assert_int_eq(q->tail, 19);
   ck_assert_int_eq(q->head, 14);
@@ -346,27 +346,27 @@ START_TEST(test_recreate_2)
   enqueue(q, *el);
   dequeue(q, el);
 
-  ck_assert_int_eq(*((int *)q->A[14].key), 15); /* Has been removed */
-  ck_assert_int_eq(*((int *)q->A[15].key), 6);
-  ck_assert_int_eq(*((int *)q->A[16].key), 9);
-  ck_assert_int_eq(*((int *)q->A[17].key), 8);
-  ck_assert_int_eq(*((int *)q->A[18].key), 4);
-  ck_assert_int_eq(*((int *)q->A[19].key), 17);
-  ck_assert_int_eq(*((int *)q->A[0].key), 3);
-  ck_assert_int_eq(*((int *)q->A[1].key), 5);
+  ck_assert_int_eq(*((int*)q->A[14].key), 15); /* Has been removed */
+  ck_assert_int_eq(*((int*)q->A[15].key), 6);
+  ck_assert_int_eq(*((int*)q->A[16].key), 9);
+  ck_assert_int_eq(*((int*)q->A[17].key), 8);
+  ck_assert_int_eq(*((int*)q->A[18].key), 4);
+  ck_assert_int_eq(*((int*)q->A[19].key), 17);
+  ck_assert_int_eq(*((int*)q->A[0].key), 3);
+  ck_assert_int_eq(*((int*)q->A[1].key), 5);
 
   ck_assert_int_eq(q->tail, 2);
   ck_assert_int_eq(q->head, 15);
 
-  ck_assert_int_eq(*((int *)q->A[q->head].key), 6);
-  ck_assert_int_eq(*((int *)q->A[q->tail - 1].key), 5);
+  ck_assert_int_eq(*((int*)q->A[q->head].key), 6);
+  ck_assert_int_eq(*((int*)q->A[q->tail - 1].key), 5);
 }
 END_TEST
 
-Suite *make_test_suite(void)
+Suite* make_test_suite(void)
 {
-  Suite *s;
-  TCase *tc_core;
+  Suite* s;
+  TCase* tc_core;
 
   s = suite_create("Queue Test Suite");
 
@@ -405,7 +405,7 @@ Suite *make_test_suite(void)
 int main(void)
 {
   int number_failed;
-  SRunner *sr;
+  SRunner* sr;
 
   sr = srunner_create(make_test_suite());
   srunner_set_fork_status(sr, CK_NOFORK);

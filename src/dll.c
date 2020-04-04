@@ -38,18 +38,18 @@ DoublyLinkedList* dll_get_nth(DoublyLinkedList** head, int n)
 
   current = (*head);
   if (n > -1)
-  {
-    i = 0;
-    while (current != NULL && i < n)
     {
-      current = current->next;
-      i++;
-    } 
-  }
+      i = 0;
+      while (current != NULL && i < n)
+        {
+          current = current->next;
+          i++;
+        }
+    }
   else
-  {
-    current = NULL;
-  }
+    {
+      current = NULL;
+    }
 
   return current;
 }
@@ -59,21 +59,21 @@ DoublyLinkedList* dll_get_by_idx(DoublyLinkedList* curt, int curt_idx, int end)
   DoublyLinkedList* current = curt;
 
   if (end > curt_idx)
-  {
-    while (current != NULL && i < end)
     {
-      current = current->next;
-      i++;
-    } 
-  }
+      while (current != NULL && i < end)
+        {
+          current = current->next;
+          i++;
+        }
+    }
   else if (end < curt_idx)
-  {
-    while (current != NULL && i > end)
     {
-      current = current->prev;
-      i--;
-    } 
-  }
+      while (current != NULL && i > end)
+        {
+          current = current->prev;
+          i--;
+        }
+    }
 
   return current;
 }
@@ -99,9 +99,9 @@ void dll_free_list(DoublyLinkedList** head)
   DoublyLinkedList* current;
 
   while ((*head) != NULL)
-  {
-    current = (*head);
-    (*head) = (*head)->next;
-    free(current);
-  }
+    {
+      current = (*head);
+      (*head) = (*head)->next;
+      free(current);
+    }
 }

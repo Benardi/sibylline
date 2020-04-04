@@ -4,21 +4,21 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-Stack *stk;
-Register *reg;
+Stack* stk;
+Register* reg;
 
 int i;
 
 void setup(void);
 void teardown(void);
-Suite *make_test_suite(void);
-int compare(void *key1, void *key2);
+Suite* make_test_suite(void);
+int compare(void* key1, void* key2);
 
-int compare(void *key1, void *key2)
+int compare(void* key1, void* key2)
 {
   int result;
-  int k1 = *((int *)key1);
-  int k2 = *((int *)key2);
+  int k1 = *((int*)key1);
+  int k2 = *((int*)key2);
 
   if (k1 > k2)
     {
@@ -178,7 +178,7 @@ START_TEST(test_stack_pop_2)
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(result3, false);
 
-  ck_assert_int_eq(*((int *)reg->key), 7);
+  ck_assert_int_eq(*((int*)reg->key), 7);
 }
 END_TEST
 
@@ -186,8 +186,8 @@ START_TEST(test_stack_pop_3)
 {
   int k1, k2;
   bool result1, result2, result3;
-  Register *el1;
-  Register *el2;
+  Register* el1;
+  Register* el2;
 
   k1 = 7;
   k2 = -5;
@@ -209,18 +209,18 @@ START_TEST(test_stack_pop_3)
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(result3, false);
 
-  ck_assert_int_eq(*((int *)el1->key), -5);
-  ck_assert_int_eq(*((int *)el2->key), 7);
+  ck_assert_int_eq(*((int*)el1->key), -5);
+  ck_assert_int_eq(*((int*)el2->key), 7);
 
   free(el1);
   free(el2);
 }
 END_TEST
 
-Suite *make_test_suite(void)
+Suite* make_test_suite(void)
 {
-  Suite *s;
-  TCase *tc_core;
+  Suite* s;
+  TCase* tc_core;
 
   s = suite_create("Stack Creation Test Suite");
 
@@ -253,7 +253,7 @@ Suite *make_test_suite(void)
 int main(void)
 {
   int number_failed;
-  SRunner *sr;
+  SRunner* sr;
 
   sr = srunner_create(make_test_suite());
   srunner_set_fork_status(sr, CK_NOFORK);

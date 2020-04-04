@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-Suite *make_test_suite(void);
+Suite* make_test_suite(void);
 
 START_TEST(test_max_heapify_1)
 {
@@ -344,10 +344,10 @@ START_TEST(test_build_max_heap_8)
 }
 END_TEST
 
-Suite *make_test_suite(void)
+Suite* make_test_suite(void)
 {
-  Suite *s;
-  TCase *tc_core;
+  Suite* s;
+  TCase* tc_core;
 
   s = suite_create("Stack Creation Test Suite");
 
@@ -382,7 +382,7 @@ Suite *make_test_suite(void)
 int main(void)
 {
   int number_failed;
-  SRunner *sr;
+  SRunner* sr;
 
   sr = srunner_create(make_test_suite());
   srunner_set_fork_status(sr, CK_NOFORK);
