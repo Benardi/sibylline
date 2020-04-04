@@ -378,20 +378,56 @@ void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
     }
 }
 
-void bucket_sort(Register array[], int length)
+void bucket_sort(Register array[], int length, int (*mul_plus_floor)(int, void*), int (*compare)(void*, void*))
 {
-  int i;
+  int i, j, pos;
+  int* buckets_size; 
   DoublyLinkedList*** buckets;
+  DoublyLinkedList** head;
+  DoublyLinkedList* node;
 
   buckets = malloc(length * sizeof(DoublyLinkedList**));
+  buckets_size = malloc(length * sizeof(int));
 
   for (i = 0; i < length; i++)
     {
-      (*buckets[i]) = NULL;
+      buckets[i] = malloc(sizeof(DoublyLinkedList*));
+      *buckets[i] = NULL;
+      buckets_size[i] = 0;
     }
 
   for (i = 0; i < length; i++)
     {
-      dll_insert(buckets[i], array[i]);
+      pos = mul_plus_floor(length, array[i].key);
+      dll_insert(buckets[pos], array[i]);
+      buckets_size[pos]++;
     }
+
+  for (i = 0; i < length; i++)
+    {
+      head = buckets[i];
+      insertion_sort_dll(head, 0, buckets_size[i] - 1, compare);
+    }
+
+  j = 0;
+  for (i = 0; i < length; i++)
+    {
+      head = buckets[i];
+      node = (*head);
+      while (node != NULL)
+      {
+        array[j] = node->data;
+	node = node->next;
+	j++;
+      }
+      dll_free_list(head);
+    }
+
+  for (i = 0; i < length; i++)
+  {
+      free(buckets[i]);
+  }
+
+  free(buckets_size);
+  free(buckets);
 }

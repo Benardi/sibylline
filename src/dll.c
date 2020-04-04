@@ -93,3 +93,15 @@ void dll_delete(DoublyLinkedList** head, DoublyLinkedList* to_remove)
       (to_remove->next)->prev = to_remove->prev;
     }
 }
+
+void dll_free_list(DoublyLinkedList** head)
+{
+  DoublyLinkedList* current;
+
+  while ((*head) != NULL)
+  {
+    current = (*head);
+    (*head) = (*head)->next;
+    free(current);
+  }
+}
