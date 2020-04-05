@@ -26,7 +26,7 @@ foreach(test_src_file ${test_src})
     # Since Check uses Threads to paralelize the tests, it's mandatory
     # add pthread as a dependency, alongside the Check libraries.
     add_executable(${test_name} ${test_src_file})
-    target_link_libraries(${test_name} sibylline ${CHECK_LIBRARIES} pthread)
+    target_link_libraries(${test_name} sibylline ${CHECK_LIBRARIES} pthread m)
 
     # Create testing target and redirect its output to `Testing` folder
     add_test(NAME ${test_name} COMMAND ${test_name} WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Testing)

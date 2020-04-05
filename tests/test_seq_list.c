@@ -4,19 +4,19 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-SeqList *sl;
-Register *reg;
+SeqList* sl;
+Register* reg;
 
 void setup(void);
 void teardown(void);
-Suite *make_test_suite(void);
-int compare(void *key1, void *key2);
+Suite* make_test_suite(void);
+int compare(void* key1, void* key2);
 
-int compare(void *key1, void *key2)
+int compare(void* key1, void* key2)
 {
   int result;
-  int k1 = *((int *)key1);
-  int k2 = *((int *)key2);
+  int k1 = *((int*)key1);
+  int k2 = *((int*)key2);
 
   if (k1 > k2)
     {
@@ -142,7 +142,7 @@ START_TEST(test_insert_elem_1)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(sl->nElem, 1);
-  ck_assert_int_eq(*((int *)sl->A[0].key), 13);
+  ck_assert_int_eq(*((int*)sl->A[0].key), 13);
 }
 END_TEST
 
@@ -166,8 +166,8 @@ START_TEST(test_insert_elem_2)
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(sl->nElem, 2);
-  ck_assert_int_eq(*((int *)sl->A[0].key), -8);
-  ck_assert_int_eq(*((int *)sl->A[1].key), 7);
+  ck_assert_int_eq(*((int*)sl->A[0].key), -8);
+  ck_assert_int_eq(*((int*)sl->A[1].key), 7);
 }
 END_TEST
 
@@ -191,7 +191,7 @@ START_TEST(test_insert_elem_3)
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, false);
   ck_assert_int_eq(sl->nElem, 1);
-  ck_assert_int_eq(*((int *)sl->A[0].key), -8);
+  ck_assert_int_eq(*((int*)sl->A[0].key), -8);
 }
 END_TEST
 
@@ -226,7 +226,7 @@ START_TEST(test_insert_sorted_1)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(sl->nElem, 1);
-  ck_assert_int_eq(*((int *)sl->A[0].key), 13);
+  ck_assert_int_eq(*((int*)sl->A[0].key), 13);
 }
 END_TEST
 
@@ -250,8 +250,8 @@ START_TEST(test_insert_sorted_2)
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(sl->nElem, 2);
-  ck_assert_int_eq(*((int *)sl->A[0].key), -8);
-  ck_assert_int_eq(*((int *)sl->A[1].key), 7);
+  ck_assert_int_eq(*((int*)sl->A[0].key), -8);
+  ck_assert_int_eq(*((int*)sl->A[1].key), 7);
 }
 END_TEST
 
@@ -275,8 +275,8 @@ START_TEST(test_insert_sorted_3)
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(sl->nElem, 2);
-  ck_assert_int_eq(*((int *)sl->A[0].key), -10);
-  ck_assert_int_eq(*((int *)sl->A[1].key), -8);
+  ck_assert_int_eq(*((int*)sl->A[0].key), -10);
+  ck_assert_int_eq(*((int*)sl->A[1].key), -8);
 }
 END_TEST
 
@@ -306,9 +306,9 @@ START_TEST(test_insert_sorted_4)
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(result3, true);
   ck_assert_int_eq(sl->nElem, 3);
-  ck_assert_int_eq(*((int *)sl->A[0].key), -8);
-  ck_assert_int_eq(*((int *)sl->A[1].key), 0);
-  ck_assert_int_eq(*((int *)sl->A[2].key), 10);
+  ck_assert_int_eq(*((int*)sl->A[0].key), -8);
+  ck_assert_int_eq(*((int*)sl->A[1].key), 0);
+  ck_assert_int_eq(*((int*)sl->A[2].key), 10);
 }
 END_TEST
 
@@ -557,9 +557,9 @@ START_TEST(test_remove_elem_3)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(sl->nElem, 3);
-  ck_assert_int_eq(*((int *)sl->A[0].key), 0);
-  ck_assert_int_eq(*((int *)sl->A[1].key), -1);
-  ck_assert_int_eq(*((int *)sl->A[2].key), -3);
+  ck_assert_int_eq(*((int*)sl->A[0].key), 0);
+  ck_assert_int_eq(*((int*)sl->A[1].key), -1);
+  ck_assert_int_eq(*((int*)sl->A[2].key), -3);
 }
 END_TEST
 
@@ -584,16 +584,16 @@ START_TEST(test_remove_elem_4)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(sl->nElem, 3);
-  ck_assert_int_eq(*((int *)sl->A[0].key), 1);
-  ck_assert_int_eq(*((int *)sl->A[1].key), 7);
-  ck_assert_int_eq(*((int *)sl->A[2].key), -2);
+  ck_assert_int_eq(*((int*)sl->A[0].key), 1);
+  ck_assert_int_eq(*((int*)sl->A[1].key), 7);
+  ck_assert_int_eq(*((int*)sl->A[2].key), -2);
 }
 END_TEST
 
-Suite *make_test_suite(void)
+Suite* make_test_suite(void)
 {
-  Suite *s;
-  TCase *tc_core;
+  Suite* s;
+  TCase* tc_core;
 
   s = suite_create("SeqList Creation Test Suite");
 
@@ -654,7 +654,7 @@ Suite *make_test_suite(void)
 int main(void)
 {
   int number_failed;
-  SRunner *sr;
+  SRunner* sr;
 
   sr = srunner_create(make_test_suite());
   srunner_set_fork_status(sr, CK_NOFORK);

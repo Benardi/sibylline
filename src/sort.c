@@ -1,9 +1,11 @@
+#include <dll.h>
 #include <heap.h>
 #include <limits.h>
 #include <malloc.h>
 #include <math.h>
 #include <sort.h>
 #include <stdlib.h>
+#include <string.h>
 #include <utils.h>
 
 #define INFINITY INT_MAX
@@ -234,4 +236,201 @@ void heap_sort(int array[], int length)
       heap_size--;
       max_heapify(array, heap_size, 0);
     }
+}
+
+/* will go from 0 to upper_limit (inclusive) */
+void counting_sort(int array[], int* out, int length, int upper_limit)
+{
+  int i;
+  int* occ;
+
+  occ = malloc((upper_limit + 1) * sizeof(int));
+
+  for (i = 0; i <= upper_limit; i++)
+    {
+      occ[i] = 0;
+    }
+
+  for (i = 0; i < length; i++)
+    {
+      occ[array[i]] = occ[array[i]] + 1;
+    }
+  /* occ[0] contains how many times 0 occurs in array */
+
+  for (i = 1; i <= upper_limit; i++)
+    {
+      occ[i] = occ[i] + occ[i - 1];
+    }
+  /* occ[1] contains number of elements less than or equal to 1 in array */
+  /* occ[1] then represents where 1 should be at a sorted array */
+
+  for (i = length - 1; i > -1; i--)
+    {
+      out[occ[array[i]] - 1] = array[i];
+      occ[array[i]] = occ[array[i]] - 1;
+    }
+
+  free(occ);
+}
+
+/* will go from 0 to upper_limit (inclusive) */
+/* n: which of n digits to consider */
+void counting_sort_by_nth_digit(int array[], int* out, int length, int n)
+{
+  int* occ;
+  int i, digit;
+  int upper_limit = 9;
+
+  occ = malloc((upper_limit + 1) * sizeof(int));
+
+  for (i = 0; i <= upper_limit; i++)
+    {
+      occ[i] = 0;
+    }
+
+  for (i = 0; i < length; i++)
+    {
+      digit = nth_digit(array[i], n, 10);
+      occ[digit] = occ[digit] + 1;
+    }
+  /* occ[0] contains how many times 0 occurs in array */
+
+  for (i = 1; i <= upper_limit; i++)
+    {
+      occ[i] = occ[i] + occ[i - 1];
+    }
+  /* occ[1] contains number of elements less than or equal to 1 in array */
+  /* occ[1] then represents where 1 should be at a sorted array */
+
+  for (i = length - 1; i > -1; i--)
+    {
+      digit = nth_digit(array[i], n, 10);
+      out[occ[digit] - 1] = array[i];
+      occ[digit] = occ[digit] - 1;
+    }
+
+  free(occ);
+}
+
+void radix_sort(int array[], int* out, int length, int max_decimal_place)
+{
+  int i, size;
+  int* temp;
+
+  size = length * sizeof(int);
+  temp = malloc(size);
+
+  memcpy(temp, array, size);
+
+  for (i = 1; i <= max_decimal_place; i++)
+    {
+      counting_sort_by_nth_digit(temp, out, length, i);
+      memcpy(temp, out, size);
+    }
+
+  free(temp);
+}
+
+void insertion_sort_gnrc(Register array[], int start, int end,
+                         int (*compare)(void*, void*))
+{
+  int j, i;
+  Register reg;
+
+  for (j = start + 1; j <= end; j++)
+    {
+      reg = array[j];
+      i = j - 1; /* last element of sorted deck */
+      while (i > (start - 1) && compare(array[i].key, reg.key) == 1)
+        {
+          array[i + 1] = array[i];
+          i = i - 1;
+        }
+      array[i + 1] = reg;
+    }
+}
+
+void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
+                        int (*compare)(void*, void*))
+{
+  int j, i, k;
+  Register reg;
+  DoublyLinkedList* current;
+
+  k = start + 1;
+  current = dll_get_nth(head, k);
+
+  for (j = start + 1; j <= end; j++)
+    {
+      current = dll_get_by_idx(current, k, j);
+      reg = current->data;
+      k = j;
+
+      i = j - 1; /* last element of sorted deck */
+      while (i > (start - 1) &&
+             compare(dll_get_by_idx(current, k, i)->data.key, reg.key) == 1)
+        {
+          dll_get_by_idx(current, k, i + 1)->data =
+              dll_get_by_idx(current, k, i)->data;
+          i = i - 1;
+        }
+
+      dll_get_by_idx(current, k, i + 1)->data = reg;
+    }
+}
+
+void bucket_sort(Register array[], int length,
+                 int (*mul_plus_floor)(int, void*),
+                 int (*compare)(void*, void*))
+{
+  int i, j, pos;
+  int* buckets_size;
+  DoublyLinkedList*** buckets;
+  DoublyLinkedList** head;
+  DoublyLinkedList* node;
+
+  buckets = malloc(length * sizeof(DoublyLinkedList**));
+  buckets_size = malloc(length * sizeof(int));
+
+  for (i = 0; i < length; i++)
+    {
+      buckets[i] = malloc(sizeof(DoublyLinkedList*));
+      *buckets[i] = NULL;
+      buckets_size[i] = 0;
+    }
+
+  for (i = 0; i < length; i++)
+    {
+      pos = mul_plus_floor(length, array[i].key);
+      dll_insert(buckets[pos], array[i]);
+      buckets_size[pos]++;
+    }
+
+  for (i = 0; i < length; i++)
+    {
+      head = buckets[i];
+      insertion_sort_dll(head, 0, buckets_size[i] - 1, compare);
+    }
+
+  j = 0;
+  for (i = 0; i < length; i++)
+    {
+      head = buckets[i];
+      node = (*head);
+      while (node != NULL)
+        {
+          array[j] = node->data;
+          node = node->next;
+          j++;
+        }
+      dll_free_list(head);
+    }
+
+  for (i = 0; i < length; i++)
+    {
+      free(buckets[i]);
+    }
+
+  free(buckets_size);
+  free(buckets);
 }
