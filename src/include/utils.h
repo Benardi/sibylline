@@ -45,8 +45,29 @@ int max(int array[], int start, int end);
  */
 int sample(int lower, int upper);
 
+/** @brief Calculates integer power for given base and exponent.
+ *
+ * Calculates integer power for given base and exponent. As an integer
+ * operation exponent cannot be a negative number.
+ *
+ * @param base Base for integer power.
+ * @param exp exponent for integer power.
+ * @return Integer Result of base ^ exponent .
+ */
 int ipow(int base, int exp);
 
+/** @brief Extracts nth digit of given number on given base.
+ *
+ * Gets the nth digit of given number on given base. If @c base is 10 then
+ * the nth digit correspond to the nth decimal place. If @c base 10 is used
+ * @c nth equals 1 extracts the units, @c nth equals 2 extracts the
+ * tenths and so forth.
+ *
+ * @param number Number to extract digit from.
+ * @param n Decimal place / digit to extract.
+ * @param base Base to consider to calculate nth digit.
+ * @return Nth digit of given number on given base.
+ */
 int nth_digit(int number, int nth, int base);
 
 #endif

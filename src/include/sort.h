@@ -24,6 +24,20 @@
  */
 void insertion_sort(int array[], int start, int end);
 
+/** @brief Sorts given array via Insertion Sort procedure.
+ *
+ * Applies Insertion Sort procedure to sort array elements in ascending
+ * order. The employed compare function must receive two void pointers
+ * as parameters and return an integer as result. If first parameter is
+ * bigger it should return 1, if first parameter is smaller it should
+ * return -1, if it's the same as the second parameter it should return 0.
+ *
+ * @param array Array of Registers to be sorted
+ * @param start Position of first array element to be sorted.
+ * @param end Position of last array element to be sorted.
+ * @param compare Pointer to function that compares two void pointers.
+ * @return Void
+ */
 void insertion_sort_gnrc(Register array[], int start, int end,
                          int (*compare)(void*, void*));
 
@@ -171,12 +185,89 @@ void bubble_sort(int array[], int start, int end);
  */
 void heap_sort(int array[], int length);
 
+/** @brief Sorts given array via Counting Sort procedure.
+ *
+ * Applies the Counting Sort procedure to sort all elements in array in
+ * ascending order. Counting sort assumes that each element is an integer
+ * in the range 0 to @c upper_limit. The employed compare function must
+ * receive two void pointers as parameters and return an integer as result.
+ * If first parameter is bigger it should return 1, if first parameter is
+ * smaller it should return -1, if it's the same as the second parameter
+ * it should return 0.
+ *
+ * @param array Array of integer numbers to be sorted.
+ * @param out Output array that will contain the sorted version.
+ * @param length Number of elements in array.
+ * @param upper_limit Upper bound for values in array.
+ * @return Void
+ */
 void counting_sort(int array[], int* out, int length, int upper_limit);
+
+/** @brief Sorts given array via Counting Sort based on nth decimal place.
+ *
+ * Applies the Counting Sort procedure to sort all elements in array in
+ * ascending order based on the nth decimal place of value of elements.
+ * Counting sort assumes that each element is an integer in the range
+ * 0 to @c upper_limit. The employed compare function must receive two
+ * void pointers as parameters and return an integer as result. If first
+ * parameter is bigger it should return 1, if first parameter is smaller
+ * it should return -1, if it's the same as the second parameter it should
+ * return 0.
+ *
+ * @param array Array of integer numbers to be sorted.
+ * @param out Output array that will contain the sorted version.
+ * @param length Number of elements in array.
+ * @param n Decimal place to be used by sorting procedure.
+ * @return Void
+ */
 void counting_sort_by_nth_digit(int array[], int* out, int length, int n);
+
+/** @brief Sorts given array via Radix Sort procedure.
+ *
+ * Applies the Radix Sort procedure to sort all elements in array in
+ * ascending order. Radix Sort expects a maximum number of decimal places
+ * in the given array elements.
+ *
+ * @param array Array of integer numbers to be sorted.
+ * @param out Output array that will contain the sorted version.
+ * @param length Number of elements in array.
+ * @param max_decimal_place Maximum number of decimal places in elements.
+ * @return Void
+ */
 void radix_sort(int array[], int* out, int length, int max_decimal_place);
 
+/** @brief Sorts Doubly Linked List via Insertion Sort procedure.
+ *
+ * Applies Insertion Sort procedure to sort elements in Doubly Linked List
+ * in ascending order. The employed compare function must receive two void
+ * pointers as parameters and return an integer as result. If first parameter
+ * is bigger it should return 1, if first parameter is smaller it should
+ * return -1, if it's the same as the second parameter it should return 0.
+ *
+ * @param head Double pointer to head of existing Doubly Linked List.
+ * @param start Position of first element in list to be sorted.
+ * @param end Position of last element in list to be sorted.
+ * @param compare Pointer to function that compares two void pointers.
+ * @return Void
+ */
 void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
                         int (*compare)(void*, void*));
+
+/** @brief Sorts array of Registers via Bucket Sort procedure.
+ *
+ * Applies Insertion Sort procedure to sort elements in Doubly Linked List
+ * in ascending order. The employed compare function must receive two void
+ * pointers as parameters and return an integer as result. If first parameter
+ * is bigger it should return 1, if first parameter is smaller it should
+ * return -1, if it's the same as the second parameter it should return 0.
+ *
+ * @param array Array of Registers to be sorted
+ * @param length Number of elements in array.
+ * @param compare Pointer to function that multiplies the values of two
+ *  void pointers then floors the result.
+ * @param compare Pointer to function that compares two void pointers.
+ * @return Void
+ */
 void bucket_sort(Register array[], int length,
                  int (*mul_plus_floor)(int, void*),
                  int (*compare)(void*, void*));

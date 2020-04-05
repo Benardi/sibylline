@@ -63,7 +63,40 @@ DoublyLinkedList* dll_search(DoublyLinkedList** head, void* key,
  */
 void dll_delete(DoublyLinkedList** head, DoublyLinkedList* to_remove);
 
+/** @brief Retrieves nth node in Doubly Linked List.
+ *
+ * Searchs for element in Doubly Linked List by index. Starts search from
+ * Doubly Linked List's head. If nth element exists returns pointer to it
+ * if it doesn't exist returns @c NULL
+ *
+ * @param head Double pointer to head of Doubly Linked List.
+ * @param n Index of node to be retrieved.
+ * @return Pointer to retrieved node.
+ */
 DoublyLinkedList* dll_get_nth(DoublyLinkedList** head, int n);
+
+/** @brief Retrieves nth node in Doubly Linked List using a starting point.
+ *
+ * Searchs for element in Doubly Linked List by index. Starts search from
+ * Doubly Linked List's head. If nth element exists returns pointer to it
+ * if it doesn't exist returns @c NULL
+ *
+ * @param curt Pointer to node in Linked List used as search's starting point.
+ * @param curt_idx Index of node used as search's starting point.
+ * @param end Index of node to be retrieved.
+ * @return Pointer to retrieved node.
+ */
 DoublyLinkedList* dll_get_by_idx(DoublyLinkedList* curt, int curt_idx, int end);
+
+/** @brief Frees memory allocated for nodes in Doubly Linked List.
+ *
+ * Iterates over elements in Doubly Linked List and frees memory allocated
+ * for them. It's up to the user to free memory allocated to the double
+ * pointer (head).
+ *
+ * @param head Double pointer to head of Doubly Linked List.
+ * @return Void.
+ */
 void dll_free_list(DoublyLinkedList** head);
+
 #endif
