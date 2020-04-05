@@ -1613,6 +1613,84 @@ START_TEST(test_dll_get_by_idx_10)
 }
 END_TEST
 
+START_TEST(test_dll_free_list_1)
+{
+  int k1, k2, k3, k4, k5, k6;
+
+  k1 = -67;
+  k2 = 30;
+  k3 = -12;
+  k4 = 0;
+  k5 = 20;
+  k6 = -189;
+
+  *head = NULL;
+  reg->key = &k1;
+  dll_insert(head, *reg);
+  reg->key = &k2;
+  dll_insert(head, *reg);
+  reg->key = &k3;
+  dll_insert(head, *reg);
+  reg->key = &k4;
+  dll_insert(head, *reg);
+  reg->key = &k5;
+  dll_insert(head, *reg);
+  reg->key = &k6;
+  dll_insert(head, *reg);
+
+  dll_free_list(head);
+}
+END_TEST
+
+START_TEST(test_dll_free_list_2)
+{
+  int k1, k2, k3, k4, k5;
+
+  k1 = 25;
+  k2 = 75;
+  k3 = 150;
+  k4 = 12;
+  k5 = 34;
+
+  *head = NULL;
+  reg->key = &k1;
+  dll_insert(head, *reg);
+  reg->key = &k2;
+  dll_insert(head, *reg);
+  reg->key = &k3;
+  dll_insert(head, *reg);
+  reg->key = &k4;
+  dll_insert(head, *reg);
+  reg->key = &k5;
+  dll_insert(head, *reg);
+
+  dll_free_list(head);
+}
+END_TEST
+
+START_TEST(test_dll_free_list_3)
+{
+  int k1, k2, k3, k4;
+
+  k1 = -67;
+  k2 = 30;
+  k3 = -12;
+  k4 = 0;
+
+  *head = NULL;
+  reg->key = &k1;
+  dll_insert(head, *reg);
+  reg->key = &k2;
+  dll_insert(head, *reg);
+  reg->key = &k3;
+  dll_insert(head, *reg);
+  reg->key = &k4;
+  dll_insert(head, *reg);
+
+  dll_free_list(head);
+}
+END_TEST
+
 Suite* make_test_suite(void)
 {
   Suite* s;
@@ -1659,6 +1737,10 @@ Suite* make_test_suite(void)
   tcase_add_test(tc_core, test_dll_get_by_idx_8);
   tcase_add_test(tc_core, test_dll_get_by_idx_9);
   tcase_add_test(tc_core, test_dll_get_by_idx_10);
+
+  tcase_add_test(tc_core, test_dll_free_list_1);
+  tcase_add_test(tc_core, test_dll_free_list_2);
+  tcase_add_test(tc_core, test_dll_free_list_3);
 
   suite_add_tcase(s, tc_core);
 
