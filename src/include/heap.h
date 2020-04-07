@@ -10,6 +10,7 @@
 #ifndef HEAP_H
 #define HEAP_H
 
+#include <register.h>
 #include <limits.h>
 #include <math.h>
 #include <stdbool.h>
@@ -31,7 +32,7 @@
  * @param i Index in array for given heap element
  * @return Void.
  */
-void max_heapify(int array[], int heap_size, int i);
+void max_heapify(Register array[], int heap_size, int i, int (*compare)(void*, void*));
 
 /** @brief Produces a max-heap from an unordered input array.
  *
@@ -42,6 +43,6 @@ void max_heapify(int array[], int heap_size, int i);
  * @param length Number of elements in given array.
  * @return Void.
  */
-void build_max_heap(int array[], int length);
+void build_max_heap(Register array[], int length, int (*compare)(void*, void*));
 
 #endif
