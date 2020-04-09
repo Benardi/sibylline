@@ -183,7 +183,7 @@ void bubble_sort(int array[], int start, int end);
  * @param length Number of elements in array.
  * @return Void
  */
-void heap_sort(int array[], int length);
+void heap_sort(Register array[], int length, int (*compare)(void*, void*));
 
 /** @brief Sorts given array via Counting Sort procedure.
  *

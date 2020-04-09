@@ -2903,230 +2903,531 @@ END_TEST
 
 START_TEST(test_heap_sort_1)
 {
-  int array[] = {5, 2, 4, 6, 1, 3};
+  Register* array;
+  int k1, k2, k3, k4, k5, k6;
   int length = 6;
 
-  heap_sort(array, length);
+  array = malloc(length * sizeof(Register));
 
-  ck_assert_int_eq(array[0], 1);
-  ck_assert_int_eq(array[1], 2);
-  ck_assert_int_eq(array[2], 3);
-  ck_assert_int_eq(array[3], 4);
-  ck_assert_int_eq(array[4], 5);
-  ck_assert_int_eq(array[5], 6);
+  k1 = 5;
+  k2 = 2;
+  k3 = 4;
+  k4 = 6;
+  k5 = 1;
+  k6 = 3;
+  
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+
+  heap_sort(array, length, compare_int);
+
+  ck_assert_int_eq(*((int*)array[0].key), 1);
+  ck_assert_int_eq(*((int*)array[1].key), 2);
+  ck_assert_int_eq(*((int*)array[2].key), 3);
+  ck_assert_int_eq(*((int*)array[3].key), 4);
+  ck_assert_int_eq(*((int*)array[4].key), 5);
+  ck_assert_int_eq(*((int*)array[5].key), 6);
+
+  free(array);
 }
 END_TEST
 
 START_TEST(test_heap_sort_2)
 {
-  int array[] = {5};
+  Register* array;
+  int k1;
   int length = 1;
 
-  heap_sort(array, length);
+  array = malloc(length * sizeof(Register));
 
-  ck_assert_int_eq(array[0], 5);
+  k1 = 5;
+  
+  array[0].key = &k1;
+
+  heap_sort(array, length, compare_int);
+
+  ck_assert_int_eq(*((int*)array[0].key), 5);
+
+  free(array);
 }
 END_TEST
 
 START_TEST(test_heap_sort_3)
 {
-  int array[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
+  Register* array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
   int length = 11;
 
-  heap_sort(array, length);
+  array = malloc(length * sizeof(Register));
 
-  ck_assert_int_eq(array[0], -200);
-  ck_assert_int_eq(array[1], -20);
-  ck_assert_int_eq(array[2], -10);
-  ck_assert_int_eq(array[3], -5);
-  ck_assert_int_eq(array[4], 0);
-  ck_assert_int_eq(array[5], 15);
-  ck_assert_int_eq(array[6], 30);
-  ck_assert_int_eq(array[7], 50);
-  ck_assert_int_eq(array[8], 75);
-  ck_assert_int_eq(array[9], 100);
-  ck_assert_int_eq(array[10], 200);
+  k1 = -10;
+  k2 = 15;
+  k3 = -5;
+  k4 = -20;
+  k5 = 50;
+  k6 = 0;
+  k7 = 100;
+  k8 = 75;
+  k9 = 30;
+  k10 = 200;
+  k11 = -200;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+  array[10].key = &k11;
+
+  heap_sort(array, length, compare_int);
+
+  ck_assert_int_eq(*((int*)array[0].key), -200);
+  ck_assert_int_eq(*((int*)array[1].key), -20);
+  ck_assert_int_eq(*((int*)array[2].key), -10);
+  ck_assert_int_eq(*((int*)array[3].key), -5);
+  ck_assert_int_eq(*((int*)array[4].key), 0);
+  ck_assert_int_eq(*((int*)array[5].key), 15);
+  ck_assert_int_eq(*((int*)array[6].key), 30);
+  ck_assert_int_eq(*((int*)array[7].key), 50);
+  ck_assert_int_eq(*((int*)array[8].key), 75);
+  ck_assert_int_eq(*((int*)array[9].key), 100);
+  ck_assert_int_eq(*((int*)array[10].key), 200);
+
+  free(array);
 }
 END_TEST
 
 START_TEST(test_heap_sort_4)
 {
-  int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+  Register* array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   int length = 10;
 
-  heap_sort(array, length);
+  array = malloc(length * sizeof(Register));
 
-  ck_assert_int_eq(array[0], 0);
-  ck_assert_int_eq(array[1], 1);
-  ck_assert_int_eq(array[2], 2);
-  ck_assert_int_eq(array[3], 3);
-  ck_assert_int_eq(array[4], 4);
-  ck_assert_int_eq(array[5], 5);
-  ck_assert_int_eq(array[6], 6);
-  ck_assert_int_eq(array[7], 7);
-  ck_assert_int_eq(array[8], 8);
-  ck_assert_int_eq(array[9], 9);
+  k1 = 0;
+  k2 = 1;
+  k3 = 2;
+  k4 = 3;
+  k5 = 4;
+  k6 = 5;
+  k7 = 6;
+  k8 = 7;
+  k9 = 8;
+  k10 = 9;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+
+  heap_sort(array, length, compare_int);
+
+  ck_assert_int_eq(*((int*)array[0].key), 0);
+  ck_assert_int_eq(*((int*)array[1].key), 1);
+  ck_assert_int_eq(*((int*)array[2].key), 2);
+  ck_assert_int_eq(*((int*)array[3].key), 3);
+  ck_assert_int_eq(*((int*)array[4].key), 4);
+  ck_assert_int_eq(*((int*)array[5].key), 5);
+  ck_assert_int_eq(*((int*)array[6].key), 6);
+  ck_assert_int_eq(*((int*)array[7].key), 7);
+  ck_assert_int_eq(*((int*)array[8].key), 8);
+  ck_assert_int_eq(*((int*)array[9].key), 9);
+
+  free(array);
 }
 END_TEST
 
 START_TEST(test_heap_sort_5)
 {
-  int array[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+  Register* array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   int length = 10;
 
-  heap_sort(array, length);
+  array = malloc(length * sizeof(Register));
 
-  ck_assert_int_eq(array[0], 0);
-  ck_assert_int_eq(array[1], 1);
-  ck_assert_int_eq(array[2], 2);
-  ck_assert_int_eq(array[3], 3);
-  ck_assert_int_eq(array[4], 4);
-  ck_assert_int_eq(array[5], 5);
-  ck_assert_int_eq(array[6], 6);
-  ck_assert_int_eq(array[7], 7);
-  ck_assert_int_eq(array[8], 8);
-  ck_assert_int_eq(array[9], 9);
+  k1 = 9;
+  k2 = 8;
+  k3 = 7;
+  k4 = 6;
+  k5 = 5;
+  k6 = 4;
+  k7 = 3;
+  k8 = 2;
+  k9 = 1;
+  k10 = 0;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+
+  heap_sort(array, length, compare_int);
+
+  ck_assert_int_eq(*((int*)array[0].key), 0);
+  ck_assert_int_eq(*((int*)array[1].key), 1);
+  ck_assert_int_eq(*((int*)array[2].key), 2);
+  ck_assert_int_eq(*((int*)array[3].key), 3);
+  ck_assert_int_eq(*((int*)array[4].key), 4);
+  ck_assert_int_eq(*((int*)array[5].key), 5);
+  ck_assert_int_eq(*((int*)array[6].key), 6);
+  ck_assert_int_eq(*((int*)array[7].key), 7);
+  ck_assert_int_eq(*((int*)array[8].key), 8);
+  ck_assert_int_eq(*((int*)array[9].key), 9);
+
+  free(array);
 }
 END_TEST
 
 START_TEST(test_heap_sort_6)
 {
-  int array[] = {2, 4, 5, 1, 2, 3, 7, 6};
+  Register* array;
+  int k1, k2, k3, k4, k5, k6, k7, k8;
   int length = 6;
 
-  heap_sort(array, length);
+  array = malloc((length + 2) * sizeof(Register));
 
-  ck_assert_int_eq(array[0], 1);
-  ck_assert_int_eq(array[1], 2);
-  ck_assert_int_eq(array[2], 2);
-  ck_assert_int_eq(array[3], 3);
-  ck_assert_int_eq(array[4], 4);
-  ck_assert_int_eq(array[5], 5);
-  ck_assert_int_eq(array[6], 7);
-  ck_assert_int_eq(array[7], 6);
+  k1 = 2;
+  k2 = 4;
+  k3 = 5;
+  k4 = 1;
+  k5 = 2;
+  k6 = 3;
+  k7 = 7;
+  k8 = 6;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+
+  heap_sort(array, length, compare_int);
+
+  ck_assert_int_eq(*((int*)array[0].key), 1);
+  ck_assert_int_eq(*((int*)array[1].key), 2);
+  ck_assert_int_eq(*((int*)array[2].key), 2);
+  ck_assert_int_eq(*((int*)array[3].key), 3);
+  ck_assert_int_eq(*((int*)array[4].key), 4);
+  ck_assert_int_eq(*((int*)array[5].key), 5);
+  ck_assert_int_eq(*((int*)array[6].key), 7);
+  ck_assert_int_eq(*((int*)array[7].key), 6);
+
+  free(array);
 }
 END_TEST
 
 START_TEST(test_heap_sort_7)
 {
-  int array[] = {0, 2, 3, 4, 55, 300, 700, -200, -100, -80, -7, 30, 150, 570};
+  Register* array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
   int length = 14;
 
-  heap_sort(array, length);
+  array = malloc(length * sizeof(Register));
 
-  ck_assert_int_eq(array[0], -200);
-  ck_assert_int_eq(array[1], -100);
-  ck_assert_int_eq(array[2], -80);
-  ck_assert_int_eq(array[3], -7);
-  ck_assert_int_eq(array[4], 0);
-  ck_assert_int_eq(array[5], 2);
-  ck_assert_int_eq(array[6], 3);
-  ck_assert_int_eq(array[7], 4);
-  ck_assert_int_eq(array[8], 30);
-  ck_assert_int_eq(array[9], 55);
-  ck_assert_int_eq(array[10], 150);
-  ck_assert_int_eq(array[11], 300);
-  ck_assert_int_eq(array[12], 570);
-  ck_assert_int_eq(array[13], 700);
+  k1 = 0;
+  k2 = 2;
+  k3 = 3;
+  k4 = 4;
+  k5 = 55;
+  k6 = 300;
+  k7 = 700;
+  k8 = -200;
+  k9 = -100;
+  k10 = -80;
+  k11 = -7;
+  k12 = 30;
+  k13 = 150;
+  k14 = 570;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+  array[10].key = &k11;
+  array[11].key = &k12;
+  array[12].key = &k13;
+  array[13].key = &k14;
+
+  heap_sort(array, length, compare_int);
+
+  ck_assert_int_eq(*((int*)array[0].key), -200);
+  ck_assert_int_eq(*((int*)array[1].key), -100);
+  ck_assert_int_eq(*((int*)array[2].key), -80);
+  ck_assert_int_eq(*((int*)array[3].key), -7);
+  ck_assert_int_eq(*((int*)array[4].key), 0);
+  ck_assert_int_eq(*((int*)array[5].key), 2);
+  ck_assert_int_eq(*((int*)array[6].key), 3);
+  ck_assert_int_eq(*((int*)array[7].key), 4);
+  ck_assert_int_eq(*((int*)array[8].key), 30);
+  ck_assert_int_eq(*((int*)array[9].key), 55);
+  ck_assert_int_eq(*((int*)array[10].key), 150);
+  ck_assert_int_eq(*((int*)array[11].key), 300);
+  ck_assert_int_eq(*((int*)array[12].key), 570);
+  ck_assert_int_eq(*((int*)array[13].key), 700);
+
+  free(array);
 }
 END_TEST
 
 START_TEST(test_heap_sort_8)
 {
-  int array[] = {3, 15, 20, 30, 50, 75, -75, -50, -30, -20, -15, -3};
+  Register* array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12;
   int length = 12;
 
-  heap_sort(array, length);
+  array = malloc(length * sizeof(Register));
 
-  ck_assert_int_eq(array[0], -75);
-  ck_assert_int_eq(array[1], -50);
-  ck_assert_int_eq(array[2], -30);
-  ck_assert_int_eq(array[3], -20);
-  ck_assert_int_eq(array[4], -15);
-  ck_assert_int_eq(array[5], -3);
-  ck_assert_int_eq(array[6], 3);
-  ck_assert_int_eq(array[7], 15);
-  ck_assert_int_eq(array[8], 20);
-  ck_assert_int_eq(array[9], 30);
-  ck_assert_int_eq(array[10], 50);
-  ck_assert_int_eq(array[11], 75);
+  k1 = 3;
+  k2 = 15;
+  k3 = 20;
+  k4 = 30;
+  k5 = 50;
+  k6 = 75;
+  k7 = -75;
+  k8 = -50;
+  k9 = -30;
+  k10 = -20;
+  k11 = -15;
+  k12 = -3;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+  array[10].key = &k11;
+  array[11].key = &k12;
+
+  heap_sort(array, length, compare_int);
+
+  ck_assert_int_eq(*((int*)array[0].key), -75);
+  ck_assert_int_eq(*((int*)array[1].key), -50);
+  ck_assert_int_eq(*((int*)array[2].key), -30);
+  ck_assert_int_eq(*((int*)array[3].key), -20);
+  ck_assert_int_eq(*((int*)array[4].key), -15);
+  ck_assert_int_eq(*((int*)array[5].key), -3);
+  ck_assert_int_eq(*((int*)array[6].key), 3);
+  ck_assert_int_eq(*((int*)array[7].key), 15);
+  ck_assert_int_eq(*((int*)array[8].key), 20);
+  ck_assert_int_eq(*((int*)array[9].key), 30);
+  ck_assert_int_eq(*((int*)array[10].key), 50);
+  ck_assert_int_eq(*((int*)array[11].key), 75);
+
+  free(array);
 }
 END_TEST
 
 START_TEST(test_heap_sort_9)
 {
-  int array[] = {5, 2, 4, 6, 1, 3};
+  Register* array;
+  int k1, k2, k3, k4, k5, k6;
   int length = 6;
 
-  heap_sort(array, length);
+  array = malloc(length * sizeof(Register));
 
-  ck_assert_int_eq(array[0], 1);
-  ck_assert_int_eq(array[1], 2);
-  ck_assert_int_eq(array[2], 3);
-  ck_assert_int_eq(array[3], 4);
-  ck_assert_int_eq(array[4], 5);
-  ck_assert_int_eq(array[5], 6);
+  k1 = 5;
+  k2 = 2;
+  k3 = 4;
+  k4 = 6;
+  k5 = 1;
+  k6 = 3;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+
+  heap_sort(array, length, compare_int);
+
+  ck_assert_int_eq(*((int*)array[0].key), 1);
+  ck_assert_int_eq(*((int*)array[1].key), 2);
+  ck_assert_int_eq(*((int*)array[2].key), 3);
+  ck_assert_int_eq(*((int*)array[3].key), 4);
+  ck_assert_int_eq(*((int*)array[4].key), 5);
+  ck_assert_int_eq(*((int*)array[5].key), 6);
+
+  free(array);
 }
 END_TEST
 
 START_TEST(test_heap_sort_10)
 {
-  int array[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
+  Register* array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
   int length = 11;
 
-  heap_sort(array, length);
+  array = malloc(length * sizeof(Register));
 
-  ck_assert_int_eq(array[0], -200);
-  ck_assert_int_eq(array[1], -20);
-  ck_assert_int_eq(array[2], -10);
-  ck_assert_int_eq(array[3], -5);
-  ck_assert_int_eq(array[4], 0);
-  ck_assert_int_eq(array[5], 15);
-  ck_assert_int_eq(array[6], 30);
-  ck_assert_int_eq(array[7], 50);
-  ck_assert_int_eq(array[8], 75);
-  ck_assert_int_eq(array[9], 100);
-  ck_assert_int_eq(array[10], 200);
+  k1 = -10;
+  k2 = 15;
+  k3 = -5;
+  k4 = -20;
+  k5 = 50;
+  k6 = 0;
+  k7 = 100;
+  k8 = 75;
+  k9 = 30;
+  k10 = 200;
+  k11 = -200;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+  array[10].key = &k11;
+
+  heap_sort(array, length, compare_int);
+
+  ck_assert_int_eq(*((int*)array[0].key), -200);
+  ck_assert_int_eq(*((int*)array[1].key), -20);
+  ck_assert_int_eq(*((int*)array[2].key), -10);
+  ck_assert_int_eq(*((int*)array[3].key), -5);
+  ck_assert_int_eq(*((int*)array[4].key), 0);
+  ck_assert_int_eq(*((int*)array[5].key), 15);
+  ck_assert_int_eq(*((int*)array[6].key), 30);
+  ck_assert_int_eq(*((int*)array[7].key), 50);
+  ck_assert_int_eq(*((int*)array[8].key), 75);
+  ck_assert_int_eq(*((int*)array[9].key), 100);
+  ck_assert_int_eq(*((int*)array[10].key), 200);
+
+  free(array);
 }
 END_TEST
 
 START_TEST(test_heap_sort_11)
 {
-  int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+  Register* array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   int length = 10;
 
-  heap_sort(array, length);
+  array = malloc(length * sizeof(Register));
 
-  ck_assert_int_eq(array[0], 0);
-  ck_assert_int_eq(array[1], 1);
-  ck_assert_int_eq(array[2], 2);
-  ck_assert_int_eq(array[3], 3);
-  ck_assert_int_eq(array[4], 4);
-  ck_assert_int_eq(array[5], 5);
-  ck_assert_int_eq(array[6], 6);
-  ck_assert_int_eq(array[7], 7);
-  ck_assert_int_eq(array[8], 8);
-  ck_assert_int_eq(array[9], 9);
+  k1 = 0;
+  k2 = 1;
+  k3 = 2;
+  k4 = 3;
+  k5 = 4;
+  k6 = 5;
+  k7 = 6;
+  k8 = 7;
+  k9 = 8;
+  k10 = 9;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+
+  heap_sort(array, length, compare_int);
+
+  ck_assert_int_eq(*((int*)array[0].key), 0);
+  ck_assert_int_eq(*((int*)array[1].key), 1);
+  ck_assert_int_eq(*((int*)array[2].key), 2);
+  ck_assert_int_eq(*((int*)array[3].key), 3);
+  ck_assert_int_eq(*((int*)array[4].key), 4);
+  ck_assert_int_eq(*((int*)array[5].key), 5);
+  ck_assert_int_eq(*((int*)array[6].key), 6);
+  ck_assert_int_eq(*((int*)array[7].key), 7);
+  ck_assert_int_eq(*((int*)array[8].key), 8);
+  ck_assert_int_eq(*((int*)array[9].key), 9);
+
+  free(array);
 }
 END_TEST
-
 START_TEST(test_heap_sort_12)
 {
-  int array[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+  Register* array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   int length = 10;
 
-  heap_sort(array, length);
+  array = malloc(length * sizeof(Register));
 
-  ck_assert_int_eq(array[0], 0);
-  ck_assert_int_eq(array[1], 1);
-  ck_assert_int_eq(array[2], 2);
-  ck_assert_int_eq(array[3], 3);
-  ck_assert_int_eq(array[4], 4);
-  ck_assert_int_eq(array[5], 5);
-  ck_assert_int_eq(array[6], 6);
-  ck_assert_int_eq(array[7], 7);
-  ck_assert_int_eq(array[8], 8);
-  ck_assert_int_eq(array[9], 9);
+  k1 = 9;
+  k2 = 8;
+  k3 = 7;
+  k4 = 6;
+  k5 = 5;
+  k6 = 4;
+  k7 = 3;
+  k8 = 2;
+  k9 = 1;
+  k10 = 0;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+
+  heap_sort(array, length, compare_int);
+
+  ck_assert_int_eq(*((int*)array[0].key), 0);
+  ck_assert_int_eq(*((int*)array[1].key), 1);
+  ck_assert_int_eq(*((int*)array[2].key), 2);
+  ck_assert_int_eq(*((int*)array[3].key), 3);
+  ck_assert_int_eq(*((int*)array[4].key), 4);
+  ck_assert_int_eq(*((int*)array[5].key), 5);
+  ck_assert_int_eq(*((int*)array[6].key), 6);
+  ck_assert_int_eq(*((int*)array[7].key), 7);
+  ck_assert_int_eq(*((int*)array[8].key), 8);
+  ck_assert_int_eq(*((int*)array[9].key), 9);
+
+  free(array);
 }
 END_TEST
 
@@ -6608,6 +6909,7 @@ Suite* make_test_suite(void)
   tcase_add_test(tc_core, test_bubble_sort_16);
 
   tcase_add_test(tc_core, test_heap_sort_1);
+  
   tcase_add_test(tc_core, test_heap_sort_2);
   tcase_add_test(tc_core, test_heap_sort_3);
   tcase_add_test(tc_core, test_heap_sort_4);
