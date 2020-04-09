@@ -2,14 +2,14 @@
 #include <max_pq.h>
 #include <utils.h>
 
-int heap_maximum(int array[])
+Register heap_maximum(Register array[])
 {
   return array[0];
 }
 
-bool heap_extract_max(int array[], int* heap_size, int* extracted)
+bool heap_extract_max(Register array[], int* heap_size, Register* extracted, int (*compare)(void*, void*))
 {
-  int max;
+  Register max;
 
   if ((*heap_size) < 1)
     {
@@ -20,25 +20,25 @@ bool heap_extract_max(int array[], int* heap_size, int* extracted)
       max = array[0];
       array[0] = array[(*heap_size) - 1];
       (*heap_size) = (*heap_size) - 1;
-      max_heapify(array, (*heap_size), 0);
+      max_heapify(array, (*heap_size), 0, compare);
       (*extracted) = max;
 
       return true;
     }
 }
 
-bool heap_increase_key(int array[], int i, int key)
+bool heap_increase_key(Register array[], int i, void* key, int (*compare)(void*, void*))
 {
-  if (key < array[i])
+  if (compare(key, array[i].key) == -1)
     {
       return false;
     }
   else
     {
-      array[i] = key;
-      while ((i > 0) && array[(int)parent(i)] < array[i])
+      array[i].key = key;
+      while ((i > 0) && compare(array[(int)parent(i)].key, array[i].key) == -1)
         {
-          swap(array, i, parent(i));
+          swap_reg(array, i, parent(i));
           i = parent(i);
         }
 
@@ -46,9 +46,10 @@ bool heap_increase_key(int array[], int i, int key)
     }
 }
 
-void max_heap_insert(int array[], int key, int* heap_size)
+void max_heap_insert(Register array[], void* key, int* heap_size, int (*compare)(void*, void*))
 {
+  int inf = MINUS_INF;
   (*heap_size) = (*heap_size) + 1;
-  array[(*heap_size) - 1] = MINUS_INF;
-  heap_increase_key(array, (*heap_size) - 1, key);
+  array[(*heap_size) - 1].key = &inf;
+  heap_increase_key(array, (*heap_size) - 1, key, compare);
 }

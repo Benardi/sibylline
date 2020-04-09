@@ -9,6 +9,7 @@
 #ifndef MAX_PQ_H
 #define MAX_PQ_H
 
+#include <register.h>
 #include <stdbool.h>
 
 /** @brief Extracts maximum value from Max Priority Queue (max-heap).
@@ -23,7 +24,7 @@
  * @param extracted Pointer where to store maximum value.
  * @return Whether extraction was successful.
  */
-bool heap_extract_max(int array[], int* heap_size, int* extracted);
+bool heap_extract_max(Register array[], int* heap_size, Register* extracted, int (*compare)(void*, void*));
 
 /** @brief Gets maximum value / priority in Max Priority Queue (max-heap).
  *
@@ -33,7 +34,7 @@ bool heap_extract_max(int array[], int* heap_size, int* extracted);
  * @param array Array of integers containing heap elements.
  * @return Maximum value in max-heap.
  */
-int heap_maximum(int array[]);
+Register heap_maximum(Register array[]);
 
 /** @brief Increases key/priority of element in Max Priority Queue (max-heap).
  *
@@ -47,7 +48,7 @@ int heap_maximum(int array[]);
  * @param key New priority value.
  * @return Whether key increase was successful.
  */
-bool heap_increase_key(int array[], int i, int key);
+bool heap_increase_key(Register array[], int i, void* key, int (*compare)(void*, void*));
 
 /** @brief Inserts element of given key into Max Priority Queue (max-heap).
  *
@@ -59,6 +60,6 @@ bool heap_increase_key(int array[], int i, int key);
  * @param heap_size Pointer to number of elements in heap.
  * @return Void.
  */
-void max_heap_insert(int array[], int key, int* heap_size);
+void max_heap_insert(Register array[], void* key, int* heap_size, int (*compare)(void*, void*));
 
 #endif
