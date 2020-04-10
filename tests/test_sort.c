@@ -2915,7 +2915,7 @@ START_TEST(test_heap_sort_1)
   k4 = 6;
   k5 = 1;
   k6 = 3;
-  
+
   array[0].key = &k1;
   array[1].key = &k2;
   array[2].key = &k3;
@@ -2945,7 +2945,7 @@ START_TEST(test_heap_sort_2)
   array = malloc(length * sizeof(Register));
 
   k1 = 5;
-  
+
   array[0].key = &k1;
 
   heap_sort(array, length, compare_int);
@@ -6909,7 +6909,7 @@ Suite* make_test_suite(void)
   tcase_add_test(tc_core, test_bubble_sort_16);
 
   tcase_add_test(tc_core, test_heap_sort_1);
-  
+
   tcase_add_test(tc_core, test_heap_sort_2);
   tcase_add_test(tc_core, test_heap_sort_3);
   tcase_add_test(tc_core, test_heap_sort_4);

@@ -1,7 +1,8 @@
 #include <heap.h>
 #include <utils.h>
 
-void max_heapify(Register array[], int heap_size, int i, int (*compare)(void*, void*) )
+void max_heapify(Register array[], int heap_size, int i,
+                 int (*compare)(void*, void*))
 {
   int left, right, largest;
   left = left(i);

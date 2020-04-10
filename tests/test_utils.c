@@ -113,8 +113,8 @@ START_TEST(test_swap_reg_1)
 {
   Register* array;
   int k1, k2, k3, k4, k5, k6;
-  int length = 6; 
- 
+  int length = 6;
+
   array = malloc(length * sizeof(Register));
 
   k1 = 5;
@@ -130,7 +130,7 @@ START_TEST(test_swap_reg_1)
   array[3].key = &k4;
   array[4].key = &k5;
   array[5].key = &k6;
-  
+
   swap_reg(array, 0, 1);
 
   ck_assert_int_eq(*((int*)array[0].key), 2);
@@ -862,7 +862,7 @@ Suite* make_test_suite(void)
   tcase_add_test(tc_core, test_swap_7);
 
   tcase_add_test(tc_core, test_swap_reg_1);
-  
+
   tcase_add_test(tc_core, test_swap_reg_2);
   tcase_add_test(tc_core, test_swap_reg_3);
   tcase_add_test(tc_core, test_swap_reg_4);

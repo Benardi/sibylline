@@ -10,9 +10,9 @@
 #ifndef HEAP_H
 #define HEAP_H
 
-#include <register.h>
 #include <limits.h>
 #include <math.h>
+#include <register.h>
 #include <stdbool.h>
 
 #define MINUS_INF INT_MIN
@@ -33,7 +33,8 @@
  * @param compare Pointer to function that compares two void pointers.
  * @return Void.
  */
-void max_heapify(Register array[], int heap_size, int i, int (*compare)(void*, void*));
+void max_heapify(Register array[], int heap_size, int i,
+                 int (*compare)(void*, void*));
 
 /** @brief Produces a max-heap from an unordered input array.
  *

@@ -48,7 +48,7 @@ START_TEST(test_heap_increase_key_1)
 
   i = 5;
   key = 40;
-  
+
   array = malloc(length * sizeof(Register));
 
   k1 = 50;
@@ -325,7 +325,7 @@ START_TEST(test_heap_increase_key_6)
   k13 = 36;
   k14 = 8;
   k15 = 26;
-  
+
   array[0].key = &k1;
   array[1].key = &k2;
   array[2].key = &k3;
@@ -343,7 +343,7 @@ START_TEST(test_heap_increase_key_6)
   array[14].key = &k15;
 
   result = heap_increase_key(array, i, &key, compare_int);
-  
+
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(*((int*)array[0].key), 100);
   ck_assert_int_eq(*((int*)array[1].key), 63);
@@ -371,11 +371,11 @@ START_TEST(test_heap_increase_key_7)
   int i, key;
   Register* array;
   int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14, k15;
-  int length = 15;  
+  int length = 15;
 
   i = 0;
   key = 68;
-  
+
   array = malloc(length * sizeof(Register));
 
   k1 = 70;
@@ -393,7 +393,7 @@ START_TEST(test_heap_increase_key_7)
   k13 = 36;
   k14 = 8;
   k15 = 26;
-  
+
   array[0].key = &k1;
   array[1].key = &k2;
   array[2].key = &k3;
@@ -461,7 +461,7 @@ START_TEST(test_heap_increase_key_8)
   k13 = 36;
   k14 = 8;
   k15 = 26;
-  
+
   array[0].key = &k1;
   array[1].key = &k2;
   array[2].key = &k3;
@@ -477,7 +477,7 @@ START_TEST(test_heap_increase_key_8)
   array[12].key = &k13;
   array[13].key = &k14;
   array[14].key = &k15;
-  
+
   result = heap_increase_key(array, i, &key, compare_int);
 
   ck_assert_int_eq(result, false);
@@ -529,7 +529,7 @@ START_TEST(test_heap_increase_key_9)
   k13 = 36;
   k14 = 8;
   k15 = 26;
-  
+
   array[0].key = &k1;
   array[1].key = &k2;
   array[2].key = &k3;
@@ -545,7 +545,7 @@ START_TEST(test_heap_increase_key_9)
   array[12].key = &k13;
   array[13].key = &k14;
   array[14].key = &k15;
-  
+
   result = heap_increase_key(array, i, &key, compare_int);
 
   ck_assert_int_eq(result, false);
@@ -663,7 +663,7 @@ START_TEST(test_max_heap_insert_3)
   array[0].key = &k1;
   array[1].key = &k2;
   array[2].key = &k3;
- 
+
   (*heap_size) = 0;
 
   key1 = 15;
@@ -827,7 +827,7 @@ START_TEST(test_heap_maximum_1)
   maximum = heap_maximum(array);
 
   ck_assert_int_eq(*((int*)maximum.key), 50);
-  
+
   free(array);
 }
 END_TEST
@@ -864,7 +864,7 @@ START_TEST(test_heap_maximum_2)
   maximum = heap_maximum(array);
 
   ck_assert_int_eq(*((int*)maximum.key), 56);
-  
+
   free(array);
 }
 END_TEST
@@ -913,7 +913,7 @@ START_TEST(test_heap_maximum_3)
   maximum = heap_maximum(array);
 
   ck_assert_int_eq(*((int*)maximum.key), 70);
-  
+
   free(array);
 }
 END_TEST
@@ -997,7 +997,7 @@ START_TEST(test_heap_extract_max_2)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(*heap_size, 0);
-  ck_assert_int_eq(*((int*) extracted->key), 34);
+  ck_assert_int_eq(*((int*)extracted->key), 34);
 
   ck_assert_int_eq(*((int*)array[0].key), 34);
 
@@ -1046,7 +1046,7 @@ START_TEST(test_heap_extract_max_3)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(*heap_size, 6);
-  ck_assert_int_eq(*((int*) extracted->key), 50);
+  ck_assert_int_eq(*((int*)extracted->key), 50);
 
   ck_assert_int_eq(*((int*)array[0].key), 35);
   ck_assert_int_eq(*((int*)array[1].key), 30);
@@ -1103,7 +1103,7 @@ START_TEST(test_heap_extract_max_4)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(*heap_size, 5);
-  ck_assert_int_eq(*((int*) extracted->key), 35);
+  ck_assert_int_eq(*((int*)extracted->key), 35);
 
   ck_assert_int_eq(*((int*)array[0].key), 30);
   ck_assert_int_eq(*((int*)array[1].key), 26);
@@ -1160,7 +1160,7 @@ START_TEST(test_heap_extract_max_5)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(*heap_size, 4);
-  ck_assert_int_eq(*((int*) extracted->key), 30);
+  ck_assert_int_eq(*((int*)extracted->key), 30);
 
   ck_assert_int_eq(*((int*)array[0].key), 26);
   ck_assert_int_eq(*((int*)array[1].key), 20);
@@ -1217,7 +1217,7 @@ START_TEST(test_heap_extract_max_6)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(*heap_size, 3);
-  ck_assert_int_eq(*((int*) extracted->key), 26);
+  ck_assert_int_eq(*((int*)extracted->key), 26);
 
   ck_assert_int_eq(*((int*)array[0].key), 22);
   ck_assert_int_eq(*((int*)array[1].key), 20);
@@ -1274,7 +1274,7 @@ START_TEST(test_heap_extract_max_7)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(*heap_size, 2);
-  ck_assert_int_eq(*((int*) extracted->key), 22);
+  ck_assert_int_eq(*((int*)extracted->key), 22);
 
   ck_assert_int_eq(*((int*)array[0].key), 20);
   ck_assert_int_eq(*((int*)array[1].key), 13);
@@ -1331,7 +1331,7 @@ START_TEST(test_heap_extract_max_8)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(*heap_size, 1);
-  ck_assert_int_eq(*((int*) extracted->key), 20);
+  ck_assert_int_eq(*((int*)extracted->key), 20);
 
   ck_assert_int_eq(*((int*)array[0].key), 13);
   ck_assert_int_eq(*((int*)array[1].key), 13);
@@ -1347,7 +1347,7 @@ START_TEST(test_heap_extract_max_8)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(*heap_size, 0);
-  ck_assert_int_eq(*((int*) extracted->key), 13);
+  ck_assert_int_eq(*((int*)extracted->key), 13);
 
   ck_assert_int_eq(*((int*)array[0].key), 13);
   ck_assert_int_eq(*((int*)array[1].key), 13);
@@ -1419,7 +1419,7 @@ START_TEST(test_heap_extract_max_9)
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(*heap_size, 0);
-  ck_assert_int_eq(*((int*) extracted->key), 13);
+  ck_assert_int_eq(*((int*)extracted->key), 13);
 
   ck_assert_int_eq(*((int*)array[0].key), 13);
   ck_assert_int_eq(*((int*)array[1].key), 13);

@@ -7,7 +7,8 @@ Register heap_maximum(Register array[])
   return array[0];
 }
 
-bool heap_extract_max(Register array[], int* heap_size, Register* extracted, int (*compare)(void*, void*))
+bool heap_extract_max(Register array[], int* heap_size, Register* extracted,
+                      int (*compare)(void*, void*))
 {
   Register max;
 
@@ -27,7 +28,8 @@ bool heap_extract_max(Register array[], int* heap_size, Register* extracted, int
     }
 }
 
-bool heap_increase_key(Register array[], int i, void* key, int (*compare)(void*, void*))
+bool heap_increase_key(Register array[], int i, void* key,
+                       int (*compare)(void*, void*))
 {
   if (compare(key, array[i].key) == -1)
     {
@@ -46,7 +48,8 @@ bool heap_increase_key(Register array[], int i, void* key, int (*compare)(void*,
     }
 }
 
-void max_heap_insert(Register array[], void* key, int* heap_size, int (*compare)(void*, void*))
+void max_heap_insert(Register array[], void* key, int* heap_size,
+                     int (*compare)(void*, void*))
 {
   int inf = MINUS_INF;
   (*heap_size) = (*heap_size) + 1;

@@ -25,7 +25,8 @@
  * @param compare Pointer to function that compares two void pointers.
  * @return Whether extraction was successful.
  */
-bool heap_extract_max(Register array[], int* heap_size, Register* extracted, int (*compare)(void*, void*));
+bool heap_extract_max(Register array[], int* heap_size, Register* extracted,
+                      int (*compare)(void*, void*));
 
 /** @brief Gets maximum value / priority in Max Priority Queue (max-heap).
  *
@@ -50,7 +51,8 @@ Register heap_maximum(Register array[]);
  * @param compare Pointer to function that compares two void pointers.
  * @return Whether key increase was successful.
  */
-bool heap_increase_key(Register array[], int i, void* key, int (*compare)(void*, void*));
+bool heap_increase_key(Register array[], int i, void* key,
+                       int (*compare)(void*, void*));
 
 /** @brief Inserts element of given key into Max Priority Queue (max-heap).
  *
@@ -63,6 +65,7 @@ bool heap_increase_key(Register array[], int i, void* key, int (*compare)(void*,
  * @param compare Pointer to function that compares two void pointers.
  * @return Void.
  */
-void max_heap_insert(Register array[], void* key, int* heap_size, int (*compare)(void*, void*));
+void max_heap_insert(Register array[], void* key, int* heap_size,
+                     int (*compare)(void*, void*));
 
 #endif

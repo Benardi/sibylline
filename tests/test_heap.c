@@ -131,7 +131,7 @@ START_TEST(test_max_heapify_3)
   ck_assert_int_eq(*((int*)array[2].key), 7);
   ck_assert_int_eq(*((int*)array[3].key), -9);
   ck_assert_int_eq(*((int*)array[4].key), 200);
-  
+
   free(array);
 }
 END_TEST
@@ -167,7 +167,7 @@ START_TEST(test_max_heapify_4)
   ck_assert_int_eq(*((int*)array[2].key), 8);
   ck_assert_int_eq(*((int*)array[3].key), 90);
   ck_assert_int_eq(*((int*)array[4].key), -1500);
- 
+
   free(array);
 }
 END_TEST
@@ -434,7 +434,7 @@ START_TEST(test_build_max_heap_1)
   int length = 1;
 
   array = malloc(length * sizeof(Register));
-  
+
   k1 = 4;
 
   array[0].key = &k1;
@@ -454,13 +454,13 @@ START_TEST(test_build_max_heap_2)
   int length = 2;
 
   array = malloc(length * sizeof(Register));
-  
+
   k1 = 4;
   k2 = 8;
 
   array[0].key = &k1;
   array[1].key = &k2;
-  
+
   build_max_heap(array, length, compare_int);
 
   ck_assert_int_eq(*((int*)array[0].key), 8);
@@ -477,7 +477,7 @@ START_TEST(test_build_max_heap_3)
   int length = 3;
 
   array = malloc(length * sizeof(Register));
-  
+
   k1 = 4;
   k2 = 8;
   k3 = 12;
@@ -485,7 +485,7 @@ START_TEST(test_build_max_heap_3)
   array[0].key = &k1;
   array[1].key = &k2;
   array[2].key = &k3;
-  
+
   build_max_heap(array, length, compare_int);
 
   ck_assert_int_eq(*((int*)array[0].key), 12);
@@ -503,7 +503,7 @@ START_TEST(test_build_max_heap_4)
   int length = 2;
 
   array = malloc((length + 1) * sizeof(Register));
-  
+
   k1 = 4;
   k2 = 8;
   k3 = 12;
@@ -567,7 +567,7 @@ START_TEST(test_build_max_heap_6)
   int length = 7;
 
   array = malloc(length * sizeof(Register));
-  
+
   k1 = 7;
   k2 = 6;
   k3 = 5;
@@ -664,7 +664,7 @@ START_TEST(test_build_max_heap_8)
 {
   Register* array;
   int length = 10;
-  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;  
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
 
   array = malloc(length * sizeof(Register));
 
