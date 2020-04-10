@@ -4,8 +4,8 @@
  * @date 12 Oct 2019
  * @brief Header file for Sequential List module.
  *
- * Defines the constant MAX number of elements, the struct SeqList and the
- * prototypes for the routines of the Sequential List module.
+ * Defines the struct SeqList and the prototypes for the routines
+ * of the Sequential List module.
  */
 #ifndef SEQ_LIST_H
 #define SEQ_LIST_H
@@ -13,12 +13,11 @@
 #include <register.h>
 #include <stdbool.h>
 
-#define MAX 20
-
 typedef struct
 {
-  Register A[MAX + 1]; /* Array that stores the elements */
-  int nElem;           /* Current number of elements in Sequential List */
+  Register* array; /* Array that stores the elements */
+  int max_n_elems;
+  int n_elems; /* Current number of elements in Sequential List */
 } SeqList;
 
 /** @brief Initializes Sequential List with 0 elements.
@@ -28,7 +27,7 @@ typedef struct
  * @param sl Sequential List as pointer
  * @return Void
  */
-void init_seq_list(SeqList* sl);
+void init_seq_list(SeqList* sl, int max_n_elems);
 
 /** @brief Reinitializes Sequential List with 0 elements.
  *
@@ -52,9 +51,9 @@ int size(SeqList* sl);
 
 /** @brief Inserts register in Sequential List at given position.
  *
- * If given position is invalid (bigger than MAX/nElems or less than zero) the
- * Sequential List is kept unchanged and false is returned. Else, the element
- * is inserted and true returned.
+ * If given position is invalid (bigger than max_n_elems/n_elems or less than
+ * zero) the Sequential List is kept unchanged and false is returned. Else,
+ * the element is inserted and true returned.
  *
  * @param sl Pointer to Sequential List.
  * @param reg Element that contains key.

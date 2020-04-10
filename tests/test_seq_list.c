@@ -12,6 +12,8 @@ void teardown(void);
 Suite* make_test_suite(void);
 int compare(void* key1, void* key2);
 
+int max_n_elems = 20;
+
 int compare(void* key1, void* key2)
 {
   int result;
@@ -47,52 +49,60 @@ void teardown(void)
 
 START_TEST(test_init_seq_list_1)
 {
-  init_seq_list(sl);
-  ck_assert_int_eq(sl->nElem, 0);
+  init_seq_list(sl, max_n_elems);
+  ck_assert_int_eq(sl->n_elems, 0);
+
+  free(sl->array);
 }
 END_TEST
 
 START_TEST(test_init_seq_list_2)
 {
-  sl->nElem = 0;
-  init_seq_list(sl);
-  ck_assert_int_eq(sl->nElem, 0);
+  sl->n_elems = 0;
+  init_seq_list(sl, max_n_elems);
+  ck_assert_int_eq(sl->n_elems, 0);
+
+  free(sl->array);
 }
 END_TEST
 
 START_TEST(test_init_seq_list_3)
 {
-  sl->nElem = 127;
-  init_seq_list(sl);
-  ck_assert_int_eq(sl->nElem, 0);
+  sl->n_elems = 127;
+  init_seq_list(sl, max_n_elems);
+  ck_assert_int_eq(sl->n_elems, 0);
+
+  free(sl->array);
 }
 END_TEST
 
 START_TEST(test_init_seq_list_4)
 {
-  sl->nElem = -127;
-  init_seq_list(sl);
-  ck_assert_int_eq(sl->nElem, 0);
+  sl->n_elems = -127;
+  init_seq_list(sl, max_n_elems);
+  ck_assert_int_eq(sl->n_elems, 0);
+
+  free(sl->array);
 }
 END_TEST
 
 START_TEST(test_size_1)
 {
-  sl->nElem = 0;
+  sl->n_elems = 0;
   ck_assert_int_eq(size(sl), 0);
 }
 END_TEST
 
 START_TEST(test_size_2)
 {
-  sl->nElem = 10;
+  sl->n_elems = 10;
   ck_assert_int_eq(size(sl), 10);
 }
 END_TEST
 
 START_TEST(test_size_3)
 {
-  sl->nElem = -10;
+  sl->n_elems = -10;
   ck_assert_int_eq(size(sl), -10);
 }
 END_TEST
@@ -100,31 +110,31 @@ END_TEST
 START_TEST(test_reinit_seq_list_1)
 {
   reinit_seq_list(sl);
-  ck_assert_int_eq(sl->nElem, 0);
+  ck_assert_int_eq(sl->n_elems, 0);
 }
 END_TEST
 
 START_TEST(test_reinit_seq_list_2)
 {
-  sl->nElem = 0;
+  sl->n_elems = 0;
   reinit_seq_list(sl);
-  ck_assert_int_eq(sl->nElem, 0);
+  ck_assert_int_eq(sl->n_elems, 0);
 }
 END_TEST
 
 START_TEST(test_reinit_seq_list_3)
 {
-  sl->nElem = 24;
+  sl->n_elems = 24;
   reinit_seq_list(sl);
-  ck_assert_int_eq(sl->nElem, 0);
+  ck_assert_int_eq(sl->n_elems, 0);
 }
 END_TEST
 
 START_TEST(test_reinit_seq_list_4)
 {
-  sl->nElem = -24;
+  sl->n_elems = -24;
   reinit_seq_list(sl);
-  ck_assert_int_eq(sl->nElem, 0);
+  ck_assert_int_eq(sl->n_elems, 0);
 }
 END_TEST
 
@@ -135,14 +145,16 @@ START_TEST(test_insert_elem_1)
 
   k1 = 13;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
   reg->key = &k1;
   result = insert_elem(sl, *reg, 0);
 
   ck_assert_int_eq(result, true);
-  ck_assert_int_eq(sl->nElem, 1);
-  ck_assert_int_eq(*((int*)sl->A[0].key), 13);
+  ck_assert_int_eq(sl->n_elems, 1);
+  ck_assert_int_eq(*((int*)sl->array[0].key), 13);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -155,7 +167,7 @@ START_TEST(test_insert_elem_2)
   k1 = -8;
   k2 = 7;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
   reg->key = &k1;
   result1 = insert_elem(sl, *reg, 0);
@@ -165,9 +177,11 @@ START_TEST(test_insert_elem_2)
 
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, true);
-  ck_assert_int_eq(sl->nElem, 2);
-  ck_assert_int_eq(*((int*)sl->A[0].key), -8);
-  ck_assert_int_eq(*((int*)sl->A[1].key), 7);
+  ck_assert_int_eq(sl->n_elems, 2);
+  ck_assert_int_eq(*((int*)sl->array[0].key), -8);
+  ck_assert_int_eq(*((int*)sl->array[1].key), 7);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -180,7 +194,7 @@ START_TEST(test_insert_elem_3)
   k1 = -8;
   k2 = 7;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
   reg->key = &k1;
   result1 = insert_elem(sl, *reg, 0);
@@ -190,8 +204,10 @@ START_TEST(test_insert_elem_3)
 
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, false);
-  ck_assert_int_eq(sl->nElem, 1);
-  ck_assert_int_eq(*((int*)sl->A[0].key), -8);
+  ck_assert_int_eq(sl->n_elems, 1);
+  ck_assert_int_eq(*((int*)sl->array[0].key), -8);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -202,13 +218,15 @@ START_TEST(test_insert_elem_4)
 
   k1 = -8;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
   reg->key = &k1;
   result = insert_elem(sl, *reg, -1);
 
   ck_assert_int_eq(result, false);
-  ck_assert_int_eq(sl->nElem, 0);
+  ck_assert_int_eq(sl->n_elems, 0);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -219,14 +237,16 @@ START_TEST(test_insert_sorted_1)
 
   k1 = 13;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
   reg->key = &k1;
   result = insert_sorted(sl, *reg, compare);
 
   ck_assert_int_eq(result, true);
-  ck_assert_int_eq(sl->nElem, 1);
-  ck_assert_int_eq(*((int*)sl->A[0].key), 13);
+  ck_assert_int_eq(sl->n_elems, 1);
+  ck_assert_int_eq(*((int*)sl->array[0].key), 13);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -236,7 +256,7 @@ START_TEST(test_insert_sorted_2)
   bool result1;
   bool result2;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
   k1 = 7;
   k2 = -8;
@@ -249,9 +269,11 @@ START_TEST(test_insert_sorted_2)
 
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, true);
-  ck_assert_int_eq(sl->nElem, 2);
-  ck_assert_int_eq(*((int*)sl->A[0].key), -8);
-  ck_assert_int_eq(*((int*)sl->A[1].key), 7);
+  ck_assert_int_eq(sl->n_elems, 2);
+  ck_assert_int_eq(*((int*)sl->array[0].key), -8);
+  ck_assert_int_eq(*((int*)sl->array[1].key), 7);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -264,7 +286,7 @@ START_TEST(test_insert_sorted_3)
   k1 = -8;
   k2 = -10;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
   reg->key = &k1;
   result1 = insert_sorted(sl, *reg, compare);
@@ -274,9 +296,11 @@ START_TEST(test_insert_sorted_3)
 
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, true);
-  ck_assert_int_eq(sl->nElem, 2);
-  ck_assert_int_eq(*((int*)sl->A[0].key), -10);
-  ck_assert_int_eq(*((int*)sl->A[1].key), -8);
+  ck_assert_int_eq(sl->n_elems, 2);
+  ck_assert_int_eq(*((int*)sl->array[0].key), -10);
+  ck_assert_int_eq(*((int*)sl->array[1].key), -8);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -291,7 +315,7 @@ START_TEST(test_insert_sorted_4)
   k2 = -8;
   k3 = 0;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
   reg->key = &k1;
   result1 = insert_sorted(sl, *reg, compare);
@@ -305,10 +329,12 @@ START_TEST(test_insert_sorted_4)
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(result3, true);
-  ck_assert_int_eq(sl->nElem, 3);
-  ck_assert_int_eq(*((int*)sl->A[0].key), -8);
-  ck_assert_int_eq(*((int*)sl->A[1].key), 0);
-  ck_assert_int_eq(*((int*)sl->A[2].key), 10);
+  ck_assert_int_eq(sl->n_elems, 3);
+  ck_assert_int_eq(*((int*)sl->array[0].key), -8);
+  ck_assert_int_eq(*((int*)sl->array[1].key), 0);
+  ck_assert_int_eq(*((int*)sl->array[2].key), 10);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -316,8 +342,10 @@ START_TEST(test_seq_search_1)
 {
   int k1 = 10;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
   ck_assert_int_eq(seq_search(sl, &k1, compare), -1);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -326,11 +354,13 @@ START_TEST(test_seq_search_2)
   int k1 = 3;
   int k2 = 3;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
-  sl->A[0].key = &k1;
-  sl->nElem = 1;
+  sl->array[0].key = &k1;
+  sl->n_elems = 1;
   ck_assert_int_eq(seq_search(sl, &k2, compare), 0);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -342,14 +372,16 @@ START_TEST(test_seq_search_3)
   int k4 = 4;
   int k5 = 4;
 
-  init_seq_list(sl);
-  sl->A[0].key = &k1;
-  sl->A[1].key = &k2;
-  sl->A[2].key = &k3;
-  sl->A[3].key = &k4;
-  sl->nElem = 4;
+  init_seq_list(sl, max_n_elems);
+  sl->array[0].key = &k1;
+  sl->array[1].key = &k2;
+  sl->array[2].key = &k3;
+  sl->array[3].key = &k4;
+  sl->n_elems = 4;
 
   ck_assert_int_eq(seq_search(sl, &k5, compare), 2);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -361,14 +393,16 @@ START_TEST(test_seq_search_4)
   int k4 = -3;
   int k5 = 5;
 
-  init_seq_list(sl);
-  sl->A[0].key = &k1;
-  sl->A[1].key = &k2;
-  sl->A[2].key = &k3;
-  sl->A[3].key = &k4;
-  sl->nElem = 4;
+  init_seq_list(sl, max_n_elems);
+  sl->array[0].key = &k1;
+  sl->array[1].key = &k2;
+  sl->array[2].key = &k3;
+  sl->array[3].key = &k4;
+  sl->n_elems = 4;
 
   ck_assert_int_eq(seq_search(sl, &k5, compare), -1);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -376,8 +410,10 @@ START_TEST(test_sentinel_search_1)
 {
   int k1 = 10;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
   ck_assert_int_eq(sentinel_search(sl, &k1, compare), -1);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -386,10 +422,12 @@ START_TEST(test_sentinel_search_2)
   int k1 = 3;
   int k2 = 3;
 
-  init_seq_list(sl);
-  sl->A[0].key = &k1;
-  sl->nElem = 1;
+  init_seq_list(sl, max_n_elems);
+  sl->array[0].key = &k1;
+  sl->n_elems = 1;
   ck_assert_int_eq(sentinel_search(sl, &k2, compare), 0);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -401,15 +439,17 @@ START_TEST(test_sentinel_search_3)
   int k4 = 4;
   int k5 = 4;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
-  sl->A[0].key = &k1;
-  sl->A[1].key = &k2;
-  sl->A[2].key = &k3;
-  sl->A[3].key = &k4;
-  sl->nElem = 4;
+  sl->array[0].key = &k1;
+  sl->array[1].key = &k2;
+  sl->array[2].key = &k3;
+  sl->array[3].key = &k4;
+  sl->n_elems = 4;
 
   ck_assert_int_eq(sentinel_search(sl, &k5, compare), 2);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -421,15 +461,17 @@ START_TEST(test_sentinel_search_4)
   int k4 = -3;
   int k5 = 5;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
-  sl->A[0].key = &k1;
-  sl->A[1].key = &k2;
-  sl->A[2].key = &k3;
-  sl->A[3].key = &k4;
-  sl->nElem = 4;
+  sl->array[0].key = &k1;
+  sl->array[1].key = &k2;
+  sl->array[2].key = &k3;
+  sl->array[3].key = &k4;
+  sl->n_elems = 4;
 
   ck_assert_int_eq(sentinel_search(sl, &k5, compare), -1);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -437,9 +479,11 @@ START_TEST(test_binary_search_1)
 {
   int k1 = 10;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
   ck_assert_int_eq(binary_search(sl, &k1, compare), -1);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -448,11 +492,13 @@ START_TEST(test_binary_search_2)
   int k1 = 3;
   int k2 = 3;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
-  sl->A[0].key = &k1;
-  sl->nElem = 1;
+  sl->array[0].key = &k1;
+  sl->n_elems = 1;
   ck_assert_int_eq(binary_search(sl, &k2, compare), 0);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -464,15 +510,17 @@ START_TEST(test_binary_search_3)
   int k4 = 4;
   int k5 = 4;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
-  sl->A[0].key = &k1;
-  sl->A[1].key = &k2;
-  sl->A[2].key = &k3;
-  sl->A[3].key = &k4;
-  sl->nElem = 4;
+  sl->array[0].key = &k1;
+  sl->array[1].key = &k2;
+  sl->array[2].key = &k3;
+  sl->array[3].key = &k4;
+  sl->n_elems = 4;
 
   ck_assert_int_eq(binary_search(sl, &k5, compare), 2);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -484,15 +532,17 @@ START_TEST(test_binary_search_4)
   int k4 = 2;
   int k5 = 5;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
-  sl->A[0].key = &k1;
-  sl->A[1].key = &k2;
-  sl->A[2].key = &k3;
-  sl->A[3].key = &k4;
-  sl->nElem = 4;
+  sl->array[0].key = &k1;
+  sl->array[1].key = &k2;
+  sl->array[2].key = &k3;
+  sl->array[3].key = &k4;
+  sl->n_elems = 4;
 
   ck_assert_int_eq(binary_search(sl, &k5, compare), -1);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -504,14 +554,16 @@ START_TEST(test_remove_elem_1)
   k1 = 20;
   k2 = 20;
 
-  init_seq_list(sl);
-  sl->A[0].key = &k1;
-  sl->nElem = 1;
+  init_seq_list(sl, max_n_elems);
+  sl->array[0].key = &k1;
+  sl->n_elems = 1;
 
   result = remove_elem(sl, &k2, compare);
 
   ck_assert_int_eq(result, true);
-  ck_assert_int_eq(sl->nElem, 0);
+  ck_assert_int_eq(sl->n_elems, 0);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -524,15 +576,17 @@ START_TEST(test_remove_elem_2)
   k2 = 1;
   k3 = 2;
 
-  init_seq_list(sl);
+  init_seq_list(sl, max_n_elems);
 
-  sl->A[0].key = &k1;
-  sl->A[1].key = &k2;
-  sl->nElem = 2;
+  sl->array[0].key = &k1;
+  sl->array[1].key = &k2;
+  sl->n_elems = 2;
 
   result = remove_elem(sl, &k3, compare);
 
   ck_assert_int_eq(result, false);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -546,20 +600,22 @@ START_TEST(test_remove_elem_3)
   int k4 = -3;
   int k5 = 2;
 
-  init_seq_list(sl);
-  sl->A[0].key = &k1;
-  sl->A[1].key = &k2;
-  sl->A[2].key = &k3;
-  sl->A[3].key = &k4;
-  sl->nElem = 4;
+  init_seq_list(sl, max_n_elems);
+  sl->array[0].key = &k1;
+  sl->array[1].key = &k2;
+  sl->array[2].key = &k3;
+  sl->array[3].key = &k4;
+  sl->n_elems = 4;
 
   result = remove_elem(sl, &k5, compare);
 
   ck_assert_int_eq(result, true);
-  ck_assert_int_eq(sl->nElem, 3);
-  ck_assert_int_eq(*((int*)sl->A[0].key), 0);
-  ck_assert_int_eq(*((int*)sl->A[1].key), -1);
-  ck_assert_int_eq(*((int*)sl->A[2].key), -3);
+  ck_assert_int_eq(sl->n_elems, 3);
+  ck_assert_int_eq(*((int*)sl->array[0].key), 0);
+  ck_assert_int_eq(*((int*)sl->array[1].key), -1);
+  ck_assert_int_eq(*((int*)sl->array[2].key), -3);
+
+  free(sl->array);
 }
 END_TEST
 
@@ -573,20 +629,22 @@ START_TEST(test_remove_elem_4)
   int k4 = -2;
   int k5 = 7;
 
-  init_seq_list(sl);
-  sl->A[0].key = &k1;
-  sl->A[1].key = &k2;
-  sl->A[2].key = &k3;
-  sl->A[3].key = &k4;
-  sl->nElem = 4;
+  init_seq_list(sl, max_n_elems);
+  sl->array[0].key = &k1;
+  sl->array[1].key = &k2;
+  sl->array[2].key = &k3;
+  sl->array[3].key = &k4;
+  sl->n_elems = 4;
 
   result = remove_elem(sl, &k5, compare);
 
   ck_assert_int_eq(result, true);
-  ck_assert_int_eq(sl->nElem, 3);
-  ck_assert_int_eq(*((int*)sl->A[0].key), 1);
-  ck_assert_int_eq(*((int*)sl->A[1].key), 7);
-  ck_assert_int_eq(*((int*)sl->A[2].key), -2);
+  ck_assert_int_eq(sl->n_elems, 3);
+  ck_assert_int_eq(*((int*)sl->array[0].key), 1);
+  ck_assert_int_eq(*((int*)sl->array[1].key), 7);
+  ck_assert_int_eq(*((int*)sl->array[2].key), -2);
+
+  free(sl->array);
 }
 END_TEST
 

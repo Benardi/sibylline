@@ -1,6 +1,15 @@
+#include <malloc.h>
 #include <queue.h>
 
-void init_queue(Queue* q)
+void init_queue(Queue* q, int length)
+{
+  q->head = 0;
+  q->tail = 0;
+  q->length = length;
+  q->array = malloc(length * sizeof(Register));
+}
+
+void reinit_queue(Queue* q)
 {
   q->head = 0;
   q->tail = 0;
@@ -13,7 +22,7 @@ bool queue_empty(Queue* q)
 
 bool queue_full(Queue* q)
 {
-  return q->head == ((q->tail + 1) % (MAX));
+  return q->head == ((q->tail + 1) % (q->length));
 }
 
 bool enqueue(Queue* q, Register reg)
@@ -24,9 +33,9 @@ bool enqueue(Queue* q, Register reg)
     }
   else
     {
-      q->A[q->tail] = reg;
+      q->array[q->tail] = reg;
 
-      if (q->tail == (MAX - 1))
+      if (q->tail == (q->length - 1))
         {
           q->tail = 0;
         }
@@ -46,8 +55,8 @@ bool dequeue(Queue* q, Register* removed)
     }
   else
     {
-      *removed = q->A[q->head];
-      if (q->head == (MAX - 1))
+      *removed = q->array[q->head];
+      if (q->head == (q->length - 1))
         {
           q->head = 0;
         }

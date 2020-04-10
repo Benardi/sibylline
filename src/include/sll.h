@@ -4,8 +4,8 @@
  * @date 7 Jan 2020
  * @brief Header file for Singly Linked List module.
  *
- * Defines the constant MAX number of elements, the struct SinglyLinkedList
- * and the prototypes for the routines of the SinglyLinkedList module.
+ * Defines the struct SinglyLinkedList and the prototypes for the
+ * routines of the SinglyLinkedList module.
  */
 #ifndef SLL_H
 #define SLL_H

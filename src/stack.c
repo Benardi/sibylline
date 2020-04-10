@@ -1,6 +1,14 @@
+#include <malloc.h>
 #include <stack.h>
 
-void init_stack(Stack* stk)
+void init_stack(Stack* stk, int length)
+{
+  stk->top = -1;
+  stk->length = length;
+  stk->array = malloc(stk->length * sizeof(Register));
+}
+
+void reinit_stack(Stack* stk)
 {
   stk->top = -1;
 }
@@ -19,7 +27,7 @@ bool stack_empty(Stack* stk)
 
 bool stack_full(Stack* stk)
 {
-  if (stk->top == (MAX - 1))
+  if (stk->top == (stk->length - 1))
     {
       return true;
     }
@@ -38,7 +46,7 @@ bool push(Stack* stk, Register reg)
   else
     {
       stk->top = stk->top + 1;
-      stk->A[stk->top] = reg;
+      stk->array[stk->top] = reg;
       return true;
     }
 }
@@ -52,7 +60,7 @@ bool pop(Stack* stk, Register* removed)
   else
     {
       stk->top = stk->top - 1;
-      *removed = stk->A[stk->top + 1];
+      *removed = stk->array[stk->top + 1];
       return true;
     }
 }
