@@ -275,7 +275,7 @@ START_TEST(test_dequeue_3)
   bool result;
 
   k = -247;
-  
+
   init_queue(q, length);
 
   el->key = &k;

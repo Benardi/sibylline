@@ -17,7 +17,7 @@ typedef struct
 {
   Register* array; /* Array that stores the elements */
   int max_n_elems;
-  int n_elems;     /* Current number of elements in Sequential List */
+  int n_elems; /* Current number of elements in Sequential List */
 } SeqList;
 
 /** @brief Initializes Sequential List with 0 elements.

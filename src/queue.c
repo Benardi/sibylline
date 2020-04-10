@@ -1,12 +1,12 @@
-#include <queue.h>
 #include <malloc.h>
+#include <queue.h>
 
 void init_queue(Queue* q, int length)
 {
   q->head = 0;
   q->tail = 0;
   q->length = length;
-  q->array = malloc(length * sizeof(Register)); 
+  q->array = malloc(length * sizeof(Register));
 }
 
 void reinit_queue(Queue* q)

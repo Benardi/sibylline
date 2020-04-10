@@ -45,8 +45,8 @@ bool queue_empty(Queue* q);
 /** @brief Checks whether the queue is full.
  *
  * If all available positions are occupied returns true. A queue can
- * hold n - 1 elements, so if length - 1 elements have been enqueued the queue is
- * full. If there's at least one available position besides the one reserved
+ * hold n - 1 elements, so if length - 1 elements have been enqueued the queue
+ * is full. If there's at least one available position besides the one reserved
  * to the tail or the queue has just been initialized returns false.
  *
  * @param q Queue as a pointer

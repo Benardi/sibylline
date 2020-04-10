@@ -1,5 +1,5 @@
-#include <stack.h>
 #include <malloc.h>
+#include <stack.h>
 
 void init_stack(Stack* stk, int length)
 {
