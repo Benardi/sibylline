@@ -30,6 +30,15 @@ void swap(int array[], int pos1, int pos2)
   array[pos2] = temp;
 }
 
+void swap_reg(Register array[], int pos1, int pos2)
+{
+  Register temp;
+
+  temp = array[pos1];
+  array[pos1] = array[pos2];
+  array[pos2] = temp;
+}
+
 int sample(int lower, int upper)
 {
   int num;

@@ -9,6 +9,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <register.h>
+
 /** @brief Switches the values at two given positions in the parameter array.
  *
  * @param array parameter array contain the two values/positions.
@@ -17,6 +19,8 @@
  * @return Void.
  */
 void swap(int array[], int pos1, int pos2);
+
+void swap_reg(Register array[], int pos1, int pos2);
 
 /** @brief Finds elements of highest value in array and returns its position.
  *

@@ -109,6 +109,266 @@ START_TEST(test_swap_7)
 }
 END_TEST
 
+START_TEST(test_swap_reg_1)
+{
+  Register* array;
+  int k1, k2, k3, k4, k5, k6;
+  int length = 6; 
+ 
+  array = malloc(length * sizeof(Register));
+
+  k1 = 5;
+  k2 = 2;
+  k3 = 4;
+  k4 = 6;
+  k5 = 1;
+  k6 = 3;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  
+  swap_reg(array, 0, 1);
+
+  ck_assert_int_eq(*((int*)array[0].key), 2);
+  ck_assert_int_eq(*((int*)array[1].key), 5);
+  ck_assert_int_eq(*((int*)array[2].key), 4);
+  ck_assert_int_eq(*((int*)array[3].key), 6);
+  ck_assert_int_eq(*((int*)array[4].key), 1);
+  ck_assert_int_eq(*((int*)array[5].key), 3);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_swap_reg_2)
+{
+  Register* array;
+  int k1, k2, k3, k4, k5, k6;
+  int length = 6;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 5;
+  k2 = 2;
+  k3 = 4;
+  k4 = 6;
+  k5 = 1;
+  k6 = 3;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+
+  swap_reg(array, 3, 3);
+
+  ck_assert_int_eq(*((int*)array[0].key), 5);
+  ck_assert_int_eq(*((int*)array[1].key), 2);
+  ck_assert_int_eq(*((int*)array[2].key), 4);
+  ck_assert_int_eq(*((int*)array[3].key), 6);
+  ck_assert_int_eq(*((int*)array[4].key), 1);
+  ck_assert_int_eq(*((int*)array[5].key), 3);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_swap_reg_3)
+{
+  Register* array;
+  int k1, k2, k3, k4, k5, k6;
+  int length = 6;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 5;
+  k2 = 2;
+  k3 = 4;
+  k4 = 6;
+  k5 = 1;
+  k6 = 3;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+
+  swap_reg(array, 0, 0);
+
+  ck_assert_int_eq(*((int*)array[0].key), 5);
+  ck_assert_int_eq(*((int*)array[1].key), 2);
+  ck_assert_int_eq(*((int*)array[2].key), 4);
+  ck_assert_int_eq(*((int*)array[3].key), 6);
+  ck_assert_int_eq(*((int*)array[4].key), 1);
+  ck_assert_int_eq(*((int*)array[5].key), 3);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_swap_reg_4)
+{
+  Register* array;
+  int k1, k2, k3, k4, k5, k6;
+  int length = 6;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 5;
+  k2 = 2;
+  k3 = 4;
+  k4 = 6;
+  k5 = 1;
+  k6 = 3;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+
+  swap_reg(array, 5, 5);
+
+  ck_assert_int_eq(*((int*)array[0].key), 5);
+  ck_assert_int_eq(*((int*)array[1].key), 2);
+  ck_assert_int_eq(*((int*)array[2].key), 4);
+  ck_assert_int_eq(*((int*)array[3].key), 6);
+  ck_assert_int_eq(*((int*)array[4].key), 1);
+  ck_assert_int_eq(*((int*)array[5].key), 3);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_swap_reg_5)
+{
+  Register* array;
+  int k1, k2, k3, k4, k5, k6;
+  int length = 6;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 5;
+  k2 = -10;
+  k3 = 4;
+  k4 = -20;
+  k5 = 1;
+  k6 = 0;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+
+  swap_reg(array, 4, 1);
+
+  ck_assert_int_eq(*((int*)array[0].key), 5);
+  ck_assert_int_eq(*((int*)array[1].key), 1);
+  ck_assert_int_eq(*((int*)array[2].key), 4);
+  ck_assert_int_eq(*((int*)array[3].key), -20);
+  ck_assert_int_eq(*((int*)array[4].key), -10);
+  ck_assert_int_eq(*((int*)array[5].key), 0);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_swap_reg_6)
+{
+  Register* array;
+  int k1, k2, k3, k4, k5, k6;
+  int length = 6;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = 5;
+  k2 = -10;
+  k3 = 4;
+  k4 = -20;
+  k5 = 1;
+  k6 = 0;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+
+  swap_reg(array, 5, 2);
+
+  ck_assert_int_eq(*((int*)array[0].key), 5);
+  ck_assert_int_eq(*((int*)array[1].key), -10);
+  ck_assert_int_eq(*((int*)array[2].key), 0);
+  ck_assert_int_eq(*((int*)array[3].key), -20);
+  ck_assert_int_eq(*((int*)array[4].key), 1);
+  ck_assert_int_eq(*((int*)array[5].key), 4);
+
+  free(array);
+}
+END_TEST
+
+START_TEST(test_swap_reg_7)
+{
+  Register* array;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
+  int length = 11;
+
+  array = malloc(length * sizeof(Register));
+
+  k1 = -50;
+  k2 = 0;
+  k3 = 25;
+  k4 = -33;
+  k5 = 245;
+  k6 = -535;
+  k7 = 0;
+  k8 = -67;
+  k9 = 200;
+  k10 = 300;
+  k11 = -20;
+
+  array[0].key = &k1;
+  array[1].key = &k2;
+  array[2].key = &k3;
+  array[3].key = &k4;
+  array[4].key = &k5;
+  array[5].key = &k6;
+  array[6].key = &k7;
+  array[7].key = &k8;
+  array[8].key = &k9;
+  array[9].key = &k10;
+  array[10].key = &k11;
+
+  swap_reg(array, 7, 3);
+
+  ck_assert_int_eq(*((int*)array[0].key), -50);
+  ck_assert_int_eq(*((int*)array[1].key), 0);
+  ck_assert_int_eq(*((int*)array[2].key), 25);
+  ck_assert_int_eq(*((int*)array[3].key), -67);
+  ck_assert_int_eq(*((int*)array[4].key), 245);
+  ck_assert_int_eq(*((int*)array[5].key), -535);
+  ck_assert_int_eq(*((int*)array[6].key), 0);
+  ck_assert_int_eq(*((int*)array[7].key), -33);
+  ck_assert_int_eq(*((int*)array[8].key), 200);
+  ck_assert_int_eq(*((int*)array[9].key), 300);
+  ck_assert_int_eq(*((int*)array[10].key), -20);
+
+  free(array);
+}
+END_TEST
+
 START_TEST(test_max_1)
 {
   int max_idx;
@@ -600,6 +860,15 @@ Suite* make_test_suite(void)
   tcase_add_test(tc_core, test_swap_5);
   tcase_add_test(tc_core, test_swap_6);
   tcase_add_test(tc_core, test_swap_7);
+
+  tcase_add_test(tc_core, test_swap_reg_1);
+  
+  tcase_add_test(tc_core, test_swap_reg_2);
+  tcase_add_test(tc_core, test_swap_reg_3);
+  tcase_add_test(tc_core, test_swap_reg_4);
+  tcase_add_test(tc_core, test_swap_reg_5);
+  tcase_add_test(tc_core, test_swap_reg_6);
+  tcase_add_test(tc_core, test_swap_reg_7);
 
   tcase_add_test(tc_core, test_max_1);
   tcase_add_test(tc_core, test_max_2);
