@@ -13,13 +13,20 @@
 
 /** @brief Switches the values at two given positions in the parameter array.
  *
- * @param array parameter array contain the two values/positions.
- * @param pos1 Position the array of element one to be switched.
- * @param pos2 Position in the array of element two to be in switched.
+ * @param array Array of integers that contains the two values/positions.
+ * @param pos1 Position in array of element one.
+ * @param pos2 Position in array of element two.
  * @return Void.
  */
 void swap(int array[], int pos1, int pos2);
 
+/** @brief Switches the values at two given positions in the parameter array.
+ *
+ * @param array Array of Registers that contain the two values/positions.
+ * @param pos1 Position in array of element one.
+ * @param pos2 Position in array of element two.
+ * @return Void.
+ */
 void swap_reg(Register array[], int pos1, int pos2);
 
 /** @brief Finds elements of highest value in array and returns its position.
