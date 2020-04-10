@@ -4,8 +4,8 @@
  * @date 2 Jan 2020
  * @brief Header file for Queue module.
  *
- * Defines the constant MAX number of elements, the struct Queue and the
- * prototypes for the routines of the Queue module.
+ * Defines the the struct Queue and the prototypes for the routines
+ * of the Queue module.
  */
 #ifndef QUEUE_H
 #define QUEUE_H
@@ -13,11 +13,10 @@
 #include <register.h>
 #include <stdbool.h>
 
-#define MAX 20
-
 typedef struct
 {
-  Register A[MAX];
+  Register* array;
+  int length;
   int head;
   int tail;
 } Queue;
@@ -29,7 +28,9 @@ typedef struct
  * @param q Pointer to Queue
  * @return Void
  */
-void init_queue(Queue* q);
+void init_queue(Queue* q, int length);
+
+void reinit_queue(Queue* q);
 
 /** @brief Checks whether the queue is empty.
  *
@@ -44,7 +45,7 @@ bool queue_empty(Queue* q);
 /** @brief Checks whether the queue is full.
  *
  * If all available positions are occupied returns true. A queue can
- * hold n - 1 elements, so if MAX - 1 elements have been enqueued the queue is
+ * hold n - 1 elements, so if length - 1 elements have been enqueued the queue is
  * full. If there's at least one available position besides the one reserved
  * to the tail or the queue has just been initialized returns false.
  *
