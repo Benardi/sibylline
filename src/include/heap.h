@@ -12,6 +12,7 @@
 
 #include <limits.h>
 #include <math.h>
+#include <register.h>
 #include <stdbool.h>
 
 #define MINUS_INF INT_MIN
@@ -26,22 +27,25 @@
  * given element with one of its children to remove a violation to the
  * max-heap property.
  *
- * @param array Array of integers containing heap elements.
+ * @param array Array of Registers containing heap elements.
  * @param heap_size Number of elements considered to be in the heap.
  * @param i Index in array for given heap element
+ * @param compare Pointer to function that compares two void pointers.
  * @return Void.
  */
-void max_heapify(int array[], int heap_size, int i);
+void max_heapify(Register array[], int heap_size, int i,
+                 int (*compare)(void*, void*));
 
 /** @brief Produces a max-heap from an unordered input array.
  *
  * Swaps elements in given array to produce a max-heap encompassing
  * all elements in array.
  *
- * @param array Array of integers containing heap elements.
+ * @param array Array of Registers containing heap elements.
  * @param length Number of elements in given array.
+ * @param compare Pointer to function that compares two void pointers.
  * @return Void.
  */
-void build_max_heap(int array[], int length);
+void build_max_heap(Register array[], int length, int (*compare)(void*, void*));
 
 #endif

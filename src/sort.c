@@ -223,18 +223,18 @@ void bubble_sort(int array[], int start, int end)
     }
 }
 
-void heap_sort(int array[], int length)
+void heap_sort(Register array[], int length, int (*compare)(void*, void*))
 {
   int i, heap_size;
 
-  build_max_heap(array, length);
+  build_max_heap(array, length, compare);
 
   heap_size = length;
   for (i = length - 1; i > 0; i--)
     {
-      swap(array, 0, i);
+      swap_reg(array, 0, i);
       heap_size--;
-      max_heapify(array, heap_size, 0);
+      max_heapify(array, heap_size, 0, compare);
     }
 }
 

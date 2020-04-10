@@ -179,11 +179,12 @@ void bubble_sort(int array[], int start, int end);
  * Applies the Heap Sort procedure to sort all elements
  * in array in ascending order.
  *
- * @param array Array of integer numbers to be sorted
+ * @param array Array of Registers numbers to be sorted
  * @param length Number of elements in array.
+ * @param compare Pointer to function that compares two void pointers.
  * @return Void
  */
-void heap_sort(int array[], int length);
+void heap_sort(Register array[], int length, int (*compare)(void*, void*));
 
 /** @brief Sorts given array via Counting Sort procedure.
  *
