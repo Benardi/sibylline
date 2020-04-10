@@ -4,8 +4,8 @@
  * @date 1 Jan 2020
  * @brief Header file for Stack module.
  *
- * Defines the constant MAX number of elements, the struct Stack and the
- * prototypes for the subroutines of the Stack module.
+ * Defines the struct Stack and the prototypes for the
+ * subroutines of the Stack module.
  */
 #ifndef STACK_H
 #define STACK_H
@@ -13,11 +13,10 @@
 #include <register.h>
 #include <stdbool.h>
 
-#define MAX 20
-
 typedef struct
 {
-  Register A[MAX];
+  Register* array;
+  int length;
   int top;
 } Stack;
 
@@ -28,7 +27,9 @@ typedef struct
  * @param stk Pointer to Stack
  * @return Void
  */
-void init_stack(Stack* stk);
+void init_stack(Stack* stk, int length);
+
+void reinit_stack(Stack* stk);
 
 /** @brief Checks whether the stack is empty.
  *
