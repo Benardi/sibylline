@@ -1,5 +1,66 @@
+#include <malloc.h>
 #include <graph.h>
+#include <dll.h>
+#include <queue.h>
 
-void bfs(DoublyLinkedList*** adj_list, int root)
+void bfs(DoublyLinkedList*** adj_list, ColoredNode* vrtxs[], int length, ColoredNode* root)
 {
+  Queue q;
+  int i, inf;
+  Register* reg;
+  ColoredNode* crt; 
+  ColoredNode* adj;
+  DoublyLinkedList* node;
+
+  inf = INF;
+  reg = malloc(sizeof(Register));
+
+  for (i = 0; i < length; i++)
+  {
+    if (vrtxs[i] != root)
+    {
+      vrtxs[i]->color = WHITE; 
+      vrtxs[i]->dist = inf; 
+      vrtxs[i]->p = NULL; 
+    }
+  }
+
+  root->color = GRAY;
+  root->dist = 0;
+  root->p = NULL;
+
+  init_queue(&q, length + 1);
+
+  reg->key = root;
+  enqueue(&q, *reg);
+
+  while (queue_empty(&q) == false)
+  {
+    dequeue(&q, reg);
+    crt = reg->key;
+	    
+    node = (*adj_list[crt->id]);
+
+    while (node != NULL)
+    {
+      adj = node->data.key;
+      
+      if (adj->color == WHITE)
+      {
+        adj->color = GRAY;
+	adj->dist = crt->dist + 1;
+	adj->p = crt;
+	
+	reg->key = adj;
+        enqueue(&q, *reg);
+      }
+
+      node = node->next; 
+    }
+
+    crt->color = BLACK; 
+  }
+ 
+  free(reg);
+  free(q.array);
 }
