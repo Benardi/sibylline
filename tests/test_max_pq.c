@@ -928,6 +928,7 @@ START_TEST(test_heap_extract_max_1)
   int length = 9;
 
   array = malloc(length * sizeof(Register));
+  extracted = malloc(sizeof(Register));
   heap_size = malloc(sizeof(int));
 
   k1 = 50;
@@ -950,8 +951,6 @@ START_TEST(test_heap_extract_max_1)
   array[7].key = &k8;
   array[8].key = &k9;
 
-  heap_size = malloc(sizeof(int));
-  extracted = malloc(sizeof(Register));
   (*heap_size) = 0;
 
   result = heap_extract_max(array, heap_size, extracted, compare_int);

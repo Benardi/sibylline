@@ -15,35 +15,40 @@ include(CheckSymbolExists)
 include(CheckTypeSize)
 include(FindValgrind)
 
-file(GLOB test_src ${CMAKE_CURRENT_SOURCE_DIR}/*.c)
-
-foreach(test_src_file ${test_src})
-
-    string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" test_name ${test_src_file})
-    string(REPLACE ".c" "" test_name ${test_name})
-    set(valgrind_test "valgrind_${test_name}") 
-
-    # Since Check uses Threads to paralelize the tests, it's mandatory
-    # add pthread as a dependency, alongside the Check libraries.
-    add_executable(${test_name} ${test_src_file})
-    target_link_libraries(${test_name} sibylline ${CHECK_LIBRARIES} pthread m)
-
-    # Create testing target and redirect its output to `Testing` folder
-    add_test(NAME ${test_name} COMMAND ${test_name} WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Testing)
-    set_tests_properties(${test_name} PROPERTIES TIMEOUT 30) 
-
-endforeach(test_src_file ${test_src})
-
-foreach(test_src_file ${test_src})
-
-    string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" test_name ${test_src_file})
-    string(REPLACE ".c" "" test_name ${test_name})
-    set(valgrind_test "valgrind_${test_name}") 
-
-    # Aditional Valgrind test to check memory leaks in code
-    add_test(NAME ${valgrind_test}
-             COMMAND ${VALGRIND_PROGRAM} --leak-check=full
-             --error-exitcode=1 $<TARGET_FILE:${test_name}>)
-
-endforeach(test_src_file ${test_src})
-
+if(NOT "${CMAKE_BUILD_TYPE}" STREQUAL "Release" AND NOT "${CMAKE_BUILD_TYPE}" STREQUAL "MinSizeRel")
+  file(GLOB test_src ${CMAKE_CURRENT_SOURCE_DIR}/*.c)
+  
+  foreach(test_src_file ${test_src})
+  
+      string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" test_name ${test_src_file})
+      string(REPLACE ".c" "" test_name ${test_name})
+      set(valgrind_test "valgrind_${test_name}") 
+  
+      # Since Check uses Threads to paralelize the tests, it's mandatory
+      # add pthread as a dependency, alongside the Check libraries.
+      add_executable(${test_name} ${test_src_file})
+      target_link_libraries(${test_name} sibylline ${CHECK_LIBRARIES} pthread m)
+  
+      # Create testing target and redirect its output to `Testing` folder
+      add_test(NAME ${test_name} COMMAND ${test_name} WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Testing)
+      set_tests_properties(${test_name} PROPERTIES TIMEOUT 30) 
+  
+  endforeach(test_src_file ${test_src})
+  
+  if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    
+    foreach(test_src_file ${test_src})
+    
+        string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" test_name ${test_src_file})
+        string(REPLACE ".c" "" test_name ${test_name})
+        set(valgrind_test "valgrind_${test_name}") 
+    
+        # Aditional Valgrind test to check memory leaks in code
+        add_test(NAME ${valgrind_test}
+                 COMMAND ${VALGRIND_PROGRAM} --leak-check=full
+                 --error-exitcode=1 $<TARGET_FILE:${test_name}>)
+    
+    endforeach(test_src_file ${test_src})
+    
+  endif()
+endif()
