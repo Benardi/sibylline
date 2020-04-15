@@ -24,6 +24,7 @@ typedef struct
 /** @brief Initializes Queue to have 0 elements.
  *
  * Sets the attribute head and tail to 0. Existing elements are ignored.
+ * If you want to hold n elements in the queue set @c length to n + 1
  *
  * @param q Pointer to Queue
  * @return Void
