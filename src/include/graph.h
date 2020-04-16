@@ -18,7 +18,9 @@
 
 typedef enum NodeColor
 {
-  WHITE = 0, GRAY = 1, BLACK = 2
+  WHITE = 0,
+  GRAY = 1,
+  BLACK = 2
 } NodeColor;
 
 typedef struct ColoredNode
@@ -47,15 +49,16 @@ typedef struct TimedNode
  * colors nodes to keep track of the visited ones. Nodes that are not reached
  * from root node are kept WHITE. For each node in the graph the algorithm
  * calculates the distance to root node and its 'parent' node. A node's
- * parent is the node that links it to the root node.  
+ * parent is the node that links it to the root node.
  *
- * @param adj_list List contains the vertices adjacent each vertex. 
+ * @param adj_list List contains the vertices adjacent each vertex.
  * @param vertices Array with all vertices in array.
  * @param length Number of vertices in graph.
  * @param root Vertex used as root for BFS algorithm.
  * @return Void.
  */
-void bfs(DoublyLinkedList*** adj_list, ColoredNode* vertices[], int length, ColoredNode* root);
+void bfs(DoublyLinkedList*** adj_list, ColoredNode* vertices[], int length,
+         ColoredNode* root);
 
 /** @brief Applies Depth First Search on given graph.
  *
@@ -68,9 +71,9 @@ void bfs(DoublyLinkedList*** adj_list, ColoredNode* vertices[], int length, Colo
  * be found the distance), finish time (iterations for it and its adjacent
  * vertices to be processed) and its 'parent' node. A node's parent is the
  * node that links it to the root of its tree (DFS produces disjoint trees
- * that together make up the entire graph).  
+ * that together make up the entire graph).
  *
- * @param adj_list List contains the vertices adjacent each vertex. 
+ * @param adj_list List contains the vertices adjacent each vertex.
  * @param vertices Array with all vertices in array.
  * @param length Number of vertices in graph.
  * @return Void.

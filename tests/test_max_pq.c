@@ -4,8 +4,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-void setup(void);
-void teardown(void);
 Suite* make_test_suite(void);
 int compare_int(void* key1, void* key2);
 
@@ -28,14 +26,6 @@ int compare_int(void* key1, void* key2)
       result = 0;
     }
   return result;
-}
-
-void setup(void)
-{
-}
-
-void teardown(void)
-{
 }
 
 START_TEST(test_heap_increase_key_1)
@@ -1516,8 +1506,6 @@ Suite* make_test_suite(void)
 
   /* Creation test case */
   tc_core = tcase_create("Test Cases with Setup and Teardown");
-
-  tcase_add_checked_fixture(tc_core, setup, teardown);
 
   tcase_add_test(tc_core, test_heap_increase_key_1);
   tcase_add_test(tc_core, test_heap_increase_key_2);
