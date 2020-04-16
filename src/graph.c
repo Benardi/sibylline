@@ -65,30 +65,7 @@ void bfs(DoublyLinkedList*** adj_list, ColoredNode* vrtxs[], int length, Colored
   free(q.array);
 }
 
-
-void dfs(DoublyLinkedList*** adj_list, TimedNode* vrtxs[], int length)
-{
-  int i;
-  int time;
-
-  for (i = 0; i < length; i++)
-  {
-    vrtxs[i]->color = WHITE;
-    vrtxs[i]->p = NULL;
-  }
-  
-  time = 0; 
-  
-  for (i = 0; i < length; i++)
-  {
-    if (vrtxs[i]->color == WHITE)
-    {
-      dfs_visit(adj_list, vrtxs, length, vrtxs[i], &time);  
-    }
-  }
-}
-
-void dfs_visit(DoublyLinkedList*** adj_list, TimedNode* vrtxs[], int length, TimedNode* start_vrtx, int* time)
+static void dfs_visit(DoublyLinkedList*** adj_list, TimedNode* vrtxs[], int length, TimedNode* start_vrtx, int* time)
 {
 
   TimedNode* adj;
@@ -117,3 +94,26 @@ void dfs_visit(DoublyLinkedList*** adj_list, TimedNode* vrtxs[], int length, Tim
   *time = *time + 1;
   start_vrtx->f_time = *time; 
 }
+
+void dfs(DoublyLinkedList*** adj_list, TimedNode* vrtxs[], int length)
+{
+  int i;
+  int time;
+
+  for (i = 0; i < length; i++)
+  {
+    vrtxs[i]->color = WHITE;
+    vrtxs[i]->p = NULL;
+  }
+  
+  time = 0; 
+  
+  for (i = 0; i < length; i++)
+  {
+    if (vrtxs[i]->color == WHITE)
+    {
+      dfs_visit(adj_list, vrtxs, length, vrtxs[i], &time);  
+    }
+  }
+}
+
