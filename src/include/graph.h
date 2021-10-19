@@ -40,6 +40,20 @@ typedef struct TimedNode
   struct TimedNode* p;
 } TimedNode;
 
+typedef struct WeightedNode
+{
+  int id;
+  int dist;
+  int weight;
+  struct WeightedNode* p;
+} WeightedNode;
+
+typedef struct WeightedEdge
+{
+  int weight;
+  struct WeightedNode* node;
+} WeightedEdge;
+
 /** @brief Applies Breadth First Search on given graph.
  *
  * Applies Breadth First Search on given graph. Graph is provided in the
@@ -79,5 +93,11 @@ void bfs(DoublyLinkedList*** adj_list, ColoredNode* vertices[], int length,
  * @return Void.
  */
 void dfs(DoublyLinkedList*** adj_list, TimedNode* vrtxs[], int length);
+
+void init_sgl_src(WeightedNode vrtxs[], int length, WeightedNode* root);
+
+void relax(WeightedNode vrtxs[], int length, WeightedNode* u, WeightedNode* v);
+
+void bellman_ford(DoublyLinkedList*** adj_list, WeightedNode vrtxs[], int length);
 
 #endif

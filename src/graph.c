@@ -2,6 +2,9 @@
 #include <graph.h>
 #include <malloc.h>
 #include <queue.h>
+#include <limits.h>
+
+#define INFINITY INT_MAX
 
 void bfs(DoublyLinkedList*** adj_list, ColoredNode* vrtxs[], int length,
          ColoredNode* root)
@@ -116,4 +119,42 @@ void dfs(DoublyLinkedList*** adj_list, TimedNode* vrtxs[], int length)
           dfs_visit(adj_list, vrtxs, length, vrtxs[i], &time);
         }
     }
+}
+
+void init_sgl_src(WeightedNode vrtxs[], int length, WeightedNode* root)
+{
+  int i;
+
+  for (i  = 0; i < length; i++)
+  {
+    vrtxs[i]->dist = INFINITY;
+    vrtxs[i]->p = NULL;
+  }
+  root->dist = 0;
+}
+
+void relax(DoublyLinkedList*** adj_list, int length, WeightedNode* vrtx1,
+	   WeightedNode* vrtx2, int (*compare)(void*, void*))
+{
+  DoublyLinkedList** head;
+  DoublyLinkedList* node;
+  WeightedEdge edge;
+
+  head = adj_list[vrtx1->id];
+  node = dll_search(head, (void*) vrtx2->id, compare); 
+
+  edge = node->data.key;
+
+  if (vrtx2->dist > (vrtx1->dist + edge.weight))
+  {
+    vrtx2->dist = vrtx1->dist + edge.weight;
+    vrtx2->p = vrtx1->p;   
+  }
+
+}
+
+void bellman_ford(DoublyLinkedList*** adj_list, WeightedNode vrtxs[], int length)
+{
+  init_sgl_src(vrtxs, length, root);
+ 
 }
