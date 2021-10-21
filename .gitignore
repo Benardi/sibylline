@@ -8,6 +8,9 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 
+#Swap files
+*.swp
+
 # Object files
 *.o
 *.ko
