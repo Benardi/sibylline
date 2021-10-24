@@ -8,35 +8,63 @@ void init_list(ArrayList* list, int capacity)
   list->array = malloc(capacity * sizeof(Register));
 }
 
-void insert(ArrayList* list, Register element)
+static void increase_capacity(ArrayList* list, int factor)
 {
+  int i;
   Register* new_array;
   Register* old_array;
-  int i;
 
+  old_array = list->array;
+  new_array = malloc(factor * list->capacity * sizeof(Register));
+
+  for (i = 0; i < list->capacity; i++)
+    {
+      new_array[i] = old_array[i];
+    }
+  list->array = new_array;
+  list->capacity = factor * list->capacity;
+  free(old_array);
+}
+
+void insert(ArrayList* list, Register element)
+{
   if (list->size == list->capacity)
     {
-      old_array = list->array;
-      new_array = malloc(2 * list->capacity * sizeof(Register));
-
-      for (i = 0; i < list->capacity; i++)
-        {
-          new_array[i] = old_array[i];
-        }
-      list->array = new_array;
-      list->capacity = 2 * list->capacity;
-      free(old_array);
+      increase_capacity(list, INCREASE_FACTOR);
     }
 
   list->array[list->size] = element;
   list->size = list->size + 1;
 }
-bool set(ArrayList* list, Register element, int position)
+
+bool insert_at(ArrayList* list, Register element, int index)
 {
   bool result;
-  if ((position > -1) && (position < list->capacity))
+
+  if ((index > -1) && (index < list->capacity))
     {
-      list->array[position] = element;
+      if (index < list->size)
+        {
+          shift_right(list, index);
+        }
+      list->array[index] = element;
+      list->size = list->size + 1;
+      result = true;
+    }
+  else
+    {
+      result = false;
+    }
+
+  return result;
+}
+
+bool set(ArrayList* list, Register element, int index)
+{
+  bool result;
+  if ((index > -1) && (index < list->capacity))
+    {
+      list->array[index] = element;
       result = true;
     }
   else
@@ -46,12 +74,12 @@ bool set(ArrayList* list, Register element, int position)
   return result;
 }
 
-Register* get(ArrayList* list, int position)
+Register* get(ArrayList* list, int index)
 {
   Register* target;
-  if ((position > -1) && (position < list->capacity))
+  if ((index > -1) && (index < list->capacity))
     {
-      target = &(list->array[position]);
+      target = &(list->array[index]);
     }
   else
     {
@@ -96,6 +124,21 @@ bool shift_left(ArrayList* list, int index)
     }
 
   return result;
+}
+
+void shift_right(ArrayList* list, int index)
+{
+  int i;
+
+  if (list->size == list->capacity)
+    {
+      increase_capacity(list, INCREASE_FACTOR);
+    }
+
+  for (i = list->size - 1; i >= index; i--)
+    {
+      list->array[i + 1] = list->array[i];
+    }
 }
 
 bool discard(ArrayList* list, int index)

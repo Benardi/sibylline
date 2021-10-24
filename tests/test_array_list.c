@@ -129,6 +129,125 @@ START_TEST(test_insert4_capacity5)
 }
 END_TEST
 
+START_TEST(test_insert_at_capacity1)
+{
+  Register el;
+  int capacity = 1;
+  int k = 5;
+
+  init_list(list, capacity);
+
+  el.key = &k;
+  insert_at(list, el, 0);
+
+  ck_assert_int_eq(list->size, 1);
+  ck_assert_int_eq(list->capacity, 1);
+  ck_assert_int_eq(*((int*)list->array[0].key), 5);
+}
+END_TEST
+
+START_TEST(test_insert_twice_at_capacity1)
+{
+  Register el;
+  int capacity = 1;
+  int k1, k2;
+  k1 = 5;
+  k2 = 20;
+
+  init_list(list, capacity);
+
+  el.key = &k1;
+  insert_at(list, el, 0);
+
+  el.key = &k2;
+  insert_at(list, el, 0);
+
+  ck_assert_int_eq(list->size, 2);
+  ck_assert_int_eq(list->capacity, 2);
+  ck_assert_int_eq(*((int*)list->array[0].key), 20);
+  ck_assert_int_eq(*((int*)list->array[1].key), 5);
+}
+END_TEST
+
+START_TEST(test_insert_at_capacity5)
+{
+  Register el;
+  int capacity = 5;
+  int k, k1, k2, k3, k4;
+
+  init_list(list, capacity);
+  list->size = 4;
+
+  k1 = 1;
+  el.key = &k1;
+  list->array[0] = el;
+
+  k2 = 3;
+  el.key = &k2;
+  list->array[1] = el;
+
+  k3 = 4;
+  el.key = &k3;
+  list->array[2] = el;
+
+  k4 = 5;
+  el.key = &k4;
+  list->array[3] = el;
+
+  k = 2;
+  el.key = &k;
+  insert_at(list, el, 1);
+
+  ck_assert_int_eq(list->size, 5);
+  ck_assert_int_eq(list->capacity, 5);
+  ck_assert_int_eq(*((int*)list->array[0].key), 1);
+  ck_assert_int_eq(*((int*)list->array[1].key), 2);
+  ck_assert_int_eq(*((int*)list->array[2].key), 3);
+  ck_assert_int_eq(*((int*)list->array[3].key), 4);
+  ck_assert_int_eq(*((int*)list->array[4].key), 5);
+}
+END_TEST
+
+START_TEST(test_insert_at_last_index)
+{
+  Register el;
+  int capacity = 5;
+  int k, k1, k2, k3, k4;
+  int index = 4;
+
+  init_list(list, capacity);
+  list->size = 4;
+
+  k1 = 1;
+  el.key = &k1;
+  list->array[0] = el;
+
+  k2 = 3;
+  el.key = &k2;
+  list->array[1] = el;
+
+  k3 = 4;
+  el.key = &k3;
+  list->array[2] = el;
+
+  k4 = 5;
+  el.key = &k4;
+  list->array[3] = el;
+
+  k = 12;
+  el.key = &k;
+  insert_at(list, el, index);
+
+  ck_assert_int_eq(list->size, 5);
+  ck_assert_int_eq(list->capacity, 5);
+  ck_assert_int_eq(*((int*)list->array[0].key), 1);
+  ck_assert_int_eq(*((int*)list->array[1].key), 3);
+  ck_assert_int_eq(*((int*)list->array[2].key), 4);
+  ck_assert_int_eq(*((int*)list->array[3].key), 5);
+  ck_assert_int_eq(*((int*)list->array[4].key), 12);
+}
+END_TEST
+
 START_TEST(test_set_success)
 {
   Register el;
@@ -535,6 +654,80 @@ START_TEST(test_shift_left_fail_tail)
 }
 END_TEST
 
+START_TEST(test_shift_right_2nd_el_in_4_el_array)
+{
+  Register el;
+  int k1, k2, k3, k4;
+  int index = 1;
+  int capacity = 5;
+
+  init_list(list, capacity);
+  list->size = 4;
+
+  k1 = 1;
+  el.key = &k1;
+  list->array[0] = el;
+
+  k2 = 2;
+  el.key = &k2;
+  list->array[1] = el;
+
+  k3 = 3;
+  el.key = &k3;
+  list->array[2] = el;
+
+  k4 = 4;
+  el.key = &k4;
+  list->array[3] = el;
+
+  shift_right(list, index);
+
+  ck_assert_int_eq(list->capacity, 5);
+  ck_assert_int_eq(*((int*)list->array[0].key), 1);
+  ck_assert_int_eq(*((int*)list->array[1].key), 2);
+  ck_assert_int_eq(*((int*)list->array[2].key), 2);
+  ck_assert_int_eq(*((int*)list->array[3].key), 3);
+  ck_assert_int_eq(*((int*)list->array[4].key), 4);
+}
+END_TEST
+
+START_TEST(test_shift_right_1st_el_in_4_el_filled_array)
+{
+  Register el;
+  int k1, k2, k3, k4;
+  int index = 0;
+  int capacity = 4;
+
+  init_list(list, capacity);
+  list->size = 4;
+
+  k1 = 1;
+  el.key = &k1;
+  list->array[0] = el;
+
+  k2 = 2;
+  el.key = &k2;
+  list->array[1] = el;
+
+  k3 = 3;
+  el.key = &k3;
+  list->array[2] = el;
+
+  k4 = 4;
+  el.key = &k4;
+  list->array[3] = el;
+
+  shift_right(list, index);
+
+  ck_assert_int_eq(list->capacity, 8);
+  ck_assert_int_eq(*((int*)list->array[0].key), 1);
+  ck_assert_int_eq(*((int*)list->array[1].key), 1);
+  ck_assert_int_eq(*((int*)list->array[2].key), 2);
+  ck_assert_int_eq(*((int*)list->array[3].key), 3);
+  ck_assert_int_eq(*((int*)list->array[4].key), 4);
+}
+END_TEST
+
 START_TEST(test_discard_head_4_el)
 {
   Register el;
@@ -718,6 +911,50 @@ START_TEST(test_index_of_success)
 }
 END_TEST
 
+START_TEST(test_index_of_failure)
+{
+  Register el;
+  void* identifier;
+  int result, value, capacity, k1, k2, k3, k4, k5;
+
+  capacity = 7;
+  init_list(list, capacity);
+  list->size = 5;
+
+  k1 = 10;
+  el.key = &k1;
+  list->array[0] = el;
+
+  k2 = 20;
+  el.key = &k2;
+  list->array[1] = el;
+
+  k3 = 30;
+  el.key = &k3;
+  list->array[2] = el;
+
+  k4 = 1;
+  el.key = &k4;
+  list->array[3] = el;
+
+  k5 = 2;
+  el.key = &k5;
+  list->array[4] = el;
+
+  value = 100;
+  identifier = &value;
+  result = index_of(list, identifier, compare_to);
+
+  ck_assert_int_eq(result, -1);
+  ck_assert_int_eq(list->size, 5);
+  ck_assert_int_eq(*((int*)list->array[0].key), 10);
+  ck_assert_int_eq(*((int*)list->array[1].key), 20);
+  ck_assert_int_eq(*((int*)list->array[2].key), 30);
+  ck_assert_int_eq(*((int*)list->array[3].key), 1);
+  ck_assert_int_eq(*((int*)list->array[4].key), 2);
+}
+END_TEST
+
 Suite* make_test_suite(void)
 {
   Suite* s;
@@ -735,6 +972,11 @@ Suite* make_test_suite(void)
   tcase_add_test(tc_core, test_insert3_capacity1);
   tcase_add_test(tc_core, test_insert4_capacity5);
 
+  tcase_add_test(tc_core, test_insert_at_capacity1);
+  tcase_add_test(tc_core, test_insert_twice_at_capacity1);
+  tcase_add_test(tc_core, test_insert_at_capacity5);
+  tcase_add_test(tc_core, test_insert_at_last_index);
+
   tcase_add_test(tc_core, test_set_success);
   tcase_add_test(tc_core, test_set_head_fail);
   tcase_add_test(tc_core, test_set_tail_fail);
@@ -751,12 +993,16 @@ Suite* make_test_suite(void)
   tcase_add_test(tc_core, test_shift_left_fail_head);
   tcase_add_test(tc_core, test_shift_left_fail_tail);
 
+  tcase_add_test(tc_core, test_shift_right_2nd_el_in_4_el_array);
+  tcase_add_test(tc_core, test_shift_right_1st_el_in_4_el_filled_array);
+
   tcase_add_test(tc_core, test_discard_tail_1_el);
   tcase_add_test(tc_core, test_discard_tail_4_el);
   tcase_add_test(tc_core, test_discard_head_4_el);
   tcase_add_test(tc_core, test_discard_idx_1_twice_5_el);
 
   tcase_add_test(tc_core, test_index_of_success);
+  tcase_add_test(tc_core, test_index_of_failure);
 
   suite_add_tcase(s, tc_core);
 
