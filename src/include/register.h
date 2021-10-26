@@ -9,10 +9,17 @@
 #ifndef REGISTER_H
 #define REGISTER_H
 
+union Key
+{
+  int i;
+  float f;
+  unsigned int u;
+} key;
+
 typedef struct
 {
-  void* key; /* Key that maps the register */
-  void* data;
+  union Key key; /* Key that maps the register */
+  void* value;
 } Register;
 
 #endif

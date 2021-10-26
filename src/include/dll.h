@@ -38,18 +38,18 @@ DoublyLinkedList* dll_insert(DoublyLinkedList** head, Register reg);
  *
  * Iterates sequentially over Doubly Linked List. If node with given key exists
  * returns pointer to it, otherwise returns @c NULL. The employed compare
- * function must receive two void pointers as parameters and return an integer
+ * function must receive two union Keys as parameters and return an integer
  * as result. If first parameter is bigger it should return 1, if first
  * parameter is smaller it should return -1, if it's the same as the second
  * parameter it should return 0.
  *
  * @param head Double pointer to head of Doubly Linked List.
  * @param key Key for Register of inserted node.
- * @param compare Pointer to function that compares two void pointers.
+ * @param compare_to Pointer to comparator for union Keys.
  * @return Pointer to retrieved node.
  */
-DoublyLinkedList* dll_search(DoublyLinkedList** head, void* key,
-                             int (*compare)(void*, void*));
+DoublyLinkedList* dll_search(DoublyLinkedList** head, union Key search_key,
+                             int (*compare)(union Key, union Key));
 
 /** @brief Deletes given node from Doubly Linked List.
  *

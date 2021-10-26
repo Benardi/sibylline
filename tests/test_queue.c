@@ -11,30 +11,8 @@ int i;
 void setup(void);
 void teardown(void);
 Suite* make_test_suite(void);
-int compare(void* key1, void* key2);
 
 int length = 20;
-
-int compare(void* key1, void* key2)
-{
-  int result;
-  int k1 = *((int*)key1);
-  int k2 = *((int*)key2);
-
-  if (k1 > k2)
-    {
-      result = 1;
-    }
-  else if (k1 < k2)
-    {
-      result = -1;
-    }
-  else
-    {
-      result = 0;
-    }
-  return result;
-}
 
 void setup(void)
 {
@@ -60,11 +38,11 @@ END_TEST
 
 START_TEST(test_init_queue_2)
 {
-  int k;
+  union Key k;
 
-  k = 10;
+  k.i = 10;
 
-  el->key = &k;
+  el->key = k;
   init_queue(q, length);
   enqueue(q, *el);
   reinit_queue(q);
@@ -145,12 +123,12 @@ END_TEST
 
 START_TEST(test_queue_full_2)
 {
-  int k;
+  union Key k;
   bool result = true;
 
-  k = -10;
+  k.i = -10;
 
-  el->key = &k;
+  el->key = k;
   init_queue(q, length);
 
   for (i = 0; i < (q->length - 2); i++)
@@ -167,12 +145,12 @@ END_TEST
 
 START_TEST(test_queue_full_3)
 {
-  int k;
+  union Key k;
   bool result = true;
 
-  k = -10;
+  k.i = -10;
 
-  el->key = &k;
+  el->key = k;
   init_queue(q, length);
 
   /* Filling up the queue */
@@ -195,18 +173,18 @@ END_TEST
 
 START_TEST(test_enqueue_1)
 {
-  int k;
+  union Key k;
   bool result;
 
-  k = 8;
+  k.i = 8;
 
   init_queue(q, length);
-  el->key = &k;
+  el->key = k;
   result = enqueue(q, *el);
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(q->tail, 1);
-  ck_assert_int_eq(*((int*)q->array[(q->head)].key), 8);
+  ck_assert_int_eq(q->array[(q->head)].key.i, 8);
 
   free(q->array);
 }
@@ -214,24 +192,24 @@ END_TEST
 
 START_TEST(test_enqueue_2)
 {
-  int k1, k2;
+  union Key k1, k2;
   bool result1, result2;
 
-  k1 = 8;
-  k2 = -15;
+  k1.i = 8;
+  k2.i = -15;
 
   init_queue(q, length);
-  el->key = &k1;
+  el->key = k1;
   result1 = enqueue(q, *el);
-  el->key = &k2;
+  el->key = k2;
   result2 = enqueue(q, *el);
 
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, true);
 
   ck_assert_int_eq(q->tail, 2);
-  ck_assert_int_eq(*((int*)q->array[(q->tail - 1)].key), -15);
-  ck_assert_int_eq(*((int*)q->array[(q->head)].key), 8);
+  ck_assert_int_eq(q->array[(q->tail - 1)].key.i, -15);
+  ck_assert_int_eq(q->array[(q->head)].key.i, 8);
 
   free(q->array);
 }
@@ -251,19 +229,19 @@ END_TEST
 
 START_TEST(test_dequeue_2)
 {
-  int k;
+  union Key k;
   bool result;
 
-  k = -247;
+  k.i = -247;
 
   init_queue(q, length);
 
-  el->key = &k;
+  el->key = k;
   enqueue(q, *el);
   result = dequeue(q, el);
 
   ck_assert_int_eq(result, true);
-  ck_assert_int_eq(*((int*)el->key), -247);
+  ck_assert_int_eq(el->key.i, -247);
 
   free(q->array);
 }
@@ -271,20 +249,20 @@ END_TEST
 
 START_TEST(test_dequeue_3)
 {
-  int k;
+  union Key k;
   bool result;
 
-  k = -247;
+  k.i = -247;
 
   init_queue(q, length);
 
-  el->key = &k;
+  el->key = k;
   enqueue(q, *el);
   dequeue(q, el);
   result = dequeue(q, el); /* el is not overwritten */
 
   ck_assert_int_eq(result, false);
-  ck_assert_int_eq(*((int*)el->key), -247);
+  ck_assert_int_eq(el->key.i, -247);
 
   free(q->array);
 }
@@ -292,13 +270,13 @@ END_TEST
 
 START_TEST(test_recreate_1)
 {
-  int k1, k2, k3, k4, k5;
+  union Key k1, k2, k3, k4, k5;
 
-  k1 = 15;
-  k2 = 6;
-  k3 = 9;
-  k4 = 8;
-  k5 = 4;
+  k1.i = 15;
+  k2.i = 6;
+  k3.i = 9;
+  k4.i = 8;
+  k5.i = 4;
 
   init_queue(q, length);
 
@@ -307,15 +285,15 @@ START_TEST(test_recreate_1)
       enqueue(q, *el);
     }
 
-  el->key = &k1;
+  el->key = k1;
   enqueue(q, *el);
-  el->key = &k2;
+  el->key = k2;
   enqueue(q, *el);
-  el->key = &k3;
+  el->key = k3;
   enqueue(q, *el);
-  el->key = &k4;
+  el->key = k4;
   enqueue(q, *el);
-  el->key = &k5;
+  el->key = k5;
   enqueue(q, *el);
 
   for (i = 0; i < 14; i++)
@@ -323,11 +301,11 @@ START_TEST(test_recreate_1)
       dequeue(q, el);
     }
 
-  ck_assert_int_eq(*((int*)q->array[14].key), 15);
-  ck_assert_int_eq(*((int*)q->array[15].key), 6);
-  ck_assert_int_eq(*((int*)q->array[16].key), 9);
-  ck_assert_int_eq(*((int*)q->array[17].key), 8);
-  ck_assert_int_eq(*((int*)q->array[18].key), 4);
+  ck_assert_int_eq(q->array[14].key.i, 15);
+  ck_assert_int_eq(q->array[15].key.i, 6);
+  ck_assert_int_eq(q->array[16].key.i, 9);
+  ck_assert_int_eq(q->array[17].key.i, 8);
+  ck_assert_int_eq(q->array[18].key.i, 4);
 
   ck_assert_int_eq(q->tail, 19);
   ck_assert_int_eq(q->head, 14);
@@ -338,16 +316,16 @@ END_TEST
 
 START_TEST(test_recreate_2)
 {
-  int k1, k2, k3, k4, k5, k6, k7, k8;
+  union Key k1, k2, k3, k4, k5, k6, k7, k8;
 
-  k1 = 15;
-  k2 = 6;
-  k3 = 9;
-  k4 = 8;
-  k5 = 4;
-  k6 = 17;
-  k7 = 3;
-  k8 = 5;
+  k1.i = 15;
+  k2.i = 6;
+  k3.i = 9;
+  k4.i = 8;
+  k5.i = 4;
+  k6.i = 17;
+  k7.i = 3;
+  k8.i = 5;
 
   init_queue(q, length);
 
@@ -356,15 +334,15 @@ START_TEST(test_recreate_2)
       enqueue(q, *el);
     }
 
-  el->key = &k1;
+  el->key = k1;
   enqueue(q, *el);
-  el->key = &k2;
+  el->key = k2;
   enqueue(q, *el);
-  el->key = &k3;
+  el->key = k3;
   enqueue(q, *el);
-  el->key = &k4;
+  el->key = k4;
   enqueue(q, *el);
-  el->key = &k5;
+  el->key = k5;
   enqueue(q, *el);
 
   for (i = 0; i < 14; i++)
@@ -372,28 +350,28 @@ START_TEST(test_recreate_2)
       dequeue(q, el);
     }
 
-  el->key = &k6;
+  el->key = k6;
   enqueue(q, *el);
-  el->key = &k7;
+  el->key = k7;
   enqueue(q, *el);
-  el->key = &k8;
+  el->key = k8;
   enqueue(q, *el);
   dequeue(q, el);
 
-  ck_assert_int_eq(*((int*)q->array[14].key), 15); /* Has been removed */
-  ck_assert_int_eq(*((int*)q->array[15].key), 6);
-  ck_assert_int_eq(*((int*)q->array[16].key), 9);
-  ck_assert_int_eq(*((int*)q->array[17].key), 8);
-  ck_assert_int_eq(*((int*)q->array[18].key), 4);
-  ck_assert_int_eq(*((int*)q->array[19].key), 17);
-  ck_assert_int_eq(*((int*)q->array[0].key), 3);
-  ck_assert_int_eq(*((int*)q->array[1].key), 5);
+  ck_assert_int_eq(q->array[14].key.i, 15); /* Has been removed */
+  ck_assert_int_eq(q->array[15].key.i, 6);
+  ck_assert_int_eq(q->array[16].key.i, 9);
+  ck_assert_int_eq(q->array[17].key.i, 8);
+  ck_assert_int_eq(q->array[18].key.i, 4);
+  ck_assert_int_eq(q->array[19].key.i, 17);
+  ck_assert_int_eq(q->array[0].key.i, 3);
+  ck_assert_int_eq(q->array[1].key.i, 5);
 
   ck_assert_int_eq(q->tail, 2);
   ck_assert_int_eq(q->head, 15);
 
-  ck_assert_int_eq(*((int*)q->array[q->head].key), 6);
-  ck_assert_int_eq(*((int*)q->array[q->tail - 1].key), 5);
+  ck_assert_int_eq(q->array[q->head].key.i, 6);
+  ck_assert_int_eq(q->array[q->tail - 1].key.i, 5);
 
   free(q->array);
 }

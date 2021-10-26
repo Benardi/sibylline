@@ -11,19 +11,16 @@ SinglyLinkedList** head;
 void setup(void);
 void teardown(void);
 Suite* make_test_suite(void);
-int compare(void* key1, void* key2);
 
-int compare(void* key1, void* key2)
+static int compare(union Key k1, union Key k2)
 {
   int result;
-  int k1 = *((int*)key1);
-  int k2 = *((int*)key2);
 
-  if (k1 > k2)
+  if (k1.i > k2.i)
     {
       result = 1;
     }
-  else if (k1 < k2)
+  else if (k1.i < k2.i)
     {
       result = -1;
     }
@@ -48,13 +45,13 @@ void teardown(void)
 
 START_TEST(test_sll_insert_1)
 {
-  int k1;
+  union Key k1;
   SinglyLinkedList* node1;
 
-  k1 = 200;
+  k1.i = 200;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -63,8 +60,8 @@ START_TEST(test_sll_insert_1)
 
   ck_assert_int_eq((*head)->next == NULL, true);
   ck_assert_int_eq(node1->next == NULL, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 200);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 200);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
   free(node1);
 }
@@ -72,17 +69,17 @@ END_TEST
 
 START_TEST(test_sll_insert_2)
 {
-  int k1, k2;
+  union Key k1, k2;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
 
-  k1 = 200;
-  k2 = 250;
+  k1.i = 200;
+  k2.i = 250;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -91,13 +88,13 @@ START_TEST(test_sll_insert_2)
 
   ck_assert_int_eq(node2->next == node1, true);
   ck_assert_int_eq(node1->next == NULL, true);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
-  ck_assert_int_eq(*((int*)node2->data.key), 250);
+  ck_assert_int_eq(node1->data.key.i, 200);
+  ck_assert_int_eq(node2->data.key.i, 250);
 
   ck_assert_int_eq((*head)->next == node1, true);
   ck_assert_int_eq((*head)->next->next == NULL, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 250);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 250);
+  ck_assert_int_eq((*head)->next->data.key.i, 200);
 
   free(node1);
   free(node2);
@@ -106,25 +103,25 @@ END_TEST
 
 START_TEST(test_sll_insert_3)
 {
-  int k1, k2, k3, k4;
+  union Key k1, k2, k3, k4;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* node3;
   SinglyLinkedList* node4;
 
-  k1 = 200;
-  k2 = -80;
-  k3 = 33;
-  k4 = -730;
+  k1.i = 200;
+  k2.i = -80;
+  k3.i = 33;
+  k4.i = -730;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  reg->key = &k3;
+  reg->key = k3;
   node3 = sll_insert(head, *reg);
-  reg->key = &k4;
+  reg->key = k4;
   node4 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -141,15 +138,15 @@ START_TEST(test_sll_insert_3)
   ck_assert_int_eq((*head)->next->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key.i, 200);
 
   free(node1);
   free(node2);
@@ -160,13 +157,13 @@ END_TEST
 
 START_TEST(test_sll_search_1)
 {
-  int k1;
+  union Key k1;
   SinglyLinkedList* node1;
 
-  k1 = 100;
+  k1.i = 100;
 
   *head = NULL;
-  node1 = sll_search(head, &k1, compare);
+  node1 = sll_search(head, k1, compare);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, true);
@@ -179,16 +176,16 @@ END_TEST
 
 START_TEST(test_sll_search_2)
 {
-  int k1, k2;
+  union Key k1, k2;
   SinglyLinkedList* node1;
   SinglyLinkedList* retrieved;
 
-  k1 = 200;
-  k2 = 200;
+  k1.i = 200;
+  k2.i = 200;
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  retrieved = sll_search(head, &k2, compare);
+  retrieved = sll_search(head, k2, compare);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -196,12 +193,12 @@ START_TEST(test_sll_search_2)
 
   ck_assert_int_eq((*head)->next == NULL, true);
   ck_assert_int_eq(node1->next == NULL, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 200);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 200);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
   ck_assert_int_eq((*head) == retrieved, true);
   ck_assert_int_eq(retrieved->next == NULL, true);
-  ck_assert_int_eq(*((int*)retrieved->data.key), 200);
+  ck_assert_int_eq(retrieved->data.key.i, 200);
   ck_assert_int_eq(retrieved == node1, true);
 
   free(node1);
@@ -210,17 +207,17 @@ END_TEST
 
 START_TEST(test_sll_search_3)
 {
-  int k1, k2;
+  union Key k1, k2;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
 
-  k1 = 200;
-  k2 = -35;
+  k1.i = 200;
+  k2.i = -35;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  node2 = sll_search(head, &k2, compare);
+  node2 = sll_search(head, k2, compare);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -228,8 +225,8 @@ START_TEST(test_sll_search_3)
 
   ck_assert_int_eq((*head)->next == NULL, true);
   ck_assert_int_eq(node1->next == NULL, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 200);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 200);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
   ck_assert_int_eq(node2 == NULL, true);
 
@@ -240,21 +237,21 @@ END_TEST
 
 START_TEST(test_sll_search_4)
 {
-  int k1, k2, k3;
+  union Key k1, k2, k3;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* retrieved;
 
-  k1 = 200;
-  k2 = 250;
-  k3 = 200;
+  k1.i = 200;
+  k2.i = 250;
+  k3.i = 200;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  retrieved = sll_search(head, &k3, compare);
+  retrieved = sll_search(head, k3, compare);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -262,18 +259,18 @@ START_TEST(test_sll_search_4)
 
   ck_assert_int_eq(node2->next == node1, true);
   ck_assert_int_eq(node1->next == NULL, true);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
-  ck_assert_int_eq(*((int*)node2->data.key), 250);
+  ck_assert_int_eq(node1->data.key.i, 200);
+  ck_assert_int_eq(node2->data.key.i, 250);
 
   ck_assert_int_eq((*head)->next == node1, true);
   ck_assert_int_eq((*head)->next->next == NULL, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 250);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 250);
+  ck_assert_int_eq((*head)->next->data.key.i, 200);
 
   ck_assert_int_eq((*head)->next == retrieved, true);
   ck_assert_int_eq(node2->next == retrieved, true);
   ck_assert_int_eq(retrieved->next == NULL, true);
-  ck_assert_int_eq(*((int*)retrieved->data.key), 200);
+  ck_assert_int_eq(retrieved->data.key.i, 200);
   ck_assert_int_eq(retrieved == node1, true);
 
   free(node1);
@@ -283,21 +280,21 @@ END_TEST
 
 START_TEST(test_sll_search_5)
 {
-  int k1, k2, k3;
+  union Key k1, k2, k3;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* retrieved;
 
-  k1 = 200;
-  k2 = 250;
-  k3 = 250;
+  k1.i = 200;
+  k2.i = 250;
+  k3.i = 250;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  retrieved = sll_search(head, &k3, compare);
+  retrieved = sll_search(head, k3, compare);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -305,17 +302,17 @@ START_TEST(test_sll_search_5)
 
   ck_assert_int_eq(node2->next == node1, true);
   ck_assert_int_eq(node1->next == NULL, true);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
-  ck_assert_int_eq(*((int*)node2->data.key), 250);
+  ck_assert_int_eq(node1->data.key.i, 200);
+  ck_assert_int_eq(node2->data.key.i, 250);
 
   ck_assert_int_eq((*head)->next == node1, true);
   ck_assert_int_eq((*head)->next->next == NULL, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 250);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 250);
+  ck_assert_int_eq((*head)->next->data.key.i, 200);
 
   ck_assert_int_eq((*head) == retrieved, true);
   ck_assert_int_eq(retrieved->next == node1, true);
-  ck_assert_int_eq(*((int*)retrieved->data.key), 250);
+  ck_assert_int_eq(retrieved->data.key.i, 250);
   ck_assert_int_eq(retrieved == node2, true);
 
   free(node1);
@@ -325,21 +322,21 @@ END_TEST
 
 START_TEST(test_sll_search_6)
 {
-  int k1, k2, k3;
+  union Key k1, k2, k3;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* retrieved;
 
-  k1 = 200;
-  k2 = 250;
-  k3 = 0;
+  k1.i = 200;
+  k2.i = 250;
+  k3.i = 0;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  retrieved = sll_search(head, &k3, compare);
+  retrieved = sll_search(head, k3, compare);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -347,13 +344,13 @@ START_TEST(test_sll_search_6)
 
   ck_assert_int_eq(node2->next == node1, true);
   ck_assert_int_eq(node1->next == NULL, true);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
-  ck_assert_int_eq(*((int*)node2->data.key), 250);
+  ck_assert_int_eq(node1->data.key.i, 200);
+  ck_assert_int_eq(node2->data.key.i, 250);
 
   ck_assert_int_eq((*head)->next == node1, true);
   ck_assert_int_eq((*head)->next->next == NULL, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 250);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 250);
+  ck_assert_int_eq((*head)->next->data.key.i, 200);
 
   ck_assert_int_eq(retrieved == NULL, true);
 
@@ -364,29 +361,29 @@ END_TEST
 
 START_TEST(test_sll_search_7)
 {
-  int k1, k2, k3, k4, k5;
+  union Key k1, k2, k3, k4, k5;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* node3;
   SinglyLinkedList* node4;
   SinglyLinkedList* retrieved;
 
-  k1 = 200;
-  k2 = -80;
-  k3 = 33;
-  k4 = -730;
-  k5 = 10;
+  k1.i = 200;
+  k2.i = -80;
+  k3.i = 33;
+  k4.i = -730;
+  k5.i = 10;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  reg->key = &k3;
+  reg->key = k3;
   node3 = sll_insert(head, *reg);
-  reg->key = &k4;
+  reg->key = k4;
   node4 = sll_insert(head, *reg);
-  retrieved = sll_search(head, &k5, compare);
+  retrieved = sll_search(head, k5, compare);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -402,15 +399,15 @@ START_TEST(test_sll_search_7)
   ck_assert_int_eq((*head)->next->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key.i, 200);
 
   ck_assert_int_eq(retrieved == NULL, true);
 
@@ -423,29 +420,29 @@ END_TEST
 
 START_TEST(test_sll_search_8)
 {
-  int k1, k2, k3, k4, k5;
+  union Key k1, k2, k3, k4, k5;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* node3;
   SinglyLinkedList* node4;
   SinglyLinkedList* retrieved;
 
-  k1 = 200;
-  k2 = -80;
-  k3 = 33;
-  k4 = -730;
-  k5 = 33;
+  k1.i = 200;
+  k2.i = -80;
+  k3.i = 33;
+  k4.i = -730;
+  k5.i = 33;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  reg->key = &k3;
+  reg->key = k3;
   node3 = sll_insert(head, *reg);
-  reg->key = &k4;
+  reg->key = k4;
   node4 = sll_insert(head, *reg);
-  retrieved = sll_search(head, &k5, compare);
+  retrieved = sll_search(head, k5, compare);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -461,20 +458,20 @@ START_TEST(test_sll_search_8)
   ck_assert_int_eq((*head)->next->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key.i, 200);
 
   ck_assert_int_eq(node4->next == retrieved, true);
   ck_assert_int_eq(retrieved->next == node2, true);
   ck_assert_int_eq((*head)->next == retrieved, true);
-  ck_assert_int_eq(*((int*)retrieved->data.key), 33);
+  ck_assert_int_eq(retrieved->data.key.i, 33);
   ck_assert_int_eq(retrieved == node3, true);
 
   free(node1);
@@ -486,29 +483,29 @@ END_TEST
 
 START_TEST(test_sll_search_9)
 {
-  int k1, k2, k3, k4, k5;
+  union Key k1, k2, k3, k4, k5;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* node3;
   SinglyLinkedList* node4;
   SinglyLinkedList* retrieved;
 
-  k1 = 200;
-  k2 = -80;
-  k3 = 33;
-  k4 = -730;
-  k5 = 200;
+  k1.i = 200;
+  k2.i = -80;
+  k3.i = 33;
+  k4.i = -730;
+  k5.i = 200;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  reg->key = &k3;
+  reg->key = k3;
   node3 = sll_insert(head, *reg);
-  reg->key = &k4;
+  reg->key = k4;
   node4 = sll_insert(head, *reg);
-  retrieved = sll_search(head, &k5, compare);
+  retrieved = sll_search(head, k5, compare);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -524,19 +521,19 @@ START_TEST(test_sll_search_9)
   ck_assert_int_eq((*head)->next->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key.i, 200);
 
   ck_assert_int_eq(node2->next == retrieved, true);
   ck_assert_int_eq(retrieved->next == NULL, true);
-  ck_assert_int_eq(*((int*)retrieved->data.key), 200);
+  ck_assert_int_eq(retrieved->data.key.i, 200);
   ck_assert_int_eq((*head)->next->next->next == retrieved, true);
   ck_assert_int_eq(retrieved == node1, true);
 
@@ -549,13 +546,13 @@ END_TEST
 
 START_TEST(test_sll_delete_1)
 {
-  int k1;
+  union Key k1;
   SinglyLinkedList* node1;
 
-  k1 = 200;
+  k1.i = 200;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -564,8 +561,8 @@ START_TEST(test_sll_delete_1)
 
   ck_assert_int_eq((*head)->next == NULL, true);
   ck_assert_int_eq(node1->next == NULL, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 200);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 200);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
   sll_delete(head, node1);
 
@@ -578,17 +575,17 @@ END_TEST
 
 START_TEST(test_sll_delete_2)
 {
-  int k1, k2;
+  union Key k1, k2;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
 
-  k1 = 200;
-  k2 = 250;
+  k1.i = 200;
+  k2.i = 250;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -597,20 +594,20 @@ START_TEST(test_sll_delete_2)
 
   ck_assert_int_eq(node2->next == node1, true);
   ck_assert_int_eq(node1->next == NULL, true);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
-  ck_assert_int_eq(*((int*)node2->data.key), 250);
+  ck_assert_int_eq(node1->data.key.i, 200);
+  ck_assert_int_eq(node2->data.key.i, 250);
 
   ck_assert_int_eq((*head)->next == node1, true);
   ck_assert_int_eq((*head)->next->next == NULL, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 250);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 250);
+  ck_assert_int_eq((*head)->next->data.key.i, 200);
 
   sll_delete(head, node2);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
   ck_assert_int_eq((*head) == node1, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 200);
   ck_assert_int_eq(node1->next == NULL, true);
 
   free(node1);
@@ -620,17 +617,17 @@ END_TEST
 
 START_TEST(test_sll_delete_3)
 {
-  int k1, k2;
+  union Key k1, k2;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
 
-  k1 = 200;
-  k2 = 250;
+  k1.i = 200;
+  k2.i = 250;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -639,20 +636,20 @@ START_TEST(test_sll_delete_3)
 
   ck_assert_int_eq(node2->next == node1, true);
   ck_assert_int_eq(node1->next == NULL, true);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
-  ck_assert_int_eq(*((int*)node2->data.key), 250);
+  ck_assert_int_eq(node1->data.key.i, 200);
+  ck_assert_int_eq(node2->data.key.i, 250);
 
   ck_assert_int_eq((*head)->next == node1, true);
   ck_assert_int_eq((*head)->next->next == NULL, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 250);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 250);
+  ck_assert_int_eq((*head)->next->data.key.i, 200);
 
   sll_delete(head, node1);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
   ck_assert_int_eq((*head) == node2, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 250);
+  ck_assert_int_eq((*head)->data.key.i, 250);
   ck_assert_int_eq(node1->next == NULL, true);
 
   free(node1);
@@ -662,17 +659,17 @@ END_TEST
 
 START_TEST(test_sll_delete_4)
 {
-  int k1, k2;
+  union Key k1, k2;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
 
-  k1 = 200;
-  k2 = 250;
+  k1.i = 200;
+  k2.i = 250;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -681,13 +678,13 @@ START_TEST(test_sll_delete_4)
 
   ck_assert_int_eq(node2->next == node1, true);
   ck_assert_int_eq(node1->next == NULL, true);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
-  ck_assert_int_eq(*((int*)node2->data.key), 250);
+  ck_assert_int_eq(node1->data.key.i, 200);
+  ck_assert_int_eq(node2->data.key.i, 250);
 
   ck_assert_int_eq((*head)->next == node1, true);
   ck_assert_int_eq((*head)->next->next == NULL, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 250);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 250);
+  ck_assert_int_eq((*head)->next->data.key.i, 200);
 
   sll_delete(head, node1);
   sll_delete(head, node2);
@@ -702,17 +699,17 @@ END_TEST
 
 START_TEST(test_sll_delete_5)
 {
-  int k1, k2;
+  union Key k1, k2;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
 
-  k1 = 200;
-  k2 = 250;
+  k1.i = 200;
+  k2.i = 250;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -721,13 +718,13 @@ START_TEST(test_sll_delete_5)
 
   ck_assert_int_eq(node2->next == node1, true);
   ck_assert_int_eq(node1->next == NULL, true);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
-  ck_assert_int_eq(*((int*)node2->data.key), 250);
+  ck_assert_int_eq(node1->data.key.i, 200);
+  ck_assert_int_eq(node2->data.key.i, 250);
 
   ck_assert_int_eq((*head)->next == node1, true);
   ck_assert_int_eq((*head)->next->next == NULL, true);
-  ck_assert_int_eq(*((int*)(*head)->data.key), 250);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 250);
+  ck_assert_int_eq((*head)->next->data.key.i, 200);
 
   sll_delete(head, node2);
   sll_delete(head, node1);
@@ -742,25 +739,25 @@ END_TEST
 
 START_TEST(test_sll_delete_6)
 {
-  int k1, k2, k3, k4;
+  union Key k1, k2, k3, k4;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* node3;
   SinglyLinkedList* node4;
 
-  k1 = 200;
-  k2 = -80;
-  k3 = 33;
-  k4 = -730;
+  k1.i = 200;
+  k2.i = -80;
+  k3.i = 33;
+  k4.i = -730;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  reg->key = &k3;
+  reg->key = k3;
   node3 = sll_insert(head, *reg);
-  reg->key = &k4;
+  reg->key = k4;
   node4 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -777,15 +774,15 @@ START_TEST(test_sll_delete_6)
   ck_assert_int_eq((*head)->next->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key.i, 200);
 
   sll_delete(head, node2);
 
@@ -801,14 +798,14 @@ START_TEST(test_sll_delete_6)
   ck_assert_int_eq((*head)->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, 200);
 
   free(node1);
   free(node2);
@@ -819,25 +816,25 @@ END_TEST
 
 START_TEST(test_sll_delete_7)
 {
-  int k1, k2, k3, k4;
+  union Key k1, k2, k3, k4;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* node3;
   SinglyLinkedList* node4;
 
-  k1 = 200;
-  k2 = -80;
-  k3 = 33;
-  k4 = -730;
+  k1.i = 200;
+  k2.i = -80;
+  k3.i = 33;
+  k4.i = -730;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  reg->key = &k3;
+  reg->key = k3;
   node3 = sll_insert(head, *reg);
-  reg->key = &k4;
+  reg->key = k4;
   node4 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -854,15 +851,15 @@ START_TEST(test_sll_delete_7)
   ck_assert_int_eq((*head)->next->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key.i, 200);
 
   sll_delete(head, node3);
 
@@ -878,14 +875,14 @@ START_TEST(test_sll_delete_7)
   ck_assert_int_eq((*head)->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->data.key.i, 200);
 
   free(node1);
   free(node2);
@@ -896,25 +893,25 @@ END_TEST
 
 START_TEST(test_sll_delete_8)
 {
-  int k1, k2, k3, k4;
+  union Key k1, k2, k3, k4;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* node3;
   SinglyLinkedList* node4;
 
-  k1 = 200;
-  k2 = -80;
-  k3 = 33;
-  k4 = -730;
+  k1.i = 200;
+  k2.i = -80;
+  k3.i = 33;
+  k4.i = -730;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  reg->key = &k3;
+  reg->key = k3;
   node3 = sll_insert(head, *reg);
-  reg->key = &k4;
+  reg->key = k4;
   node4 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -931,15 +928,15 @@ START_TEST(test_sll_delete_8)
   ck_assert_int_eq((*head)->next->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key.i, 200);
 
   sll_delete(head, node4);
 
@@ -955,14 +952,14 @@ START_TEST(test_sll_delete_8)
   ck_assert_int_eq((*head)->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->data.key.i, 200);
 
   free(node1);
   free(node2);
@@ -973,25 +970,25 @@ END_TEST
 
 START_TEST(test_sll_delete_9)
 {
-  int k1, k2, k3, k4;
+  union Key k1, k2, k3, k4;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* node3;
   SinglyLinkedList* node4;
 
-  k1 = 200;
-  k2 = -80;
-  k3 = 33;
-  k4 = -730;
+  k1.i = 200;
+  k2.i = -80;
+  k3.i = 33;
+  k4.i = -730;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  reg->key = &k3;
+  reg->key = k3;
   node3 = sll_insert(head, *reg);
-  reg->key = &k4;
+  reg->key = k4;
   node4 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -1008,15 +1005,15 @@ START_TEST(test_sll_delete_9)
   ck_assert_int_eq((*head)->next->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key.i, 200);
 
   sll_delete(head, node1);
 
@@ -1032,14 +1029,14 @@ START_TEST(test_sll_delete_9)
   ck_assert_int_eq((*head)->next->next == node2, true);
   ck_assert_int_eq((*head)->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), -80);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
 
   free(node1);
   free(node2);
@@ -1050,25 +1047,25 @@ END_TEST
 
 START_TEST(test_sll_delete_10)
 {
-  int k1, k2, k3, k4;
+  union Key k1, k2, k3, k4;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* node3;
   SinglyLinkedList* node4;
 
-  k1 = 200;
-  k2 = -80;
-  k3 = 33;
-  k4 = -730;
+  k1.i = 200;
+  k2.i = -80;
+  k3.i = 33;
+  k4.i = -730;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  reg->key = &k3;
+  reg->key = k3;
   node3 = sll_insert(head, *reg);
-  reg->key = &k4;
+  reg->key = k4;
   node4 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -1085,15 +1082,15 @@ START_TEST(test_sll_delete_10)
   ck_assert_int_eq((*head)->next->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key.i, 200);
 
   sll_delete(head, node1);
   sll_delete(head, node4);
@@ -1108,13 +1105,13 @@ START_TEST(test_sll_delete_10)
   ck_assert_int_eq((*head)->next == node2, true);
   ck_assert_int_eq((*head)->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), -80);
+  ck_assert_int_eq((*head)->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->data.key.i, -80);
 
   free(node1);
   free(node2);
@@ -1125,25 +1122,25 @@ END_TEST
 
 START_TEST(test_sll_delete_11)
 {
-  int k1, k2, k3, k4;
+  union Key k1, k2, k3, k4;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* node3;
   SinglyLinkedList* node4;
 
-  k1 = 200;
-  k2 = -80;
-  k3 = 33;
-  k4 = -730;
+  k1.i = 200;
+  k2.i = -80;
+  k3.i = 33;
+  k4.i = -730;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  reg->key = &k3;
+  reg->key = k3;
   node3 = sll_insert(head, *reg);
-  reg->key = &k4;
+  reg->key = k4;
   node4 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -1160,15 +1157,15 @@ START_TEST(test_sll_delete_11)
   ck_assert_int_eq((*head)->next->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key.i, 200);
 
   sll_delete(head, node2);
   sll_delete(head, node3);
@@ -1183,13 +1180,13 @@ START_TEST(test_sll_delete_11)
   ck_assert_int_eq((*head)->next == node1, true);
   ck_assert_int_eq((*head)->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 200);
 
   free(node1);
   free(node2);
@@ -1200,25 +1197,25 @@ END_TEST
 
 START_TEST(test_sll_delete_12)
 {
-  int k1, k2, k3, k4;
+  union Key k1, k2, k3, k4;
   SinglyLinkedList* node1;
   SinglyLinkedList* node2;
   SinglyLinkedList* node3;
   SinglyLinkedList* node4;
 
-  k1 = 200;
-  k2 = -80;
-  k3 = 33;
-  k4 = -730;
+  k1.i = 200;
+  k2.i = -80;
+  k3.i = 33;
+  k4.i = -730;
 
   *head = NULL;
-  reg->key = &k1;
+  reg->key = k1;
   node1 = sll_insert(head, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   node2 = sll_insert(head, *reg);
-  reg->key = &k3;
+  reg->key = k3;
   node3 = sll_insert(head, *reg);
-  reg->key = &k4;
+  reg->key = k4;
   node4 = sll_insert(head, *reg);
 
   ck_assert_int_eq(head == NULL, false);
@@ -1235,15 +1232,15 @@ START_TEST(test_sll_delete_12)
   ck_assert_int_eq((*head)->next->next->next == node1, true);
   ck_assert_int_eq((*head)->next->next->next->next == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
-  ck_assert_int_eq(*((int*)(*head)->data.key), -730);
-  ck_assert_int_eq(*((int*)(*head)->next->data.key), 33);
-  ck_assert_int_eq(*((int*)(*head)->next->next->data.key), -80);
-  ck_assert_int_eq(*((int*)(*head)->next->next->next->data.key), 200);
+  ck_assert_int_eq((*head)->data.key.i, -730);
+  ck_assert_int_eq((*head)->next->data.key.i, 33);
+  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key.i, 200);
 
   sll_delete(head, node3);
   sll_delete(head, node1);
@@ -1253,10 +1250,10 @@ START_TEST(test_sll_delete_12)
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, true);
 
-  ck_assert_int_eq(*((int*)node4->data.key), -730);
-  ck_assert_int_eq(*((int*)node3->data.key), 33);
-  ck_assert_int_eq(*((int*)node2->data.key), -80);
-  ck_assert_int_eq(*((int*)node1->data.key), 200);
+  ck_assert_int_eq(node4->data.key.i, -730);
+  ck_assert_int_eq(node3->data.key.i, 33);
+  ck_assert_int_eq(node2->data.key.i, -80);
+  ck_assert_int_eq(node1->data.key.i, 200);
 
   free(node1);
   free(node2);

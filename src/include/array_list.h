@@ -94,12 +94,12 @@ Register* get(ArrayList* list, int index);
  * is in ArrayList.
  *
  * @param list Pointer to ArrayList.
- * @param identifier Point to identifier of element to be found.
- * @param compare Pointer to function that compares two void pointers.
+ * @param identifier Element to be found as a Union Key.
+ * @param compare Pointer to function that compares two union Keys.
  * @return Whether element is in ArrayList.
  */
-bool contains(ArrayList* list, void* identifier,
-              int (*compare_to)(void*, void*));
+bool contains(ArrayList* list, union Key identifier,
+              int (*compare_to)(union Key, union Key));
 
 /*
  * @brief Moves elements to the left starting at given index.
@@ -152,11 +152,11 @@ bool discard(ArrayList* list, int index);
  * If there's no match in the ArrayList the function returns -1.
  *
  * @param list Pointer to ArrayList.
- * @param identifier Point to identifier of element to be found.
- * @param compare Pointer to function that compares two void pointers.
+ * @param identifier Element to be found as a Union Key.
+ * @param compare Pointer to function that compares two union Keys.
  * @return Index of match in ArrayList.
  */
-int index_of(ArrayList* list, void* identifier,
-             int (*compare_to)(void*, void*));
+int index_of(ArrayList* list, union Key identifier,
+             int (*compare_to)(union Key, union Key));
 
 #endif
