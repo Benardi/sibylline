@@ -50,9 +50,9 @@ CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
  *
  * Iterates sequentially over Circular Doubly Linked List. If node with given
  * key exists returns pointer to it, otherwise returns pointer to nil node.
- * The employed compare function must receive two void pointers as parameters
+ * The employed compare function must receive two union Keys as parameters
  * and return an integer as result. The employed compare function must receive
- * two void pointers as parameter and return an integer as result. If first
+ * two union Keys as parameter and return an integer as result. If first
  * parameter is bigger it should return 1, if first parameter is smaller it
  * should return -1, if it's the same as the second parameter it should
  * return 0.
@@ -60,11 +60,12 @@ CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
  *
  * @param nil Pointer to nil node.
  * @param key Key for Register of inserted node.
- * @param compare Pointer to function that compares two void pointers.
+ * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to retrieved node.
  */
-CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil, void* key,
-                                      int (*compare)(void*, void*));
+CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil,
+                                      union Key key,
+                                      int (*compare)(union Key, union Key));
 
 /** @brief Deletes given node from Circular Doubly Linked List.
  *

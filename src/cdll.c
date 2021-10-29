@@ -22,8 +22,9 @@ CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
   return node;
 }
 
-CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil, void* key,
-                                      int (*compare)(void*, void*))
+CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil,
+                                      union Key key,
+                                      int (*compare)(union Key, union Key))
 {
   CircularDoublyLinkedList* node;
 

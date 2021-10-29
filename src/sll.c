@@ -12,8 +12,8 @@ SinglyLinkedList* sll_insert(SinglyLinkedList** head, Register reg)
   return node;
 }
 
-SinglyLinkedList* sll_search(SinglyLinkedList** head, void* key,
-                             int (*compare)(void*, void*))
+SinglyLinkedList* sll_search(SinglyLinkedList** head, union Key key,
+                             int (*compare)(union Key, union Key))
 {
   SinglyLinkedList* node;
 

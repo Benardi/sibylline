@@ -12,28 +12,6 @@ int i;
 void setup(void);
 void teardown(void);
 Suite* make_test_suite(void);
-int compare(void* key1, void* key2);
-
-int compare(void* key1, void* key2)
-{
-  int result;
-  int k1 = *((int*)key1);
-  int k2 = *((int*)key2);
-
-  if (k1 > k2)
-    {
-      result = 1;
-    }
-  else if (k1 < k2)
-    {
-      result = -1;
-    }
-  else
-    {
-      result = 0;
-    }
-  return result;
-}
 
 void setup(void)
 {
@@ -88,10 +66,11 @@ END_TEST
 
 START_TEST(test_stack_empty_3)
 {
-  int k1 = 10;
+  union Key k1;
   int length = 5;
 
-  reg->key = &k1;
+  k1.i = 10;
+  reg->key = k1;
   init_stack(stk, length);
   stk->array[0] = *reg;
   stk->top = 0;
@@ -103,10 +82,11 @@ END_TEST
 
 START_TEST(test_stack_empty_4)
 {
-  int k1 = 10;
+  union Key k1;
   int length = 10;
 
-  reg->key = &k1;
+  k1.i = 10;
+  reg->key = k1;
   init_stack(stk, length);
   stk->array[0] = *reg;
   stk->top = 0;
@@ -130,10 +110,11 @@ END_TEST
 
 START_TEST(test_stack_full_2)
 {
-  int k1 = -10;
+  union Key k1;
   int length = 10;
 
-  reg->key = &k1;
+  k1.i = -10;
+  reg->key = k1;
   init_stack(stk, length);
   push(stk, *reg);
   ck_assert_int_eq(stack_full(stk), false);
@@ -144,11 +125,12 @@ END_TEST
 
 START_TEST(test_stack_full_3)
 {
-  int k1 = -10;
+  union Key k1;
   int length = 20;
   bool result = true;
 
-  reg->key = &k1;
+  k1.i = -10;
+  reg->key = k1;
   init_stack(stk, length);
 
   /* Filling up the stack */
@@ -190,15 +172,15 @@ END_TEST
 
 START_TEST(test_stack_pop_2)
 {
-  int k1;
+  union Key k1;
   bool result1, result2, result3;
   int length = 20;
 
-  k1 = 7;
+  k1.i = 7;
 
   init_stack(stk, length);
   result1 = pop(stk, reg); /* Doesn't write to pointer address*/
-  reg->key = &k1;
+  reg->key = k1;
   push(stk, *reg);
   result2 = pop(stk, reg); /* Writes to pointer address*/
   result3 = pop(stk, reg); /* Doesn't write to pointer address*/
@@ -207,7 +189,7 @@ START_TEST(test_stack_pop_2)
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(result3, false);
 
-  ck_assert_int_eq(*((int*)reg->key), 7);
+  ck_assert_int_eq(reg->key.i, 7);
 
   free(stk->array);
 }
@@ -215,22 +197,22 @@ END_TEST
 
 START_TEST(test_stack_pop_3)
 {
-  int k1, k2;
+  union Key k1, k2;
   bool result1, result2, result3;
   Register* el1;
   Register* el2;
   int length = 20;
 
-  k1 = 7;
-  k2 = -5;
+  k1.i = 7;
+  k2.i = -5;
 
   el1 = malloc(sizeof(Register));
   el2 = malloc(sizeof(Register));
 
   init_stack(stk, length);
-  reg->key = &k1;
+  reg->key = k1;
   push(stk, *reg);
-  reg->key = &k2;
+  reg->key = k2;
   push(stk, *reg);
 
   result1 = pop(stk, el1);
@@ -241,8 +223,8 @@ START_TEST(test_stack_pop_3)
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(result3, false);
 
-  ck_assert_int_eq(*((int*)el1->key), -5);
-  ck_assert_int_eq(*((int*)el2->key), 7);
+  ck_assert_int_eq(el1->key.i, -5);
+  ck_assert_int_eq(el2->key.i, 7);
 
   free(el1);
   free(el2);

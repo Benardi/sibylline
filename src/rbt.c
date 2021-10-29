@@ -133,7 +133,7 @@ static void rb_insert_fixup(RedBlackTree** root, RedBlackTree* nil,
 }
 
 RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Register reg,
-                        int (*compare)(void*, void*))
+                        int (*compare)(union Key, union Key))
 {
   RedBlackTree* node;
   RedBlackTree* parent;

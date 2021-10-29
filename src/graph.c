@@ -32,19 +32,19 @@ void bfs(DoublyLinkedList*** adj_list, ColoredNode* vrtxs[], int length,
 
   init_queue(&q, length + 1);
 
-  reg->key = root;
+  reg->value = root;
   enqueue(&q, *reg);
 
   while (queue_empty(&q) == false)
     {
       dequeue(&q, reg);
-      crt = reg->key;
+      crt = reg->value;
 
       node = (*adj_list[crt->id]);
 
       while (node != NULL)
         {
-          adj = node->data.key;
+          adj = node->data.value;
 
           if (adj->color == WHITE)
             {
@@ -52,7 +52,7 @@ void bfs(DoublyLinkedList*** adj_list, ColoredNode* vrtxs[], int length,
               adj->dist = crt->dist + 1;
               adj->p = crt;
 
-              reg->key = adj;
+              reg->value = adj;
               enqueue(&q, *reg);
             }
 
@@ -80,7 +80,7 @@ static void dfs_visit(DoublyLinkedList*** adj_list, TimedNode* vrtxs[],
 
   while (node != NULL)
     {
-      adj = node->data.key;
+      adj = node->data.value;
 
       if (adj->color == WHITE)
         {

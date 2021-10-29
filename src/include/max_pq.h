@@ -22,11 +22,11 @@
  * @param array Array of Registers containing heap elements.
  * @param heap_size Pointer that contains number of elements in heap.
  * @param extracted Pointer where to store Register containing maximum value.
- * @param compare Pointer to function that compares two void pointers.
+ * @param compare Pointer to function that compares two union Keys.
  * @return Whether extraction was successful.
  */
 bool heap_extract_max(Register array[], int* heap_size, Register* extracted,
-                      int (*compare)(void*, void*));
+                      int (*compare)(union Key, union Key));
 
 /** @brief Gets maximum value / priority in Max Priority Queue (max-heap).
  *
@@ -47,12 +47,12 @@ Register heap_maximum(Register array[]);
  *
  * @param array Array of Registers containing heap elements.
  * @param i Index of element whose priority is to be increased.
- * @param key New priority value as void pointer.
- * @param compare Pointer to function that compares two void pointers.
+ * @param key New priority value as union Key.
+ * @param compare Pointer to function that compares two union Keys.
  * @return Whether key increase was successful.
  */
-bool heap_increase_key(Register array[], int i, void* key,
-                       int (*compare)(void*, void*));
+bool heap_increase_key(Register array[], int i, union Key,
+                       int (*compare)(union Key, union Key));
 
 /** @brief Inserts element of given key into Max Priority Queue (max-heap).
  *
@@ -60,12 +60,12 @@ bool heap_increase_key(Register array[], int i, void* key,
  * maintain heap property and updates heap size.
  *
  * @param array Array of Registers containing heap elements.
- * @param key Key (Priority) of element to be inserted as void pointer.
+ * @param key Key (Priority) of element to be inserted as union Key.
  * @param heap_size Pointer to number of elements in heap.
- * @param compare Pointer to function that compares two void pointers.
+ * @param compare Pointer to function that compares two union Keys.
  * @return Void.
  */
-void max_heap_insert(Register array[], void* key, int* heap_size,
-                     int (*compare)(void*, void*));
+void max_heap_insert(Register array[], union Key, int* heap_size,
+                     int (*compare)(union Key, union Key));
 
 #endif

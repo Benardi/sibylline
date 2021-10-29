@@ -8,42 +8,20 @@
 #include <stdlib.h>
 
 Suite* make_test_suite(void);
-int compare(void* key1, void* key2);
-
-int compare(void* key1, void* key2)
-{
-  int result;
-  int k1 = *((int*)key1);
-  int k2 = *((int*)key2);
-
-  if (k1 > k2)
-    {
-      result = 1;
-    }
-  else if (k1 < k2)
-    {
-      result = -1;
-    }
-  else
-    {
-      result = 0;
-    }
-  return result;
-}
 
 START_TEST(test_build_adj_list_1)
 {
   int i, length;
-  int u0, u1, u2, u3, u4;
+  union Key k0, k1, k2, k3, k4;
   Register reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
-  u0 = 0;
-  u1 = 1;
-  u2 = 2;
-  u3 = 3;
-  u4 = 4;
+  k0.i = 0;
+  k1.i = 1;
+  k2.i = 2;
+  k3.i = 3;
+  k4.i = 4;
 
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
@@ -53,57 +31,57 @@ START_TEST(test_build_adj_list_1)
       *adj_list[i] = NULL;
     }
 
-  reg.key = &u4;
+  reg.key = k4;
   dll_insert(adj_list[0], reg);
-  reg.key = &u1;
+  reg.key = k1;
   dll_insert(adj_list[0], reg);
 
-  reg.key = &u3;
+  reg.key = k3;
   dll_insert(adj_list[1], reg);
-  reg.key = &u2;
+  reg.key = k2;
   dll_insert(adj_list[1], reg);
-  reg.key = &u4;
+  reg.key = k4;
   dll_insert(adj_list[1], reg);
-  reg.key = &u0;
+  reg.key = k0;
   dll_insert(adj_list[1], reg);
 
-  reg.key = &u3;
+  reg.key = k3;
   dll_insert(adj_list[2], reg);
-  reg.key = &u1;
+  reg.key = k1;
   dll_insert(adj_list[2], reg);
 
-  reg.key = &u2;
+  reg.key = k2;
   dll_insert(adj_list[3], reg);
-  reg.key = &u4;
+  reg.key = k4;
   dll_insert(adj_list[3], reg);
-  reg.key = &u1;
+  reg.key = k1;
   dll_insert(adj_list[3], reg);
 
-  reg.key = &u1;
+  reg.key = k1;
   dll_insert(adj_list[4], reg);
-  reg.key = &u0;
+  reg.key = k0;
   dll_insert(adj_list[4], reg);
-  reg.key = &u3;
+  reg.key = k3;
   dll_insert(adj_list[4], reg);
 
-  ck_assert_int_eq(*((int*)(*adj_list[0])->data.key), 1);
-  ck_assert_int_eq(*((int*)(*adj_list[0])->next->data.key), 4);
+  ck_assert_int_eq((*adj_list[0])->data.key.i, 1);
+  ck_assert_int_eq((*adj_list[0])->next->data.key.i, 4);
 
-  ck_assert_int_eq(*((int*)(*adj_list[1])->data.key), 0);
-  ck_assert_int_eq(*((int*)(*adj_list[1])->next->data.key), 4);
-  ck_assert_int_eq(*((int*)(*adj_list[1])->next->next->data.key), 2);
-  ck_assert_int_eq(*((int*)(*adj_list[1])->next->next->next->data.key), 3);
+  ck_assert_int_eq((*adj_list[1])->data.key.i, 0);
+  ck_assert_int_eq((*adj_list[1])->next->data.key.i, 4);
+  ck_assert_int_eq((*adj_list[1])->next->next->data.key.i, 2);
+  ck_assert_int_eq((*adj_list[1])->next->next->next->data.key.i, 3);
 
-  ck_assert_int_eq(*((int*)(*adj_list[2])->data.key), 1);
-  ck_assert_int_eq(*((int*)(*adj_list[2])->next->data.key), 3);
+  ck_assert_int_eq((*adj_list[2])->data.key.i, 1);
+  ck_assert_int_eq((*adj_list[2])->next->data.key.i, 3);
 
-  ck_assert_int_eq(*((int*)(*adj_list[3])->data.key), 1);
-  ck_assert_int_eq(*((int*)(*adj_list[3])->next->data.key), 4);
-  ck_assert_int_eq(*((int*)(*adj_list[3])->next->next->data.key), 2);
+  ck_assert_int_eq((*adj_list[3])->data.key.i, 1);
+  ck_assert_int_eq((*adj_list[3])->next->data.key.i, 4);
+  ck_assert_int_eq((*adj_list[3])->next->next->data.key.i, 2);
 
-  ck_assert_int_eq(*((int*)(*adj_list[4])->data.key), 3);
-  ck_assert_int_eq(*((int*)(*adj_list[4])->next->data.key), 0);
-  ck_assert_int_eq(*((int*)(*adj_list[4])->next->next->data.key), 1);
+  ck_assert_int_eq((*adj_list[4])->data.key.i, 3);
+  ck_assert_int_eq((*adj_list[4])->next->data.key.i, 0);
+  ck_assert_int_eq((*adj_list[4])->next->next->data.key.i, 1);
 
   for (i = 0; i < length; i++)
     {
@@ -118,15 +96,15 @@ END_TEST
 START_TEST(test_build_adj_list_2)
 {
   int i, length;
-  int u1, u3, u4, u5;
+  union Key k1, k3, k4, k5;
   Register reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
-  u1 = 1;
-  u3 = 3;
-  u4 = 4;
-  u5 = 5;
+  k1.i = 1;
+  k3.i = 3;
+  k4.i = 4;
+  k5.i = 5;
 
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
@@ -136,41 +114,41 @@ START_TEST(test_build_adj_list_2)
       *adj_list[i] = NULL;
     }
 
-  reg.key = &u3;
+  reg.key = k3;
   dll_insert(adj_list[0], reg);
-  reg.key = &u1;
+  reg.key = k1;
   dll_insert(adj_list[0], reg);
 
-  reg.key = &u4;
+  reg.key = k4;
   dll_insert(adj_list[1], reg);
 
-  reg.key = &u4;
+  reg.key = k4;
   dll_insert(adj_list[2], reg);
-  reg.key = &u5;
+  reg.key = k5;
   dll_insert(adj_list[2], reg);
 
-  reg.key = &u1;
+  reg.key = k1;
   dll_insert(adj_list[3], reg);
 
-  reg.key = &u3;
+  reg.key = k3;
   dll_insert(adj_list[4], reg);
 
-  reg.key = &u5;
+  reg.key = k5;
   dll_insert(adj_list[5], reg);
 
-  ck_assert_int_eq(*((int*)(*adj_list[0])->data.key), 1);
-  ck_assert_int_eq(*((int*)(*adj_list[0])->next->data.key), 3);
+  ck_assert_int_eq((*adj_list[0])->data.key.i, 1);
+  ck_assert_int_eq((*adj_list[0])->next->data.key.i, 3);
 
-  ck_assert_int_eq(*((int*)(*adj_list[1])->data.key), 4);
+  ck_assert_int_eq((*adj_list[1])->data.key.i, 4);
 
-  ck_assert_int_eq(*((int*)(*adj_list[2])->data.key), 5);
-  ck_assert_int_eq(*((int*)(*adj_list[2])->next->data.key), 4);
+  ck_assert_int_eq((*adj_list[2])->data.key.i, 5);
+  ck_assert_int_eq((*adj_list[2])->next->data.key.i, 4);
 
-  ck_assert_int_eq(*((int*)(*adj_list[3])->data.key), 1);
+  ck_assert_int_eq((*adj_list[3])->data.key.i, 1);
 
-  ck_assert_int_eq(*((int*)(*adj_list[4])->data.key), 3);
+  ck_assert_int_eq((*adj_list[4])->data.key.i, 3);
 
-  ck_assert_int_eq(*((int*)(*adj_list[5])->data.key), 5);
+  ck_assert_int_eq((*adj_list[5])->data.key.i, 5);
 
   for (i = 0; i < length; i++)
     {
@@ -185,19 +163,19 @@ END_TEST
 START_TEST(test_build_adj_list_3)
 {
   int i, length;
-  ColoredNode u1, u3, u4, u5;
+  ColoredNode node1, node3, node4, node5;
   Register reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
-  u1.id = 1;
-  u1.color = WHITE;
-  u3.id = 3;
-  u3.color = GRAY;
-  u4.id = 4;
-  u4.color = BLACK;
-  u5.id = 5;
-  u5.color = WHITE;
+  node1.id = 1;
+  node1.color = WHITE;
+  node3.id = 3;
+  node3.color = GRAY;
+  node4.id = 4;
+  node4.color = BLACK;
+  node5.id = 5;
+  node5.color = WHITE;
 
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
@@ -207,41 +185,41 @@ START_TEST(test_build_adj_list_3)
       *adj_list[i] = NULL;
     }
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[0], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[0], reg);
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[1], reg);
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[2], reg);
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[2], reg);
 
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[3], reg);
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[4], reg);
 
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[5], reg);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.key)->id, 1);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.key)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.value)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.value)->id, 3);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->data.key)->id, 4);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->data.value)->id, 4);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->data.key)->id, 5);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->next->data.key)->id, 4);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->data.value)->id, 5);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->next->data.value)->id, 4);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->data.key)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->data.value)->id, 1);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->data.key)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->data.value)->id, 3);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[5])->data.key)->id, 5);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[5])->data.value)->id, 5);
 
   for (i = 0; i < length; i++)
     {
@@ -423,27 +401,27 @@ START_TEST(test_bfs_1)
 {
   int i, length;
   ColoredNode** vrtxs;
-  ColoredNode u0, u1, u2, u3, u4, u5;
+  ColoredNode node0, node1, node2, node3, node4, node5;
   Register reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
-  u0.id = 0;
-  u1.id = 1;
-  u2.id = 2;
-  u3.id = 3;
-  u4.id = 4;
-  u5.id = 5;
+  node0.id = 0;
+  node1.id = 1;
+  node2.id = 2;
+  node3.id = 3;
+  node4.id = 4;
+  node5.id = 5;
 
   vrtxs = malloc(length * sizeof(ColoredNode*));
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
-  vrtxs[0] = &u0;
-  vrtxs[1] = &u1;
-  vrtxs[2] = &u2;
-  vrtxs[3] = &u3;
-  vrtxs[4] = &u4;
-  vrtxs[5] = &u5;
+  vrtxs[0] = &node0;
+  vrtxs[1] = &node1;
+  vrtxs[2] = &node2;
+  vrtxs[3] = &node3;
+  vrtxs[4] = &node4;
+  vrtxs[5] = &node5;
 
   for (i = 0; i < length; i++)
     {
@@ -451,69 +429,69 @@ START_TEST(test_bfs_1)
       *adj_list[i] = NULL;
     }
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[0], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[0], reg);
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[1], reg);
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[2], reg);
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[2], reg);
 
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[3], reg);
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[4], reg);
 
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[5], reg);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.key)->id, 1);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.key)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.value)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.value)->id, 3);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->data.key)->id, 4);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->data.value)->id, 4);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->data.key)->id, 5);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->next->data.key)->id, 4);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->data.value)->id, 5);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->next->data.value)->id, 4);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->data.key)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->data.value)->id, 1);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->data.key)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->data.value)->id, 3);
 
-  bfs(adj_list, vrtxs, length, &u2);
+  bfs(adj_list, vrtxs, length, &node2);
 
-  ck_assert_int_eq(u0.id, 0);
-  ck_assert_int_eq(u1.id, 1);
-  ck_assert_int_eq(u2.id, 2);
-  ck_assert_int_eq(u3.id, 3);
-  ck_assert_int_eq(u4.id, 4);
-  ck_assert_int_eq(u5.id, 5);
+  ck_assert_int_eq(node0.id, 0);
+  ck_assert_int_eq(node1.id, 1);
+  ck_assert_int_eq(node2.id, 2);
+  ck_assert_int_eq(node3.id, 3);
+  ck_assert_int_eq(node4.id, 4);
+  ck_assert_int_eq(node5.id, 5);
 
-  ck_assert_int_eq(u0.color, WHITE);
-  ck_assert_int_eq(u1.color, BLACK);
-  ck_assert_int_eq(u2.color, BLACK);
-  ck_assert_int_eq(u3.color, BLACK);
-  ck_assert_int_eq(u4.color, BLACK);
-  ck_assert_int_eq(u5.color, BLACK);
+  ck_assert_int_eq(node0.color, WHITE);
+  ck_assert_int_eq(node1.color, BLACK);
+  ck_assert_int_eq(node2.color, BLACK);
+  ck_assert_int_eq(node3.color, BLACK);
+  ck_assert_int_eq(node4.color, BLACK);
+  ck_assert_int_eq(node5.color, BLACK);
 
-  ck_assert_int_eq(u0.dist, INF);
-  ck_assert_int_eq(u1.dist, 3);
-  ck_assert_int_eq(u2.dist, 0);
-  ck_assert_int_eq(u3.dist, 2);
-  ck_assert_int_eq(u4.dist, 1);
-  ck_assert_int_eq(u5.dist, 1);
+  ck_assert_int_eq(node0.dist, INF);
+  ck_assert_int_eq(node1.dist, 3);
+  ck_assert_int_eq(node2.dist, 0);
+  ck_assert_int_eq(node3.dist, 2);
+  ck_assert_int_eq(node4.dist, 1);
+  ck_assert_int_eq(node5.dist, 1);
 
-  ck_assert_ptr_eq(u0.p, NULL);
-  ck_assert_ptr_eq(u1.p, &u3);
-  ck_assert_ptr_eq(u2.p, NULL);
-  ck_assert_ptr_eq(u3.p, &u4);
-  ck_assert_ptr_eq(u4.p, &u2);
-  ck_assert_ptr_eq(u5.p, &u2);
+  ck_assert_ptr_eq(node0.p, NULL);
+  ck_assert_ptr_eq(node1.p, &node3);
+  ck_assert_ptr_eq(node2.p, NULL);
+  ck_assert_ptr_eq(node3.p, &node4);
+  ck_assert_ptr_eq(node4.p, &node2);
+  ck_assert_ptr_eq(node5.p, &node2);
 
   for (i = 0; i < length; i++)
     {
@@ -530,25 +508,25 @@ START_TEST(test_bfs_2)
 {
   int i, length;
   ColoredNode** vrtxs;
-  ColoredNode u0, u1, u2, u3, u4;
+  ColoredNode node0, node1, node2, node3, node4;
   Register reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
-  u0.id = 0;
-  u1.id = 1;
-  u2.id = 2;
-  u3.id = 3;
-  u4.id = 4;
+  node0.id = 0;
+  node1.id = 1;
+  node2.id = 2;
+  node3.id = 3;
+  node4.id = 4;
 
   vrtxs = malloc(length * sizeof(ColoredNode*));
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
-  vrtxs[0] = &u0;
-  vrtxs[1] = &u1;
-  vrtxs[2] = &u2;
-  vrtxs[3] = &u3;
-  vrtxs[4] = &u4;
+  vrtxs[0] = &node0;
+  vrtxs[1] = &node1;
+  vrtxs[2] = &node2;
+  vrtxs[3] = &node3;
+  vrtxs[4] = &node4;
 
   for (i = 0; i < length; i++)
     {
@@ -556,84 +534,87 @@ START_TEST(test_bfs_2)
       *adj_list[i] = NULL;
     }
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[0], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[0], reg);
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[1], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[1], reg);
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[1], reg);
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[1], reg);
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[2], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[2], reg);
 
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[3], reg);
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[3], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[3], reg);
 
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[4], reg);
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[4], reg);
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[4], reg);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.key)->id, 1);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.key)->id, 4);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.value)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.value)->id, 4);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->data.key)->id, 0);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->next->data.key)->id, 4);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->next->next->data.key)->id, 2);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->data.value)->id, 0);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->next->data.value)->id, 4);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->next->next->data.value)->id,
+                   2);
   ck_assert_int_eq(
-      ((ColoredNode*)(*adj_list[1])->next->next->next->data.key)->id, 3);
+      ((ColoredNode*)(*adj_list[1])->next->next->next->data.value)->id, 3);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->data.key)->id, 1);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->next->data.key)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->data.value)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->next->data.value)->id, 3);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->data.key)->id, 1);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->next->data.key)->id, 4);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->next->next->data.key)->id, 2);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->data.value)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->next->data.value)->id, 4);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->next->next->data.value)->id,
+                   2);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->data.key)->id, 3);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->next->data.key)->id, 0);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->next->next->data.key)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->data.value)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->next->data.value)->id, 0);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->next->next->data.value)->id,
+                   1);
 
-  bfs(adj_list, vrtxs, length, &u0);
+  bfs(adj_list, vrtxs, length, &node0);
 
-  ck_assert_int_eq(u0.id, 0);
-  ck_assert_int_eq(u1.id, 1);
-  ck_assert_int_eq(u2.id, 2);
-  ck_assert_int_eq(u3.id, 3);
-  ck_assert_int_eq(u4.id, 4);
+  ck_assert_int_eq(node0.id, 0);
+  ck_assert_int_eq(node1.id, 1);
+  ck_assert_int_eq(node2.id, 2);
+  ck_assert_int_eq(node3.id, 3);
+  ck_assert_int_eq(node4.id, 4);
 
-  ck_assert_int_eq(u0.color, BLACK);
-  ck_assert_int_eq(u1.color, BLACK);
-  ck_assert_int_eq(u2.color, BLACK);
-  ck_assert_int_eq(u3.color, BLACK);
-  ck_assert_int_eq(u4.color, BLACK);
+  ck_assert_int_eq(node0.color, BLACK);
+  ck_assert_int_eq(node1.color, BLACK);
+  ck_assert_int_eq(node2.color, BLACK);
+  ck_assert_int_eq(node3.color, BLACK);
+  ck_assert_int_eq(node4.color, BLACK);
 
-  ck_assert_int_eq(u0.dist, 0);
-  ck_assert_int_eq(u1.dist, 1);
-  ck_assert_int_eq(u2.dist, 2);
-  ck_assert_int_eq(u3.dist, 2);
-  ck_assert_int_eq(u4.dist, 1);
+  ck_assert_int_eq(node0.dist, 0);
+  ck_assert_int_eq(node1.dist, 1);
+  ck_assert_int_eq(node2.dist, 2);
+  ck_assert_int_eq(node3.dist, 2);
+  ck_assert_int_eq(node4.dist, 1);
 
-  ck_assert_ptr_eq(u0.p, NULL);
-  ck_assert_ptr_eq(u1.p, &u0);
-  ck_assert_ptr_eq(u2.p, &u1);
-  ck_assert_ptr_eq(u3.p, &u1);
-  ck_assert_ptr_eq(u4.p, &u0);
+  ck_assert_ptr_eq(node0.p, NULL);
+  ck_assert_ptr_eq(node1.p, &node0);
+  ck_assert_ptr_eq(node2.p, &node1);
+  ck_assert_ptr_eq(node3.p, &node1);
+  ck_assert_ptr_eq(node4.p, &node0);
 
   for (i = 0; i < length; i++)
     {
@@ -650,31 +631,31 @@ START_TEST(test_bfs_3)
 {
   int i, length;
   ColoredNode** vrtxs;
-  ColoredNode u0, u1, u2, u3, u4, u5, u6, u7;
+  ColoredNode node0, node1, node2, node3, node4, node5, node6, node7;
   Register reg;
   DoublyLinkedList*** adj_list;
 
   length = 8;
-  u0.id = 0;
-  u1.id = 1;
-  u2.id = 2;
-  u3.id = 3;
-  u4.id = 4;
-  u5.id = 5;
-  u6.id = 6;
-  u7.id = 7;
+  node0.id = 0;
+  node1.id = 1;
+  node2.id = 2;
+  node3.id = 3;
+  node4.id = 4;
+  node5.id = 5;
+  node6.id = 6;
+  node7.id = 7;
 
   vrtxs = malloc(length * sizeof(ColoredNode*));
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
-  vrtxs[0] = &u0;
-  vrtxs[1] = &u1;
-  vrtxs[2] = &u2;
-  vrtxs[3] = &u3;
-  vrtxs[4] = &u4;
-  vrtxs[5] = &u5;
-  vrtxs[6] = &u6;
-  vrtxs[7] = &u7;
+  vrtxs[0] = &node0;
+  vrtxs[1] = &node1;
+  vrtxs[2] = &node2;
+  vrtxs[3] = &node3;
+  vrtxs[4] = &node4;
+  vrtxs[5] = &node5;
+  vrtxs[6] = &node6;
+  vrtxs[7] = &node7;
 
   for (i = 0; i < length; i++)
     {
@@ -682,120 +663,124 @@ START_TEST(test_bfs_3)
       *adj_list[i] = NULL;
     }
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[0], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[0], reg);
 
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[1], reg);
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[1], reg);
 
-  reg.key = &u6;
+  reg.value = &node6;
   dll_insert(adj_list[2], reg);
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[2], reg);
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[2], reg);
 
-  reg.key = &u7;
+  reg.value = &node7;
   dll_insert(adj_list[3], reg);
-  reg.key = &u6;
+  reg.value = &node6;
   dll_insert(adj_list[3], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[3], reg);
 
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[4], reg);
 
-  reg.key = &u6;
+  reg.value = &node6;
   dll_insert(adj_list[5], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[5], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[5], reg);
 
-  reg.key = &u7;
+  reg.value = &node7;
   dll_insert(adj_list[6], reg);
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[6], reg);
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[6], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[6], reg);
 
-  reg.key = &u6;
+  reg.value = &node6;
   dll_insert(adj_list[7], reg);
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[7], reg);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.key)->id, 1);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.key)->id, 4);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.value)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.value)->id, 4);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->data.key)->id, 0);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->next->data.key)->id, 5);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->data.value)->id, 0);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->next->data.value)->id, 5);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->data.key)->id, 3);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->next->data.key)->id, 5);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->next->next->data.key)->id, 6);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->data.value)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->next->data.value)->id, 5);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->next->next->data.value)->id,
+                   6);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->data.key)->id, 2);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->next->data.key)->id, 6);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->next->next->data.key)->id, 7);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->data.value)->id, 2);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->next->data.value)->id, 6);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->next->next->data.value)->id,
+                   7);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->data.key)->id, 0);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->data.value)->id, 0);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[5])->data.key)->id, 1);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[5])->next->data.key)->id, 2);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[5])->next->next->data.key)->id, 6);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[5])->data.value)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[5])->next->data.value)->id, 2);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[5])->next->next->data.value)->id,
+                   6);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[6])->data.key)->id, 2);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[6])->next->data.key)->id, 3);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[6])->next->next->data.key)->id, 5);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[6])->data.value)->id, 2);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[6])->next->data.value)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[6])->next->next->data.value)->id,
+                   5);
   ck_assert_int_eq(
-      ((ColoredNode*)(*adj_list[6])->next->next->next->data.key)->id, 7);
+      ((ColoredNode*)(*adj_list[6])->next->next->next->data.value)->id, 7);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[7])->data.key)->id, 3);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[7])->next->data.key)->id, 6);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[7])->data.value)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[7])->next->data.value)->id, 6);
 
-  bfs(adj_list, vrtxs, length, &u1);
+  bfs(adj_list, vrtxs, length, &node1);
 
-  ck_assert_int_eq(u0.id, 0);
-  ck_assert_int_eq(u1.id, 1);
-  ck_assert_int_eq(u2.id, 2);
-  ck_assert_int_eq(u3.id, 3);
-  ck_assert_int_eq(u4.id, 4);
-  ck_assert_int_eq(u5.id, 5);
-  ck_assert_int_eq(u6.id, 6);
-  ck_assert_int_eq(u7.id, 7);
+  ck_assert_int_eq(node0.id, 0);
+  ck_assert_int_eq(node1.id, 1);
+  ck_assert_int_eq(node2.id, 2);
+  ck_assert_int_eq(node3.id, 3);
+  ck_assert_int_eq(node4.id, 4);
+  ck_assert_int_eq(node5.id, 5);
+  ck_assert_int_eq(node6.id, 6);
+  ck_assert_int_eq(node7.id, 7);
 
-  ck_assert_int_eq(u0.color, BLACK);
-  ck_assert_int_eq(u1.color, BLACK);
-  ck_assert_int_eq(u2.color, BLACK);
-  ck_assert_int_eq(u3.color, BLACK);
-  ck_assert_int_eq(u4.color, BLACK);
-  ck_assert_int_eq(u5.color, BLACK);
-  ck_assert_int_eq(u6.color, BLACK);
-  ck_assert_int_eq(u7.color, BLACK);
+  ck_assert_int_eq(node0.color, BLACK);
+  ck_assert_int_eq(node1.color, BLACK);
+  ck_assert_int_eq(node2.color, BLACK);
+  ck_assert_int_eq(node3.color, BLACK);
+  ck_assert_int_eq(node4.color, BLACK);
+  ck_assert_int_eq(node5.color, BLACK);
+  ck_assert_int_eq(node6.color, BLACK);
+  ck_assert_int_eq(node7.color, BLACK);
 
-  ck_assert_int_eq(u0.dist, 1);
-  ck_assert_int_eq(u1.dist, 0);
-  ck_assert_int_eq(u2.dist, 2);
-  ck_assert_int_eq(u3.dist, 3);
-  ck_assert_int_eq(u4.dist, 2);
-  ck_assert_int_eq(u5.dist, 1);
-  ck_assert_int_eq(u6.dist, 2);
-  ck_assert_int_eq(u7.dist, 3);
+  ck_assert_int_eq(node0.dist, 1);
+  ck_assert_int_eq(node1.dist, 0);
+  ck_assert_int_eq(node2.dist, 2);
+  ck_assert_int_eq(node3.dist, 3);
+  ck_assert_int_eq(node4.dist, 2);
+  ck_assert_int_eq(node5.dist, 1);
+  ck_assert_int_eq(node6.dist, 2);
+  ck_assert_int_eq(node7.dist, 3);
 
-  ck_assert_ptr_eq(u0.p, &u1);
-  ck_assert_ptr_eq(u1.p, NULL);
-  ck_assert_ptr_eq(u2.p, &u5);
-  ck_assert_ptr_eq(u3.p, &u2);
-  ck_assert_ptr_eq(u4.p, &u0);
-  ck_assert_ptr_eq(u5.p, &u1);
-  ck_assert_ptr_eq(u6.p, &u5);
-  ck_assert_ptr_eq(u7.p, &u6);
+  ck_assert_ptr_eq(node0.p, &node1);
+  ck_assert_ptr_eq(node1.p, NULL);
+  ck_assert_ptr_eq(node2.p, &node5);
+  ck_assert_ptr_eq(node3.p, &node2);
+  ck_assert_ptr_eq(node4.p, &node0);
+  ck_assert_ptr_eq(node5.p, &node1);
+  ck_assert_ptr_eq(node6.p, &node5);
+  ck_assert_ptr_eq(node7.p, &node6);
 
   for (i = 0; i < length; i++)
     {
@@ -812,16 +797,16 @@ START_TEST(test_bfs_4)
 {
   int i, length;
   ColoredNode** vrtxs;
-  ColoredNode u0;
+  ColoredNode node0;
   DoublyLinkedList*** adj_list;
 
   length = 1;
-  u0.id = 0;
+  node0.id = 0;
 
   vrtxs = malloc(length * sizeof(ColoredNode*));
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
-  vrtxs[0] = &u0;
+  vrtxs[0] = &node0;
 
   for (i = 0; i < length; i++)
     {
@@ -829,12 +814,12 @@ START_TEST(test_bfs_4)
       *adj_list[i] = NULL;
     }
 
-  bfs(adj_list, vrtxs, length, &u0);
+  bfs(adj_list, vrtxs, length, &node0);
 
-  ck_assert_int_eq(u0.id, 0);
-  ck_assert_int_eq(u0.color, BLACK);
-  ck_assert_int_eq(u0.dist, 0);
-  ck_assert_ptr_eq(u0.p, NULL);
+  ck_assert_int_eq(node0.id, 0);
+  ck_assert_int_eq(node0.color, BLACK);
+  ck_assert_int_eq(node0.dist, 0);
+  ck_assert_ptr_eq(node0.p, NULL);
 
   for (i = 0; i < length; i++)
     {
@@ -851,25 +836,25 @@ START_TEST(test_bfs_5)
 {
   int i, length;
   ColoredNode** vrtxs;
-  ColoredNode u0, u1, u2, u3, u4;
+  ColoredNode node0, node1, node2, node3, node4;
   Register reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
-  u0.id = 0;
-  u1.id = 1;
-  u2.id = 2;
-  u3.id = 3;
-  u4.id = 4;
+  node0.id = 0;
+  node1.id = 1;
+  node2.id = 2;
+  node3.id = 3;
+  node4.id = 4;
 
   vrtxs = malloc(length * sizeof(ColoredNode*));
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
-  vrtxs[0] = &u0;
-  vrtxs[1] = &u1;
-  vrtxs[2] = &u2;
-  vrtxs[3] = &u3;
-  vrtxs[4] = &u4;
+  vrtxs[0] = &node0;
+  vrtxs[1] = &node1;
+  vrtxs[2] = &node2;
+  vrtxs[3] = &node3;
+  vrtxs[4] = &node4;
 
   for (i = 0; i < length; i++)
     {
@@ -877,82 +862,83 @@ START_TEST(test_bfs_5)
       *adj_list[i] = NULL;
     }
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[0], reg);
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[0], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[0], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[0], reg);
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[1], reg);
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[1], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[1], reg);
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[1], reg);
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[2], reg);
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[2], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[2], reg);
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[2], reg);
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[3], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[3], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[3], reg);
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[3], reg);
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[4], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[4], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[4], reg);
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[4], reg);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.key)->id, 1);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.key)->id, 2);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->next->data.key)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.value)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.value)->id, 2);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->next->data.value)->id,
+                   3);
   ck_assert_int_eq(
-      ((ColoredNode*)(*adj_list[0])->next->next->next->data.key)->id, 4);
+      ((ColoredNode*)(*adj_list[0])->next->next->next->data.value)->id, 4);
 
-  bfs(adj_list, vrtxs, length, &u4);
+  bfs(adj_list, vrtxs, length, &node4);
 
-  ck_assert_int_eq(u0.id, 0);
-  ck_assert_int_eq(u1.id, 1);
-  ck_assert_int_eq(u2.id, 2);
-  ck_assert_int_eq(u3.id, 3);
-  ck_assert_int_eq(u4.id, 4);
+  ck_assert_int_eq(node0.id, 0);
+  ck_assert_int_eq(node1.id, 1);
+  ck_assert_int_eq(node2.id, 2);
+  ck_assert_int_eq(node3.id, 3);
+  ck_assert_int_eq(node4.id, 4);
 
-  ck_assert_int_eq(u0.color, BLACK);
-  ck_assert_int_eq(u1.color, BLACK);
-  ck_assert_int_eq(u2.color, BLACK);
-  ck_assert_int_eq(u3.color, BLACK);
-  ck_assert_int_eq(u4.color, BLACK);
+  ck_assert_int_eq(node0.color, BLACK);
+  ck_assert_int_eq(node1.color, BLACK);
+  ck_assert_int_eq(node2.color, BLACK);
+  ck_assert_int_eq(node3.color, BLACK);
+  ck_assert_int_eq(node4.color, BLACK);
 
-  ck_assert_int_eq(u0.dist, 1);
-  ck_assert_int_eq(u1.dist, 1);
-  ck_assert_int_eq(u2.dist, 1);
-  ck_assert_int_eq(u3.dist, 1);
-  ck_assert_int_eq(u4.dist, 0);
+  ck_assert_int_eq(node0.dist, 1);
+  ck_assert_int_eq(node1.dist, 1);
+  ck_assert_int_eq(node2.dist, 1);
+  ck_assert_int_eq(node3.dist, 1);
+  ck_assert_int_eq(node4.dist, 0);
 
-  ck_assert_ptr_eq(u0.p, &u4);
-  ck_assert_ptr_eq(u1.p, &u4);
-  ck_assert_ptr_eq(u2.p, &u4);
-  ck_assert_ptr_eq(u3.p, &u4);
-  ck_assert_ptr_eq(u4.p, NULL);
+  ck_assert_ptr_eq(node0.p, &node4);
+  ck_assert_ptr_eq(node1.p, &node4);
+  ck_assert_ptr_eq(node2.p, &node4);
+  ck_assert_ptr_eq(node3.p, &node4);
+  ck_assert_ptr_eq(node4.p, NULL);
 
   for (i = 0; i < length; i++)
     {
@@ -969,25 +955,25 @@ START_TEST(test_bfs_6)
 {
   int i, length;
   ColoredNode** vrtxs;
-  ColoredNode u0, u1, u2, u3, u4;
+  ColoredNode node0, node1, node2, node3, node4;
   Register reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
-  u0.id = 0;
-  u1.id = 1;
-  u2.id = 2;
-  u3.id = 3;
-  u4.id = 4;
+  node0.id = 0;
+  node1.id = 1;
+  node2.id = 2;
+  node3.id = 3;
+  node4.id = 4;
 
   vrtxs = malloc(length * sizeof(ColoredNode*));
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
-  vrtxs[0] = &u0;
-  vrtxs[1] = &u1;
-  vrtxs[2] = &u2;
-  vrtxs[3] = &u3;
-  vrtxs[4] = &u4;
+  vrtxs[0] = &node0;
+  vrtxs[1] = &node1;
+  vrtxs[2] = &node2;
+  vrtxs[3] = &node3;
+  vrtxs[4] = &node4;
 
   for (i = 0; i < length; i++)
     {
@@ -995,78 +981,80 @@ START_TEST(test_bfs_6)
       *adj_list[i] = NULL;
     }
 
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[0], reg);
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[1], reg);
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[1], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[1], reg);
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[1], reg);
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[2], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[2], reg);
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[3], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[3], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[3], reg);
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[4], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[4], reg);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.key)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.value)->id, 1);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->data.key)->id, 0);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->next->data.key)->id, 2);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->next->next->data.key)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->data.value)->id, 0);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->next->data.value)->id, 2);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[1])->next->next->data.value)->id,
+                   3);
   ck_assert_int_eq(
-      ((ColoredNode*)(*adj_list[1])->next->next->next->data.key)->id, 4);
+      ((ColoredNode*)(*adj_list[1])->next->next->next->data.value)->id, 4);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->data.key)->id, 1);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->next->data.key)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->data.value)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[2])->next->data.value)->id, 3);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->data.key)->id, 1);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->next->data.key)->id, 2);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->next->next->data.key)->id, 4);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->data.value)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->next->data.value)->id, 2);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[3])->next->next->data.value)->id,
+                   4);
 
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->data.key)->id, 1);
-  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->next->data.key)->id, 3);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->data.value)->id, 1);
+  ck_assert_int_eq(((ColoredNode*)(*adj_list[4])->next->data.value)->id, 3);
 
-  bfs(adj_list, vrtxs, length, &u2);
+  bfs(adj_list, vrtxs, length, &node2);
 
-  ck_assert_int_eq(u0.id, 0);
-  ck_assert_int_eq(u1.id, 1);
-  ck_assert_int_eq(u2.id, 2);
-  ck_assert_int_eq(u3.id, 3);
-  ck_assert_int_eq(u4.id, 4);
+  ck_assert_int_eq(node0.id, 0);
+  ck_assert_int_eq(node1.id, 1);
+  ck_assert_int_eq(node2.id, 2);
+  ck_assert_int_eq(node3.id, 3);
+  ck_assert_int_eq(node4.id, 4);
 
-  ck_assert_int_eq(u0.color, BLACK);
-  ck_assert_int_eq(u1.color, BLACK);
-  ck_assert_int_eq(u2.color, BLACK);
-  ck_assert_int_eq(u3.color, BLACK);
-  ck_assert_int_eq(u4.color, BLACK);
+  ck_assert_int_eq(node0.color, BLACK);
+  ck_assert_int_eq(node1.color, BLACK);
+  ck_assert_int_eq(node2.color, BLACK);
+  ck_assert_int_eq(node3.color, BLACK);
+  ck_assert_int_eq(node4.color, BLACK);
 
-  ck_assert_int_eq(u0.dist, 2);
-  ck_assert_int_eq(u1.dist, 1);
-  ck_assert_int_eq(u2.dist, 0);
-  ck_assert_int_eq(u3.dist, 1);
-  ck_assert_int_eq(u4.dist, 2);
+  ck_assert_int_eq(node0.dist, 2);
+  ck_assert_int_eq(node1.dist, 1);
+  ck_assert_int_eq(node2.dist, 0);
+  ck_assert_int_eq(node3.dist, 1);
+  ck_assert_int_eq(node4.dist, 2);
 
-  ck_assert_ptr_eq(u0.p, &u1);
-  ck_assert_ptr_eq(u1.p, &u2);
-  ck_assert_ptr_eq(u2.p, NULL);
-  ck_assert_ptr_eq(u3.p, &u2);
-  ck_assert_ptr_eq(u4.p, &u1);
+  ck_assert_ptr_eq(node0.p, &node1);
+  ck_assert_ptr_eq(node1.p, &node2);
+  ck_assert_ptr_eq(node2.p, NULL);
+  ck_assert_ptr_eq(node3.p, &node2);
+  ck_assert_ptr_eq(node4.p, &node1);
 
   for (i = 0; i < length; i++)
     {
@@ -1083,27 +1071,27 @@ START_TEST(test_dfs_1)
 {
   int i, length;
   TimedNode** vrtxs;
-  TimedNode u0, u1, u2, u3, u4, u5;
+  TimedNode node0, node1, node2, node3, node4, node5;
   Register reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
-  u0.id = 0;
-  u1.id = 1;
-  u2.id = 2;
-  u3.id = 3;
-  u4.id = 4;
-  u5.id = 5;
+  node0.id = 0;
+  node1.id = 1;
+  node2.id = 2;
+  node3.id = 3;
+  node4.id = 4;
+  node5.id = 5;
 
   vrtxs = malloc(length * sizeof(TimedNode*));
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
-  vrtxs[0] = &u0;
-  vrtxs[1] = &u1;
-  vrtxs[2] = &u2;
-  vrtxs[3] = &u3;
-  vrtxs[4] = &u4;
-  vrtxs[5] = &u5;
+  vrtxs[0] = &node0;
+  vrtxs[1] = &node1;
+  vrtxs[2] = &node2;
+  vrtxs[3] = &node3;
+  vrtxs[4] = &node4;
+  vrtxs[5] = &node5;
 
   for (i = 0; i < length; i++)
     {
@@ -1111,60 +1099,60 @@ START_TEST(test_dfs_1)
       *adj_list[i] = NULL;
     }
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[0], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[0], reg);
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[1], reg);
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[2], reg);
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[2], reg);
 
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[3], reg);
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[4], reg);
 
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[5], reg);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->data.key)->id, 1);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->data.key)->id, 3);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->data.value)->id, 1);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->data.value)->id, 3);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->data.key)->id, 4);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->data.value)->id, 4);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->data.key)->id, 5);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->next->data.key)->id, 4);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->data.value)->id, 5);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->next->data.value)->id, 4);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->data.key)->id, 1);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->data.value)->id, 1);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[4])->data.key)->id, 3);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[4])->data.value)->id, 3);
 
   dfs(adj_list, vrtxs, length);
 
-  ck_assert_int_eq(u0.id, 0);
-  ck_assert_int_eq(u1.id, 1);
-  ck_assert_int_eq(u2.id, 2);
-  ck_assert_int_eq(u3.id, 3);
-  ck_assert_int_eq(u4.id, 4);
-  ck_assert_int_eq(u5.id, 5);
+  ck_assert_int_eq(node0.id, 0);
+  ck_assert_int_eq(node1.id, 1);
+  ck_assert_int_eq(node2.id, 2);
+  ck_assert_int_eq(node3.id, 3);
+  ck_assert_int_eq(node4.id, 4);
+  ck_assert_int_eq(node5.id, 5);
 
-  ck_assert_int_eq(u0.color, BLACK);
-  ck_assert_int_eq(u1.color, BLACK);
-  ck_assert_int_eq(u2.color, BLACK);
-  ck_assert_int_eq(u3.color, BLACK);
-  ck_assert_int_eq(u4.color, BLACK);
-  ck_assert_int_eq(u5.color, BLACK);
+  ck_assert_int_eq(node0.color, BLACK);
+  ck_assert_int_eq(node1.color, BLACK);
+  ck_assert_int_eq(node2.color, BLACK);
+  ck_assert_int_eq(node3.color, BLACK);
+  ck_assert_int_eq(node4.color, BLACK);
+  ck_assert_int_eq(node5.color, BLACK);
 
-  ck_assert_ptr_eq(u0.p, NULL);
-  ck_assert_ptr_eq(u1.p, &u0);
-  ck_assert_ptr_eq(u2.p, NULL);
-  ck_assert_ptr_eq(u5.p, &u2);
+  ck_assert_ptr_eq(node0.p, NULL);
+  ck_assert_ptr_eq(node1.p, &node0);
+  ck_assert_ptr_eq(node2.p, NULL);
+  ck_assert_ptr_eq(node5.p, &node2);
 
   for (i = 0; i < length; i++)
     {
@@ -1181,25 +1169,25 @@ START_TEST(test_dfs_2)
 {
   int i, length;
   TimedNode** vrtxs;
-  TimedNode u0, u1, u2, u3, u4;
+  TimedNode node0, node1, node2, node3, node4;
   Register reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
-  u0.id = 0;
-  u1.id = 1;
-  u2.id = 2;
-  u3.id = 3;
-  u4.id = 4;
+  node0.id = 0;
+  node1.id = 1;
+  node2.id = 2;
+  node3.id = 3;
+  node4.id = 4;
 
   vrtxs = malloc(length * sizeof(TimedNode*));
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
-  vrtxs[0] = &u0;
-  vrtxs[1] = &u1;
-  vrtxs[2] = &u2;
-  vrtxs[3] = &u3;
-  vrtxs[4] = &u4;
+  vrtxs[0] = &node0;
+  vrtxs[1] = &node1;
+  vrtxs[2] = &node2;
+  vrtxs[3] = &node3;
+  vrtxs[4] = &node4;
 
   for (i = 0; i < length; i++)
     {
@@ -1207,72 +1195,72 @@ START_TEST(test_dfs_2)
       *adj_list[i] = NULL;
     }
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[0], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[0], reg);
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[1], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[1], reg);
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[1], reg);
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[1], reg);
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[2], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[2], reg);
 
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[3], reg);
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[3], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[3], reg);
 
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[4], reg);
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[4], reg);
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[4], reg);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->data.key)->id, 1);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->data.key)->id, 4);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->data.value)->id, 1);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->data.value)->id, 4);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->data.key)->id, 0);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->next->data.key)->id, 4);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->next->next->data.key)->id, 2);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->next->next->next->data.key)->id,
-                   3);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->data.value)->id, 0);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->next->data.value)->id, 4);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->next->next->data.value)->id, 2);
+  ck_assert_int_eq(
+      ((TimedNode*)(*adj_list[1])->next->next->next->data.value)->id, 3);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->data.key)->id, 1);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->next->data.key)->id, 3);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->data.value)->id, 1);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->next->data.value)->id, 3);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->data.key)->id, 1);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->next->data.key)->id, 4);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->next->next->data.key)->id, 2);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->data.value)->id, 1);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->next->data.value)->id, 4);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->next->next->data.value)->id, 2);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[4])->data.key)->id, 3);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[4])->next->data.key)->id, 0);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[4])->next->next->data.key)->id, 1);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[4])->data.value)->id, 3);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[4])->next->data.value)->id, 0);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[4])->next->next->data.value)->id, 1);
 
   dfs(adj_list, vrtxs, length);
 
-  ck_assert_int_eq(u0.id, 0);
-  ck_assert_int_eq(u1.id, 1);
-  ck_assert_int_eq(u2.id, 2);
-  ck_assert_int_eq(u3.id, 3);
-  ck_assert_int_eq(u4.id, 4);
+  ck_assert_int_eq(node0.id, 0);
+  ck_assert_int_eq(node1.id, 1);
+  ck_assert_int_eq(node2.id, 2);
+  ck_assert_int_eq(node3.id, 3);
+  ck_assert_int_eq(node4.id, 4);
 
-  ck_assert_int_eq(u0.color, BLACK);
-  ck_assert_int_eq(u1.color, BLACK);
-  ck_assert_int_eq(u2.color, BLACK);
-  ck_assert_int_eq(u3.color, BLACK);
-  ck_assert_int_eq(u4.color, BLACK);
+  ck_assert_int_eq(node0.color, BLACK);
+  ck_assert_int_eq(node1.color, BLACK);
+  ck_assert_int_eq(node2.color, BLACK);
+  ck_assert_int_eq(node3.color, BLACK);
+  ck_assert_int_eq(node4.color, BLACK);
 
   for (i = 0; i < length; i++)
     {
@@ -1289,31 +1277,31 @@ START_TEST(test_dfs_3)
 {
   int i, length;
   TimedNode** vrtxs;
-  TimedNode u0, u1, u2, u3, u4, u5, u6, u7;
+  TimedNode node0, node1, node2, node3, node4, node5, node6, node7;
   Register reg;
   DoublyLinkedList*** adj_list;
 
   length = 8;
-  u0.id = 0;
-  u1.id = 1;
-  u2.id = 2;
-  u3.id = 3;
-  u4.id = 4;
-  u5.id = 5;
-  u6.id = 6;
-  u7.id = 7;
+  node0.id = 0;
+  node1.id = 1;
+  node2.id = 2;
+  node3.id = 3;
+  node4.id = 4;
+  node5.id = 5;
+  node6.id = 6;
+  node7.id = 7;
 
   vrtxs = malloc(length * sizeof(TimedNode*));
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
-  vrtxs[0] = &u0;
-  vrtxs[1] = &u1;
-  vrtxs[2] = &u2;
-  vrtxs[3] = &u3;
-  vrtxs[4] = &u4;
-  vrtxs[5] = &u5;
-  vrtxs[6] = &u6;
-  vrtxs[7] = &u7;
+  vrtxs[0] = &node0;
+  vrtxs[1] = &node1;
+  vrtxs[2] = &node2;
+  vrtxs[3] = &node3;
+  vrtxs[4] = &node4;
+  vrtxs[5] = &node5;
+  vrtxs[6] = &node6;
+  vrtxs[7] = &node7;
 
   for (i = 0; i < length; i++)
     {
@@ -1321,105 +1309,105 @@ START_TEST(test_dfs_3)
       *adj_list[i] = NULL;
     }
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[0], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[0], reg);
 
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[1], reg);
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[1], reg);
 
-  reg.key = &u6;
+  reg.value = &node6;
   dll_insert(adj_list[2], reg);
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[2], reg);
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[2], reg);
 
-  reg.key = &u7;
+  reg.value = &node7;
   dll_insert(adj_list[3], reg);
-  reg.key = &u6;
+  reg.value = &node6;
   dll_insert(adj_list[3], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[3], reg);
 
-  reg.key = &u0;
+  reg.value = &node0;
   dll_insert(adj_list[4], reg);
 
-  reg.key = &u6;
+  reg.value = &node6;
   dll_insert(adj_list[5], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[5], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[5], reg);
 
-  reg.key = &u7;
+  reg.value = &node7;
   dll_insert(adj_list[6], reg);
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[6], reg);
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[6], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[6], reg);
 
-  reg.key = &u6;
+  reg.value = &node6;
   dll_insert(adj_list[7], reg);
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[7], reg);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->data.key)->id, 1);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->data.key)->id, 4);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->data.value)->id, 1);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->data.value)->id, 4);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->data.key)->id, 0);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->next->data.key)->id, 5);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->data.value)->id, 0);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->next->data.value)->id, 5);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->data.key)->id, 3);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->next->data.key)->id, 5);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->next->next->data.key)->id, 6);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->data.value)->id, 3);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->next->data.value)->id, 5);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->next->next->data.value)->id, 6);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->data.key)->id, 2);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->next->data.key)->id, 6);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->next->next->data.key)->id, 7);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->data.value)->id, 2);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->next->data.value)->id, 6);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[3])->next->next->data.value)->id, 7);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[4])->data.key)->id, 0);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[4])->data.value)->id, 0);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[5])->data.key)->id, 1);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[5])->next->data.key)->id, 2);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[5])->next->next->data.key)->id, 6);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[5])->data.value)->id, 1);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[5])->next->data.value)->id, 2);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[5])->next->next->data.value)->id, 6);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[6])->data.key)->id, 2);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[6])->next->data.key)->id, 3);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[6])->next->next->data.key)->id, 5);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[6])->next->next->next->data.key)->id,
-                   7);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[6])->data.value)->id, 2);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[6])->next->data.value)->id, 3);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[6])->next->next->data.value)->id, 5);
+  ck_assert_int_eq(
+      ((TimedNode*)(*adj_list[6])->next->next->next->data.value)->id, 7);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[7])->data.key)->id, 3);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[7])->next->data.key)->id, 6);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[7])->data.value)->id, 3);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[7])->next->data.value)->id, 6);
 
   dfs(adj_list, vrtxs, length);
 
-  ck_assert_int_eq(u0.id, 0);
-  ck_assert_int_eq(u1.id, 1);
-  ck_assert_int_eq(u2.id, 2);
-  ck_assert_int_eq(u3.id, 3);
-  ck_assert_int_eq(u4.id, 4);
-  ck_assert_int_eq(u5.id, 5);
-  ck_assert_int_eq(u6.id, 6);
-  ck_assert_int_eq(u7.id, 7);
+  ck_assert_int_eq(node0.id, 0);
+  ck_assert_int_eq(node1.id, 1);
+  ck_assert_int_eq(node2.id, 2);
+  ck_assert_int_eq(node3.id, 3);
+  ck_assert_int_eq(node4.id, 4);
+  ck_assert_int_eq(node5.id, 5);
+  ck_assert_int_eq(node6.id, 6);
+  ck_assert_int_eq(node7.id, 7);
 
-  ck_assert_int_eq(u0.color, BLACK);
-  ck_assert_int_eq(u1.color, BLACK);
-  ck_assert_int_eq(u2.color, BLACK);
-  ck_assert_int_eq(u3.color, BLACK);
-  ck_assert_int_eq(u4.color, BLACK);
-  ck_assert_int_eq(u5.color, BLACK);
-  ck_assert_int_eq(u6.color, BLACK);
-  ck_assert_int_eq(u7.color, BLACK);
+  ck_assert_int_eq(node0.color, BLACK);
+  ck_assert_int_eq(node1.color, BLACK);
+  ck_assert_int_eq(node2.color, BLACK);
+  ck_assert_int_eq(node3.color, BLACK);
+  ck_assert_int_eq(node4.color, BLACK);
+  ck_assert_int_eq(node5.color, BLACK);
+  ck_assert_int_eq(node6.color, BLACK);
+  ck_assert_int_eq(node7.color, BLACK);
 
-  ck_assert_ptr_eq(u0.p, NULL);
-  ck_assert_ptr_eq(u4.p, &u0);
+  ck_assert_ptr_eq(node0.p, NULL);
+  ck_assert_ptr_eq(node4.p, &node0);
 
   for (i = 0; i < length; i++)
     {
@@ -1436,16 +1424,16 @@ START_TEST(test_dfs_4)
 {
   int i, length;
   TimedNode** vrtxs;
-  TimedNode u0;
+  TimedNode node0;
   DoublyLinkedList*** adj_list;
 
   length = 1;
-  u0.id = 0;
+  node0.id = 0;
 
   vrtxs = malloc(length * sizeof(TimedNode*));
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
-  vrtxs[0] = &u0;
+  vrtxs[0] = &node0;
 
   for (i = 0; i < length; i++)
     {
@@ -1455,9 +1443,9 @@ START_TEST(test_dfs_4)
 
   dfs(adj_list, vrtxs, length);
 
-  ck_assert_int_eq(u0.id, 0);
-  ck_assert_int_eq(u0.color, BLACK);
-  ck_assert_ptr_eq(u0.p, NULL);
+  ck_assert_int_eq(node0.id, 0);
+  ck_assert_int_eq(node0.color, BLACK);
+  ck_assert_ptr_eq(node0.p, NULL);
 
   for (i = 0; i < length; i++)
     {
@@ -1474,27 +1462,27 @@ START_TEST(test_dfs_5)
 {
   int i, length;
   TimedNode** vrtxs;
-  TimedNode u0, u1, u2, u3, u4, u5;
+  TimedNode node0, node1, node2, node3, node4, node5;
   Register reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
-  u0.id = 0;
-  u1.id = 1;
-  u2.id = 2;
-  u3.id = 3;
-  u4.id = 4;
-  u5.id = 5;
+  node0.id = 0;
+  node1.id = 1;
+  node2.id = 2;
+  node3.id = 3;
+  node4.id = 4;
+  node5.id = 5;
 
   vrtxs = malloc(length * sizeof(TimedNode*));
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
-  vrtxs[0] = &u0;
-  vrtxs[1] = &u1;
-  vrtxs[2] = &u2;
-  vrtxs[3] = &u3;
-  vrtxs[4] = &u4;
-  vrtxs[5] = &u5;
+  vrtxs[0] = &node0;
+  vrtxs[1] = &node1;
+  vrtxs[2] = &node2;
+  vrtxs[3] = &node3;
+  vrtxs[4] = &node4;
+  vrtxs[5] = &node5;
 
   for (i = 0; i < length; i++)
     {
@@ -1502,47 +1490,47 @@ START_TEST(test_dfs_5)
       *adj_list[i] = NULL;
     }
 
-  reg.key = &u3;
+  reg.value = &node3;
   dll_insert(adj_list[0], reg);
-  reg.key = &u2;
+  reg.value = &node2;
   dll_insert(adj_list[0], reg);
-  reg.key = &u1;
+  reg.value = &node1;
   dll_insert(adj_list[0], reg);
 
-  reg.key = &u4;
+  reg.value = &node4;
   dll_insert(adj_list[1], reg);
 
-  reg.key = &u5;
+  reg.value = &node5;
   dll_insert(adj_list[2], reg);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->data.key)->id, 1);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->data.key)->id, 2);
-  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->next->data.key)->id, 3);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->data.value)->id, 1);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->data.value)->id, 2);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->next->data.value)->id, 3);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->data.key)->id, 4);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[1])->data.value)->id, 4);
 
-  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->data.key)->id, 5);
+  ck_assert_int_eq(((TimedNode*)(*adj_list[2])->data.value)->id, 5);
 
   dfs(adj_list, vrtxs, length);
 
-  ck_assert_int_eq(u0.id, 0);
-  ck_assert_int_eq(u1.id, 1);
-  ck_assert_int_eq(u2.id, 2);
-  ck_assert_int_eq(u3.id, 3);
-  ck_assert_int_eq(u4.id, 4);
+  ck_assert_int_eq(node0.id, 0);
+  ck_assert_int_eq(node1.id, 1);
+  ck_assert_int_eq(node2.id, 2);
+  ck_assert_int_eq(node3.id, 3);
+  ck_assert_int_eq(node4.id, 4);
 
-  ck_assert_int_eq(u0.color, BLACK);
-  ck_assert_int_eq(u1.color, BLACK);
-  ck_assert_int_eq(u2.color, BLACK);
-  ck_assert_int_eq(u3.color, BLACK);
-  ck_assert_int_eq(u4.color, BLACK);
+  ck_assert_int_eq(node0.color, BLACK);
+  ck_assert_int_eq(node1.color, BLACK);
+  ck_assert_int_eq(node2.color, BLACK);
+  ck_assert_int_eq(node3.color, BLACK);
+  ck_assert_int_eq(node4.color, BLACK);
 
-  ck_assert_ptr_eq(u0.p, NULL);
-  ck_assert_ptr_eq(u1.p, &u0);
-  ck_assert_ptr_eq(u2.p, &u0);
-  ck_assert_ptr_eq(u3.p, &u0);
-  ck_assert_ptr_eq(u4.p, &u1);
-  ck_assert_ptr_eq(u5.p, &u2);
+  ck_assert_ptr_eq(node0.p, NULL);
+  ck_assert_ptr_eq(node1.p, &node0);
+  ck_assert_ptr_eq(node2.p, &node0);
+  ck_assert_ptr_eq(node3.p, &node0);
+  ck_assert_ptr_eq(node4.p, &node1);
+  ck_assert_ptr_eq(node5.p, &node2);
 
   for (i = 0; i < length; i++)
     {

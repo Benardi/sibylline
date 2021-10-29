@@ -88,8 +88,8 @@ Register* get(ArrayList* list, int index)
   return target;
 }
 
-bool contains(ArrayList* list, void* identifier,
-              int (*compare_to)(void*, void*))
+bool contains(ArrayList* list, union Key identifier,
+              int (*compare_to)(union Key, union Key))
 {
   int i;
   bool result = false;
@@ -162,7 +162,8 @@ bool discard(ArrayList* list, int index)
   return result;
 }
 
-int index_of(ArrayList* list, void* identifier, int (*compare_to)(void*, void*))
+int index_of(ArrayList* list, union Key identifier,
+             int (*compare_to)(union Key, union Key))
 {
   int index = -1;
   int i;

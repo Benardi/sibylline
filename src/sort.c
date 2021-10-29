@@ -223,7 +223,8 @@ void bubble_sort(int array[], int start, int end)
     }
 }
 
-void heap_sort(Register array[], int length, int (*compare)(void*, void*))
+void heap_sort(Register array[], int length,
+               int (*compare)(union Key, union Key))
 {
   int i, heap_size;
 
@@ -332,7 +333,7 @@ void radix_sort(int array[], int* out, int length, int max_decimal_place)
 }
 
 void insertion_sort_gnrc(Register array[], int start, int end,
-                         int (*compare)(void*, void*))
+                         int (*compare)(union Key, union Key))
 {
   int j, i;
   Register reg;
@@ -351,7 +352,7 @@ void insertion_sort_gnrc(Register array[], int start, int end,
 }
 
 void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
-                        int (*compare)(void*, void*))
+                        int (*compare)(union Key, union Key))
 {
   int j, i, k;
   Register reg;
@@ -379,10 +380,28 @@ void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
     }
 }
 
-void bucket_sort(Register array[], int length,
-                 int (*mul_plus_floor)(int, void*),
-                 int (*compare)(void*, void*))
+static int compare_float(union Key k1, union Key k2)
 {
+  int result;
+
+  if (k1.f > k2.f)
+    {
+      result = 1;
+    }
+  else if (k1.f < k2.f)
+    {
+      result = -1;
+    }
+  else
+    {
+      result = 0;
+    }
+  return result;
+}
+
+void bucket_sort(Register array[], int length)
+{
+  float temp;
   int i, j, pos;
   int* buckets_size;
   DoublyLinkedList*** buckets;
@@ -401,7 +420,8 @@ void bucket_sort(Register array[], int length,
 
   for (i = 0; i < length; i++)
     {
-      pos = mul_plus_floor(length, array[i].key);
+      temp = length * array[i].key.f;
+      pos = (int)temp;
       dll_insert(buckets[pos], array[i]);
       buckets_size[pos]++;
     }
@@ -409,7 +429,7 @@ void bucket_sort(Register array[], int length,
   for (i = 0; i < length; i++)
     {
       head = buckets[i];
-      insertion_sort_dll(head, 0, buckets_size[i] - 1, compare);
+      insertion_sort_dll(head, 0, buckets_size[i] - 1, compare_float);
     }
 
   j = 0;
