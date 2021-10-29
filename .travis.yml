@@ -39,7 +39,7 @@ before_script:
   - pkg-config --version
 script:
   - cd build
-  - cmake D CMAKE_BUILD_TYPE=Debug ..
+  - cmake -D CMAKE_BUILD_TYPE=Debug ..
   - make
   - make test VERBOSE=1
   - cd .. && bash ./check_code_format.sh
