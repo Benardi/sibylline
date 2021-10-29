@@ -9,6 +9,8 @@
 # Requires Git and clang-format to be installed
 # sudo apt install clang-format
 
-clang-format -i ./src/include/*.h
-clang-format -i ./src/*.c
-clang-format -i ./tests/*.c
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+clang-format -i ${SCRIPT_DIR}/src/include/*.h
+clang-format -i ${SCRIPT_DIR}/src/*.c
+clang-format -i ${SCRIPT_DIR}/tests/*.c
