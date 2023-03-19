@@ -29,24 +29,26 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Installation
 
-To run this project the following programs need to be installed on your system:
-- Cmake
-- Check
+To build this library the following dependencies must be installed on your system:
+- [Cmake](https://cmake.org/)
+- [pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/)
 
-Then, do as follows to build and test this library:
+Then, run the following commands to build this library:
 
 ```bash
 $ mkdir build && cd build
 $ cmake ..
 $ make
-$ make test
 ```
 
-### Build Type
+### Build Type and Tests
 
-By default `Release` build type will be used. Note that assert will be disabled with this build type.
+To run this lib's tests you need the following dependencies:
+- [Check](https://github.com/libcheck/check) (At least version 0.11.0)
+- [Valgrind](https://valgrind.org/)
 
-You can a specific build type vai the `CMAKE_BUILD_TYPE` flag.
+By default the `Release` build type will be used. Note that assertions will be disabled with this build type.
+You can specify a build type via the flag `CMAKE_BUILD_TYPE`.
 
 
 ```bash
