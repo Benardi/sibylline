@@ -13,9 +13,9 @@ Data Structures and Algorithms written in C
         <img src="https://img.shields.io/github/license/vndmtrx/check-cmake-example.svg"
             alt="BSD licensed"/>
     </a>
-    <a href="https://travis-ci.org/Benardi/sibylline">
-        <img src="https://travis-ci.org/Benardi/sibylline.svg?branch=master"
-            alt="Build Status"/>
+    <a href="https://github.com/Benardi/sibylline/actions/workflows/build_test_checkstyle.yaml">
+        <img src="https://github.com/Benardi/sibylline/actions/workflows/build_test_checkstyle.yaml/badge.svg"
+            alt="Build, Test, Check Style"/>
     <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FBenardi%2Fsibylline?ref=badge_small" alt="FOSSA Status">
         <img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FBenardi%2Fsibylline.svg?type=small"/>
     </a>
