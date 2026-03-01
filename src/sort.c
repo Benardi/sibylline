@@ -1,14 +1,12 @@
 #include <dll.h>
 #include <heap.h>
 #include <limits.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <math.h>
 #include <sort.h>
 #include <stdlib.h>
 #include <string.h>
 #include <utils.h>
-
-#define INFINITY INT_MAX
 
 void insertion_sort(int array[], int start, int end)
 {

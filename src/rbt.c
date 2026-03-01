@@ -1,4 +1,4 @@
-#include <malloc.h>
+#include <stdlib.h>
 #include <rbt.h>
 
 void init_rbtree(RedBlackTree** root, RedBlackTree* nil)

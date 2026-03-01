@@ -1,5 +1,5 @@
 #include <cdll.h>
-#include <malloc.h>
+#include <stdlib.h>
 
 void cdll_init(CircularDoublyLinkedList* nil)
 {

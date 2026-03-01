@@ -1,6 +1,6 @@
 #include <dll.h>
 #include <graph.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <queue.h>
 
 void bfs(DoublyLinkedList*** adj_list, ColoredNode* vrtxs[], int length,

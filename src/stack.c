@@ -1,4 +1,4 @@
-#include <malloc.h>
+#include <stdlib.h>
 #include <stack.h>
 
 void init_stack(Stack* stk, int length)

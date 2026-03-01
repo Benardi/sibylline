@@ -1,4 +1,4 @@
-#include <malloc.h>
+#include <stdlib.h>
 #include <sll.h>
 
 SinglyLinkedList* sll_insert(SinglyLinkedList** head, Register reg)

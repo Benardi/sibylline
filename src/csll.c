@@ -1,5 +1,5 @@
 #include <csll.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,

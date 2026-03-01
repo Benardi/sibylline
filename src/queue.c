@@ -1,4 +1,4 @@
-#include <malloc.h>
+#include <stdlib.h>
 #include <queue.h>
 
 void init_queue(Queue* q, int length)
