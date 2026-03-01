@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <utils.h>
+#include <limits.h>
 
 void insertion_sort(int array[], int start, int end)
 {
@@ -50,8 +51,8 @@ void merge(int array[], int start, int middle, int end)
       right[j] = array[middle + j + 1];
     }
 
-  left[n1] = INFINITY;
-  right[n2] = INFINITY;
+  left[n1] = INT_MAX;
+  right[n2] = INT_MAX;
 
   i = j = 0;
 
