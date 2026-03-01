@@ -169,8 +169,11 @@ void quick_sort(int array[], int start, int end)
 
 int rand_partition(int array[], int start, int end)
 {
-  int i;
-  i = sample(start, end);
+  int i, range;
+
+  range = end - start + 1;
+  i = (rand() % range) + start;
+
   swap(array, end, i);
   return partition(array, start, end);
 }
