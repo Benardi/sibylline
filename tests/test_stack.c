@@ -1,5 +1,5 @@
 #include <check.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <stack.h>
 #include <stdint.h>
 #include <stdlib.h>
