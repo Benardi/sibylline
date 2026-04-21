@@ -5,6 +5,10 @@ include(CTest)
 # Optional: allow forcing Valgrind on/off explicitly
 option(ENABLE_VALGRIND "Enable Valgrind tests (requires Valgrind installed)" OFF)
 
+# macOS leak detection via the built-in leaks tool.
+# Incompatible with ENABLE_SANITIZERS (ASan replaces malloc, breaking leaks).
+option(ENABLE_LEAKS "Enable macOS leaks tool tests (macOS only, do not combine with ENABLE_SANITIZERS)" OFF)
+
 # Enable tests in:
 # - Debug single-config
 # - any config in multi-config generators (Xcode, Ninja Multi-Config)
@@ -86,6 +90,22 @@ if(ENABLE_TESTS)
                 --leak-check=full
                 --error-exitcode=1
                 $<TARGET_FILE:${test_name}>
+      )
+    endif()
+
+    # macOS leaks tool — do not combine with ENABLE_SANITIZERS
+    if(ENABLE_LEAKS)
+      if(NOT APPLE)
+        message(FATAL_ERROR "ENABLE_LEAKS is only supported on macOS")
+      endif()
+      find_program(LEAKS_PROGRAM leaks REQUIRED)
+      add_test(
+        NAME leaks_${test_name}
+        COMMAND ${LEAKS_PROGRAM} --atExit -- $<TARGET_FILE:${test_name}>
+      )
+      set_tests_properties(leaks_${test_name} PROPERTIES
+        ENVIRONMENT "MallocStackLogging=1"
+        TIMEOUT 60
       )
     endif()
 

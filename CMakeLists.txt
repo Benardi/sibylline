@@ -22,6 +22,24 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -Wextra -std=c99 -pedantic \
                    -Wmissing-prototypes -Wstrict-prototypes \
                    -Wold-style-definition")
 
+option(ENABLE_ASAN "Enable AddressSanitizer (detects memory errors)" OFF)
+if(ENABLE_ASAN)
+  add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
+  add_link_options(-fsanitize=address)
+endif()
+
+# ASan + UBSan: closest cross-platform equivalent to Valgrind.
+# Adds leak detection on Linux (LSan); on macOS detects everything except leaks.
+option(ENABLE_SANITIZERS "Enable AddressSanitizer + UndefinedBehaviorSanitizer" OFF)
+if(ENABLE_SANITIZERS)
+  set(_sanitizers "address,undefined")
+  if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    string(APPEND _sanitizers ",leak")
+  endif()
+  add_compile_options(-fsanitize=${_sanitizers} -fno-omit-frame-pointer)
+  add_link_options(-fsanitize=${_sanitizers})
+endif()
+
 file(GLOB src ${SIBYLLINE_SRC_ROOT}/*.c)
 
 include_directories(${SIBYLLINE_INCLUDE_DIR})
