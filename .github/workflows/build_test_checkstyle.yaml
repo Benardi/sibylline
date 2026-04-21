@@ -9,13 +9,18 @@ on:
 
 jobs:
   Build-Test-CheckStyle:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Install CMake 4
+        run: |
+          wget -q https://github.com/Kitware/CMake/releases/download/v4.0.2/cmake-4.0.2-linux-x86_64.sh
+          sudo sh cmake-4.0.2-linux-x86_64.sh --skip-license --prefix=/usr/local --exclude-subdir
+          cmake --version
       - name: Install dependencies
-        run: | 
+        run: |
           sudo apt-get -qq update
-          sudo apt-get install -y build-essential cmake
+          sudo apt-get install -y build-essential
           sudo apt-get install -qq valgrind
           sudo apt install -y clang-format
           sudo apt-get install -qq automake
@@ -39,6 +44,7 @@ jobs:
           sudo rm -rf ./check-0.14.0*
       - name: Check dependencies' versions
         run: |
+          cmake --version
           automake --version
           autoconf --version
           libtool --version

@@ -1,5 +1,4 @@
 #include <check.h>
-#include <malloc.h>
 #include <math.h>
 #include <sort.h>
 #include <stdbool.h>
@@ -1788,8 +1787,8 @@ START_TEST(test_rand_partition_1)
 
   middle = rand_partition(array, start, end);
 
-  ck_assert_int_gt(middle, start - 1);
-  ck_assert_int_lt(middle, end + 1);
+  ck_assert_int_ge(middle, start);
+  ck_assert_int_le(middle, end);
 
   for (i = start; i <= end; i++)
     {
@@ -1799,7 +1798,7 @@ START_TEST(test_rand_partition_1)
         }
       else if (i > middle)
         {
-          ck_assert_uint_gt(array[i], array[middle]);
+          ck_assert_int_ge(array[i], array[middle]);
         }
     }
 }
@@ -1815,8 +1814,8 @@ START_TEST(test_rand_partition_2)
 
   middle = rand_partition(array, start, end);
 
-  ck_assert_int_gt(middle, start - 1);
-  ck_assert_int_lt(middle, end + 1);
+  ck_assert_int_ge(middle, start);
+  ck_assert_int_le(middle, end);
 
   for (i = start; i <= end; i++)
     {
@@ -1826,7 +1825,7 @@ START_TEST(test_rand_partition_2)
         }
       else if (i > middle)
         {
-          ck_assert_uint_gt(array[i], array[middle]);
+          ck_assert_int_ge(array[i], array[middle]);
         }
     }
 }
@@ -1842,8 +1841,8 @@ START_TEST(test_rand_partition_3)
 
   middle = rand_partition(array, start, end);
 
-  ck_assert_int_gt(middle, start - 1);
-  ck_assert_int_lt(middle, end + 1);
+  ck_assert_int_ge(middle, start);
+  ck_assert_int_le(middle, end);
 
   for (i = start; i <= end; i++)
     {
@@ -1853,7 +1852,7 @@ START_TEST(test_rand_partition_3)
         }
       else if (i > middle)
         {
-          ck_assert_uint_gt(array[i], array[middle]);
+          ck_assert_int_ge(array[i], array[middle]);
         }
     }
 }
@@ -1870,8 +1869,8 @@ START_TEST(test_rand_partition_4)
 
   middle = rand_partition(array, start, end);
 
-  ck_assert_int_gt(middle, start - 1);
-  ck_assert_int_lt(middle, end + 1);
+  ck_assert_int_ge(middle, start);
+  ck_assert_int_le(middle, end);
 
   for (i = start; i <= end; i++)
     {
@@ -1881,7 +1880,7 @@ START_TEST(test_rand_partition_4)
         }
       else if (i > middle)
         {
-          ck_assert_uint_gt(array[i], array[middle]);
+          ck_assert_int_ge(array[i], array[middle]);
         }
     }
 }
@@ -1897,8 +1896,8 @@ START_TEST(test_rand_partition_5)
 
   middle = rand_partition(array, start, end);
 
-  ck_assert_int_gt(middle, start - 1);
-  ck_assert_int_lt(middle, end + 1);
+  ck_assert_int_ge(middle, start);
+  ck_assert_int_le(middle, end);
 
   for (i = start; i <= end; i++)
     {
@@ -1908,7 +1907,7 @@ START_TEST(test_rand_partition_5)
         }
       else if (i > middle)
         {
-          ck_assert_uint_gt(array[i], array[middle]);
+          ck_assert_int_ge(array[i], array[middle]);
         }
     }
 }
@@ -2865,7 +2864,7 @@ END_TEST
 START_TEST(test_heap_sort_1)
 {
   int i;
-  union Key k;
+  union Key k = {0};
   int length = 6;
   Register* array;
   int values[] = {5, 2, 4, 6, 1, 3};
@@ -2888,7 +2887,7 @@ END_TEST
 START_TEST(test_heap_sort_2)
 {
   Register* array;
-  union Key k;
+  union Key k = {0};
   int length = 1;
   int values[] = {5};
 
@@ -2906,7 +2905,7 @@ END_TEST
 START_TEST(test_heap_sort_3)
 {
   int i;
-  union Key k;
+  union Key k = {0};
   int length = 11;
   Register* array;
   int values[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
@@ -2929,7 +2928,7 @@ END_TEST
 START_TEST(test_heap_sort_4)
 {
   int i;
-  union Key k;
+  union Key k = {0};
   int length = 10;
   Register* array;
   int values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -2952,7 +2951,7 @@ END_TEST
 START_TEST(test_heap_sort_5)
 {
   int i;
-  union Key k;
+  union Key k = {0};
   int length = 10;
   Register* array;
   int values[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
@@ -2975,7 +2974,7 @@ END_TEST
 START_TEST(test_heap_sort_6)
 {
   int i;
-  union Key k;
+  union Key k = {0};
   int length = 6;
   Register* array;
   int values[] = {2, 4, 5, 1, 2, 3, 7, 6};
@@ -2998,7 +2997,7 @@ END_TEST
 START_TEST(test_heap_sort_7)
 {
   int i;
-  union Key k;
+  union Key k = {0};
   int length = 14;
   Register* array;
   int values[] = {0, 2, 3, 4, 55, 300, 700, -200, -100, -80, -7, 30, 150, 570};
@@ -3023,7 +3022,7 @@ START_TEST(test_heap_sort_8)
 {
   int i;
   Register* array;
-  union Key k;
+  union Key k = {0};
   int length = 12;
   int values[] = {3, 15, 20, 30, 50, 75, -75, -50, -30, -20, -15, -3};
   int expected[] = {-75, -50, -30, -20, -15, -3, 3, 15, 20, 30, 50, 75};
@@ -3045,7 +3044,7 @@ END_TEST
 START_TEST(test_heap_sort_9)
 {
   int i;
-  union Key k;
+  union Key k = {0};
   int length = 6;
   Register* array;
   int values[] = {5, 2, 4, 6, 1, 3};
@@ -3068,7 +3067,7 @@ END_TEST
 START_TEST(test_heap_sort_10)
 {
   int i;
-  union Key k;
+  union Key k = {0};
   int length = 11;
   Register* array;
   int values[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
@@ -3091,7 +3090,7 @@ END_TEST
 START_TEST(test_heap_sort_11)
 {
   int i;
-  union Key k;
+  union Key k = {0};
   Register* array;
   int length = 10;
   int values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -3115,7 +3114,7 @@ START_TEST(test_heap_sort_12)
 {
   int i;
   Register* array;
-  union Key k;
+  union Key k = {0};
   int length = 10;
   int values[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
   int expected[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};

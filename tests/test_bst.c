@@ -1,6 +1,5 @@
 #include <bst.h>
 #include <check.h>
-#include <malloc.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -6048,7 +6047,6 @@ START_TEST(test_bst_iterative_tree_search_3)
   (*root) = NULL;
 
   k.i = 10;
-  key = k;
   reg->key = k;
   node1 = tree_insert(root, *reg, compare);
 
@@ -6064,7 +6062,7 @@ START_TEST(test_bst_iterative_tree_search_3)
   ck_assert_int_eq(node1->right == NULL, true);
   ck_assert_int_eq(node1->data.key.i, 10);
 
-  retrieved = iterative_tree_search(*root, key, compare);
+  retrieved = iterative_tree_search(*root, k, compare);
 
   ck_assert_int_eq(retrieved->p == NULL, true);
   ck_assert_int_eq(retrieved->left == NULL, true);

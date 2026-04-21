@@ -1,57 +1,114 @@
-# - Try to find the CHECK libraries
-#  Once done this will define
+# FindCheck.cmake - Find the Check unit testing framework (libcheck)
 #
-#  CHECK_FOUND - system has check
-#  CHECK_INCLUDE_DIR - the check include directory
-#  CHECK_LIBRARIES - check library
+# Provides:
+#   Check_FOUND
+#   Check_INCLUDE_DIRS
+#   Check_LIBRARIES
+#   Check::Check (imported target)
 #
-#  This configuration file for finding libcheck is originally from
-#  the opensync project. The originally was downloaded from here:
-#  opensync.org/browser/branches/3rd-party-cmake-modules/modules/FindCheck.cmake
-#
-#  Copyright (c) 2007 Daniel Gollub <dgollub@suse.de>
-#  Copyright (c) 2007 Bjoern Ricks  <b.ricks@fh-osnabrueck.de>
-#
-#  Redistribution and use is allowed according to the terms of the New
-#  BSD license.
-#  For details see the accompanying COPYING-CMAKE-SCRIPTS file.
+# Backward-compatible variables:
+#   CHECK_FOUND
+#   CHECK_INCLUDE_DIR
+#   CHECK_INCLUDE_DIRS
+#   CHECK_LIBRARIES
 
+# DO NOT set cmake_minimum_required() in a Find-module.
 
-INCLUDE( FindPkgConfig )
+# Prefer pkg-config when available
+find_package(PkgConfig QUIET)
+if(PkgConfig_FOUND)
+  pkg_check_modules(PC_CHECK QUIET check)
+endif()
 
-# Take care about check.pc settings
-PKG_SEARCH_MODULE( CHECK check )
+# Optional user override
+set(_CHECK_HINT_INCLUDE "")
+set(_CHECK_HINT_LIB "")
 
-# Look for CHECK include dir and libraries
-IF( NOT CHECK_FOUND )
-	IF ( CHECK_INSTALL_DIR )
-		MESSAGE ( STATUS "Using override CHECK_INSTALL_DIR to find check" )
-		SET ( CHECK_INCLUDE_DIR  "${CHECK_INSTALL_DIR}/include" )
-		SET ( CHECK_INCLUDE_DIRS "${CHECK_INCLUDE_DIR}" )
-		FIND_LIBRARY( CHECK_LIBRARY NAMES check PATHS "${CHECK_INSTALL_DIR}/lib" )
-		FIND_LIBRARY( COMPAT_LIBRARY NAMES compat PATHS "${CHECK_INSTALL_DIR}/lib" )
-		SET ( CHECK_LIBRARIES "${CHECK_LIBRARY}" "${COMPAT_LIBRARY}" )
-	ELSE ( CHECK_INSTALL_DIR )
-		FIND_PATH( CHECK_INCLUDE_DIR check.h )
-		FIND_LIBRARY( CHECK_LIBRARIES NAMES check )
-	ENDIF ( CHECK_INSTALL_DIR )
+if(CHECK_INSTALL_DIR)
+  set(_CHECK_HINT_INCLUDE "${CHECK_INSTALL_DIR}/include")
+  set(_CHECK_HINT_LIB     "${CHECK_INSTALL_DIR}/lib")
+endif()
 
-	IF ( CHECK_INCLUDE_DIR AND CHECK_LIBRARIES )
-		SET( CHECK_FOUND 1 )
-		IF ( NOT Check_FIND_QUIETLY )
-			MESSAGE ( STATUS "Found CHECK: ${CHECK_LIBRARIES}" )
-		ENDIF ( NOT Check_FIND_QUIETLY )
-	ELSE ( CHECK_INCLUDE_DIR AND CHECK_LIBRARIES )
-		IF ( Check_FIND_REQUIRED )
-			MESSAGE( FATAL_ERROR "Could NOT find CHECK" )
-		ELSE ( Check_FIND_REQUIRED )
-			IF ( NOT Check_FIND_QUIETLY )
-				MESSAGE( STATUS "Could NOT find CHECK" )	
-			ENDIF ( NOT Check_FIND_QUIETLY )
-		ENDIF ( Check_FIND_REQUIRED )
-	ENDIF ( CHECK_INCLUDE_DIR AND CHECK_LIBRARIES )
-ENDIF( NOT CHECK_FOUND )
+# Homebrew/common prefixes fallback (Apple Silicon + Intel)
+set(_CHECK_PREFIX_HINTS
+  /opt/homebrew
+  /usr/local
+  /opt/local
+)
 
-# Hide advanced variables from CMake GUIs
-MARK_AS_ADVANCED( CHECK_INCLUDE_DIR CHECK_LIBRARIES )
+# Find header
+find_path(Check_INCLUDE_DIR
+  NAMES check.h
+  HINTS
+    ${_CHECK_HINT_INCLUDE}
+    ${PC_CHECK_INCLUDEDIR}
+    ${PC_CHECK_INCLUDE_DIRS}
+  PATHS
+    ${_CHECK_PREFIX_HINTS}
+  PATH_SUFFIXES
+    include
+)
 
+# Find library
+find_library(Check_LIBRARY
+  NAMES check
+  HINTS
+    ${_CHECK_HINT_LIB}
+    ${PC_CHECK_LIBDIR}
+    ${PC_CHECK_LIBRARY_DIRS}
+  PATHS
+    ${_CHECK_PREFIX_HINTS}
+  PATH_SUFFIXES
+    lib
+    lib64
+)
+
+# (Optional) compat library (older distros)
+find_library(Check_COMPAT_LIBRARY
+  NAMES compat
+  HINTS
+    ${_CHECK_HINT_LIB}
+    ${PC_CHECK_LIBDIR}
+    ${PC_CHECK_LIBRARY_DIRS}
+  PATHS
+    ${_CHECK_PREFIX_HINTS}
+  PATH_SUFFIXES
+    lib
+    lib64
+)
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(Check
+  REQUIRED_VARS Check_LIBRARY Check_INCLUDE_DIR
+)
+
+if(Check_FOUND)
+  set(Check_INCLUDE_DIRS "${Check_INCLUDE_DIR}")
+  if(Check_COMPAT_LIBRARY)
+    set(Check_LIBRARIES "${Check_LIBRARY};${Check_COMPAT_LIBRARY}")
+  else()
+    set(Check_LIBRARIES "${Check_LIBRARY}")
+  endif()
+
+  if(NOT TARGET Check::Check)
+    add_library(Check::Check UNKNOWN IMPORTED)
+    set_target_properties(Check::Check PROPERTIES
+      IMPORTED_LOCATION "${Check_LIBRARY}"
+      INTERFACE_INCLUDE_DIRECTORIES "${Check_INCLUDE_DIR}"
+    )
+    if(Check_COMPAT_LIBRARY)
+      set_property(TARGET Check::Check APPEND PROPERTY
+        INTERFACE_LINK_LIBRARIES "${Check_COMPAT_LIBRARY}"
+      )
+    endif()
+  endif()
+endif()
+
+# Backward-compatible variable names used by older projects
+set(CHECK_FOUND        "${Check_FOUND}")
+set(CHECK_INCLUDE_DIR  "${Check_INCLUDE_DIR}")
+set(CHECK_INCLUDE_DIRS "${Check_INCLUDE_DIRS}")
+set(CHECK_LIBRARIES    "${Check_LIBRARIES}")
+
+mark_as_advanced(Check_INCLUDE_DIR Check_LIBRARY Check_COMPAT_LIBRARY)
+mark_as_advanced(CHECK_INCLUDE_DIR CHECK_LIBRARIES CHECK_INCLUDE_DIRS CHECK_FOUND)

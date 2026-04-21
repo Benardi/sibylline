@@ -3,7 +3,6 @@
 #include <dll.h>
 #include <graph.h>
 #include <limits.h>
-#include <malloc.h>
 #include <stdint.h>
 #include <stdlib.h>
 

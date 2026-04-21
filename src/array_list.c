@@ -1,5 +1,5 @@
 #include <array_list.h>
-#include <malloc.h>
+#include <stdlib.h>
 
 void init_list(ArrayList* list, int capacity)
 {

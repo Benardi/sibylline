@@ -1,14 +1,42 @@
-# If pkg-config is not installed on the system, then the CHECK_INSTALL_DIR var
-# must be set to the install location of Check. For example, on Windows, this
-# may be: C:/Program Files/check
-# set(CHECK_INSTALL_DIR "C:/Program Files/check")
+# tests/CMakeLists.txt
 
+include(CTest)
 
+# Optional: allow forcing Valgrind on/off explicitly
+option(ENABLE_VALGRIND "Enable Valgrind tests (requires Valgrind installed)" OFF)
 
-if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
-  # Only check for testing dependencies if in Debug mode 
+# macOS leak detection via the built-in leaks tool.
+# Incompatible with ENABLE_SANITIZERS (ASan replaces malloc, breaking leaks).
+option(ENABLE_LEAKS "Enable macOS leaks tool tests (macOS only, do not combine with ENABLE_SANITIZERS)" OFF)
+
+# Enable tests in:
+# - Debug single-config
+# - any config in multi-config generators (Xcode, Ninja Multi-Config)
+set(ENABLE_TESTS OFF)
+if(CMAKE_CONFIGURATION_TYPES)
+  set(ENABLE_TESTS ON)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  set(ENABLE_TESTS ON)
+endif()
+
+if(ENABLE_TESTS)
+
+  message(STATUS "Configuring unit tests")
+
+  # Only check for testing dependencies if in Debug mode (single-config),
+  # or always for multi-config generators (gated by ENABLE_TESTS above).
   find_package(Check REQUIRED)
-  find_package(Valgrind REQUIRED)
+  find_package(Threads REQUIRED)
+
+  # Valgrind is now truly optional with the updated FindValgrind.cmake
+  # - If ENABLE_VALGRIND=ON, require it.
+  # - Otherwise, try quietly and only add valgrind tests if found.
+  if(ENABLE_VALGRIND)
+    find_package(Valgrind REQUIRED)
+  else()
+    find_package(Valgrind QUIET)
+  endif()
+
   include(CheckCSourceCompiles)
   include(CheckCSourceRuns)
   include(CheckFunctionExists)
@@ -17,38 +45,70 @@ if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
   include(CheckLibraryExists)
   include(CheckSymbolExists)
   include(CheckTypeSize)
-  
-  if(NOT "${CMAKE_BUILD_TYPE}" STREQUAL "Release" AND NOT "${CMAKE_BUILD_TYPE}" STREQUAL "MinSizeRel")
-    file(GLOB test_src ${CMAKE_CURRENT_SOURCE_DIR}/*.c)
-    
-    foreach(test_src_file ${test_src})
-    
-        string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" test_name ${test_src_file})
-        string(REPLACE ".c" "" test_name ${test_name})
-        set(valgrind_test "valgrind_${test_name}") 
-    
-        # Since Check uses Threads to paralelize the tests, it's mandatory
-        # add pthread as a dependency, alongside the Check libraries.
-        add_executable(${test_name} ${test_src_file})
-        target_link_libraries(${test_name} sibylline ${CHECK_LIBRARIES} pthread m)
-    
-        # Create testing target and redirect its output to `Testing` folder
-        add_test(NAME ${test_name} COMMAND ${test_name} WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Testing)
-        set_tests_properties(${test_name} PROPERTIES TIMEOUT 30) 
-    
-    endforeach(test_src_file ${test_src})
-    
-    foreach(test_src_file ${test_src})
-    
-        string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" test_name ${test_src_file})
-        string(REPLACE ".c" "" test_name ${test_name})
-        set(valgrind_test "valgrind_${test_name}") 
-    
-        # Aditional Valgrind test to check memory leaks in code
-        add_test(NAME ${valgrind_test}
-                 COMMAND ${VALGRIND_PROGRAM} --leak-check=full
-                 --error-exitcode=1 $<TARGET_FILE:${test_name}>)
-    
-    endforeach(test_src_file ${test_src})
-  endif()
+
+  file(GLOB test_src "${CMAKE_CURRENT_SOURCE_DIR}/*.c")
+
+  foreach(test_src_file ${test_src})
+
+    get_filename_component(test_name "${test_src_file}" NAME_WE)
+    set(valgrind_test "valgrind_${test_name}")
+
+    add_executable(${test_name} ${test_src_file})
+
+    # Link Check + threads portably
+    if(TARGET Check::Check)
+      target_link_libraries(${test_name}
+        PRIVATE
+          sibylline
+          Check::Check
+          Threads::Threads
+          m
+      )
+    else()
+      target_link_libraries(${test_name}
+        PRIVATE
+          sibylline
+          ${CHECK_LIBRARIES}
+          Threads::Threads
+          m
+      )
+    endif()
+
+    # Create testing target and redirect its output to `Testing` folder
+    add_test(
+      NAME ${test_name}
+      COMMAND ${test_name}
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Testing
+    )
+    set_tests_properties(${test_name} PROPERTIES TIMEOUT 30)
+
+    # Additional Valgrind test to check memory leaks in code (only if found)
+    if(Valgrind_FOUND)
+      add_test(
+        NAME ${valgrind_test}
+        COMMAND ${Valgrind_PROGRAM}
+                --leak-check=full
+                --error-exitcode=1
+                $<TARGET_FILE:${test_name}>
+      )
+    endif()
+
+    # macOS leaks tool — do not combine with ENABLE_SANITIZERS
+    if(ENABLE_LEAKS)
+      if(NOT APPLE)
+        message(FATAL_ERROR "ENABLE_LEAKS is only supported on macOS")
+      endif()
+      find_program(LEAKS_PROGRAM leaks REQUIRED)
+      add_test(
+        NAME leaks_${test_name}
+        COMMAND ${LEAKS_PROGRAM} --atExit -- $<TARGET_FILE:${test_name}>
+      )
+      set_tests_properties(leaks_${test_name} PROPERTIES
+        ENVIRONMENT "MallocStackLogging=1"
+        TIMEOUT 60
+      )
+    endif()
+
+  endforeach()
+
 endif()

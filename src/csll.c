@@ -1,6 +1,6 @@
 #include <csll.h>
-#include <malloc.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
                                             Register reg)

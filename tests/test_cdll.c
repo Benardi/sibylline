@@ -1,6 +1,5 @@
 #include <cdll.h>
 #include <check.h>
-#include <malloc.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>

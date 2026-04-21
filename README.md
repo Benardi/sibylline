@@ -36,27 +36,57 @@ To build this library the following dependencies must be installed on your syste
 Then, run the following commands to build this library:
 
 ```bash
-$ mkdir build && cd build
-$ cmake ..
-$ make
+cmake -S . -B build
+cmake --build build
 ```
 
 ### Build Type and Tests
 
 To run this lib's tests you need the following dependencies:
 - [Check](https://github.com/libcheck/check) (At least version 0.11.0)
-- [Valgrind](https://valgrind.org/)
 
 By default the `Release` build type will be used. Note that assertions will be disabled with this build type.
-You can specify a build type via the flag `CMAKE_BUILD_TYPE`.
-
+Tests only build in `Debug` mode — specify it via `CMAKE_BUILD_TYPE`:
 
 ```bash
-$ mkdir build && cd build
-$ cmake -D CMAKE_BUILD_TYPE=Debug ..
-$ make
-$ make test
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build
+ctest --test-dir build
 ```
+
+### Memory Analysis
+
+#### Valgrind (Linux)
+
+Install [Valgrind](https://valgrind.org/) and enable it at configure time:
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DENABLE_VALGRIND=ON
+cmake --build build
+ctest --test-dir build --output-on-failure
+```
+
+#### AddressSanitizer + UndefinedBehaviorSanitizer (Linux and macOS)
+
+No extra dependencies — ASan and UBSan ship with Clang/GCC. Detects use-after-free, buffer overflows, and undefined behavior. On Linux, leak detection (LSan) is also included automatically.
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DENABLE_SANITIZERS=ON
+cmake --build build
+ctest --test-dir build --output-on-failure
+```
+
+#### Leak detection on macOS
+
+The `leaks` tool is built into macOS (Xcode developer tools). It is incompatible with `ENABLE_SANITIZERS` — run it as a separate step without sanitizers enabled:
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DENABLE_LEAKS=ON
+cmake --build build
+ctest --test-dir build --output-on-failure
+```
+
+For complete macOS coverage, run both configurations: `ENABLE_SANITIZERS=ON` to catch memory errors, then `ENABLE_LEAKS=ON` to catch leaks.
 
 ***
 
@@ -65,7 +95,7 @@ $ make test
 If you wish to install the `sibylline` library run the following command with sudo after building the project:
 
 ```bash
-$ make install
+sudo cmake --install build
 ```
 
 <br>

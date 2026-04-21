@@ -1,6 +1,6 @@
-#include <malloc.h>
 #include <seq_list.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void init_seq_list(SeqList* sl, int max_n_elems)
 {

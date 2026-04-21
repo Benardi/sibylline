@@ -1,5 +1,4 @@
 #include <check.h>
-#include <malloc.h>
 #include <max_pq.h>
 #include <stdint.h>
 #include <stdlib.h>

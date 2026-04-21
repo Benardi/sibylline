@@ -1,5 +1,5 @@
 #include <dll.h>
-#include <malloc.h>
+#include <stdlib.h>
 
 DoublyLinkedList* dll_insert(DoublyLinkedList** head, Register reg)
 {

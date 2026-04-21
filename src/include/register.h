@@ -14,7 +14,7 @@ union Key
   int i;
   float f;
   unsigned int u;
-} key;
+};
 
 typedef struct
 {

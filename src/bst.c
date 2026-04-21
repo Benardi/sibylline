@@ -1,5 +1,6 @@
 #include <bst.h>
-#include <malloc.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void inorder_tree_walk(BinarySearchTree* node)
 {
