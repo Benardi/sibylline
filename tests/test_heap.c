@@ -1,6 +1,5 @@
 #include <check.h>
 #include <heap.h>
-#include <stdlib.h>
 #include <stdint.h>
 #include <stdlib.h>
 

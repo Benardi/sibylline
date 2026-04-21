@@ -1,6 +1,5 @@
 #include <check.h>
 #include <dll.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>

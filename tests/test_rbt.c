@@ -1,5 +1,4 @@
 #include <check.h>
-#include <stdlib.h>
 #include <rbt.h>
 #include <stdbool.h>
 #include <stdint.h>

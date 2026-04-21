@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include <queue.h>
+#include <stdlib.h>
 
 void init_queue(Queue* q, int length)
 {

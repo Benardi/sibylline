@@ -1,5 +1,4 @@
 #include <check.h>
-#include <stdlib.h>
 #include <max_pq.h>
 #include <stdint.h>
 #include <stdlib.h>

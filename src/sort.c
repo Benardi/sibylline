@@ -1,13 +1,11 @@
 #include <dll.h>
 #include <heap.h>
 #include <limits.h>
-#include <stdlib.h>
 #include <math.h>
 #include <sort.h>
 #include <stdlib.h>
 #include <string.h>
 #include <utils.h>
-#include <limits.h>
 
 void insertion_sort(int array[], int start, int end)
 {

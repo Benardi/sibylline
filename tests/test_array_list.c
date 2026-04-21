@@ -1,6 +1,5 @@
 #include <array_list.h>
 #include <check.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>

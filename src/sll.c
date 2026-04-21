@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include <sll.h>
+#include <stdlib.h>
 
 SinglyLinkedList* sll_insert(SinglyLinkedList** head, Register reg)
 {
