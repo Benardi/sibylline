@@ -40,7 +40,7 @@ void cdll_init(CircularDoublyLinkedList* nil);
  * pointer to inserted node.
  *
  * @param nil Pointer to nil node.
- * @param reg ExtendedItem of inserted node.
+ * @param reg Item of inserted node.
  * @return Pointer to inserted node.
  */
 CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
@@ -59,7 +59,7 @@ CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
  *
  *
  * @param nil Pointer to nil node.
- * @param key Key for ExtendedItem of inserted node.
+ * @param key Key for Item of inserted node.
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to retrieved node.
  */

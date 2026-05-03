@@ -84,7 +84,7 @@ bool insert_sorted(SeqList* sl, Item reg,
  * index of first occurrence.
  *
  * Sequentially iterates over Sequential List in ascending order of index.
- * Returns index of first occurrence that matches given ExtendedItem key, else
+ * Returns index of first occurrence that matches given Item key, else
  * returns -1. The employed compare function must receive two union Keys
  * as parameters and return an integer as result. If first parameter is
  * bigger it should return 1, if first parameter is smaller it should
@@ -102,7 +102,7 @@ int seq_search(SeqList* sl, int key,
  * is sorted.
  *
  * Performs binary search on a sorted Sequential List. Returns index of first
- * matched occurrence of given ExtendedItem key, else returns -1. The employed
+ * matched occurrence of given Item key, else returns -1. The employed
  * compare function must receive two union Keys as parameters and return
  * an integer as result. If first parameter is bigger it should return 1,
  * if first parameter is smaller it should return -1, if it's the same as the
@@ -121,7 +121,7 @@ int binary_search(SeqList* sl, int k,
  *
  * Sequentially iterates over Sequential List in ascending order of index.
  * Sentinel is appended to List to allow a more efficient search. Returns
- * index of first occurrence that matches given ExtendedItem key, else returns -1.
+ * index of first occurrence that matches given Item key, else returns -1.
  * The employed compare function must receive two union Keys as parameters
  * and return an integer as result. If first parameter is bigger it should
  * return 1, if first parameter is smaller it should return -1, if it's the
@@ -139,7 +139,7 @@ int sentinel_search(SeqList* sl, int k,
  * occurrence.
  *
  * Sequentially iterates over Sequential List in ascending order of index.
- * Removes first occurrence that matches given ExtendedItem key and shifts
+ * Removes first occurrence that matches given Item key and shifts
  * remaining elements to the right to keep Sequential List contiguous.
  * Else, keeps Sequential List untouched. The employed compare function must
  * receive two union Keys as parameters and return an integer as result.

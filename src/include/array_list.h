@@ -25,7 +25,7 @@ typedef struct
 /** @brief Initializes ArrayList with 0 elements and given capacity.
  *
  * Sets attribute size to 0, and capacity to given parameter. Allocates array
- * attribute with array of ExtendedItem as long as the capacity attribute.
+ * attribute with array of Item as long as the capacity attribute.
  *
  * @param list Pointer to ArrayList.
  * @param capacity Number of elements the ArrayList can fit initially.

@@ -76,9 +76,9 @@ void right_rotate(RedBlackTree** root, RedBlackTree* nil, RedBlackTree* node);
  */
 RedBlackTree* rb_tree_minimum(RedBlackTree* root, RedBlackTree* nil);
 
-/** @brief Inserts node with given ExtendedItem/Key in Red Black Tree.
+/** @brief Inserts node with given Item/Key in Red Black Tree.
  *
- * Inserts node with provided ExtendedItem/Key in Red Black Tree. Insertion is
+ * Inserts node with provided Item/Key in Red Black Tree. Insertion is
  * done as to ensure properties of Red Black Tree. Returns pointer to
  * inserted node. The employed compare function must receive two void
  * pointers as parameters and return an integer as result. If first parameter
@@ -87,7 +87,7 @@ RedBlackTree* rb_tree_minimum(RedBlackTree* root, RedBlackTree* nil);
  *
  * @param root Pointer to pointer to root of tree.
  * @param nil Pointer to node used as nil/sentinel.
- * @param reg ExtendedItem with key and satellite data of inserted node.
+ * @param reg Item with key and satellite data of inserted node.
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to inserted node.
  */

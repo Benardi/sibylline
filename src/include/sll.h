@@ -27,7 +27,7 @@ typedef struct SinglyLinkedList
  * the Singly Linked List.
  *
  * @param head Double pointer to head of Singly Linked List.
- * @param reg ExtendedItem of inserted node.
+ * @param reg Item of inserted node.
  * @return Pointer to inserted node.
  */
 SinglyLinkedList* sll_insert(SinglyLinkedList** head, Item reg);
@@ -42,7 +42,7 @@ SinglyLinkedList* sll_insert(SinglyLinkedList** head, Item reg);
  * second parameter it should return 0.
  *
  * @param head Double pointer to head of Singly Linked List.
- * @param key Key for ExtendedItem of inserted node.
+ * @param key Key for Item of inserted node.
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to retrieved node.
  */

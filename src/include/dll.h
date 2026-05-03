@@ -29,7 +29,7 @@ typedef struct DoublyLinkedList
  * the linked list.
  *
  * @param head Double pointer to head of Doubly Linked List.
- * @param reg ExtendedItem of inserted node.
+ * @param reg Item of inserted node.
  * @return Pointer to inserted node.
  */
 DoublyLinkedList* dll_insert(DoublyLinkedList** head, Item reg);
@@ -44,7 +44,7 @@ DoublyLinkedList* dll_insert(DoublyLinkedList** head, Item reg);
  * parameter it should return 0.
  *
  * @param head Double pointer to head of Doubly Linked List.
- * @param key Key for ExtendedItem of inserted node.
+ * @param key Key for Item of inserted node.
  * @param compare_to Pointer to comparator for union Keys.
  * @return Pointer to retrieved node.
  */

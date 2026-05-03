@@ -71,9 +71,9 @@ BinarySearchTree* tree_minimum(BinarySearchTree* root);
  */
 BinarySearchTree* tree_maximum(BinarySearchTree* root);
 
-/** @brief Inserts node with given ExtendedItem/Key in Binary Search Tree.
+/** @brief Inserts node with given Item/Key in Binary Search Tree.
  *
- * Inserts node with provided ExtendedItem/Key in Binary Search Tree. Insertion
+ * Inserts node with provided Item/Key in Binary Search Tree. Insertion
  * is done as to ensure properties of Binary Search Tree. Returns pointer to
  * inserted node. The employed compare function must receive two union Keys
  * as parameters and return an integer as result. If first parameter is bigger
@@ -81,7 +81,7 @@ BinarySearchTree* tree_maximum(BinarySearchTree* root);
  * it's the same as the second parameter it should return 0.
  *
  * @param node Pointer to pointer to root of tree.
- * @param reg ExtendedItem with key and satellite data of inserted node.
+ * @param reg Item with key and satellite data of inserted node.
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to inserted node.
  */
