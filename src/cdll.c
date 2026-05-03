@@ -8,7 +8,7 @@ void cdll_init(CircularDoublyLinkedList* nil)
 }
 
 CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
-                                      Register reg)
+                                      IntRegister reg)
 {
   CircularDoublyLinkedList* node;
   node = malloc(sizeof(CircularDoublyLinkedList));
@@ -23,8 +23,8 @@ CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
 }
 
 CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil,
-                                      union Key key,
-                                      int (*compare)(union Key, union Key))
+                                      int key,
+                                      int (*compare)(int, int))
 {
   CircularDoublyLinkedList* node;
 

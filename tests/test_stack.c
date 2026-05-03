@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 Stack* stk;
-Register* reg;
+IntRegister* reg;
 
 int i;
 
@@ -14,7 +14,7 @@ Suite* make_test_suite(void);
 
 void setup(void)
 {
-  reg = malloc(sizeof(Register));
+  reg = malloc(sizeof(IntRegister));
   stk = malloc(sizeof(Stack));
 }
 
@@ -65,10 +65,10 @@ END_TEST
 
 START_TEST(test_stack_empty_3)
 {
-  union Key k1;
+  int k1;
   int length = 5;
 
-  k1.i = 10;
+  k1 = 10;
   reg->key = k1;
   init_stack(stk, length);
   stk->array[0] = *reg;
@@ -81,10 +81,10 @@ END_TEST
 
 START_TEST(test_stack_empty_4)
 {
-  union Key k1;
+  int k1;
   int length = 10;
 
-  k1.i = 10;
+  k1 = 10;
   reg->key = k1;
   init_stack(stk, length);
   stk->array[0] = *reg;
@@ -109,10 +109,10 @@ END_TEST
 
 START_TEST(test_stack_full_2)
 {
-  union Key k1;
+  int k1;
   int length = 10;
 
-  k1.i = -10;
+  k1 = -10;
   reg->key = k1;
   init_stack(stk, length);
   push(stk, *reg);
@@ -124,11 +124,11 @@ END_TEST
 
 START_TEST(test_stack_full_3)
 {
-  union Key k1;
+  int k1;
   int length = 20;
   bool result = true;
 
-  k1.i = -10;
+  k1 = -10;
   reg->key = k1;
   init_stack(stk, length);
 
@@ -171,11 +171,11 @@ END_TEST
 
 START_TEST(test_stack_pop_2)
 {
-  union Key k1;
+  int k1;
   bool result1, result2, result3;
   int length = 20;
 
-  k1.i = 7;
+  k1 = 7;
 
   init_stack(stk, length);
   result1 = pop(stk, reg); /* Doesn't write to pointer address*/
@@ -188,7 +188,7 @@ START_TEST(test_stack_pop_2)
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(result3, false);
 
-  ck_assert_int_eq(reg->key.i, 7);
+  ck_assert_int_eq(reg->key, 7);
 
   free(stk->array);
 }
@@ -196,17 +196,17 @@ END_TEST
 
 START_TEST(test_stack_pop_3)
 {
-  union Key k1, k2;
+  int k1, k2;
   bool result1, result2, result3;
-  Register* el1;
-  Register* el2;
+  IntRegister* el1;
+  IntRegister* el2;
   int length = 20;
 
-  k1.i = 7;
-  k2.i = -5;
+  k1 = 7;
+  k2 = -5;
 
-  el1 = malloc(sizeof(Register));
-  el2 = malloc(sizeof(Register));
+  el1 = malloc(sizeof(IntRegister));
+  el2 = malloc(sizeof(IntRegister));
 
   init_stack(stk, length);
   reg->key = k1;
@@ -222,8 +222,8 @@ START_TEST(test_stack_pop_3)
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(result3, false);
 
-  ck_assert_int_eq(el1->key.i, -5);
-  ck_assert_int_eq(el2->key.i, 7);
+  ck_assert_int_eq(el1->key, -5);
+  ck_assert_int_eq(el2->key, 7);
 
   free(el1);
   free(el2);

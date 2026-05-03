@@ -23,7 +23,7 @@ typedef struct RedBlackTree
   struct RedBlackTree* p;
   struct RedBlackTree* left;
   struct RedBlackTree* right;
-  Register data;
+  IntRegister data;
   Color color;
 
 } RedBlackTree;
@@ -91,8 +91,8 @@ RedBlackTree* rb_tree_minimum(RedBlackTree* root, RedBlackTree* nil);
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to inserted node.
  */
-RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Register reg,
-                        int (*compare)(union Key, union Key));
+RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, IntRegister reg,
+                        int (*compare)(int, int));
 
 /** @brief Removes given node from Red Black Tree.
  *

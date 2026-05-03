@@ -19,7 +19,7 @@ typedef struct
 {
   int size;
   int capacity;
-  Register* array;
+  IntRegister* array;
 } ArrayList;
 
 /** @brief Initializes ArrayList with 0 elements and given capacity.
@@ -43,7 +43,7 @@ void init_list(ArrayList* list, int capacity);
  * @param element New element to be inserted in the ArrayList
  * @return Void
  */
-void insert(ArrayList* list, Register element);
+void insert(ArrayList* list, IntRegister element);
 
 /** @brief Adds element at given index in ArrayList.
  *
@@ -56,7 +56,7 @@ void insert(ArrayList* list, Register element);
  * @param index Position for new element.
  * @return Whether element could be inserted
  */
-bool insert_at(ArrayList* list, Register element, int index);
+bool insert_at(ArrayList* list, IntRegister element, int index);
 
 /*
  * @brief Sets element at index within ArrayList.
@@ -72,7 +72,7 @@ bool insert_at(ArrayList* list, Register element, int index);
  * @param index Position to be set with new element.
  * @return Whether element could be set at given index.
  */
-bool set(ArrayList* list, Register element, int index);
+bool set(ArrayList* list, IntRegister element, int index);
 
 /*
  * @brief Retrieves element from given index in ArrayList.
@@ -85,7 +85,7 @@ bool set(ArrayList* list, Register element, int index);
  * @param index Position of element to be retrieved.
  * @return Returns Pointer to retrieved element.
  */
-Register* get(ArrayList* list, int index);
+IntRegister* get(ArrayList* list, int index);
 
 /*
  * @brief Returns boolean saying if element is in ArrayList.
@@ -98,8 +98,8 @@ Register* get(ArrayList* list, int index);
  * @param compare Pointer to function that compares two union Keys.
  * @return Whether element is in ArrayList.
  */
-bool contains(ArrayList* list, union Key identifier,
-              int (*compare_to)(union Key, union Key));
+bool contains(ArrayList* list, int identifier,
+              int (*compare_to)(int, int));
 
 /*
  * @brief Moves elements to the left starting at given index.
@@ -156,7 +156,7 @@ bool discard(ArrayList* list, int index);
  * @param compare Pointer to function that compares two union Keys.
  * @return Index of match in ArrayList.
  */
-int index_of(ArrayList* list, union Key identifier,
-             int (*compare_to)(union Key, union Key));
+int index_of(ArrayList* list, int identifier,
+             int (*compare_to)(int, int));
 
 #endif

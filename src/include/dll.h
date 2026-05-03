@@ -18,7 +18,7 @@ typedef struct DoublyLinkedList
 {
   struct DoublyLinkedList* prev;
   struct DoublyLinkedList* next;
-  Register data;
+  IntRegister data;
 } DoublyLinkedList;
 
 /** @brief Inserts node at front of Doubly Linked List.
@@ -32,7 +32,7 @@ typedef struct DoublyLinkedList
  * @param reg Register of inserted node.
  * @return Pointer to inserted node.
  */
-DoublyLinkedList* dll_insert(DoublyLinkedList** head, Register reg);
+DoublyLinkedList* dll_insert(DoublyLinkedList** head, IntRegister reg);
 
 /** @brief Retrieves node from Doubly Linked List via key.
  *
@@ -48,8 +48,8 @@ DoublyLinkedList* dll_insert(DoublyLinkedList** head, Register reg);
  * @param compare_to Pointer to comparator for union Keys.
  * @return Pointer to retrieved node.
  */
-DoublyLinkedList* dll_search(DoublyLinkedList** head, union Key search_key,
-                             int (*compare)(union Key, union Key));
+DoublyLinkedList* dll_search(DoublyLinkedList** head, int search_key,
+                             int (*compare)(int, int));
 
 /** @brief Deletes given node from Doubly Linked List.
  *

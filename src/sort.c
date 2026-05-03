@@ -352,10 +352,10 @@ void insertion_sort_gnrc(Register array[], int start, int end,
 }
 
 void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
-                        int (*compare)(union Key, union Key))
+                        int (*compare)(int, int))
 {
   int j, i, k;
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList* current;
 
   k = start + 1;
@@ -380,15 +380,19 @@ void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
     }
 }
 
-static int compare_float(union Key k1, union Key k2)
+static int compare_float(int k1, int k2)
 {
   int result;
+  union Key a, b;
 
-  if (k1.f > k2.f)
+  a.i = k1;
+  b.i = k2;
+
+  if (a.f > b.f)
     {
       result = 1;
     }
-  else if (k1.f < k2.f)
+  else if (a.f < b.f)
     {
       result = -1;
     }
@@ -407,6 +411,7 @@ void bucket_sort(Register array[], int length)
   DoublyLinkedList*** buckets;
   DoublyLinkedList** head;
   DoublyLinkedList* node;
+  IntRegister ireg;
 
   buckets = malloc(length * sizeof(DoublyLinkedList**));
   buckets_size = malloc(length * sizeof(int));
@@ -422,7 +427,9 @@ void bucket_sort(Register array[], int length)
     {
       temp = length * array[i].key.f;
       pos = (int)temp;
-      dll_insert(buckets[pos], array[i]);
+      ireg.key = array[i].key.i;
+      ireg.value = array[i].value;
+      dll_insert(buckets[pos], ireg);
       buckets_size[pos]++;
     }
 
@@ -439,7 +446,8 @@ void bucket_sort(Register array[], int length)
       node = (*head);
       while (node != NULL)
         {
-          array[j] = node->data;
+          array[j].key.i = node->data.key;
+          array[j].value = node->data.value;
           node = node->next;
           j++;
         }

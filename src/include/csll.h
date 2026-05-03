@@ -16,7 +16,7 @@
 typedef struct CircularSinglyLinkedList
 {
   struct CircularSinglyLinkedList* next;
-  Register data;
+  IntRegister data;
 } CircularSinglyLinkedList;
 
 /** @brief Inserts node at front of Circular Singly Linked List.
@@ -30,7 +30,7 @@ typedef struct CircularSinglyLinkedList
  * @return Pointer to inserted node.
  */
 CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
-                                            Register reg);
+                                            IntRegister reg);
 
 /** @brief Inserts node at end of Circular Singly Linked List.
  *
@@ -44,7 +44,7 @@ CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
  * @return Pointer to inserted node.
  */
 CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
-                                          Register reg);
+                                          IntRegister reg);
 
 /** @brief Retrieves node from Circular Singly Linked List via key.
  *
@@ -61,8 +61,8 @@ CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
  * @return Pointer to retrieved node.
  */
 CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail,
-                                      union Key key,
-                                      int (*compare)(union Key, union Key));
+                                      int key,
+                                      int (*compare)(int, int));
 
 /** @brief Deletes given node from Circular Singly Linked List.
  *

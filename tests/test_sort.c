@@ -9,6 +9,8 @@ int seed = 23;
 Suite* make_test_suite(void);
 int compare_int(union Key k1, union Key k2);
 int compare_float(union Key k1, union Key k2);
+int compare_int_dll(int k1, int k2);
+int compare_float_dll(int k1, int k2);
 
 int compare_int(union Key k1, union Key k2)
 {
@@ -38,6 +40,48 @@ int compare_float(union Key k1, union Key k2)
       result = 1;
     }
   else if (k1.f < k2.f)
+    {
+      result = -1;
+    }
+  else
+    {
+      result = 0;
+    }
+  return result;
+}
+
+int compare_int_dll(int k1, int k2)
+{
+  int result;
+
+  if (k1 > k2)
+    {
+      result = 1;
+    }
+  else if (k1 < k2)
+    {
+      result = -1;
+    }
+  else
+    {
+      result = 0;
+    }
+  return result;
+}
+
+int compare_float_dll(int k1, int k2)
+{
+  int result;
+  union Key a, b;
+
+  a.i = k1;
+  b.i = k2;
+
+  if (a.f > b.f)
+    {
+      result = 1;
+    }
+  else if (a.f < b.f)
     {
       result = -1;
     }
@@ -4627,7 +4671,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_1)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4636,18 +4680,18 @@ START_TEST(test_insertion_sort_dll_1)
   DoublyLinkedList* node5;
   DoublyLinkedList* node6;
 
-  union Key k1, k2, k3, k4, k5, k6;
+  int k1, k2, k3, k4, k5, k6;
   int start = 0;
   int end = 5;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 5;
-  k2.i = 2;
-  k3.i = 4;
-  k4.i = 6;
-  k5.i = 1;
-  k6.i = 3;
+  k1 = 5;
+  k2 = 2;
+  k3 = 4;
+  k4 = 6;
+  k5 = 1;
+  k6 = 3;
 
   *head = NULL;
   reg.key = k1;
@@ -4663,15 +4707,15 @@ START_TEST(test_insertion_sort_dll_1)
   reg.key = k6;
   node6 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 1);
+  ck_assert_int_eq((*head)->data.key, 1);
 
-  ck_assert_int_eq((*head)->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 6);
 
   free(node1);
   free(node2);
@@ -4685,25 +4729,25 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_2)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
 
-  union Key k1;
+  int k1;
   int start = 0;
   int end = 0;
 
   head = malloc(sizeof(DoublyLinkedList*));
   *head = NULL;
 
-  k1.i = 5;
+  k1 = 5;
   reg.key = k1;
   node1 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 5);
-  ck_assert_int_eq(node1->data.key.i, 5);
+  ck_assert_int_eq((*head)->data.key, 5);
+  ck_assert_int_eq(node1->data.key, 5);
 
   free(node1);
   free(head);
@@ -4712,7 +4756,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_3)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4726,23 +4770,23 @@ START_TEST(test_insertion_sort_dll_3)
   DoublyLinkedList* node10;
   DoublyLinkedList* node11;
 
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
   int start = 0;
   int end = 10;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = -10;
-  k2.i = 15;
-  k3.i = -5;
-  k4.i = -20;
-  k5.i = 50;
-  k6.i = 0;
-  k7.i = 100;
-  k8.i = 75;
-  k9.i = 30;
-  k10.i = 200;
-  k11.i = -200;
+  k1 = -10;
+  k2 = 15;
+  k3 = -5;
+  k4 = -20;
+  k5 = 50;
+  k6 = 0;
+  k7 = 100;
+  k8 = 75;
+  k9 = 30;
+  k10 = 200;
+  k11 = -200;
 
   *head = NULL;
   reg.key = k1;
@@ -4768,25 +4812,25 @@ START_TEST(test_insertion_sort_dll_3)
   reg.key = k11;
   node11 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, -200);
-  ck_assert_int_eq((*head)->next->data.key.i, -20);
-  ck_assert_int_eq((*head)->next->next->data.key.i, -10);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, -5);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 15);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 30);
+  ck_assert_int_eq((*head)->data.key, -200);
+  ck_assert_int_eq((*head)->next->data.key, -20);
+  ck_assert_int_eq((*head)->next->next->data.key, -10);
+  ck_assert_int_eq((*head)->next->next->next->data.key, -5);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 0);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 15);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 30);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 50);
+      (*head)->next->next->next->next->next->next->next->data.key, 50);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 75);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 75);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       100);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->data.key.i,
+                       ->next->data.key,
                    200);
 
   free(node11);
@@ -4806,7 +4850,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_4)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4819,22 +4863,22 @@ START_TEST(test_insertion_sort_dll_4)
   DoublyLinkedList* node9;
   DoublyLinkedList* node10;
 
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   int start = 0;
   int end = 9;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 0;
-  k2.i = 1;
-  k3.i = 2;
-  k4.i = 3;
-  k5.i = 4;
-  k6.i = 5;
-  k7.i = 6;
-  k8.i = 7;
-  k9.i = 8;
-  k10.i = 9;
+  k1 = 0;
+  k2 = 1;
+  k3 = 2;
+  k4 = 3;
+  k5 = 4;
+  k6 = 5;
+  k7 = 6;
+  k8 = 7;
+  k9 = 8;
+  k10 = 9;
 
   *head = NULL;
   reg.key = k1;
@@ -4858,21 +4902,21 @@ START_TEST(test_insertion_sort_dll_4)
   reg.key = k10;
   node10 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 0);
+  ck_assert_int_eq((*head)->next->data.key, 1);
+  ck_assert_int_eq((*head)->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 7);
+      (*head)->next->next->next->next->next->next->next->data.key, 7);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 8);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 8);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       9);
 
   free(node10);
@@ -4891,7 +4935,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_5)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4903,23 +4947,23 @@ START_TEST(test_insertion_sort_dll_5)
   DoublyLinkedList* node8;
   DoublyLinkedList* node9;
   DoublyLinkedList* node10;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
 
   int start = 0;
   int end = 9;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 9;
-  k2.i = 8;
-  k3.i = 7;
-  k4.i = 6;
-  k5.i = 5;
-  k6.i = 4;
-  k7.i = 3;
-  k8.i = 2;
-  k9.i = 1;
-  k10.i = 0;
+  k1 = 9;
+  k2 = 8;
+  k3 = 7;
+  k4 = 6;
+  k5 = 5;
+  k6 = 4;
+  k7 = 3;
+  k8 = 2;
+  k9 = 1;
+  k10 = 0;
 
   *head = NULL;
   reg.key = k1;
@@ -4943,21 +4987,21 @@ START_TEST(test_insertion_sort_dll_5)
   reg.key = k10;
   node10 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 0);
+  ck_assert_int_eq((*head)->next->data.key, 1);
+  ck_assert_int_eq((*head)->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 7);
+      (*head)->next->next->next->next->next->next->next->data.key, 7);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 8);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 8);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       9);
 
   free(node10);
@@ -4976,7 +5020,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_6)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4986,21 +5030,21 @@ START_TEST(test_insertion_sort_dll_6)
   DoublyLinkedList* node6;
   DoublyLinkedList* node7;
   DoublyLinkedList* node8;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8;
+  int k1, k2, k3, k4, k5, k6, k7, k8;
 
   int start = 2;
   int end = 7;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 2;
-  k2.i = 4;
-  k3.i = 1;
-  k4.i = 5;
-  k5.i = 7;
-  k6.i = 2;
-  k7.i = 3;
-  k8.i = 6;
+  k1 = 2;
+  k2 = 4;
+  k3 = 1;
+  k4 = 5;
+  k5 = 7;
+  k6 = 2;
+  k7 = 3;
+  k8 = 6;
 
   *head = NULL;
   reg.key = k8; /* we put in reverse order */
@@ -5020,17 +5064,17 @@ START_TEST(test_insertion_sort_dll_6)
   reg.key = k1;
   node8 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 2);
+  ck_assert_int_eq((*head)->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->data.key, 1);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 7);
+      (*head)->next->next->next->next->next->next->next->data.key, 7);
 
   free(node8);
   free(node7);
@@ -5046,7 +5090,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_7)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5056,21 +5100,21 @@ START_TEST(test_insertion_sort_dll_7)
   DoublyLinkedList* node6;
   DoublyLinkedList* node7;
   DoublyLinkedList* node8;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8;
+  int k1, k2, k3, k4, k5, k6, k7, k8;
 
   int start = 0;
   int end = 5;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 2;
-  k2.i = 4;
-  k3.i = 5;
-  k4.i = 1;
-  k5.i = 2;
-  k6.i = 3;
-  k7.i = 7;
-  k8.i = 6;
+  k1 = 2;
+  k2 = 4;
+  k3 = 5;
+  k4 = 1;
+  k5 = 2;
+  k6 = 3;
+  k7 = 7;
+  k8 = 6;
 
   *head = NULL;
   reg.key = k8; /* we put in reverse order */
@@ -5090,17 +5134,17 @@ START_TEST(test_insertion_sort_dll_7)
   reg.key = k1;
   node8 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 7);
+  ck_assert_int_eq((*head)->data.key, 1);
+  ck_assert_int_eq((*head)->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 7);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 6);
+      (*head)->next->next->next->next->next->next->next->data.key, 6);
 
   free(node8);
   free(node7);
@@ -5116,7 +5160,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_8)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5126,21 +5170,21 @@ START_TEST(test_insertion_sort_dll_8)
   DoublyLinkedList* node6;
   DoublyLinkedList* node7;
   DoublyLinkedList* node8;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8;
+  int k1, k2, k3, k4, k5, k6, k7, k8;
 
   int start = 2;
   int end = 5;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 2;
-  k2.i = 4;
-  k3.i = 1;
-  k4.i = 5;
-  k5.i = 2;
-  k6.i = 3;
-  k7.i = 7;
-  k8.i = 6;
+  k1 = 2;
+  k2 = 4;
+  k3 = 1;
+  k4 = 5;
+  k5 = 2;
+  k6 = 3;
+  k7 = 7;
+  k8 = 6;
 
   *head = NULL;
   reg.key = k8; /* we put in reverse order */
@@ -5160,17 +5204,17 @@ START_TEST(test_insertion_sort_dll_8)
   reg.key = k1;
   node8 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 7);
+  ck_assert_int_eq((*head)->data.key, 2);
+  ck_assert_int_eq((*head)->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->data.key, 1);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 7);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 6);
+      (*head)->next->next->next->next->next->next->next->data.key, 6);
 
   free(node8);
   free(node7);
@@ -5186,7 +5230,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_9)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5202,27 +5246,27 @@ START_TEST(test_insertion_sort_dll_9)
   DoublyLinkedList* node12;
   DoublyLinkedList* node13;
   DoublyLinkedList* node14;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
 
   int start = 0;
   int end = 13;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 0;
-  k2.i = 2;
-  k3.i = 3;
-  k4.i = 4;
-  k5.i = 55;
-  k6.i = 300;
-  k7.i = 700;
-  k8.i = -200;
-  k9.i = -100;
-  k10.i = -80;
-  k11.i = -7;
-  k12.i = 30;
-  k13.i = 150;
-  k14.i = 570;
+  k1 = 0;
+  k2 = 2;
+  k3 = 3;
+  k4 = 4;
+  k5 = 55;
+  k6 = 300;
+  k7 = 700;
+  k8 = -200;
+  k9 = -100;
+  k10 = -80;
+  k11 = -7;
+  k12 = 30;
+  k13 = 150;
+  k14 = 570;
 
   *head = NULL;
   reg.key = k14; /* we put in reverse order */
@@ -5254,37 +5298,37 @@ START_TEST(test_insertion_sort_dll_9)
   reg.key = k1;
   node14 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, -200);
-  ck_assert_int_eq((*head)->next->data.key.i, -100);
-  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, -7);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 3);
+  ck_assert_int_eq((*head)->data.key, -200);
+  ck_assert_int_eq((*head)->next->data.key, -100);
+  ck_assert_int_eq((*head)->next->next->data.key, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key, -7);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 0);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 3);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 4);
+      (*head)->next->next->next->next->next->next->next->data.key, 4);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 30);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 30);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       55);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->data.key.i,
+                       ->next->data.key,
                    150);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->data.key.i,
+                       ->next->next->data.key,
                    300);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->next->data.key.i,
+                       ->next->next->next->data.key,
                    570);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->next->next->data.key.i,
+                       ->next->next->next->next->data.key,
                    700);
 
   free(node14);
@@ -5307,7 +5351,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_10)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5323,27 +5367,27 @@ START_TEST(test_insertion_sort_dll_10)
   DoublyLinkedList* node12;
   DoublyLinkedList* node13;
   DoublyLinkedList* node14;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
 
   int start = 2;
   int end = 11;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 0;
-  k2.i = 2;
-  k3.i = 3;
-  k4.i = 4;
-  k5.i = 55;
-  k6.i = 300;
-  k7.i = 700;
-  k8.i = -200;
-  k9.i = -100;
-  k10.i = -80;
-  k11.i = -7;
-  k12.i = 30;
-  k13.i = 150;
-  k14.i = 570;
+  k1 = 0;
+  k2 = 2;
+  k3 = 3;
+  k4 = 4;
+  k5 = 55;
+  k6 = 300;
+  k7 = 700;
+  k8 = -200;
+  k9 = -100;
+  k10 = -80;
+  k11 = -7;
+  k12 = 30;
+  k13 = 150;
+  k14 = 570;
 
   *head = NULL;
   reg.key = k14; /* we put in reverse order */
@@ -5375,37 +5419,37 @@ START_TEST(test_insertion_sort_dll_10)
   reg.key = k1;
   node14 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->data.key.i, -200);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, -100);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, -80);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, -7);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 3);
+  ck_assert_int_eq((*head)->data.key, 0);
+  ck_assert_int_eq((*head)->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->data.key, -200);
+  ck_assert_int_eq((*head)->next->next->next->data.key, -100);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, -80);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, -7);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 3);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 4);
+      (*head)->next->next->next->next->next->next->next->data.key, 4);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 30);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 30);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       55);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->data.key.i,
+                       ->next->data.key,
                    300);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->data.key.i,
+                       ->next->next->data.key,
                    700);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->next->data.key.i,
+                       ->next->next->next->data.key,
                    150);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->next->next->data.key.i,
+                       ->next->next->next->next->data.key,
                    570);
 
   free(node14);
@@ -5428,7 +5472,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_11)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5442,25 +5486,25 @@ START_TEST(test_insertion_sort_dll_11)
   DoublyLinkedList* node10;
   DoublyLinkedList* node11;
   DoublyLinkedList* node12;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12;
 
   int start = 0;
   int end = 11;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 3;
-  k2.i = 15;
-  k3.i = 20;
-  k4.i = 30;
-  k5.i = 50;
-  k6.i = 75;
-  k7.i = -75;
-  k8.i = -50;
-  k9.i = -30;
-  k10.i = -20;
-  k11.i = -15;
-  k12.i = -3;
+  k1 = 3;
+  k2 = 15;
+  k3 = 20;
+  k4 = 30;
+  k5 = 50;
+  k6 = 75;
+  k7 = -75;
+  k8 = -50;
+  k9 = -30;
+  k10 = -20;
+  k11 = -15;
+  k12 = -3;
 
   *head = NULL;
   reg.key = k12; /* we put in reverse order */
@@ -5488,29 +5532,29 @@ START_TEST(test_insertion_sort_dll_11)
   reg.key = k1;
   node12 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, -75);
-  ck_assert_int_eq((*head)->next->data.key.i, -50);
-  ck_assert_int_eq((*head)->next->next->data.key.i, -30);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, -20);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, -15);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, -3);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 3);
+  ck_assert_int_eq((*head)->data.key, -75);
+  ck_assert_int_eq((*head)->next->data.key, -50);
+  ck_assert_int_eq((*head)->next->next->data.key, -30);
+  ck_assert_int_eq((*head)->next->next->next->data.key, -20);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, -15);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, -3);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 3);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 15);
+      (*head)->next->next->next->next->next->next->next->data.key, 15);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 20);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 20);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       30);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->data.key.i,
+                       ->next->data.key,
                    50);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->data.key.i,
+                       ->next->next->data.key,
                    75);
 
   free(node12);
@@ -5531,7 +5575,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_12)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5539,19 +5583,19 @@ START_TEST(test_insertion_sort_dll_12)
   DoublyLinkedList* node4;
   DoublyLinkedList* node5;
   DoublyLinkedList* node6;
-  union Key k1, k2, k3, k4, k5, k6;
+  int k1, k2, k3, k4, k5, k6;
 
   int start = 0;
   int end = 5;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 5;
-  k2.i = 2;
-  k3.i = 4;
-  k4.i = 6;
-  k5.i = 1;
-  k6.i = 3;
+  k1 = 5;
+  k2 = 2;
+  k3 = 4;
+  k4 = 6;
+  k5 = 1;
+  k6 = 3;
 
   *head = NULL;
   reg.key = k6; /* we put in reverse order */
@@ -5567,14 +5611,14 @@ START_TEST(test_insertion_sort_dll_12)
   reg.key = k1;
   node6 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 1);
+  ck_assert_int_eq((*head)->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 6);
 
   free(node6);
   free(node5);
@@ -5588,24 +5632,24 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_13)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
-  union Key k1;
+  int k1;
   int start = 0;
   int end = 0;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 5;
+  k1 = 5;
 
   *head = NULL;
   reg.key = k1;
   node1 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 5);
+  ck_assert_int_eq((*head)->data.key, 5);
 
   free(node1);
   free(head);
@@ -5614,7 +5658,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_14)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5627,24 +5671,24 @@ START_TEST(test_insertion_sort_dll_14)
   DoublyLinkedList* node9;
   DoublyLinkedList* node10;
   DoublyLinkedList* node11;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
 
   int start = 0;
   int end = 10;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = -10;
-  k2.i = 15;
-  k3.i = -5;
-  k4.i = -20;
-  k5.i = 50;
-  k6.i = 0;
-  k7.i = 100;
-  k8.i = 75;
-  k9.i = 30;
-  k10.i = 200;
-  k11.i = -200;
+  k1 = -10;
+  k2 = 15;
+  k3 = -5;
+  k4 = -20;
+  k5 = 50;
+  k6 = 0;
+  k7 = 100;
+  k8 = 75;
+  k9 = 30;
+  k10 = 200;
+  k11 = -200;
 
   *head = NULL;
   reg.key = k1;
@@ -5670,25 +5714,25 @@ START_TEST(test_insertion_sort_dll_14)
   reg.key = k11;
   node11 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, -200);
-  ck_assert_int_eq((*head)->next->data.key.i, -20);
-  ck_assert_int_eq((*head)->next->next->data.key.i, -10);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, -5);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 15);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 30);
+  ck_assert_int_eq((*head)->data.key, -200);
+  ck_assert_int_eq((*head)->next->data.key, -20);
+  ck_assert_int_eq((*head)->next->next->data.key, -10);
+  ck_assert_int_eq((*head)->next->next->next->data.key, -5);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 0);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 15);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 30);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 50);
+      (*head)->next->next->next->next->next->next->next->data.key, 50);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 75);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 75);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       100);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->data.key.i,
+                       ->next->data.key,
                    200);
 
   free(node11);
@@ -5708,7 +5752,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_15)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5720,23 +5764,23 @@ START_TEST(test_insertion_sort_dll_15)
   DoublyLinkedList* node8;
   DoublyLinkedList* node9;
   DoublyLinkedList* node10;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
 
   int start = 0;
   int end = 9;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 0;
-  k2.i = 1;
-  k3.i = 2;
-  k4.i = 3;
-  k5.i = 4;
-  k6.i = 5;
-  k7.i = 6;
-  k8.i = 7;
-  k9.i = 8;
-  k10.i = 9;
+  k1 = 0;
+  k2 = 1;
+  k3 = 2;
+  k4 = 3;
+  k5 = 4;
+  k6 = 5;
+  k7 = 6;
+  k8 = 7;
+  k9 = 8;
+  k10 = 9;
 
   *head = NULL;
   reg.key = k1;
@@ -5760,21 +5804,21 @@ START_TEST(test_insertion_sort_dll_15)
   reg.key = k10;
   node10 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 0);
+  ck_assert_int_eq((*head)->next->data.key, 1);
+  ck_assert_int_eq((*head)->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 7);
+      (*head)->next->next->next->next->next->next->next->data.key, 7);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 8);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 8);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       9);
 
   free(node10);
@@ -5793,7 +5837,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_16)
 {
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5805,23 +5849,23 @@ START_TEST(test_insertion_sort_dll_16)
   DoublyLinkedList* node8;
   DoublyLinkedList* node9;
   DoublyLinkedList* node10;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
 
   int start = 0;
   int end = 9;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 9;
-  k2.i = 8;
-  k3.i = 7;
-  k4.i = 6;
-  k5.i = 5;
-  k6.i = 4;
-  k7.i = 3;
-  k8.i = 2;
-  k9.i = 1;
-  k10.i = 0;
+  k1 = 9;
+  k2 = 8;
+  k3 = 7;
+  k4 = 6;
+  k5 = 5;
+  k6 = 4;
+  k7 = 3;
+  k8 = 2;
+  k9 = 1;
+  k10 = 0;
 
   *head = NULL;
   reg.key = k1;
@@ -5845,21 +5889,21 @@ START_TEST(test_insertion_sort_dll_16)
   reg.key = k10;
   node10 = dll_insert(head, reg);
 
-  insertion_sort_dll(head, start, end, compare_float);
+  insertion_sort_dll(head, start, end, compare_float_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 0);
+  ck_assert_int_eq((*head)->next->data.key, 1);
+  ck_assert_int_eq((*head)->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 7);
+      (*head)->next->next->next->next->next->next->next->data.key, 7);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 8);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 8);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       9);
 
   free(node10);

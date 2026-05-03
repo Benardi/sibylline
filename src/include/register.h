@@ -22,4 +22,10 @@ typedef struct
   void* value;
 } Register;
 
+typedef struct
+{
+  int key;
+  void* value;
+} IntRegister;
+
 #endif

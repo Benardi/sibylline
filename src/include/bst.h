@@ -18,7 +18,7 @@ typedef struct BinarySearchTree
   struct BinarySearchTree* p;
   struct BinarySearchTree* left;
   struct BinarySearchTree* right;
-  Register data;
+  IntRegister data;
 } BinarySearchTree;
 
 /** @brief Finds node in Binary Search Tree with the key of lowest value.
@@ -85,8 +85,8 @@ BinarySearchTree* tree_maximum(BinarySearchTree* root);
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to inserted node.
  */
-BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg,
-                              int (*compare)(union Key, union Key));
+BinarySearchTree* tree_insert(BinarySearchTree** root, IntRegister reg,
+                              int (*compare)(int, int));
 
 /** @brief Searches Binary Search Tree recursively for node of matching key.
  *
@@ -102,8 +102,8 @@ BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg,
  * @param key Search key.
  * @return Pointer to found node.
  */
-BinarySearchTree* tree_search(BinarySearchTree* node, union Key key,
-                              int (*compare)(union Key, union Key));
+BinarySearchTree* tree_search(BinarySearchTree* node, int key,
+                              int (*compare)(int, int));
 
 /** @brief Searches Binary Search Tree iteratively for node of matching key.
  *
@@ -119,8 +119,8 @@ BinarySearchTree* tree_search(BinarySearchTree* node, union Key key,
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to found node.
  */
-BinarySearchTree* iterative_tree_search(BinarySearchTree* root, union Key key,
-                                        int (*compare)(union Key, union Key));
+BinarySearchTree* iterative_tree_search(BinarySearchTree* root, int key,
+                                        int (*compare)(int, int));
 
 /** @brief Searches Binary Search Tree for successor node in terms of key.
  *

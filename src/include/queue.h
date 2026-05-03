@@ -15,7 +15,7 @@
 
 typedef struct
 {
-  Register* array;
+  IntRegister* array;
   int length;
   int head;
   int tail;
@@ -64,7 +64,7 @@ bool queue_full(Queue* q);
  * @param q Queue as a pointer
  * @return Whether element could be enqueued
  */
-bool enqueue(Queue* q, Register reg);
+bool enqueue(Queue* q, IntRegister reg);
 
 /** @brief Removes head of queue and returns it.
  *
@@ -76,6 +76,6 @@ bool enqueue(Queue* q, Register reg);
  * @param removed Pointer to hold value of removed element
  * @return Whether an element could be dequeued
  */
-bool dequeue(Queue* q, Register* removed);
+bool dequeue(Queue* q, IntRegister* removed);
 
 #endif

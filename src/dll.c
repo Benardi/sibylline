@@ -1,7 +1,7 @@
 #include <dll.h>
 #include <stdlib.h>
 
-DoublyLinkedList* dll_insert(DoublyLinkedList** head, Register reg)
+DoublyLinkedList* dll_insert(DoublyLinkedList** head, IntRegister reg)
 {
   DoublyLinkedList* node;
   node = malloc(sizeof(DoublyLinkedList));
@@ -17,8 +17,8 @@ DoublyLinkedList* dll_insert(DoublyLinkedList** head, Register reg)
   return node;
 }
 
-DoublyLinkedList* dll_search(DoublyLinkedList** head, union Key search_key,
-                             int (*compare)(union Key, union Key))
+DoublyLinkedList* dll_search(DoublyLinkedList** head, int search_key,
+                             int (*compare)(int, int))
 {
   DoublyLinkedList* node;
 

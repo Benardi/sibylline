@@ -6,7 +6,7 @@ void init_seq_list(SeqList* sl, int max_n_elems)
 {
   sl->n_elems = 0;
   sl->max_n_elems = max_n_elems;
-  sl->array = malloc((max_n_elems + 1) * sizeof(Register));
+  sl->array = malloc((max_n_elems + 1) * sizeof(IntRegister));
 }
 
 void reinit_seq_list(SeqList* sl)
@@ -19,7 +19,7 @@ int size(SeqList* sl)
   return sl->n_elems;
 }
 
-int seq_search(SeqList* sl, union Key key, int (*compare)(union Key, union Key))
+int seq_search(SeqList* sl, int key, int (*compare)(int, int))
 {
   int i = 0;
   while (i < sl->n_elems)
@@ -36,8 +36,8 @@ int seq_search(SeqList* sl, union Key key, int (*compare)(union Key, union Key))
   return -1;
 }
 
-int sentinel_search(SeqList* sl, union Key k,
-                    int (*compare)(union Key, union Key))
+int sentinel_search(SeqList* sl, int k,
+                    int (*compare)(int, int))
 {
   int i = 0;
   sl->array[sl->n_elems].key = k;
@@ -56,8 +56,8 @@ int sentinel_search(SeqList* sl, union Key k,
     }
 }
 
-bool insert_sorted(SeqList* sl, Register reg,
-                   int (*compare)(union Key, union Key))
+bool insert_sorted(SeqList* sl, IntRegister reg,
+                   int (*compare)(int, int))
 {
   int pos;
 
@@ -80,8 +80,8 @@ bool insert_sorted(SeqList* sl, Register reg,
   return true;
 }
 
-int binary_search(SeqList* sl, union Key k,
-                  int (*compare)(union Key, union Key))
+int binary_search(SeqList* sl, int k,
+                  int (*compare)(int, int))
 {
   int left, right, middle;
   left = 0;
@@ -110,7 +110,7 @@ int binary_search(SeqList* sl, union Key k,
   return -1;
 }
 
-bool insert_elem(SeqList* sl, Register reg, int i)
+bool insert_elem(SeqList* sl, IntRegister reg, int i)
 {
   int j;
   if (sl->n_elems == sl->max_n_elems || i < 0 || i > sl->n_elems)
@@ -129,8 +129,8 @@ bool insert_elem(SeqList* sl, Register reg, int i)
     }
 }
 
-bool remove_elem(SeqList* sl, union Key key,
-                 int (*compare)(union Key, union Key))
+bool remove_elem(SeqList* sl, int key,
+                 int (*compare)(int, int))
 {
   int pos, j;
   pos = seq_search(sl, key, compare);
@@ -155,9 +155,9 @@ void show_list(SeqList* sl)
   printf("List: \"");
 
   for (i = 0; i < sl->n_elems - 1; i++)
-    printf("%i ", sl->array[i].key.i);
+    printf("%i ", sl->array[i].key);
 
   /* Last element isn't followed by blank space */
-  printf("%i", sl->array[sl->n_elems - 1].key.i);
+  printf("%i", sl->array[sl->n_elems - 1].key);
   printf("\"\n");
 }

@@ -5,17 +5,17 @@ void init_list(ArrayList* list, int capacity)
 {
   list->size = 0;
   list->capacity = capacity;
-  list->array = malloc(capacity * sizeof(Register));
+  list->array = malloc(capacity * sizeof(IntRegister));
 }
 
 static void increase_capacity(ArrayList* list, int factor)
 {
   int i;
-  Register* new_array;
-  Register* old_array;
+  IntRegister* new_array;
+  IntRegister* old_array;
 
   old_array = list->array;
-  new_array = malloc(factor * list->capacity * sizeof(Register));
+  new_array = malloc(factor * list->capacity * sizeof(IntRegister));
 
   for (i = 0; i < list->capacity; i++)
     {
@@ -26,7 +26,7 @@ static void increase_capacity(ArrayList* list, int factor)
   free(old_array);
 }
 
-void insert(ArrayList* list, Register element)
+void insert(ArrayList* list, IntRegister element)
 {
   if (list->size == list->capacity)
     {
@@ -37,7 +37,7 @@ void insert(ArrayList* list, Register element)
   list->size = list->size + 1;
 }
 
-bool insert_at(ArrayList* list, Register element, int index)
+bool insert_at(ArrayList* list, IntRegister element, int index)
 {
   bool result;
 
@@ -59,7 +59,7 @@ bool insert_at(ArrayList* list, Register element, int index)
   return result;
 }
 
-bool set(ArrayList* list, Register element, int index)
+bool set(ArrayList* list, IntRegister element, int index)
 {
   bool result;
   if ((index > -1) && (index < list->capacity))
@@ -74,9 +74,9 @@ bool set(ArrayList* list, Register element, int index)
   return result;
 }
 
-Register* get(ArrayList* list, int index)
+IntRegister* get(ArrayList* list, int index)
 {
-  Register* target;
+  IntRegister* target;
   if ((index > -1) && (index < list->capacity))
     {
       target = &(list->array[index]);
@@ -88,8 +88,8 @@ Register* get(ArrayList* list, int index)
   return target;
 }
 
-bool contains(ArrayList* list, union Key identifier,
-              int (*compare_to)(union Key, union Key))
+bool contains(ArrayList* list, int identifier,
+              int (*compare_to)(int, int))
 {
   int i;
   bool result = false;
@@ -162,8 +162,8 @@ bool discard(ArrayList* list, int index)
   return result;
 }
 
-int index_of(ArrayList* list, union Key identifier,
-             int (*compare_to)(union Key, union Key))
+int index_of(ArrayList* list, int identifier,
+             int (*compare_to)(int, int))
 {
   int index = -1;
   int i;

@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-Register* reg;
+IntRegister* reg;
 RedBlackTree** root;
 
 void setup(void);
@@ -13,7 +13,7 @@ Suite* make_test_suite(void);
 
 void setup(void)
 {
-  reg = malloc(sizeof(Register));
+  reg = malloc(sizeof(IntRegister));
   root = malloc(sizeof(RedBlackTree*));
 }
 
@@ -23,15 +23,15 @@ void teardown(void)
   free(root);
 }
 
-static int compare(union Key k1, union Key k2)
+static int compare(int k1, int k2)
 {
   int result;
 
-  if (k1.i > k2.i)
+  if (k1 > k2)
     {
       result = 1;
     }
-  else if (k1.i < k2.i)
+  else if (k1 < k2)
     {
       result = -1;
     }
@@ -70,7 +70,7 @@ END_TEST
 
 START_TEST(test_rbt_left_rotate_1)
 {
-  union Key k1, k2, k3, k4, k5;
+  int k1, k2, k3, k4, k5;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -88,11 +88,11 @@ START_TEST(test_rbt_left_rotate_1)
 
   init_rbtree(root, nil);
 
-  k1.i = 5;
-  k2.i = 15;
-  k3.i = -2;
-  k4.i = 10;
-  k5.i = 23;
+  k1 = 5;
+  k2 = 15;
+  k3 = -2;
+  k4 = 10;
+  k5 = 23;
 
   node1->data.key = k1;
   node2->data.key = k2;
@@ -122,11 +122,11 @@ START_TEST(test_rbt_left_rotate_1)
 
   (*root) = node1;
 
-  ck_assert_int_eq(node1->data.key.i, 5);
-  ck_assert_int_eq(node2->data.key.i, 15);
-  ck_assert_int_eq(node3->data.key.i, -2);
-  ck_assert_int_eq(node4->data.key.i, 10);
-  ck_assert_int_eq(node5->data.key.i, 23);
+  ck_assert_int_eq(node1->data.key, 5);
+  ck_assert_int_eq(node2->data.key, 15);
+  ck_assert_int_eq(node3->data.key, -2);
+  ck_assert_int_eq(node4->data.key, 10);
+  ck_assert_int_eq(node5->data.key, 23);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -152,11 +152,11 @@ START_TEST(test_rbt_left_rotate_1)
 
   left_rotate(root, nil, node1);
 
-  ck_assert_int_eq(node1->data.key.i, 5);
-  ck_assert_int_eq(node2->data.key.i, 15);
-  ck_assert_int_eq(node3->data.key.i, -2);
-  ck_assert_int_eq(node4->data.key.i, 10);
-  ck_assert_int_eq(node5->data.key.i, 23);
+  ck_assert_int_eq(node1->data.key, 5);
+  ck_assert_int_eq(node2->data.key, 15);
+  ck_assert_int_eq(node3->data.key, -2);
+  ck_assert_int_eq(node4->data.key, 10);
+  ck_assert_int_eq(node5->data.key, 23);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -191,7 +191,7 @@ END_TEST
 
 START_TEST(test_rbt_right_rotate_1)
 {
-  union Key k1, k2, k3, k4, k5;
+  int k1, k2, k3, k4, k5;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -209,11 +209,11 @@ START_TEST(test_rbt_right_rotate_1)
 
   init_rbtree(root, nil);
 
-  k1.i = 5;
-  k2.i = 15;
-  k3.i = -2;
-  k4.i = 10;
-  k5.i = 23;
+  k1 = 5;
+  k2 = 15;
+  k3 = -2;
+  k4 = 10;
+  k5 = 23;
 
   node1->data.key = k1;
   node2->data.key = k2;
@@ -243,11 +243,11 @@ START_TEST(test_rbt_right_rotate_1)
 
   (*root) = node2;
 
-  ck_assert_int_eq(node1->data.key.i, 5);
-  ck_assert_int_eq(node2->data.key.i, 15);
-  ck_assert_int_eq(node3->data.key.i, -2);
-  ck_assert_int_eq(node4->data.key.i, 10);
-  ck_assert_int_eq(node5->data.key.i, 23);
+  ck_assert_int_eq(node1->data.key, 5);
+  ck_assert_int_eq(node2->data.key, 15);
+  ck_assert_int_eq(node3->data.key, -2);
+  ck_assert_int_eq(node4->data.key, 10);
+  ck_assert_int_eq(node5->data.key, 23);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -273,11 +273,11 @@ START_TEST(test_rbt_right_rotate_1)
 
   right_rotate(root, nil, node2);
 
-  ck_assert_int_eq(node1->data.key.i, 5);
-  ck_assert_int_eq(node2->data.key.i, 15);
-  ck_assert_int_eq(node3->data.key.i, -2);
-  ck_assert_int_eq(node4->data.key.i, 10);
-  ck_assert_int_eq(node5->data.key.i, 23);
+  ck_assert_int_eq(node1->data.key, 5);
+  ck_assert_int_eq(node2->data.key, 15);
+  ck_assert_int_eq(node3->data.key, -2);
+  ck_assert_int_eq(node4->data.key, 10);
+  ck_assert_int_eq(node5->data.key, 23);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -312,15 +312,15 @@ END_TEST
 
 START_TEST(test_rbt_insert_1)
 {
-  union Key k1, k2, k3;
+  int k1, k2, k3;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
   RedBlackTree* nil;
 
-  k1.i = 10;
-  k2.i = 5;
-  k3.i = 4;
+  k1 = 10;
+  k2 = 5;
+  k3 = 4;
 
   nil = malloc(sizeof(RedBlackTree));
 
@@ -335,13 +335,13 @@ START_TEST(test_rbt_insert_1)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq(node1->data.key.i, 10);
+  ck_assert_int_eq(node1->data.key, 10);
   ck_assert_int_eq(node1->color, BLACK);
   ck_assert_int_eq(node1->left == nil, true);
   ck_assert_int_eq(node1->right == nil, true);
   ck_assert_int_eq(node1->p == nil, true);
 
-  ck_assert_int_eq((*root)->data.key.i, 10);
+  ck_assert_int_eq((*root)->data.key, 10);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == nil, true);
   ck_assert_int_eq((*root)->right == nil, true);
@@ -353,26 +353,26 @@ START_TEST(test_rbt_insert_1)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq(node1->data.key.i, 10);
+  ck_assert_int_eq(node1->data.key, 10);
   ck_assert_int_eq(node1->color, BLACK);
   ck_assert_int_eq(node1->left == node2, true);
   ck_assert_int_eq(node1->right == nil, true);
   ck_assert_int_eq(node1->p == nil, true);
 
-  ck_assert_int_eq(node2->data.key.i, 5);
+  ck_assert_int_eq(node2->data.key, 5);
   ck_assert_int_eq(node2->color, RED);
   ck_assert_int_eq(node2->left == nil, true);
   ck_assert_int_eq(node2->right == nil, true);
   ck_assert_int_eq(node2->p == node1, true);
 
-  ck_assert_int_eq((*root)->data.key.i, 10);
+  ck_assert_int_eq((*root)->data.key, 10);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == nil, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 5);
+  ck_assert_int_eq((*root)->left->data.key, 5);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
@@ -385,39 +385,39 @@ START_TEST(test_rbt_insert_1)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq(node1->data.key.i, 10);
+  ck_assert_int_eq(node1->data.key, 10);
   ck_assert_int_eq(node1->color, RED);
   ck_assert_int_eq(node1->left == nil, true);
   ck_assert_int_eq(node1->right == nil, true);
   ck_assert_int_eq(node1->p == node2, true);
 
-  ck_assert_int_eq(node2->data.key.i, 5);
+  ck_assert_int_eq(node2->data.key, 5);
   ck_assert_int_eq(node2->color, BLACK);
   ck_assert_int_eq(node2->left == node3, true);
   ck_assert_int_eq(node2->right == node1, true);
   ck_assert_int_eq(node2->p == nil, true);
 
-  ck_assert_int_eq(node3->data.key.i, 4);
+  ck_assert_int_eq(node3->data.key, 4);
   ck_assert_int_eq(node3->color, RED);
   ck_assert_int_eq(node3->left == nil, true);
   ck_assert_int_eq(node3->right == nil, true);
   ck_assert_int_eq(node3->p == node2, true);
 
-  ck_assert_int_eq((*root)->data.key.i, 5);
+  ck_assert_int_eq((*root)->data.key, 5);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node3, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 4);
+  ck_assert_int_eq((*root)->left->data.key, 4);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node3, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 10);
+  ck_assert_int_eq((*root)->right->data.key, 10);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -433,7 +433,7 @@ END_TEST
 
 START_TEST(test_rbt_insert_2)
 {
-  union Key k1, k2, k3, k4, k5, k6;
+  int k1, k2, k3, k4, k5, k6;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -442,12 +442,12 @@ START_TEST(test_rbt_insert_2)
   RedBlackTree* node6;
   RedBlackTree* nil;
 
-  k1.i = 10;
-  k2.i = -10;
-  k3.i = 20;
-  k4.i = 7;
-  k5.i = 15;
-  k6.i = 13;
+  k1 = 10;
+  k2 = -10;
+  k3 = 20;
+  k4 = 7;
+  k5 = 15;
+  k6 = 13;
 
   nil = malloc(sizeof(RedBlackTree));
 
@@ -502,61 +502,61 @@ START_TEST(test_rbt_insert_2)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq(node1->data.key.i, 10);
+  ck_assert_int_eq(node1->data.key, 10);
   ck_assert_int_eq(node1->color, BLACK);
   ck_assert_int_eq(node1->left == node2, true);
   ck_assert_int_eq(node1->right == node3, true);
   ck_assert_int_eq(node1->p == nil, true);
 
-  ck_assert_int_eq(node2->data.key.i, -10);
+  ck_assert_int_eq(node2->data.key, -10);
   ck_assert_int_eq(node2->color, BLACK);
   ck_assert_int_eq(node2->left == nil, true);
   ck_assert_int_eq(node2->right == node4, true);
   ck_assert_int_eq(node2->p == node1, true);
 
-  ck_assert_int_eq(node3->data.key.i, 20);
+  ck_assert_int_eq(node3->data.key, 20);
   ck_assert_int_eq(node3->color, BLACK);
   ck_assert_int_eq(node3->left == node5, true);
   ck_assert_int_eq(node3->right == nil, true);
   ck_assert_int_eq(node3->p == node1, true);
 
-  ck_assert_int_eq(node4->data.key.i, 7);
+  ck_assert_int_eq(node4->data.key, 7);
   ck_assert_int_eq(node4->color, RED);
   ck_assert_int_eq(node4->left == nil, true);
   ck_assert_int_eq(node4->right == nil, true);
   ck_assert_int_eq(node4->p == node2, true);
 
-  ck_assert_int_eq(node5->data.key.i, 15);
+  ck_assert_int_eq(node5->data.key, 15);
   ck_assert_int_eq(node5->color, RED);
   ck_assert_int_eq(node5->left == nil, true);
   ck_assert_int_eq(node5->right == nil, true);
   ck_assert_int_eq(node5->p == node3, true);
 
-  ck_assert_int_eq((*root)->data.key.i, 10);
+  ck_assert_int_eq((*root)->data.key, 10);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, -10);
+  ck_assert_int_eq((*root)->left->data.key, -10);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
   ck_assert_int_eq((*root)->left->p == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 20);
+  ck_assert_int_eq((*root)->right->data.key, 20);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == node5, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node1, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 7);
+  ck_assert_int_eq((*root)->left->right->data.key, 7);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->left->data.key, 15);
   ck_assert_int_eq((*root)->right->left->color, RED);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
@@ -565,79 +565,79 @@ START_TEST(test_rbt_insert_2)
   reg->key = k6;
   node6 = rb_insert(root, nil, *reg, compare);
 
-  ck_assert_int_eq((*root)->data.key.i, 10);
+  ck_assert_int_eq((*root)->data.key, 10);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node5, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, -10);
+  ck_assert_int_eq((*root)->left->data.key, -10);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
   ck_assert_int_eq((*root)->left->p == node1, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->data.key, 15);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == node6, true);
   ck_assert_int_eq((*root)->right->right == node3, true);
   ck_assert_int_eq((*root)->right->p == node1, true);
   ck_assert_int_eq((*root)->right == node5, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 7);
+  ck_assert_int_eq((*root)->left->right->data.key, 7);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 13);
+  ck_assert_int_eq((*root)->right->left->data.key, 13);
   ck_assert_int_eq((*root)->right->left->color, RED);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
   ck_assert_int_eq((*root)->right->left->p == node5, true);
   ck_assert_int_eq((*root)->right->left == node6, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 20);
+  ck_assert_int_eq((*root)->right->right->data.key, 20);
   ck_assert_int_eq((*root)->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right == nil, true);
   ck_assert_int_eq((*root)->right->right->p == node5, true);
   ck_assert_int_eq((*root)->right->right == node3, true);
 
-  ck_assert_int_eq(node1->data.key.i, 10);
+  ck_assert_int_eq(node1->data.key, 10);
   ck_assert_int_eq(node1->color, BLACK);
   ck_assert_int_eq(node1->left == node2, true);
   ck_assert_int_eq(node1->right == node5, true);
   ck_assert_int_eq(node1->p == nil, true);
 
-  ck_assert_int_eq(node2->data.key.i, -10);
+  ck_assert_int_eq(node2->data.key, -10);
   ck_assert_int_eq(node2->color, BLACK);
   ck_assert_int_eq(node2->left == nil, true);
   ck_assert_int_eq(node2->right == node4, true);
   ck_assert_int_eq(node2->p == node1, true);
 
-  ck_assert_int_eq(node3->data.key.i, 20);
+  ck_assert_int_eq(node3->data.key, 20);
   ck_assert_int_eq(node3->color, RED);
   ck_assert_int_eq(node3->left == nil, true);
   ck_assert_int_eq(node3->right == nil, true);
   ck_assert_int_eq(node3->p == node5, true);
 
-  ck_assert_int_eq(node4->data.key.i, 7);
+  ck_assert_int_eq(node4->data.key, 7);
   ck_assert_int_eq(node4->color, RED);
   ck_assert_int_eq(node4->left == nil, true);
   ck_assert_int_eq(node4->right == nil, true);
   ck_assert_int_eq(node4->p == node2, true);
 
-  ck_assert_int_eq(node5->data.key.i, 15);
+  ck_assert_int_eq(node5->data.key, 15);
   ck_assert_int_eq(node5->color, BLACK);
   ck_assert_int_eq(node5->left == node6, true);
   ck_assert_int_eq(node5->right == node3, true);
   ck_assert_int_eq(node5->p == node1, true);
 
-  ck_assert_int_eq(node6->data.key.i, 13);
+  ck_assert_int_eq(node6->data.key, 13);
   ck_assert_int_eq(node6->color, RED);
   ck_assert_int_eq(node6->left == nil, true);
   ck_assert_int_eq(node6->right == nil, true);
@@ -655,7 +655,7 @@ END_TEST
 
 START_TEST(test_rbt_insert_3)
 {
-  union Key k1, k2, k3, k4, k5, k6;
+  int k1, k2, k3, k4, k5, k6;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -664,12 +664,12 @@ START_TEST(test_rbt_insert_3)
   RedBlackTree* node6;
   RedBlackTree* nil;
 
-  k1.i = 10;
-  k2.i = -10;
-  k3.i = 20;
-  k4.i = 7;
-  k5.i = 15;
-  k6.i = 17;
+  k1 = 10;
+  k2 = -10;
+  k3 = 20;
+  k4 = 7;
+  k5 = 15;
+  k6 = 17;
 
   nil = malloc(sizeof(RedBlackTree));
 
@@ -724,61 +724,61 @@ START_TEST(test_rbt_insert_3)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq(node1->data.key.i, 10);
+  ck_assert_int_eq(node1->data.key, 10);
   ck_assert_int_eq(node1->color, BLACK);
   ck_assert_int_eq(node1->left == node2, true);
   ck_assert_int_eq(node1->right == node3, true);
   ck_assert_int_eq(node1->p == nil, true);
 
-  ck_assert_int_eq(node2->data.key.i, -10);
+  ck_assert_int_eq(node2->data.key, -10);
   ck_assert_int_eq(node2->color, BLACK);
   ck_assert_int_eq(node2->left == nil, true);
   ck_assert_int_eq(node2->right == node4, true);
   ck_assert_int_eq(node2->p == node1, true);
 
-  ck_assert_int_eq(node3->data.key.i, 20);
+  ck_assert_int_eq(node3->data.key, 20);
   ck_assert_int_eq(node3->color, BLACK);
   ck_assert_int_eq(node3->left == node5, true);
   ck_assert_int_eq(node3->right == nil, true);
   ck_assert_int_eq(node3->p == node1, true);
 
-  ck_assert_int_eq(node4->data.key.i, 7);
+  ck_assert_int_eq(node4->data.key, 7);
   ck_assert_int_eq(node4->color, RED);
   ck_assert_int_eq(node4->left == nil, true);
   ck_assert_int_eq(node4->right == nil, true);
   ck_assert_int_eq(node4->p == node2, true);
 
-  ck_assert_int_eq(node5->data.key.i, 15);
+  ck_assert_int_eq(node5->data.key, 15);
   ck_assert_int_eq(node5->color, RED);
   ck_assert_int_eq(node5->left == nil, true);
   ck_assert_int_eq(node5->right == nil, true);
   ck_assert_int_eq(node5->p == node3, true);
 
-  ck_assert_int_eq((*root)->data.key.i, 10);
+  ck_assert_int_eq((*root)->data.key, 10);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, -10);
+  ck_assert_int_eq((*root)->left->data.key, -10);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
   ck_assert_int_eq((*root)->left->p == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 20);
+  ck_assert_int_eq((*root)->right->data.key, 20);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == node5, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node1, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 7);
+  ck_assert_int_eq((*root)->left->right->data.key, 7);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->left->data.key, 15);
   ck_assert_int_eq((*root)->right->left->color, RED);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
@@ -787,79 +787,79 @@ START_TEST(test_rbt_insert_3)
   reg->key = k6;
   node6 = rb_insert(root, nil, *reg, compare);
 
-  ck_assert_int_eq((*root)->data.key.i, 10);
+  ck_assert_int_eq((*root)->data.key, 10);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node6, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, -10);
+  ck_assert_int_eq((*root)->left->data.key, -10);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
   ck_assert_int_eq((*root)->left->p == node1, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 17);
+  ck_assert_int_eq((*root)->right->data.key, 17);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == node5, true);
   ck_assert_int_eq((*root)->right->right == node3, true);
   ck_assert_int_eq((*root)->right->p == node1, true);
   ck_assert_int_eq((*root)->right == node6, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 7);
+  ck_assert_int_eq((*root)->left->right->data.key, 7);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->left->data.key, 15);
   ck_assert_int_eq((*root)->right->left->color, RED);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
   ck_assert_int_eq((*root)->right->left->p == node6, true);
   ck_assert_int_eq((*root)->right->left == node5, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 20);
+  ck_assert_int_eq((*root)->right->right->data.key, 20);
   ck_assert_int_eq((*root)->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right == nil, true);
   ck_assert_int_eq((*root)->right->right->p == node6, true);
   ck_assert_int_eq((*root)->right->right == node3, true);
 
-  ck_assert_int_eq(node1->data.key.i, 10);
+  ck_assert_int_eq(node1->data.key, 10);
   ck_assert_int_eq(node1->color, BLACK);
   ck_assert_int_eq(node1->left == node2, true);
   ck_assert_int_eq(node1->right == node6, true);
   ck_assert_int_eq(node1->p == nil, true);
 
-  ck_assert_int_eq(node2->data.key.i, -10);
+  ck_assert_int_eq(node2->data.key, -10);
   ck_assert_int_eq(node2->color, BLACK);
   ck_assert_int_eq(node2->left == nil, true);
   ck_assert_int_eq(node2->right == node4, true);
   ck_assert_int_eq(node2->p == node1, true);
 
-  ck_assert_int_eq(node3->data.key.i, 20);
+  ck_assert_int_eq(node3->data.key, 20);
   ck_assert_int_eq(node3->color, RED);
   ck_assert_int_eq(node3->left == nil, true);
   ck_assert_int_eq(node3->right == nil, true);
   ck_assert_int_eq(node3->p == node6, true);
 
-  ck_assert_int_eq(node4->data.key.i, 7);
+  ck_assert_int_eq(node4->data.key, 7);
   ck_assert_int_eq(node4->color, RED);
   ck_assert_int_eq(node4->left == nil, true);
   ck_assert_int_eq(node4->right == nil, true);
   ck_assert_int_eq(node4->p == node2, true);
 
-  ck_assert_int_eq(node5->data.key.i, 15);
+  ck_assert_int_eq(node5->data.key, 15);
   ck_assert_int_eq(node5->color, RED);
   ck_assert_int_eq(node5->left == nil, true);
   ck_assert_int_eq(node5->right == nil, true);
   ck_assert_int_eq(node5->p == node6, true);
 
-  ck_assert_int_eq(node6->data.key.i, 17);
+  ck_assert_int_eq(node6->data.key, 17);
   ck_assert_int_eq(node6->color, BLACK);
   ck_assert_int_eq(node6->left == node5, true);
   ck_assert_int_eq(node6->right == node3, true);
@@ -877,7 +877,7 @@ END_TEST
 
 START_TEST(test_rbt_insert_4)
 {
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -907,16 +907,16 @@ START_TEST(test_rbt_insert_4)
   node8 = malloc(sizeof(RedBlackTree));
   node9 = malloc(sizeof(RedBlackTree));
 
-  k1.i = 10;
-  k2.i = -10;
-  k3.i = 20;
-  k4.i = -20;
-  k5.i = 6;
-  k6.i = 15;
-  k7.i = 30;
-  k8.i = 1;
-  k9.i = 9;
-  k10.i = 4;
+  k1 = 10;
+  k2 = -10;
+  k3 = 20;
+  k4 = -20;
+  k5 = 6;
+  k6 = 15;
+  k7 = 30;
+  k8 = 1;
+  k9 = 9;
+  k10 = 4;
 
   reg->key = k1;
   node1->data = *reg;
@@ -986,109 +986,109 @@ START_TEST(test_rbt_insert_4)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq(node1->data.key.i, 10);
+  ck_assert_int_eq(node1->data.key, 10);
   ck_assert_int_eq(node1->color, BLACK);
   ck_assert_int_eq(node1->left == node2, true);
   ck_assert_int_eq(node1->right == node3, true);
   ck_assert_int_eq(node1->p == nil, true);
 
-  ck_assert_int_eq(node2->data.key.i, -10);
+  ck_assert_int_eq(node2->data.key, -10);
   ck_assert_int_eq(node2->color, RED);
   ck_assert_int_eq(node2->left == node4, true);
   ck_assert_int_eq(node2->right == node5, true);
   ck_assert_int_eq(node2->p == node1, true);
 
-  ck_assert_int_eq(node3->data.key.i, 20);
+  ck_assert_int_eq(node3->data.key, 20);
   ck_assert_int_eq(node3->color, BLACK);
   ck_assert_int_eq(node3->left == node6, true);
   ck_assert_int_eq(node3->right == node7, true);
   ck_assert_int_eq(node3->p == node1, true);
 
-  ck_assert_int_eq(node4->data.key.i, -20);
+  ck_assert_int_eq(node4->data.key, -20);
   ck_assert_int_eq(node4->color, BLACK);
   ck_assert_int_eq(node4->left == nil, true);
   ck_assert_int_eq(node4->right == nil, true);
   ck_assert_int_eq(node4->p == node2, true);
 
-  ck_assert_int_eq(node5->data.key.i, 6);
+  ck_assert_int_eq(node5->data.key, 6);
   ck_assert_int_eq(node5->color, BLACK);
   ck_assert_int_eq(node5->left == node8, true);
   ck_assert_int_eq(node5->right == node9, true);
   ck_assert_int_eq(node5->p == node2, true);
 
-  ck_assert_int_eq(node6->data.key.i, 15);
+  ck_assert_int_eq(node6->data.key, 15);
   ck_assert_int_eq(node6->color, RED);
   ck_assert_int_eq(node6->left == nil, true);
   ck_assert_int_eq(node6->right == nil, true);
   ck_assert_int_eq(node6->p == node3, true);
 
-  ck_assert_int_eq(node7->data.key.i, 30);
+  ck_assert_int_eq(node7->data.key, 30);
   ck_assert_int_eq(node7->color, RED);
   ck_assert_int_eq(node7->left == nil, true);
   ck_assert_int_eq(node7->right == nil, true);
   ck_assert_int_eq(node7->p == node3, true);
 
-  ck_assert_int_eq(node8->data.key.i, 1);
+  ck_assert_int_eq(node8->data.key, 1);
   ck_assert_int_eq(node8->color, RED);
   ck_assert_int_eq(node8->left == nil, true);
   ck_assert_int_eq(node8->right == nil, true);
   ck_assert_int_eq(node8->p == node5, true);
 
-  ck_assert_int_eq(node9->data.key.i, 9);
+  ck_assert_int_eq(node9->data.key, 9);
   ck_assert_int_eq(node9->color, RED);
   ck_assert_int_eq(node9->left == nil, true);
   ck_assert_int_eq(node9->right == nil, true);
   ck_assert_int_eq(node9->p == node5, true);
 
-  ck_assert_int_eq((*root)->data.key.i, 10);
+  ck_assert_int_eq((*root)->data.key, 10);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, -10);
+  ck_assert_int_eq((*root)->left->data.key, -10);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == node4, true);
   ck_assert_int_eq((*root)->left->right == node5, true);
   ck_assert_int_eq((*root)->left->p == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 20);
+  ck_assert_int_eq((*root)->right->data.key, 20);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == node6, true);
   ck_assert_int_eq((*root)->right->right == node7, true);
   ck_assert_int_eq((*root)->right->p == node1, true);
 
-  ck_assert_int_eq((*root)->left->left->data.key.i, -20);
+  ck_assert_int_eq((*root)->left->left->data.key, -20);
   ck_assert_int_eq((*root)->left->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left->left == nil, true);
   ck_assert_int_eq((*root)->left->left->right == nil, true);
   ck_assert_int_eq((*root)->left->left->p == node2, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 6);
+  ck_assert_int_eq((*root)->left->right->data.key, 6);
   ck_assert_int_eq((*root)->left->right->color, BLACK);
   ck_assert_int_eq((*root)->left->right->left == node8, true);
   ck_assert_int_eq((*root)->left->right->right == node9, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->left->data.key, 15);
   ck_assert_int_eq((*root)->right->left->color, RED);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
   ck_assert_int_eq((*root)->right->left->p == node3, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 30);
+  ck_assert_int_eq((*root)->right->right->data.key, 30);
   ck_assert_int_eq((*root)->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right == nil, true);
   ck_assert_int_eq((*root)->right->right->p == node3, true);
 
-  ck_assert_int_eq((*root)->left->right->left->data.key.i, 1);
+  ck_assert_int_eq((*root)->left->right->left->data.key, 1);
   ck_assert_int_eq((*root)->left->right->left->color, RED);
   ck_assert_int_eq((*root)->left->right->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right->left->right == nil, true);
   ck_assert_int_eq((*root)->left->right->left->p == node5, true);
 
-  ck_assert_int_eq((*root)->left->right->right->data.key.i, 9);
+  ck_assert_int_eq((*root)->left->right->right->data.key, 9);
   ck_assert_int_eq((*root)->left->right->right->color, RED);
   ck_assert_int_eq((*root)->left->right->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right->right == nil, true);
@@ -1097,118 +1097,118 @@ START_TEST(test_rbt_insert_4)
   reg->key = k10;
   node10 = rb_insert(root, nil, *reg, compare);
 
-  ck_assert_int_eq((*root)->data.key.i, 6);
+  ck_assert_int_eq((*root)->data.key, 6);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node5, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, -10);
+  ck_assert_int_eq((*root)->left->data.key, -10);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == node4, true);
   ck_assert_int_eq((*root)->left->right == node8, true);
   ck_assert_int_eq((*root)->left->p == node5, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 10);
+  ck_assert_int_eq((*root)->right->data.key, 10);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == node9, true);
   ck_assert_int_eq((*root)->right->right == node3, true);
   ck_assert_int_eq((*root)->right->p == node5, true);
   ck_assert_int_eq((*root)->right == node1, true);
 
-  ck_assert_int_eq((*root)->left->left->data.key.i, -20);
+  ck_assert_int_eq((*root)->left->left->data.key, -20);
   ck_assert_int_eq((*root)->left->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left->left == nil, true);
   ck_assert_int_eq((*root)->left->left->right == nil, true);
   ck_assert_int_eq((*root)->left->left->p == node2, true);
   ck_assert_int_eq((*root)->left->left == node4, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 1);
+  ck_assert_int_eq((*root)->left->right->data.key, 1);
   ck_assert_int_eq((*root)->left->right->color, BLACK);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == node10, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
   ck_assert_int_eq((*root)->left->right == node8, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 9);
+  ck_assert_int_eq((*root)->right->left->data.key, 9);
   ck_assert_int_eq((*root)->right->left->color, BLACK);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
   ck_assert_int_eq((*root)->right->left->p == node1, true);
   ck_assert_int_eq((*root)->right->left == node9, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 20);
+  ck_assert_int_eq((*root)->right->right->data.key, 20);
   ck_assert_int_eq((*root)->right->right->color, BLACK);
   ck_assert_int_eq((*root)->right->right->left == node6, true);
   ck_assert_int_eq((*root)->right->right->right == node7, true);
   ck_assert_int_eq((*root)->right->right->p == node1, true);
   ck_assert_int_eq((*root)->right->right == node3, true);
 
-  ck_assert_int_eq((*root)->right->right->left->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->right->left->data.key, 15);
   ck_assert_int_eq((*root)->right->right->left->color, RED);
   ck_assert_int_eq((*root)->right->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->right->left->right == nil, true);
   ck_assert_int_eq((*root)->right->right->left->p == node3, true);
   ck_assert_int_eq((*root)->right->right->left == node6, true);
 
-  ck_assert_int_eq((*root)->right->right->right->data.key.i, 30);
+  ck_assert_int_eq((*root)->right->right->right->data.key, 30);
   ck_assert_int_eq((*root)->right->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right->right == nil, true);
   ck_assert_int_eq((*root)->right->right->right->p == node3, true);
   ck_assert_int_eq((*root)->right->right->right == node7, true);
 
-  ck_assert_int_eq(node5->data.key.i, 6);
+  ck_assert_int_eq(node5->data.key, 6);
   ck_assert_int_eq(node5->color, BLACK);
   ck_assert_int_eq(node5->left == node2, true);
   ck_assert_int_eq(node5->right == node1, true);
   ck_assert_int_eq(node5->p == nil, true);
 
-  ck_assert_int_eq(node2->data.key.i, -10);
+  ck_assert_int_eq(node2->data.key, -10);
   ck_assert_int_eq(node2->color, RED);
   ck_assert_int_eq(node2->left == node4, true);
   ck_assert_int_eq(node2->right == node8, true);
   ck_assert_int_eq(node2->p == node5, true);
 
-  ck_assert_int_eq(node1->data.key.i, 10);
+  ck_assert_int_eq(node1->data.key, 10);
   ck_assert_int_eq(node1->color, RED);
   ck_assert_int_eq(node1->left == node9, true);
   ck_assert_int_eq(node1->right == node3, true);
   ck_assert_int_eq(node1->p == node5, true);
 
-  ck_assert_int_eq(node4->data.key.i, -20);
+  ck_assert_int_eq(node4->data.key, -20);
   ck_assert_int_eq(node4->color, BLACK);
   ck_assert_int_eq(node4->left == nil, true);
   ck_assert_int_eq(node4->right == nil, true);
   ck_assert_int_eq(node4->p == node2, true);
 
-  ck_assert_int_eq(node8->data.key.i, 1);
+  ck_assert_int_eq(node8->data.key, 1);
   ck_assert_int_eq(node8->color, BLACK);
   ck_assert_int_eq(node8->left == nil, true);
   ck_assert_int_eq(node8->right == node10, true);
   ck_assert_int_eq(node8->p == node2, true);
 
-  ck_assert_int_eq(node9->data.key.i, 9);
+  ck_assert_int_eq(node9->data.key, 9);
   ck_assert_int_eq(node9->color, BLACK);
   ck_assert_int_eq(node9->left == nil, true);
   ck_assert_int_eq(node9->right == nil, true);
   ck_assert_int_eq(node9->p == node1, true);
 
-  ck_assert_int_eq(node3->data.key.i, 20);
+  ck_assert_int_eq(node3->data.key, 20);
   ck_assert_int_eq(node3->color, BLACK);
   ck_assert_int_eq(node3->left == node6, true);
   ck_assert_int_eq(node3->right == node7, true);
   ck_assert_int_eq(node3->p == node1, true);
 
-  ck_assert_int_eq(node6->data.key.i, 15);
+  ck_assert_int_eq(node6->data.key, 15);
   ck_assert_int_eq(node6->color, RED);
   ck_assert_int_eq(node6->left == nil, true);
   ck_assert_int_eq(node6->right == nil, true);
   ck_assert_int_eq(node6->p == node3, true);
 
-  ck_assert_int_eq(node7->data.key.i, 30);
+  ck_assert_int_eq(node7->data.key, 30);
   ck_assert_int_eq(node7->color, RED);
   ck_assert_int_eq(node7->left == nil, true);
   ck_assert_int_eq(node7->right == nil, true);
@@ -1230,7 +1230,7 @@ END_TEST
 
 START_TEST(test_rbt_insert_5)
 {
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -1258,15 +1258,15 @@ START_TEST(test_rbt_insert_5)
   node7 = malloc(sizeof(RedBlackTree));
   node8 = malloc(sizeof(RedBlackTree));
 
-  k1.i = 11;
-  k2.i = 2;
-  k3.i = 14;
-  k4.i = 1;
-  k5.i = 7;
-  k6.i = 15;
-  k7.i = 5;
-  k8.i = 8;
-  k9.i = 4;
+  k1 = 11;
+  k2 = 2;
+  k3 = 14;
+  k4 = 1;
+  k5 = 7;
+  k6 = 15;
+  k7 = 5;
+  k8 = 8;
+  k9 = 4;
 
   reg->key = k1;
   node1->data = *reg;
@@ -1329,104 +1329,104 @@ START_TEST(test_rbt_insert_5)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq(node1->data.key.i, 11);
+  ck_assert_int_eq(node1->data.key, 11);
   ck_assert_int_eq(node1->color, BLACK);
   ck_assert_int_eq(node1->left == node2, true);
   ck_assert_int_eq(node1->right == node3, true);
   ck_assert_int_eq(node1->p == nil, true);
 
-  ck_assert_int_eq(node2->data.key.i, 2);
+  ck_assert_int_eq(node2->data.key, 2);
   ck_assert_int_eq(node2->color, RED);
   ck_assert_int_eq(node2->left == node4, true);
   ck_assert_int_eq(node2->right == node5, true);
   ck_assert_int_eq(node2->p == node1, true);
 
-  ck_assert_int_eq(node3->data.key.i, 14);
+  ck_assert_int_eq(node3->data.key, 14);
   ck_assert_int_eq(node3->color, BLACK);
   ck_assert_int_eq(node3->left == nil, true);
   ck_assert_int_eq(node3->right == node6, true);
   ck_assert_int_eq(node3->p == node1, true);
 
-  ck_assert_int_eq(node4->data.key.i, 1);
+  ck_assert_int_eq(node4->data.key, 1);
   ck_assert_int_eq(node4->color, BLACK);
   ck_assert_int_eq(node4->left == nil, true);
   ck_assert_int_eq(node4->right == nil, true);
   ck_assert_int_eq(node4->p == node2, true);
 
-  ck_assert_int_eq(node5->data.key.i, 7);
+  ck_assert_int_eq(node5->data.key, 7);
   ck_assert_int_eq(node5->color, BLACK);
   ck_assert_int_eq(node5->left == node7, true);
   ck_assert_int_eq(node5->right == node8, true);
   ck_assert_int_eq(node5->p == node2, true);
 
-  ck_assert_int_eq(node6->data.key.i, 15);
+  ck_assert_int_eq(node6->data.key, 15);
   ck_assert_int_eq(node6->color, RED);
   ck_assert_int_eq(node6->left == nil, true);
   ck_assert_int_eq(node6->right == nil, true);
   ck_assert_int_eq(node6->p == node3, true);
 
-  ck_assert_int_eq(node7->data.key.i, 5);
+  ck_assert_int_eq(node7->data.key, 5);
   ck_assert_int_eq(node7->color, RED);
   ck_assert_int_eq(node7->left == nil, true);
   ck_assert_int_eq(node7->right == nil, true);
   ck_assert_int_eq(node7->p == node5, true);
 
-  ck_assert_int_eq(node8->data.key.i, 8);
+  ck_assert_int_eq(node8->data.key, 8);
   ck_assert_int_eq(node8->color, RED);
   ck_assert_int_eq(node8->left == nil, true);
   ck_assert_int_eq(node8->right == nil, true);
   ck_assert_int_eq(node8->p == node5, true);
 
-  ck_assert_int_eq((*root)->data.key.i, 11);
+  ck_assert_int_eq((*root)->data.key, 11);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->data.key, 2);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == node4, true);
   ck_assert_int_eq((*root)->left->right == node5, true);
   ck_assert_int_eq((*root)->left->p == node1, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 14);
+  ck_assert_int_eq((*root)->right->data.key, 14);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == node6, true);
   ck_assert_int_eq((*root)->right->p == node1, true);
   ck_assert_int_eq((*root)->right == node3, true);
 
-  ck_assert_int_eq((*root)->left->left->data.key.i, 1);
+  ck_assert_int_eq((*root)->left->left->data.key, 1);
   ck_assert_int_eq((*root)->left->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left->left == nil, true);
   ck_assert_int_eq((*root)->left->left->right == nil, true);
   ck_assert_int_eq((*root)->left->left->p == node2, true);
   ck_assert_int_eq((*root)->left->left == node4, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 7);
+  ck_assert_int_eq((*root)->left->right->data.key, 7);
   ck_assert_int_eq((*root)->left->right->color, BLACK);
   ck_assert_int_eq((*root)->left->right->left == node7, true);
   ck_assert_int_eq((*root)->left->right->right == node8, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
   ck_assert_int_eq((*root)->left->right == node5, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->right->data.key, 15);
   ck_assert_int_eq((*root)->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right == nil, true);
   ck_assert_int_eq((*root)->right->right->p == node3, true);
   ck_assert_int_eq((*root)->right->right == node6, true);
 
-  ck_assert_int_eq((*root)->left->right->left->data.key.i, 5);
+  ck_assert_int_eq((*root)->left->right->left->data.key, 5);
   ck_assert_int_eq((*root)->left->right->left->color, RED);
   ck_assert_int_eq((*root)->left->right->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right->left->right == nil, true);
   ck_assert_int_eq((*root)->left->right->left->p == node5, true);
   ck_assert_int_eq((*root)->left->right->left == node7, true);
 
-  ck_assert_int_eq((*root)->left->right->right->data.key.i, 8);
+  ck_assert_int_eq((*root)->left->right->right->data.key, 8);
   ck_assert_int_eq((*root)->left->right->right->color, RED);
   ck_assert_int_eq((*root)->left->right->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right->right == nil, true);
@@ -1436,118 +1436,118 @@ START_TEST(test_rbt_insert_5)
   reg->key = k9;
   node9 = rb_insert(root, nil, *reg, compare);
 
-  ck_assert_int_eq((*root)->data.key.i, 7);
+  ck_assert_int_eq((*root)->data.key, 7);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node5, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->data.key, 2);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == node4, true);
   ck_assert_int_eq((*root)->left->right == node7, true);
   ck_assert_int_eq((*root)->left->p == node5, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 11);
+  ck_assert_int_eq((*root)->right->data.key, 11);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == node8, true);
   ck_assert_int_eq((*root)->right->right == node3, true);
   ck_assert_int_eq((*root)->right->p == node5, true);
   ck_assert_int_eq((*root)->right == node1, true);
 
-  ck_assert_int_eq((*root)->left->left->data.key.i, 1);
+  ck_assert_int_eq((*root)->left->left->data.key, 1);
   ck_assert_int_eq((*root)->left->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left->left == nil, true);
   ck_assert_int_eq((*root)->left->left->right == nil, true);
   ck_assert_int_eq((*root)->left->left->p == node2, true);
   ck_assert_int_eq((*root)->left->left == node4, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 5);
+  ck_assert_int_eq((*root)->left->right->data.key, 5);
   ck_assert_int_eq((*root)->left->right->color, BLACK);
   ck_assert_int_eq((*root)->left->right->left == node9, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
   ck_assert_int_eq((*root)->left->right == node7, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 8);
+  ck_assert_int_eq((*root)->right->left->data.key, 8);
   ck_assert_int_eq((*root)->right->left->color, BLACK);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
   ck_assert_int_eq((*root)->right->left->p == node1, true);
   ck_assert_int_eq((*root)->right->left == node8, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 14);
+  ck_assert_int_eq((*root)->right->right->data.key, 14);
   ck_assert_int_eq((*root)->right->right->color, BLACK);
   ck_assert_int_eq((*root)->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right == node6, true);
   ck_assert_int_eq((*root)->right->right->p == node1, true);
   ck_assert_int_eq((*root)->right->right == node3, true);
 
-  ck_assert_int_eq((*root)->left->right->left->data.key.i, 4);
+  ck_assert_int_eq((*root)->left->right->left->data.key, 4);
   ck_assert_int_eq((*root)->left->right->left->color, RED);
   ck_assert_int_eq((*root)->left->right->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right->left->right == nil, true);
   ck_assert_int_eq((*root)->left->right->left->p == node7, true);
   ck_assert_int_eq((*root)->left->right->left == node9, true);
 
-  ck_assert_int_eq((*root)->right->right->right->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->right->right->data.key, 15);
   ck_assert_int_eq((*root)->right->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right->right == nil, true);
   ck_assert_int_eq((*root)->right->right->right->p == node3, true);
   ck_assert_int_eq((*root)->right->right->right == node6, true);
 
-  ck_assert_int_eq(node1->data.key.i, 11);
+  ck_assert_int_eq(node1->data.key, 11);
   ck_assert_int_eq(node1->color, RED);
   ck_assert_int_eq(node1->left == node8, true);
   ck_assert_int_eq(node1->right == node3, true);
   ck_assert_int_eq(node1->p == node5, true);
 
-  ck_assert_int_eq(node2->data.key.i, 2);
+  ck_assert_int_eq(node2->data.key, 2);
   ck_assert_int_eq(node2->color, RED);
   ck_assert_int_eq(node2->left == node4, true);
   ck_assert_int_eq(node2->right == node7, true);
   ck_assert_int_eq(node2->p == node5, true);
 
-  ck_assert_int_eq(node3->data.key.i, 14);
+  ck_assert_int_eq(node3->data.key, 14);
   ck_assert_int_eq(node3->color, BLACK);
   ck_assert_int_eq(node3->left == nil, true);
   ck_assert_int_eq(node3->right == node6, true);
   ck_assert_int_eq(node3->p == node1, true);
 
-  ck_assert_int_eq(node4->data.key.i, 1);
+  ck_assert_int_eq(node4->data.key, 1);
   ck_assert_int_eq(node4->color, BLACK);
   ck_assert_int_eq(node4->left == nil, true);
   ck_assert_int_eq(node4->right == nil, true);
   ck_assert_int_eq(node4->p == node2, true);
 
-  ck_assert_int_eq(node5->data.key.i, 7);
+  ck_assert_int_eq(node5->data.key, 7);
   ck_assert_int_eq(node5->color, BLACK);
   ck_assert_int_eq(node5->left == node2, true);
   ck_assert_int_eq(node5->right == node1, true);
   ck_assert_int_eq(node5->p == nil, true);
 
-  ck_assert_int_eq(node6->data.key.i, 15);
+  ck_assert_int_eq(node6->data.key, 15);
   ck_assert_int_eq(node6->color, RED);
   ck_assert_int_eq(node6->left == nil, true);
   ck_assert_int_eq(node6->right == nil, true);
   ck_assert_int_eq(node6->p == node3, true);
 
-  ck_assert_int_eq(node7->data.key.i, 5);
+  ck_assert_int_eq(node7->data.key, 5);
   ck_assert_int_eq(node7->color, BLACK);
   ck_assert_int_eq(node7->left == node9, true);
   ck_assert_int_eq(node7->right == nil, true);
   ck_assert_int_eq(node7->p == node2, true);
 
-  ck_assert_int_eq(node8->data.key.i, 8);
+  ck_assert_int_eq(node8->data.key, 8);
   ck_assert_int_eq(node8->color, BLACK);
   ck_assert_int_eq(node8->left == nil, true);
   ck_assert_int_eq(node8->right == nil, true);
   ck_assert_int_eq(node8->p == node1, true);
 
-  ck_assert_int_eq(node9->data.key.i, 4);
+  ck_assert_int_eq(node9->data.key, 4);
   ck_assert_int_eq(node9->color, RED);
   ck_assert_int_eq(node9->left == nil, true);
   ck_assert_int_eq(node9->right == nil, true);
@@ -1568,7 +1568,7 @@ END_TEST
 
 START_TEST(test_rbt_insert_6)
 {
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -1580,15 +1580,15 @@ START_TEST(test_rbt_insert_6)
   RedBlackTree* node9;
   RedBlackTree* nil;
 
-  k1.i = 11;
-  k2.i = 2;
-  k3.i = 14;
-  k4.i = 1;
-  k5.i = 7;
-  k6.i = 15;
-  k7.i = 5;
-  k8.i = 8;
-  k9.i = 9;
+  k1 = 11;
+  k2 = 2;
+  k3 = 14;
+  k4 = 1;
+  k5 = 7;
+  k6 = 15;
+  k7 = 5;
+  k8 = 8;
+  k9 = 9;
 
   nil = malloc(sizeof(RedBlackTree));
 
@@ -1667,104 +1667,104 @@ START_TEST(test_rbt_insert_6)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq(node1->data.key.i, 11);
+  ck_assert_int_eq(node1->data.key, 11);
   ck_assert_int_eq(node1->color, BLACK);
   ck_assert_int_eq(node1->left == node2, true);
   ck_assert_int_eq(node1->right == node3, true);
   ck_assert_int_eq(node1->p == nil, true);
 
-  ck_assert_int_eq(node2->data.key.i, 2);
+  ck_assert_int_eq(node2->data.key, 2);
   ck_assert_int_eq(node2->color, RED);
   ck_assert_int_eq(node2->left == node4, true);
   ck_assert_int_eq(node2->right == node5, true);
   ck_assert_int_eq(node2->p == node1, true);
 
-  ck_assert_int_eq(node3->data.key.i, 14);
+  ck_assert_int_eq(node3->data.key, 14);
   ck_assert_int_eq(node3->color, BLACK);
   ck_assert_int_eq(node3->left == nil, true);
   ck_assert_int_eq(node3->right == node6, true);
   ck_assert_int_eq(node3->p == node1, true);
 
-  ck_assert_int_eq(node4->data.key.i, 1);
+  ck_assert_int_eq(node4->data.key, 1);
   ck_assert_int_eq(node4->color, BLACK);
   ck_assert_int_eq(node4->left == nil, true);
   ck_assert_int_eq(node4->right == nil, true);
   ck_assert_int_eq(node4->p == node2, true);
 
-  ck_assert_int_eq(node5->data.key.i, 7);
+  ck_assert_int_eq(node5->data.key, 7);
   ck_assert_int_eq(node5->color, BLACK);
   ck_assert_int_eq(node5->left == node7, true);
   ck_assert_int_eq(node5->right == node8, true);
   ck_assert_int_eq(node5->p == node2, true);
 
-  ck_assert_int_eq(node6->data.key.i, 15);
+  ck_assert_int_eq(node6->data.key, 15);
   ck_assert_int_eq(node6->color, RED);
   ck_assert_int_eq(node6->left == nil, true);
   ck_assert_int_eq(node6->right == nil, true);
   ck_assert_int_eq(node6->p == node3, true);
 
-  ck_assert_int_eq(node7->data.key.i, 5);
+  ck_assert_int_eq(node7->data.key, 5);
   ck_assert_int_eq(node7->color, RED);
   ck_assert_int_eq(node7->left == nil, true);
   ck_assert_int_eq(node7->right == nil, true);
   ck_assert_int_eq(node7->p == node5, true);
 
-  ck_assert_int_eq(node8->data.key.i, 8);
+  ck_assert_int_eq(node8->data.key, 8);
   ck_assert_int_eq(node8->color, RED);
   ck_assert_int_eq(node8->left == nil, true);
   ck_assert_int_eq(node8->right == nil, true);
   ck_assert_int_eq(node8->p == node5, true);
 
-  ck_assert_int_eq((*root)->data.key.i, 11);
+  ck_assert_int_eq((*root)->data.key, 11);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->data.key, 2);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == node4, true);
   ck_assert_int_eq((*root)->left->right == node5, true);
   ck_assert_int_eq((*root)->left->p == node1, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 14);
+  ck_assert_int_eq((*root)->right->data.key, 14);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == node6, true);
   ck_assert_int_eq((*root)->right->p == node1, true);
   ck_assert_int_eq((*root)->right == node3, true);
 
-  ck_assert_int_eq((*root)->left->left->data.key.i, 1);
+  ck_assert_int_eq((*root)->left->left->data.key, 1);
   ck_assert_int_eq((*root)->left->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left->left == nil, true);
   ck_assert_int_eq((*root)->left->left->right == nil, true);
   ck_assert_int_eq((*root)->left->left->p == node2, true);
   ck_assert_int_eq((*root)->left->left == node4, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 7);
+  ck_assert_int_eq((*root)->left->right->data.key, 7);
   ck_assert_int_eq((*root)->left->right->color, BLACK);
   ck_assert_int_eq((*root)->left->right->left == node7, true);
   ck_assert_int_eq((*root)->left->right->right == node8, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
   ck_assert_int_eq((*root)->left->right == node5, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->right->data.key, 15);
   ck_assert_int_eq((*root)->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right == nil, true);
   ck_assert_int_eq((*root)->right->right->p == node3, true);
   ck_assert_int_eq((*root)->right->right == node6, true);
 
-  ck_assert_int_eq((*root)->left->right->left->data.key.i, 5);
+  ck_assert_int_eq((*root)->left->right->left->data.key, 5);
   ck_assert_int_eq((*root)->left->right->left->color, RED);
   ck_assert_int_eq((*root)->left->right->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right->left->right == nil, true);
   ck_assert_int_eq((*root)->left->right->left->p == node5, true);
   ck_assert_int_eq((*root)->left->right->left == node7, true);
 
-  ck_assert_int_eq((*root)->left->right->right->data.key.i, 8);
+  ck_assert_int_eq((*root)->left->right->right->data.key, 8);
   ck_assert_int_eq((*root)->left->right->right->color, RED);
   ck_assert_int_eq((*root)->left->right->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right->right == nil, true);
@@ -1774,118 +1774,118 @@ START_TEST(test_rbt_insert_6)
   reg->key = k9;
   node9 = rb_insert(root, nil, *reg, compare);
 
-  ck_assert_int_eq((*root)->data.key.i, 7);
+  ck_assert_int_eq((*root)->data.key, 7);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node5, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->data.key, 2);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == node4, true);
   ck_assert_int_eq((*root)->left->right == node7, true);
   ck_assert_int_eq((*root)->left->p == node5, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 11);
+  ck_assert_int_eq((*root)->right->data.key, 11);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == node8, true);
   ck_assert_int_eq((*root)->right->right == node3, true);
   ck_assert_int_eq((*root)->right->p == node5, true);
   ck_assert_int_eq((*root)->right == node1, true);
 
-  ck_assert_int_eq((*root)->left->left->data.key.i, 1);
+  ck_assert_int_eq((*root)->left->left->data.key, 1);
   ck_assert_int_eq((*root)->left->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left->left == nil, true);
   ck_assert_int_eq((*root)->left->left->right == nil, true);
   ck_assert_int_eq((*root)->left->left->p == node2, true);
   ck_assert_int_eq((*root)->left->left == node4, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 5);
+  ck_assert_int_eq((*root)->left->right->data.key, 5);
   ck_assert_int_eq((*root)->left->right->color, BLACK);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
   ck_assert_int_eq((*root)->left->right == node7, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 8);
+  ck_assert_int_eq((*root)->right->left->data.key, 8);
   ck_assert_int_eq((*root)->right->left->color, BLACK);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == node9, true);
   ck_assert_int_eq((*root)->right->left->p == node1, true);
   ck_assert_int_eq((*root)->right->left == node8, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 14);
+  ck_assert_int_eq((*root)->right->right->data.key, 14);
   ck_assert_int_eq((*root)->right->right->color, BLACK);
   ck_assert_int_eq((*root)->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right == node6, true);
   ck_assert_int_eq((*root)->right->right->p == node1, true);
   ck_assert_int_eq((*root)->right->right == node3, true);
 
-  ck_assert_int_eq((*root)->right->right->right->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->right->right->data.key, 15);
   ck_assert_int_eq((*root)->right->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right->right == nil, true);
   ck_assert_int_eq((*root)->right->right->right->p == node3, true);
   ck_assert_int_eq((*root)->right->right->right == node6, true);
 
-  ck_assert_int_eq((*root)->right->left->right->data.key.i, 9);
+  ck_assert_int_eq((*root)->right->left->right->data.key, 9);
   ck_assert_int_eq((*root)->right->left->right->color, RED);
   ck_assert_int_eq((*root)->right->left->right->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right->right == nil, true);
   ck_assert_int_eq((*root)->right->left->right->p == node8, true);
   ck_assert_int_eq((*root)->right->left->right == node9, true);
 
-  ck_assert_int_eq(node1->data.key.i, 11);
+  ck_assert_int_eq(node1->data.key, 11);
   ck_assert_int_eq(node1->color, RED);
   ck_assert_int_eq(node1->left == node8, true);
   ck_assert_int_eq(node1->right == node3, true);
   ck_assert_int_eq(node1->p == node5, true);
 
-  ck_assert_int_eq(node2->data.key.i, 2);
+  ck_assert_int_eq(node2->data.key, 2);
   ck_assert_int_eq(node2->color, RED);
   ck_assert_int_eq(node2->left == node4, true);
   ck_assert_int_eq(node2->right == node7, true);
   ck_assert_int_eq(node2->p == node5, true);
 
-  ck_assert_int_eq(node3->data.key.i, 14);
+  ck_assert_int_eq(node3->data.key, 14);
   ck_assert_int_eq(node3->color, BLACK);
   ck_assert_int_eq(node3->left == nil, true);
   ck_assert_int_eq(node3->right == node6, true);
   ck_assert_int_eq(node3->p == node1, true);
 
-  ck_assert_int_eq(node4->data.key.i, 1);
+  ck_assert_int_eq(node4->data.key, 1);
   ck_assert_int_eq(node4->color, BLACK);
   ck_assert_int_eq(node4->left == nil, true);
   ck_assert_int_eq(node4->right == nil, true);
   ck_assert_int_eq(node4->p == node2, true);
 
-  ck_assert_int_eq(node5->data.key.i, 7);
+  ck_assert_int_eq(node5->data.key, 7);
   ck_assert_int_eq(node5->color, BLACK);
   ck_assert_int_eq(node5->left == node2, true);
   ck_assert_int_eq(node5->right == node1, true);
   ck_assert_int_eq(node5->p == nil, true);
 
-  ck_assert_int_eq(node6->data.key.i, 15);
+  ck_assert_int_eq(node6->data.key, 15);
   ck_assert_int_eq(node6->color, RED);
   ck_assert_int_eq(node6->left == nil, true);
   ck_assert_int_eq(node6->right == nil, true);
   ck_assert_int_eq(node6->p == node3, true);
 
-  ck_assert_int_eq(node7->data.key.i, 5);
+  ck_assert_int_eq(node7->data.key, 5);
   ck_assert_int_eq(node7->color, BLACK);
   ck_assert_int_eq(node7->left == nil, true);
   ck_assert_int_eq(node7->right == nil, true);
   ck_assert_int_eq(node7->p == node2, true);
 
-  ck_assert_int_eq(node8->data.key.i, 8);
+  ck_assert_int_eq(node8->data.key, 8);
   ck_assert_int_eq(node8->color, BLACK);
   ck_assert_int_eq(node8->left == nil, true);
   ck_assert_int_eq(node8->right == node9, true);
   ck_assert_int_eq(node8->p == node1, true);
 
-  ck_assert_int_eq(node9->data.key.i, 9);
+  ck_assert_int_eq(node9->data.key, 9);
   ck_assert_int_eq(node9->color, RED);
   ck_assert_int_eq(node9->left == nil, true);
   ck_assert_int_eq(node9->right == nil, true);
@@ -1907,7 +1907,7 @@ END_TEST
 
 START_TEST(test_rbt_insert_7)
 {
-  union Key k1, k2, k3, k4;
+  int k1, k2, k3, k4;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -1915,10 +1915,10 @@ START_TEST(test_rbt_insert_7)
 
   RedBlackTree* nil;
 
-  k1.i = 10;
-  k2.i = 20;
-  k3.i = 30;
-  k4.i = 15;
+  k1 = 10;
+  k2 = 20;
+  k3 = 30;
+  k4 = 15;
 
   nil = malloc(sizeof(RedBlackTree));
 
@@ -1933,7 +1933,7 @@ START_TEST(test_rbt_insert_7)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 10);
+  ck_assert_int_eq((*root)->data.key, 10);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == nil, true);
   ck_assert_int_eq((*root)->right == nil, true);
@@ -1945,13 +1945,13 @@ START_TEST(test_rbt_insert_7)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 10);
+  ck_assert_int_eq((*root)->data.key, 10);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == nil, true);
   ck_assert_int_eq((*root)->right == node2, true);
   ck_assert_int_eq((*root)->p == nil, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 20);
+  ck_assert_int_eq((*root)->right->data.key, 20);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -1963,19 +1963,19 @@ START_TEST(test_rbt_insert_7)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 20);
+  ck_assert_int_eq((*root)->data.key, 20);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node1, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 10);
+  ck_assert_int_eq((*root)->left->data.key, 10);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 30);
+  ck_assert_int_eq((*root)->right->data.key, 30);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -1987,28 +1987,28 @@ START_TEST(test_rbt_insert_7)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 20);
+  ck_assert_int_eq((*root)->data.key, 20);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node1, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 10);
+  ck_assert_int_eq((*root)->left->data.key, 10);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 30);
+  ck_assert_int_eq((*root)->right->data.key, 30);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node2, true);
   ck_assert_int_eq((*root)->right == node3, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 15);
+  ck_assert_int_eq((*root)->left->right->data.key, 15);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
@@ -2025,15 +2025,15 @@ END_TEST
 
 START_TEST(test_rbt_insert_8)
 {
-  union Key k1, k2, k3;
+  int k1, k2, k3;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
   RedBlackTree* nil;
 
-  k1.i = 50;
-  k2.i = 25;
-  k3.i = 10;
+  k1 = 50;
+  k2 = 25;
+  k3 = 10;
 
   nil = malloc(sizeof(RedBlackTree));
 
@@ -2048,7 +2048,7 @@ START_TEST(test_rbt_insert_8)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 50);
+  ck_assert_int_eq((*root)->data.key, 50);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == nil, true);
   ck_assert_int_eq((*root)->right == nil, true);
@@ -2061,14 +2061,14 @@ START_TEST(test_rbt_insert_8)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 50);
+  ck_assert_int_eq((*root)->data.key, 50);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == nil, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 25);
+  ck_assert_int_eq((*root)->left->data.key, 25);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
@@ -2081,21 +2081,21 @@ START_TEST(test_rbt_insert_8)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 25);
+  ck_assert_int_eq((*root)->data.key, 25);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node3, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 10);
+  ck_assert_int_eq((*root)->left->data.key, 10);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node3, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 50);
+  ck_assert_int_eq((*root)->right->data.key, 50);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -2111,15 +2111,15 @@ END_TEST
 
 START_TEST(test_rbt_insert_9)
 {
-  union Key k1, k2, k3;
+  int k1, k2, k3;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
   RedBlackTree* nil;
 
-  k1.i = 30;
-  k2.i = 15;
-  k3.i = 20;
+  k1 = 30;
+  k2 = 15;
+  k3 = 20;
 
   nil = malloc(sizeof(RedBlackTree));
 
@@ -2134,7 +2134,7 @@ START_TEST(test_rbt_insert_9)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 30);
+  ck_assert_int_eq((*root)->data.key, 30);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == nil, true);
   ck_assert_int_eq((*root)->right == nil, true);
@@ -2147,14 +2147,14 @@ START_TEST(test_rbt_insert_9)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 30);
+  ck_assert_int_eq((*root)->data.key, 30);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == nil, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 15);
+  ck_assert_int_eq((*root)->left->data.key, 15);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
@@ -2167,21 +2167,21 @@ START_TEST(test_rbt_insert_9)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 20);
+  ck_assert_int_eq((*root)->data.key, 20);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node3, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 15);
+  ck_assert_int_eq((*root)->left->data.key, 15);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node3, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 30);
+  ck_assert_int_eq((*root)->right->data.key, 30);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -2197,15 +2197,15 @@ END_TEST
 
 START_TEST(test_rbt_insert_10)
 {
-  union Key k1, k2, k3;
+  int k1, k2, k3;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
   RedBlackTree* nil;
 
-  k1.i = 12;
-  k2.i = 18;
-  k3.i = 24;
+  k1 = 12;
+  k2 = 18;
+  k3 = 24;
 
   nil = malloc(sizeof(RedBlackTree));
 
@@ -2220,7 +2220,7 @@ START_TEST(test_rbt_insert_10)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 12);
+  ck_assert_int_eq((*root)->data.key, 12);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == nil, true);
   ck_assert_int_eq((*root)->right == nil, true);
@@ -2233,14 +2233,14 @@ START_TEST(test_rbt_insert_10)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 12);
+  ck_assert_int_eq((*root)->data.key, 12);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == nil, true);
   ck_assert_int_eq((*root)->right == node2, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 18);
+  ck_assert_int_eq((*root)->right->data.key, 18);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -2253,21 +2253,21 @@ START_TEST(test_rbt_insert_10)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 18);
+  ck_assert_int_eq((*root)->data.key, 18);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node1, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 12);
+  ck_assert_int_eq((*root)->left->data.key, 12);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 24);
+  ck_assert_int_eq((*root)->right->data.key, 24);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -2283,15 +2283,15 @@ END_TEST
 
 START_TEST(test_rbt_insert_11)
 {
-  union Key k1, k2, k3;
+  int k1, k2, k3;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
   RedBlackTree* nil;
 
-  k1.i = -8;
-  k2.i = 15;
-  k3.i = 6;
+  k1 = -8;
+  k2 = 15;
+  k3 = 6;
 
   nil = malloc(sizeof(RedBlackTree));
 
@@ -2306,7 +2306,7 @@ START_TEST(test_rbt_insert_11)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, -8);
+  ck_assert_int_eq((*root)->data.key, -8);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == nil, true);
   ck_assert_int_eq((*root)->right == nil, true);
@@ -2319,14 +2319,14 @@ START_TEST(test_rbt_insert_11)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, -8);
+  ck_assert_int_eq((*root)->data.key, -8);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == nil, true);
   ck_assert_int_eq((*root)->right == node2, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->data.key, 15);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -2339,21 +2339,21 @@ START_TEST(test_rbt_insert_11)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 6);
+  ck_assert_int_eq((*root)->data.key, 6);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node1, true);
   ck_assert_int_eq((*root)->right == node2, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node3, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, -8);
+  ck_assert_int_eq((*root)->left->data.key, -8);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node3, true);
   ck_assert_int_eq((*root)->left == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->data.key, 15);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -2369,11 +2369,11 @@ END_TEST
 
 START_TEST(test_rbt_delete_1)
 {
-  union Key k1;
+  int k1;
   RedBlackTree* node1;
   RedBlackTree* nil;
 
-  k1.i = 50;
+  k1 = 50;
 
   nil = malloc(sizeof(RedBlackTree));
 
@@ -2388,7 +2388,7 @@ START_TEST(test_rbt_delete_1)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 50);
+  ck_assert_int_eq((*root)->data.key, 50);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == nil, true);
   ck_assert_int_eq((*root)->right == nil, true);
@@ -2407,7 +2407,7 @@ END_TEST
 
 START_TEST(test_rbt_delete_2)
 {
-  union Key k1, k2, k3;
+  int k1, k2, k3;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -2420,9 +2420,9 @@ START_TEST(test_rbt_delete_2)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, true);
 
-  k1.i = 50;
-  k2.i = 25;
-  k3.i = 10;
+  k1 = 50;
+  k2 = 25;
+  k3 = 10;
 
   reg->key = k1;
   node1 = rb_insert(root, nil, *reg, compare);
@@ -2434,21 +2434,21 @@ START_TEST(test_rbt_delete_2)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 25);
+  ck_assert_int_eq((*root)->data.key, 25);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node3, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 10);
+  ck_assert_int_eq((*root)->left->data.key, 10);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node3, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 50);
+  ck_assert_int_eq((*root)->right->data.key, 50);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -2457,14 +2457,14 @@ START_TEST(test_rbt_delete_2)
 
   rb_delete(root, nil, node3);
 
-  ck_assert_int_eq((*root)->data.key.i, 25);
+  ck_assert_int_eq((*root)->data.key, 25);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == nil, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 50);
+  ck_assert_int_eq((*root)->right->data.key, 50);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -2480,7 +2480,7 @@ END_TEST
 
 START_TEST(test_rbt_delete_3)
 {
-  union Key k1, k2, k3;
+  int k1, k2, k3;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -2493,9 +2493,9 @@ START_TEST(test_rbt_delete_3)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, true);
 
-  k1.i = 50;
-  k2.i = 25;
-  k3.i = 10;
+  k1 = 50;
+  k2 = 25;
+  k3 = 10;
 
   reg->key = k1;
   node1 = rb_insert(root, nil, *reg, compare);
@@ -2507,21 +2507,21 @@ START_TEST(test_rbt_delete_3)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 25);
+  ck_assert_int_eq((*root)->data.key, 25);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node3, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 10);
+  ck_assert_int_eq((*root)->left->data.key, 10);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node3, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 50);
+  ck_assert_int_eq((*root)->right->data.key, 50);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -2533,14 +2533,14 @@ START_TEST(test_rbt_delete_3)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 25);
+  ck_assert_int_eq((*root)->data.key, 25);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node3, true);
   ck_assert_int_eq((*root)->right == nil, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 10);
+  ck_assert_int_eq((*root)->left->data.key, 10);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
@@ -2556,7 +2556,7 @@ END_TEST
 
 START_TEST(test_rbt_delete_4)
 {
-  union Key k1, k2, k3, k4;
+  int k1, k2, k3, k4;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -2570,10 +2570,10 @@ START_TEST(test_rbt_delete_4)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, true);
 
-  k1.i = 10;
-  k2.i = 20;
-  k3.i = 30;
-  k4.i = 15;
+  k1 = 10;
+  k2 = 20;
+  k3 = 30;
+  k4 = 15;
 
   reg->key = k1;
   node1 = rb_insert(root, nil, *reg, compare);
@@ -2587,28 +2587,28 @@ START_TEST(test_rbt_delete_4)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 20);
+  ck_assert_int_eq((*root)->data.key, 20);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node1, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 10);
+  ck_assert_int_eq((*root)->left->data.key, 10);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 30);
+  ck_assert_int_eq((*root)->right->data.key, 30);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node2, true);
   ck_assert_int_eq((*root)->right == node3, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 15);
+  ck_assert_int_eq((*root)->left->right->data.key, 15);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
@@ -2620,21 +2620,21 @@ START_TEST(test_rbt_delete_4)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 20);
+  ck_assert_int_eq((*root)->data.key, 20);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node4, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 15);
+  ck_assert_int_eq((*root)->left->data.key, 15);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node4, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 30);
+  ck_assert_int_eq((*root)->right->data.key, 30);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -2651,7 +2651,7 @@ END_TEST
 
 START_TEST(test_rbt_delete_5)
 {
-  union Key k1, k2, k3, k4;
+  int k1, k2, k3, k4;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -2665,10 +2665,10 @@ START_TEST(test_rbt_delete_5)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, true);
 
-  k1.i = 10;
-  k2.i = 20;
-  k3.i = 30;
-  k4.i = 15;
+  k1 = 10;
+  k2 = 20;
+  k3 = 30;
+  k4 = 15;
 
   reg->key = k1;
   node1 = rb_insert(root, nil, *reg, compare);
@@ -2682,28 +2682,28 @@ START_TEST(test_rbt_delete_5)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 20);
+  ck_assert_int_eq((*root)->data.key, 20);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node1, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 10);
+  ck_assert_int_eq((*root)->left->data.key, 10);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 30);
+  ck_assert_int_eq((*root)->right->data.key, 30);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node2, true);
   ck_assert_int_eq((*root)->right == node3, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 15);
+  ck_assert_int_eq((*root)->left->right->data.key, 15);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
@@ -2715,21 +2715,21 @@ START_TEST(test_rbt_delete_5)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 15);
+  ck_assert_int_eq((*root)->data.key, 15);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node1, true);
   ck_assert_int_eq((*root)->right == node2, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node4, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 10);
+  ck_assert_int_eq((*root)->left->data.key, 10);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node4, true);
   ck_assert_int_eq((*root)->left == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 20);
+  ck_assert_int_eq((*root)->right->data.key, 20);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -2746,7 +2746,7 @@ END_TEST
 
 START_TEST(test_rbt_delete_6)
 {
-  union Key k1, k2, k3, k4;
+  int k1, k2, k3, k4;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -2760,10 +2760,10 @@ START_TEST(test_rbt_delete_6)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, true);
 
-  k1.i = 10;
-  k2.i = 20;
-  k3.i = 30;
-  k4.i = 5;
+  k1 = 10;
+  k2 = 20;
+  k3 = 30;
+  k4 = 5;
 
   reg->key = k1;
   node1 = rb_insert(root, nil, *reg, compare);
@@ -2777,28 +2777,28 @@ START_TEST(test_rbt_delete_6)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 20);
+  ck_assert_int_eq((*root)->data.key, 20);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node1, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 10);
+  ck_assert_int_eq((*root)->left->data.key, 10);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == node4, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 30);
+  ck_assert_int_eq((*root)->right->data.key, 30);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node2, true);
   ck_assert_int_eq((*root)->right == node3, true);
 
-  ck_assert_int_eq((*root)->left->left->data.key.i, 5);
+  ck_assert_int_eq((*root)->left->left->data.key, 5);
   ck_assert_int_eq((*root)->left->left->color, RED);
   ck_assert_int_eq((*root)->left->left->left == nil, true);
   ck_assert_int_eq((*root)->left->left->right == nil, true);
@@ -2810,21 +2810,21 @@ START_TEST(test_rbt_delete_6)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 20);
+  ck_assert_int_eq((*root)->data.key, 20);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node4, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 5);
+  ck_assert_int_eq((*root)->left->data.key, 5);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node4, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 30);
+  ck_assert_int_eq((*root)->right->data.key, 30);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -2841,7 +2841,7 @@ END_TEST
 
 START_TEST(test_rbt_delete_7)
 {
-  union Key k1, k2, k3, k4, k5, k6;
+  int k1, k2, k3, k4, k5, k6;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -2854,12 +2854,12 @@ START_TEST(test_rbt_delete_7)
 
   init_rbtree(root, nil);
 
-  k1.i = 10;
-  k2.i = -10;
-  k3.i = 20;
-  k4.i = 7;
-  k5.i = 15;
-  k6.i = 17;
+  k1 = 10;
+  k2 = -10;
+  k3 = 20;
+  k4 = 7;
+  k5 = 15;
+  k6 = 17;
 
   reg->key = k1;
   node1 = rb_insert(root, nil, *reg, compare);
@@ -2877,42 +2877,42 @@ START_TEST(test_rbt_delete_7)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 10);
+  ck_assert_int_eq((*root)->data.key, 10);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node6, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, -10);
+  ck_assert_int_eq((*root)->left->data.key, -10);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
   ck_assert_int_eq((*root)->left->p == node1, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 17);
+  ck_assert_int_eq((*root)->right->data.key, 17);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == node5, true);
   ck_assert_int_eq((*root)->right->right == node3, true);
   ck_assert_int_eq((*root)->right->p == node1, true);
   ck_assert_int_eq((*root)->right == node6, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 7);
+  ck_assert_int_eq((*root)->left->right->data.key, 7);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 15);
+  ck_assert_int_eq((*root)->right->left->data.key, 15);
   ck_assert_int_eq((*root)->right->left->color, RED);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
   ck_assert_int_eq((*root)->right->left->p == node6, true);
   ck_assert_int_eq((*root)->right->left == node5, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 20);
+  ck_assert_int_eq((*root)->right->right->data.key, 20);
   ck_assert_int_eq((*root)->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right == nil, true);
@@ -2924,35 +2924,35 @@ START_TEST(test_rbt_delete_7)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 15);
+  ck_assert_int_eq((*root)->data.key, 15);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node6, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node5, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, -10);
+  ck_assert_int_eq((*root)->left->data.key, -10);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
   ck_assert_int_eq((*root)->left->p == node5, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 17);
+  ck_assert_int_eq((*root)->right->data.key, 17);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == node3, true);
   ck_assert_int_eq((*root)->right->p == node5, true);
   ck_assert_int_eq((*root)->right == node6, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 7);
+  ck_assert_int_eq((*root)->left->right->data.key, 7);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
   ck_assert_int_eq((*root)->left->right == node4, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 20);
+  ck_assert_int_eq((*root)->right->right->data.key, 20);
   ck_assert_int_eq((*root)->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right == nil, true);
@@ -2971,7 +2971,7 @@ END_TEST
 
 START_TEST(test_rbt_delete_8)
 {
-  union Key k1, k2, k3, k4, k5, k6;
+  int k1, k2, k3, k4, k5, k6;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -2984,12 +2984,12 @@ START_TEST(test_rbt_delete_8)
 
   init_rbtree(root, nil);
 
-  k1.i = 6;
-  k2.i = 4;
-  k3.i = 8;
-  k4.i = 2;
-  k5.i = 5;
-  k6.i = 7;
+  k1 = 6;
+  k2 = 4;
+  k3 = 8;
+  k4 = 2;
+  k5 = 5;
+  k6 = 7;
 
   reg->key = k1;
   node1 = rb_insert(root, nil, *reg, compare);
@@ -3007,42 +3007,42 @@ START_TEST(test_rbt_delete_8)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 6);
+  ck_assert_int_eq((*root)->data.key, 6);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node3, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 4);
+  ck_assert_int_eq((*root)->left->data.key, 4);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == node4, true);
   ck_assert_int_eq((*root)->left->right == node5, true);
   ck_assert_int_eq((*root)->left->p == node1, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 8);
+  ck_assert_int_eq((*root)->right->data.key, 8);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == node6, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node1, true);
   ck_assert_int_eq((*root)->right == node3, true);
 
-  ck_assert_int_eq((*root)->left->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->left->data.key, 2);
   ck_assert_int_eq((*root)->left->left->color, RED);
   ck_assert_int_eq((*root)->left->left->left == nil, true);
   ck_assert_int_eq((*root)->left->left->right == nil, true);
   ck_assert_int_eq((*root)->left->left->p == node2, true);
   ck_assert_int_eq((*root)->left->left == node4, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 5);
+  ck_assert_int_eq((*root)->left->right->data.key, 5);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
   ck_assert_int_eq((*root)->left->right == node5, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 7);
+  ck_assert_int_eq((*root)->right->left->data.key, 7);
   ck_assert_int_eq((*root)->right->left->color, RED);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
@@ -3054,35 +3054,35 @@ START_TEST(test_rbt_delete_8)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 6);
+  ck_assert_int_eq((*root)->data.key, 6);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node6, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 4);
+  ck_assert_int_eq((*root)->left->data.key, 4);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == node4, true);
   ck_assert_int_eq((*root)->left->right == node5, true);
   ck_assert_int_eq((*root)->left->p == node1, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 7);
+  ck_assert_int_eq((*root)->right->data.key, 7);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node1, true);
   ck_assert_int_eq((*root)->right == node6, true);
 
-  ck_assert_int_eq((*root)->left->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->left->data.key, 2);
   ck_assert_int_eq((*root)->left->left->color, RED);
   ck_assert_int_eq((*root)->left->left->left == nil, true);
   ck_assert_int_eq((*root)->left->left->right == nil, true);
   ck_assert_int_eq((*root)->left->left->p == node2, true);
   ck_assert_int_eq((*root)->left->left == node4, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 5);
+  ck_assert_int_eq((*root)->left->right->data.key, 5);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
@@ -3094,28 +3094,28 @@ START_TEST(test_rbt_delete_8)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 4);
+  ck_assert_int_eq((*root)->data.key, 4);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node4, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->data.key, 2);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node4, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 6);
+  ck_assert_int_eq((*root)->right->data.key, 6);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == node5, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node2, true);
   ck_assert_int_eq((*root)->right == node1, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 5);
+  ck_assert_int_eq((*root)->right->left->data.key, 5);
   ck_assert_int_eq((*root)->right->left->color, RED);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
@@ -3127,21 +3127,21 @@ START_TEST(test_rbt_delete_8)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 5);
+  ck_assert_int_eq((*root)->data.key, 5);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node4, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node5, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->data.key, 2);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node5, true);
   ck_assert_int_eq((*root)->left == node4, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 6);
+  ck_assert_int_eq((*root)->right->data.key, 6);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -3153,14 +3153,14 @@ START_TEST(test_rbt_delete_8)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 5);
+  ck_assert_int_eq((*root)->data.key, 5);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node4, true);
   ck_assert_int_eq((*root)->right == nil, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node5, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->data.key, 2);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
@@ -3179,7 +3179,7 @@ END_TEST
 
 START_TEST(test_rbt_delete_9)
 {
-  union Key k1, k2, k3, k4, k5, k6;
+  int k1, k2, k3, k4, k5, k6;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -3192,12 +3192,12 @@ START_TEST(test_rbt_delete_9)
 
   init_rbtree(root, nil);
 
-  k1.i = 50;
-  k2.i = 75;
-  k3.i = 100;
-  k4.i = 200;
-  k5.i = 150;
-  k6.i = 400;
+  k1 = 50;
+  k2 = 75;
+  k3 = 100;
+  k4 = 200;
+  k5 = 150;
+  k6 = 400;
 
   reg->key = k1;
   node1 = rb_insert(root, nil, *reg, compare);
@@ -3215,42 +3215,42 @@ START_TEST(test_rbt_delete_9)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 75);
+  ck_assert_int_eq((*root)->data.key, 75);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node1, true);
   ck_assert_int_eq((*root)->right == node5, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 50);
+  ck_assert_int_eq((*root)->left->data.key, 50);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 150);
+  ck_assert_int_eq((*root)->right->data.key, 150);
   ck_assert_int_eq((*root)->right->color, RED);
   ck_assert_int_eq((*root)->right->left == node3, true);
   ck_assert_int_eq((*root)->right->right == node4, true);
   ck_assert_int_eq((*root)->right->p == node2, true);
   ck_assert_int_eq((*root)->right == node5, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 100);
+  ck_assert_int_eq((*root)->right->left->data.key, 100);
   ck_assert_int_eq((*root)->right->left->color, BLACK);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
   ck_assert_int_eq((*root)->right->left->p == node5, true);
   ck_assert_int_eq((*root)->right->left == node3, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 200);
+  ck_assert_int_eq((*root)->right->right->data.key, 200);
   ck_assert_int_eq((*root)->right->right->color, BLACK);
   ck_assert_int_eq((*root)->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right == node6, true);
   ck_assert_int_eq((*root)->right->right->p == node5, true);
   ck_assert_int_eq((*root)->right->right == node4, true);
 
-  ck_assert_int_eq((*root)->right->right->right->data.key.i, 400);
+  ck_assert_int_eq((*root)->right->right->right->data.key, 400);
   ck_assert_int_eq((*root)->right->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right->right == nil, true);
@@ -3262,35 +3262,35 @@ START_TEST(test_rbt_delete_9)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 150);
+  ck_assert_int_eq((*root)->data.key, 150);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node4, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node5, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 75);
+  ck_assert_int_eq((*root)->left->data.key, 75);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == node3, true);
   ck_assert_int_eq((*root)->left->p == node5, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 200);
+  ck_assert_int_eq((*root)->right->data.key, 200);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == node6, true);
   ck_assert_int_eq((*root)->right->p == node5, true);
   ck_assert_int_eq((*root)->right == node4, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 100);
+  ck_assert_int_eq((*root)->left->right->data.key, 100);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
   ck_assert_int_eq((*root)->left->right->p == node2, true);
   ck_assert_int_eq((*root)->left->right == node3, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 400);
+  ck_assert_int_eq((*root)->right->right->data.key, 400);
   ck_assert_int_eq((*root)->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right == nil, true);
@@ -3309,7 +3309,7 @@ END_TEST
 
 START_TEST(test_rbt_delete_10)
 {
-  union Key k1, k2, k3, k4, k5;
+  int k1, k2, k3, k4, k5;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -3321,11 +3321,11 @@ START_TEST(test_rbt_delete_10)
 
   init_rbtree(root, nil);
 
-  k1.i = 1;
-  k2.i = 2;
-  k3.i = 3;
-  k4.i = 5;
-  k5.i = 10;
+  k1 = 1;
+  k2 = 2;
+  k3 = 3;
+  k4 = 5;
+  k5 = 10;
 
   reg->key = k1;
   node1 = rb_insert(root, nil, *reg, compare);
@@ -3341,35 +3341,35 @@ START_TEST(test_rbt_delete_10)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 2);
+  ck_assert_int_eq((*root)->data.key, 2);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node1, true);
   ck_assert_int_eq((*root)->right == node4, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 1);
+  ck_assert_int_eq((*root)->left->data.key, 1);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 5);
+  ck_assert_int_eq((*root)->right->data.key, 5);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == node3, true);
   ck_assert_int_eq((*root)->right->right == node5, true);
   ck_assert_int_eq((*root)->right->p == node2, true);
   ck_assert_int_eq((*root)->right == node4, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 3);
+  ck_assert_int_eq((*root)->right->left->data.key, 3);
   ck_assert_int_eq((*root)->right->left->color, RED);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
   ck_assert_int_eq((*root)->right->left->p == node4, true);
   ck_assert_int_eq((*root)->right->left == node3, true);
 
-  ck_assert_int_eq((*root)->right->right->data.key.i, 10);
+  ck_assert_int_eq((*root)->right->right->data.key, 10);
   ck_assert_int_eq((*root)->right->right->color, RED);
   ck_assert_int_eq((*root)->right->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right->right == nil, true);
@@ -3381,28 +3381,28 @@ START_TEST(test_rbt_delete_10)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 2);
+  ck_assert_int_eq((*root)->data.key, 2);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node1, true);
   ck_assert_int_eq((*root)->right == node4, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 1);
+  ck_assert_int_eq((*root)->left->data.key, 1);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node1, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 5);
+  ck_assert_int_eq((*root)->right->data.key, 5);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == node3, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node2, true);
   ck_assert_int_eq((*root)->right == node4, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 3);
+  ck_assert_int_eq((*root)->right->left->data.key, 3);
   ck_assert_int_eq((*root)->right->left->color, RED);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
@@ -3414,21 +3414,21 @@ START_TEST(test_rbt_delete_10)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 3);
+  ck_assert_int_eq((*root)->data.key, 3);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node2, true);
   ck_assert_int_eq((*root)->right == node4, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node3, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->data.key, 2);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node3, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 5);
+  ck_assert_int_eq((*root)->right->data.key, 5);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
@@ -3446,7 +3446,7 @@ END_TEST
 
 START_TEST(test_rbt_delete_11)
 {
-  union Key k1, k2, k3, k4, k5, k6;
+  int k1, k2, k3, k4, k5, k6;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -3459,12 +3459,12 @@ START_TEST(test_rbt_delete_11)
 
   init_rbtree(root, nil);
 
-  k1.i = 500;
-  k2.i = 475;
-  k3.i = 450;
-  k4.i = 400;
-  k5.i = 425;
-  k6.i = 200;
+  k1 = 500;
+  k2 = 475;
+  k3 = 450;
+  k4 = 400;
+  k5 = 425;
+  k6 = 200;
 
   reg->key = k1;
   node1 = rb_insert(root, nil, *reg, compare);
@@ -3482,42 +3482,42 @@ START_TEST(test_rbt_delete_11)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 475);
+  ck_assert_int_eq((*root)->data.key, 475);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node5, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 425);
+  ck_assert_int_eq((*root)->left->data.key, 425);
   ck_assert_int_eq((*root)->left->color, RED);
   ck_assert_int_eq((*root)->left->left == node4, true);
   ck_assert_int_eq((*root)->left->right == node3, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node5, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 500);
+  ck_assert_int_eq((*root)->right->data.key, 500);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node2, true);
   ck_assert_int_eq((*root)->right == node1, true);
 
-  ck_assert_int_eq((*root)->left->left->data.key.i, 400);
+  ck_assert_int_eq((*root)->left->left->data.key, 400);
   ck_assert_int_eq((*root)->left->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left->left == node6, true);
   ck_assert_int_eq((*root)->left->left->right == nil, true);
   ck_assert_int_eq((*root)->left->left->p == node5, true);
   ck_assert_int_eq((*root)->left->left == node4, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 450);
+  ck_assert_int_eq((*root)->left->right->data.key, 450);
   ck_assert_int_eq((*root)->left->right->color, BLACK);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
   ck_assert_int_eq((*root)->left->right->p == node5, true);
   ck_assert_int_eq((*root)->left->right == node3, true);
 
-  ck_assert_int_eq((*root)->left->left->left->data.key.i, 200);
+  ck_assert_int_eq((*root)->left->left->left->data.key, 200);
   ck_assert_int_eq((*root)->left->left->left->color, RED);
   ck_assert_int_eq((*root)->left->left->left->left == nil, true);
   ck_assert_int_eq((*root)->left->left->left->right == nil, true);
@@ -3529,35 +3529,35 @@ START_TEST(test_rbt_delete_11)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 425);
+  ck_assert_int_eq((*root)->data.key, 425);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node4, true);
   ck_assert_int_eq((*root)->right == node2, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node5, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 400);
+  ck_assert_int_eq((*root)->left->data.key, 400);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == node6, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node5, true);
   ck_assert_int_eq((*root)->left == node4, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 475);
+  ck_assert_int_eq((*root)->right->data.key, 475);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == node3, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node5, true);
   ck_assert_int_eq((*root)->right == node2, true);
 
-  ck_assert_int_eq((*root)->left->left->data.key.i, 200);
+  ck_assert_int_eq((*root)->left->left->data.key, 200);
   ck_assert_int_eq((*root)->left->left->color, RED);
   ck_assert_int_eq((*root)->left->left->left == nil, true);
   ck_assert_int_eq((*root)->left->left->right == nil, true);
   ck_assert_int_eq((*root)->left->left->p == node4, true);
   ck_assert_int_eq((*root)->left->left == node6, true);
 
-  ck_assert_int_eq((*root)->right->left->data.key.i, 450);
+  ck_assert_int_eq((*root)->right->left->data.key, 450);
   ck_assert_int_eq((*root)->right->left->color, RED);
   ck_assert_int_eq((*root)->right->left->left == nil, true);
   ck_assert_int_eq((*root)->right->left->right == nil, true);
@@ -3576,7 +3576,7 @@ END_TEST
 
 START_TEST(test_rbt_delete_12)
 {
-  union Key k1, k2, k3, k4, k5;
+  int k1, k2, k3, k4, k5;
   RedBlackTree* node1;
   RedBlackTree* node2;
   RedBlackTree* node3;
@@ -3588,11 +3588,11 @@ START_TEST(test_rbt_delete_12)
 
   init_rbtree(root, nil);
 
-  k1.i = 10;
-  k2.i = 5;
-  k3.i = 3;
-  k4.i = 2;
-  k5.i = 1;
+  k1 = 10;
+  k2 = 5;
+  k3 = 3;
+  k4 = 2;
+  k5 = 1;
 
   reg->key = k1;
   node1 = rb_insert(root, nil, *reg, compare);
@@ -3608,35 +3608,35 @@ START_TEST(test_rbt_delete_12)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 5);
+  ck_assert_int_eq((*root)->data.key, 5);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node4, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->data.key, 2);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == node5, true);
   ck_assert_int_eq((*root)->left->right == node3, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node4, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 10);
+  ck_assert_int_eq((*root)->right->data.key, 10);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node2, true);
   ck_assert_int_eq((*root)->right == node1, true);
 
-  ck_assert_int_eq((*root)->left->left->data.key.i, 1);
+  ck_assert_int_eq((*root)->left->left->data.key, 1);
   ck_assert_int_eq((*root)->left->left->color, RED);
   ck_assert_int_eq((*root)->left->left->left == nil, true);
   ck_assert_int_eq((*root)->left->left->right == nil, true);
   ck_assert_int_eq((*root)->left->left->p == node4, true);
   ck_assert_int_eq((*root)->left->left == node5, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 3);
+  ck_assert_int_eq((*root)->left->right->data.key, 3);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
@@ -3648,28 +3648,28 @@ START_TEST(test_rbt_delete_12)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 5);
+  ck_assert_int_eq((*root)->data.key, 5);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node4, true);
   ck_assert_int_eq((*root)->right == node1, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node2, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->data.key, 2);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == node3, true);
   ck_assert_int_eq((*root)->left->p == node2, true);
   ck_assert_int_eq((*root)->left == node4, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 10);
+  ck_assert_int_eq((*root)->right->data.key, 10);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node2, true);
   ck_assert_int_eq((*root)->right == node1, true);
 
-  ck_assert_int_eq((*root)->left->right->data.key.i, 3);
+  ck_assert_int_eq((*root)->left->right->data.key, 3);
   ck_assert_int_eq((*root)->left->right->color, RED);
   ck_assert_int_eq((*root)->left->right->left == nil, true);
   ck_assert_int_eq((*root)->left->right->right == nil, true);
@@ -3681,21 +3681,21 @@ START_TEST(test_rbt_delete_12)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
 
-  ck_assert_int_eq((*root)->data.key.i, 3);
+  ck_assert_int_eq((*root)->data.key, 3);
   ck_assert_int_eq((*root)->color, BLACK);
   ck_assert_int_eq((*root)->left == node4, true);
   ck_assert_int_eq((*root)->right == node2, true);
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node3, true);
 
-  ck_assert_int_eq((*root)->left->data.key.i, 2);
+  ck_assert_int_eq((*root)->left->data.key, 2);
   ck_assert_int_eq((*root)->left->color, BLACK);
   ck_assert_int_eq((*root)->left->left == nil, true);
   ck_assert_int_eq((*root)->left->right == nil, true);
   ck_assert_int_eq((*root)->left->p == node3, true);
   ck_assert_int_eq((*root)->left == node4, true);
 
-  ck_assert_int_eq((*root)->right->data.key.i, 5);
+  ck_assert_int_eq((*root)->right->data.key, 5);
   ck_assert_int_eq((*root)->right->color, BLACK);
   ck_assert_int_eq((*root)->right->left == nil, true);
   ck_assert_int_eq((*root)->right->right == nil, true);

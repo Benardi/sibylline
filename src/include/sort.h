@@ -245,7 +245,7 @@ void radix_sort(int array[], int* out, int length, int max_decimal_place);
  * @return Void
  */
 void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
-                        int (*compare)(union Key, union Key));
+                        int (*compare)(int, int));
 
 /** @brief Sorts array of Registers via Bucket Sort procedure.
  *

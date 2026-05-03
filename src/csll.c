@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
-                                            Register reg)
+                                            IntRegister reg)
 {
   CircularSinglyLinkedList* node;
 
@@ -25,7 +25,7 @@ CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
 }
 
 CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
-                                          Register reg)
+                                          IntRegister reg)
 {
   CircularSinglyLinkedList* node;
 
@@ -48,8 +48,8 @@ CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
 }
 
 CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail,
-                                      union Key key,
-                                      int (*compare)(union Key, union Key))
+                                      int key,
+                                      int (*compare)(int, int))
 {
   if ((*tail) == NULL)
     {

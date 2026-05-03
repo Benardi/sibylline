@@ -16,7 +16,7 @@
 typedef struct SinglyLinkedList
 {
   struct SinglyLinkedList* next;
-  Register data;
+  IntRegister data;
 } SinglyLinkedList;
 
 /** @brief Inserts node at front of Singly Linked List.
@@ -30,7 +30,7 @@ typedef struct SinglyLinkedList
  * @param reg Register of inserted node.
  * @return Pointer to inserted node.
  */
-SinglyLinkedList* sll_insert(SinglyLinkedList** head, Register reg);
+SinglyLinkedList* sll_insert(SinglyLinkedList** head, IntRegister reg);
 
 /** @brief Retrieves node from Singly Linked List via key.
  *
@@ -46,8 +46,8 @@ SinglyLinkedList* sll_insert(SinglyLinkedList** head, Register reg);
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to retrieved node.
  */
-SinglyLinkedList* sll_search(SinglyLinkedList** head, union Key key,
-                             int (*compare)(union Key, union Key));
+SinglyLinkedList* sll_search(SinglyLinkedList** head, int key,
+                             int (*compare)(int, int));
 
 /** @brief Deletes given node from Singly Linked List.
  *

@@ -11,16 +11,16 @@ Suite* make_test_suite(void);
 START_TEST(test_build_adj_list_1)
 {
   int i, length;
-  union Key k0, k1, k2, k3, k4;
-  Register reg;
+  int k0, k1, k2, k3, k4;
+  IntRegister reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
-  k0.i = 0;
-  k1.i = 1;
-  k2.i = 2;
-  k3.i = 3;
-  k4.i = 4;
+  k0 = 0;
+  k1 = 1;
+  k2 = 2;
+  k3 = 3;
+  k4 = 4;
 
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
@@ -63,24 +63,24 @@ START_TEST(test_build_adj_list_1)
   reg.key = k3;
   dll_insert(adj_list[4], reg);
 
-  ck_assert_int_eq((*adj_list[0])->data.key.i, 1);
-  ck_assert_int_eq((*adj_list[0])->next->data.key.i, 4);
+  ck_assert_int_eq((*adj_list[0])->data.key, 1);
+  ck_assert_int_eq((*adj_list[0])->next->data.key, 4);
 
-  ck_assert_int_eq((*adj_list[1])->data.key.i, 0);
-  ck_assert_int_eq((*adj_list[1])->next->data.key.i, 4);
-  ck_assert_int_eq((*adj_list[1])->next->next->data.key.i, 2);
-  ck_assert_int_eq((*adj_list[1])->next->next->next->data.key.i, 3);
+  ck_assert_int_eq((*adj_list[1])->data.key, 0);
+  ck_assert_int_eq((*adj_list[1])->next->data.key, 4);
+  ck_assert_int_eq((*adj_list[1])->next->next->data.key, 2);
+  ck_assert_int_eq((*adj_list[1])->next->next->next->data.key, 3);
 
-  ck_assert_int_eq((*adj_list[2])->data.key.i, 1);
-  ck_assert_int_eq((*adj_list[2])->next->data.key.i, 3);
+  ck_assert_int_eq((*adj_list[2])->data.key, 1);
+  ck_assert_int_eq((*adj_list[2])->next->data.key, 3);
 
-  ck_assert_int_eq((*adj_list[3])->data.key.i, 1);
-  ck_assert_int_eq((*adj_list[3])->next->data.key.i, 4);
-  ck_assert_int_eq((*adj_list[3])->next->next->data.key.i, 2);
+  ck_assert_int_eq((*adj_list[3])->data.key, 1);
+  ck_assert_int_eq((*adj_list[3])->next->data.key, 4);
+  ck_assert_int_eq((*adj_list[3])->next->next->data.key, 2);
 
-  ck_assert_int_eq((*adj_list[4])->data.key.i, 3);
-  ck_assert_int_eq((*adj_list[4])->next->data.key.i, 0);
-  ck_assert_int_eq((*adj_list[4])->next->next->data.key.i, 1);
+  ck_assert_int_eq((*adj_list[4])->data.key, 3);
+  ck_assert_int_eq((*adj_list[4])->next->data.key, 0);
+  ck_assert_int_eq((*adj_list[4])->next->next->data.key, 1);
 
   for (i = 0; i < length; i++)
     {
@@ -95,15 +95,15 @@ END_TEST
 START_TEST(test_build_adj_list_2)
 {
   int i, length;
-  union Key k1, k3, k4, k5;
-  Register reg;
+  int k1, k3, k4, k5;
+  IntRegister reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
-  k1.i = 1;
-  k3.i = 3;
-  k4.i = 4;
-  k5.i = 5;
+  k1 = 1;
+  k3 = 3;
+  k4 = 4;
+  k5 = 5;
 
   adj_list = malloc(length * sizeof(DoublyLinkedList**));
 
@@ -135,19 +135,19 @@ START_TEST(test_build_adj_list_2)
   reg.key = k5;
   dll_insert(adj_list[5], reg);
 
-  ck_assert_int_eq((*adj_list[0])->data.key.i, 1);
-  ck_assert_int_eq((*adj_list[0])->next->data.key.i, 3);
+  ck_assert_int_eq((*adj_list[0])->data.key, 1);
+  ck_assert_int_eq((*adj_list[0])->next->data.key, 3);
 
-  ck_assert_int_eq((*adj_list[1])->data.key.i, 4);
+  ck_assert_int_eq((*adj_list[1])->data.key, 4);
 
-  ck_assert_int_eq((*adj_list[2])->data.key.i, 5);
-  ck_assert_int_eq((*adj_list[2])->next->data.key.i, 4);
+  ck_assert_int_eq((*adj_list[2])->data.key, 5);
+  ck_assert_int_eq((*adj_list[2])->next->data.key, 4);
 
-  ck_assert_int_eq((*adj_list[3])->data.key.i, 1);
+  ck_assert_int_eq((*adj_list[3])->data.key, 1);
 
-  ck_assert_int_eq((*adj_list[4])->data.key.i, 3);
+  ck_assert_int_eq((*adj_list[4])->data.key, 3);
 
-  ck_assert_int_eq((*adj_list[5])->data.key.i, 5);
+  ck_assert_int_eq((*adj_list[5])->data.key, 5);
 
   for (i = 0; i < length; i++)
     {
@@ -163,7 +163,7 @@ START_TEST(test_build_adj_list_3)
 {
   int i, length;
   ColoredNode node1, node3, node4, node5;
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
@@ -401,7 +401,7 @@ START_TEST(test_bfs_1)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4, node5;
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
@@ -508,7 +508,7 @@ START_TEST(test_bfs_2)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4;
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -631,7 +631,7 @@ START_TEST(test_bfs_3)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4, node5, node6, node7;
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList*** adj_list;
 
   length = 8;
@@ -836,7 +836,7 @@ START_TEST(test_bfs_5)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4;
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -955,7 +955,7 @@ START_TEST(test_bfs_6)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4;
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -1071,7 +1071,7 @@ START_TEST(test_dfs_1)
   int i, length;
   TimedNode** vrtxs;
   TimedNode node0, node1, node2, node3, node4, node5;
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
@@ -1169,7 +1169,7 @@ START_TEST(test_dfs_2)
   int i, length;
   TimedNode** vrtxs;
   TimedNode node0, node1, node2, node3, node4;
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -1277,7 +1277,7 @@ START_TEST(test_dfs_3)
   int i, length;
   TimedNode** vrtxs;
   TimedNode node0, node1, node2, node3, node4, node5, node6, node7;
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList*** adj_list;
 
   length = 8;
@@ -1462,7 +1462,7 @@ START_TEST(test_dfs_5)
   int i, length;
   TimedNode** vrtxs;
   TimedNode node0, node1, node2, node3, node4, node5;
-  Register reg;
+  IntRegister reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;

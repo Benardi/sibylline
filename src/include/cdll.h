@@ -17,7 +17,7 @@ typedef struct CircularDoublyLinkedList
 {
   struct CircularDoublyLinkedList* prev;
   struct CircularDoublyLinkedList* next;
-  Register data;
+  IntRegister data;
 } CircularDoublyLinkedList;
 
 /** @brief Inits nil node to create valid Circular Doubly Linked List.
@@ -44,7 +44,7 @@ void cdll_init(CircularDoublyLinkedList* nil);
  * @return Pointer to inserted node.
  */
 CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
-                                      Register reg);
+                                      IntRegister reg);
 
 /** @brief Retrieves node in Circular Doubly Linked List via key.
  *
@@ -64,8 +64,8 @@ CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
  * @return Pointer to retrieved node.
  */
 CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil,
-                                      union Key key,
-                                      int (*compare)(union Key, union Key));
+                                      int key,
+                                      int (*compare)(int, int));
 
 /** @brief Deletes given node from Circular Doubly Linked List.
  *

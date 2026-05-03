@@ -15,7 +15,7 @@
 
 typedef struct
 {
-  Register* array; /* Array that stores the elements */
+  IntRegister* array; /* Array that stores the elements */
   int max_n_elems;
   int n_elems; /* Current number of elements in Sequential List */
 } SeqList;
@@ -60,7 +60,7 @@ int size(SeqList* sl);
  * @param i Position where to insert
  * @return Whether element could be inserted
  */
-bool insert_elem(SeqList* sl, Register reg, int i);
+bool insert_elem(SeqList* sl, IntRegister reg, int i);
 
 /** @brief Inserts register in Sequential List whilst ensuring the List stays
  * sorted.
@@ -77,8 +77,8 @@ bool insert_elem(SeqList* sl, Register reg, int i);
  * @param compare Pointer to function that compares two union Keys.
  * @return Whether element could be inserted
  */
-bool insert_sorted(SeqList* sl, Register reg,
-                   int (*compare)(union Key, union Key));
+bool insert_sorted(SeqList* sl, IntRegister reg,
+                   int (*compare)(int, int));
 
 /** @brief Sequentially searchs a Sequential List and returns
  * index of first occurrence.
@@ -95,8 +95,8 @@ bool insert_sorted(SeqList* sl, Register reg,
  * @param compare Pointer to function that compares two union Keys.
  * @return Index of first match
  */
-int seq_search(SeqList* sl, union Key key,
-               int (*compare)(union Key, union Key));
+int seq_search(SeqList* sl, int key,
+               int (*compare)(int, int));
 
 /** @brief Performs binary search on a Sequential List under the assumption it
  * is sorted.
@@ -113,8 +113,8 @@ int seq_search(SeqList* sl, union Key key,
  * @param compare Pointer to function that compares two union Keys.
  * @return Index of first match
  */
-int binary_search(SeqList* sl, union Key k,
-                  int (*compare)(union Key, union Key));
+int binary_search(SeqList* sl, int k,
+                  int (*compare)(int, int));
 
 /** @brief Sequentially searchs a Sequential List and returns index of first
  * occurrence.
@@ -132,8 +132,8 @@ int binary_search(SeqList* sl, union Key k,
  * @param compare Pointer to function that compares two union Keys.
  * @return Index of first match
  */
-int sentinel_search(SeqList* sl, union Key k,
-                    int (*compare)(union Key, union Key));
+int sentinel_search(SeqList* sl, int k,
+                    int (*compare)(int, int));
 
 /** @brief Sequentially searchs a Sequential List and removes first
  * occurrence.
@@ -152,8 +152,8 @@ int sentinel_search(SeqList* sl, union Key k,
  * @param compare Pointer to function that compares two union Keys.
  * @return Wheter element could be removed
  */
-bool remove_elem(SeqList* sl, union Key key,
-                 int (*compare)(union Key, union Key));
+bool remove_elem(SeqList* sl, int key,
+                 int (*compare)(int, int));
 
 /** @brief Prints elements in Sequential List
  *

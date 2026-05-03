@@ -15,7 +15,7 @@
 
 typedef struct
 {
-  Register* array;
+  IntRegister* array;
   int length;
   int top;
 } Stack;
@@ -60,7 +60,7 @@ bool stack_full(Stack* stk);
  * @param stk Pointer to Stack
  * @return Whether element could be pushed
  */
-bool push(Stack* stk, Register reg);
+bool push(Stack* stk, IntRegister reg);
 
 /** @brief Removes element from stack and returns it.
  *
@@ -72,6 +72,6 @@ bool push(Stack* stk, Register reg);
  * @param removed Pointer to hold value of removed element
  * @return Whether an element could be popped
  */
-bool pop(Stack* stk, Register* removed);
+bool pop(Stack* stk, IntRegister* removed);
 
 #endif
