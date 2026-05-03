@@ -8,11 +8,11 @@ void cdll_init(CircularDoublyLinkedList* nil)
 }
 
 CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
-                                      Item reg)
+                                      Item item)
 {
   CircularDoublyLinkedList* node;
   node = malloc(sizeof(CircularDoublyLinkedList));
-  node->data = reg;
+  node->data = item;
 
   node->next = nil->next;
   nil->next->prev = node;

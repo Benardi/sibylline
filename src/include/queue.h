@@ -64,7 +64,7 @@ bool queue_full(Queue* q);
  * @param q Queue as a pointer
  * @return Whether element could be enqueued
  */
-bool enqueue(Queue* q, Item reg);
+bool enqueue(Queue* q, Item item);
 
 /** @brief Removes head of queue and returns it.
  *

@@ -25,7 +25,7 @@ bool queue_full(Queue* q)
   return q->head == ((q->tail + 1) % (q->length));
 }
 
-bool enqueue(Queue* q, Item reg)
+bool enqueue(Queue* q, Item item)
 {
   if (queue_full(q))
     {
@@ -33,7 +33,7 @@ bool enqueue(Queue* q, Item reg)
     }
   else
     {
-      q->array[q->tail] = reg;
+      q->array[q->tail] = item;
 
       if (q->tail == (q->length - 1))
         {

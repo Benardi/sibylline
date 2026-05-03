@@ -87,11 +87,11 @@ RedBlackTree* rb_tree_minimum(RedBlackTree* root, RedBlackTree* nil);
  *
  * @param root Pointer to pointer to root of tree.
  * @param nil Pointer to node used as nil/sentinel.
- * @param reg Item with key and satellite data of inserted node.
+ * @param item Item with key and satellite data of inserted node.
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to inserted node.
  */
-RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Item reg,
+RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Item item,
                         int (*compare)(int, int));
 
 /** @brief Removes given node from Red Black Tree.

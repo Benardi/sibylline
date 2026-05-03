@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-Item* reg;
+Item* item;
 RedBlackTree** root;
 
 void setup(void);
@@ -13,13 +13,13 @@ Suite* make_test_suite(void);
 
 void setup(void)
 {
-  reg = malloc(sizeof(Item));
+  item = malloc(sizeof(Item));
   root = malloc(sizeof(RedBlackTree*));
 }
 
 void teardown(void)
 {
-  free(reg);
+  free(item);
   free(root);
 }
 
@@ -329,8 +329,8 @@ START_TEST(test_rbt_insert_1)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, true);
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -347,8 +347,8 @@ START_TEST(test_rbt_insert_1)
   ck_assert_int_eq((*root)->right == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -379,8 +379,8 @@ START_TEST(test_rbt_insert_1)
   ck_assert_int_eq((*root)->left->p == node1, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -462,37 +462,37 @@ START_TEST(test_rbt_insert_2)
   node4 = malloc(sizeof(RedBlackTree));
   node5 = malloc(sizeof(RedBlackTree));
 
-  reg->key = k1;
+  item->key = k1;
   node1->color = BLACK;
-  node1->data = *reg;
+  node1->data = *item;
   node1->left = node2;
   node1->right = node3;
   node1->p = nil;
 
-  reg->key = k2;
+  item->key = k2;
   node2->color = BLACK;
-  node2->data = *reg;
+  node2->data = *item;
   node2->left = nil;
   node2->right = node4;
   node2->p = node1;
 
-  reg->key = k3;
+  item->key = k3;
   node3->color = BLACK;
-  node3->data = *reg;
+  node3->data = *item;
   node3->left = node5;
   node3->right = nil;
   node3->p = node1;
 
-  reg->key = k4;
+  item->key = k4;
   node4->color = RED;
-  node4->data = *reg;
+  node4->data = *item;
   node4->left = nil;
   node4->right = nil;
   node4->p = node2;
 
-  reg->key = k5;
+  item->key = k5;
   node5->color = RED;
-  node5->data = *reg;
+  node5->data = *item;
   node5->left = nil;
   node5->right = nil;
   node5->p = node3;
@@ -562,8 +562,8 @@ START_TEST(test_rbt_insert_2)
   ck_assert_int_eq((*root)->right->left->right == nil, true);
   ck_assert_int_eq((*root)->right->left->p == node3, true);
 
-  reg->key = k6;
-  node6 = rb_insert(root, nil, *reg, compare);
+  item->key = k6;
+  node6 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq((*root)->data.key, 10);
   ck_assert_int_eq((*root)->color, BLACK);
@@ -684,37 +684,37 @@ START_TEST(test_rbt_insert_3)
   node4 = malloc(sizeof(RedBlackTree));
   node5 = malloc(sizeof(RedBlackTree));
 
-  reg->key = k1;
+  item->key = k1;
   node1->color = BLACK;
-  node1->data = *reg;
+  node1->data = *item;
   node1->left = node2;
   node1->right = node3;
   node1->p = nil;
 
-  reg->key = k2;
+  item->key = k2;
   node2->color = BLACK;
-  node2->data = *reg;
+  node2->data = *item;
   node2->left = nil;
   node2->right = node4;
   node2->p = node1;
 
-  reg->key = k3;
+  item->key = k3;
   node3->color = BLACK;
-  node3->data = *reg;
+  node3->data = *item;
   node3->left = node5;
   node3->right = nil;
   node3->p = node1;
 
-  reg->key = k4;
+  item->key = k4;
   node4->color = RED;
-  node4->data = *reg;
+  node4->data = *item;
   node4->left = nil;
   node4->right = nil;
   node4->p = node2;
 
-  reg->key = k5;
+  item->key = k5;
   node5->color = RED;
-  node5->data = *reg;
+  node5->data = *item;
   node5->left = nil;
   node5->right = nil;
   node5->p = node3;
@@ -784,8 +784,8 @@ START_TEST(test_rbt_insert_3)
   ck_assert_int_eq((*root)->right->left->right == nil, true);
   ck_assert_int_eq((*root)->right->left->p == node3, true);
 
-  reg->key = k6;
-  node6 = rb_insert(root, nil, *reg, compare);
+  item->key = k6;
+  node6 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq((*root)->data.key, 10);
   ck_assert_int_eq((*root)->color, BLACK);
@@ -918,64 +918,64 @@ START_TEST(test_rbt_insert_4)
   k9 = 9;
   k10 = 4;
 
-  reg->key = k1;
-  node1->data = *reg;
+  item->key = k1;
+  node1->data = *item;
   node1->color = BLACK;
   node1->left = node2;
   node1->right = node3;
   node1->p = nil;
 
-  reg->key = k2;
-  node2->data = *reg;
+  item->key = k2;
+  node2->data = *item;
   node2->color = RED;
   node2->left = node4;
   node2->right = node5;
   node2->p = node1;
 
-  reg->key = k3;
-  node3->data = *reg;
+  item->key = k3;
+  node3->data = *item;
   node3->color = BLACK;
   node3->left = node6;
   node3->right = node7;
   node3->p = node1;
 
-  reg->key = k4;
-  node4->data = *reg;
+  item->key = k4;
+  node4->data = *item;
   node4->color = BLACK;
   node4->left = nil;
   node4->right = nil;
   node4->p = node2;
 
-  reg->key = k5;
-  node5->data = *reg;
+  item->key = k5;
+  node5->data = *item;
   node5->color = BLACK;
   node5->left = node8;
   node5->right = node9;
   node5->p = node2;
 
-  reg->key = k6;
-  node6->data = *reg;
+  item->key = k6;
+  node6->data = *item;
   node6->color = RED;
   node6->left = nil;
   node6->right = nil;
   node6->p = node3;
 
-  reg->key = k7;
-  node7->data = *reg;
+  item->key = k7;
+  node7->data = *item;
   node7->color = RED;
   node7->left = nil;
   node7->right = nil;
   node7->p = node3;
 
-  reg->key = k8;
-  node8->data = *reg;
+  item->key = k8;
+  node8->data = *item;
   node8->color = RED;
   node8->left = nil;
   node8->right = nil;
   node8->p = node5;
 
-  reg->key = k9;
-  node9->data = *reg;
+  item->key = k9;
+  node9->data = *item;
   node9->color = RED;
   node9->left = nil;
   node9->right = nil;
@@ -1094,8 +1094,8 @@ START_TEST(test_rbt_insert_4)
   ck_assert_int_eq((*root)->left->right->right->right == nil, true);
   ck_assert_int_eq((*root)->left->right->right->p == node5, true);
 
-  reg->key = k10;
-  node10 = rb_insert(root, nil, *reg, compare);
+  item->key = k10;
+  node10 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq((*root)->data.key, 6);
   ck_assert_int_eq((*root)->color, BLACK);
@@ -1268,57 +1268,57 @@ START_TEST(test_rbt_insert_5)
   k8 = 8;
   k9 = 4;
 
-  reg->key = k1;
-  node1->data = *reg;
+  item->key = k1;
+  node1->data = *item;
   node1->color = BLACK;
   node1->left = node2;
   node1->right = node3;
   node1->p = nil;
 
-  reg->key = k2;
-  node2->data = *reg;
+  item->key = k2;
+  node2->data = *item;
   node2->color = RED;
   node2->left = node4;
   node2->right = node5;
   node2->p = node1;
 
-  reg->key = k3;
-  node3->data = *reg;
+  item->key = k3;
+  node3->data = *item;
   node3->color = BLACK;
   node3->left = nil;
   node3->right = node6;
   node3->p = node1;
 
-  reg->key = k4;
-  node4->data = *reg;
+  item->key = k4;
+  node4->data = *item;
   node4->color = BLACK;
   node4->left = nil;
   node4->right = nil;
   node4->p = node2;
 
-  reg->key = k5;
-  node5->data = *reg;
+  item->key = k5;
+  node5->data = *item;
   node5->color = BLACK;
   node5->left = node7;
   node5->right = node8;
   node5->p = node2;
 
-  reg->key = k6;
-  node6->data = *reg;
+  item->key = k6;
+  node6->data = *item;
   node6->color = RED;
   node6->left = nil;
   node6->right = nil;
   node6->p = node3;
 
-  reg->key = k7;
-  node7->data = *reg;
+  item->key = k7;
+  node7->data = *item;
   node7->color = RED;
   node7->left = nil;
   node7->right = nil;
   node7->p = node5;
 
-  reg->key = k8;
-  node8->data = *reg;
+  item->key = k8;
+  node8->data = *item;
   node8->color = RED;
   node8->left = nil;
   node8->right = nil;
@@ -1433,8 +1433,8 @@ START_TEST(test_rbt_insert_5)
   ck_assert_int_eq((*root)->left->right->right->p == node5, true);
   ck_assert_int_eq((*root)->left->right->right == node8, true);
 
-  reg->key = k9;
-  node9 = rb_insert(root, nil, *reg, compare);
+  item->key = k9;
+  node9 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq((*root)->data.key, 7);
   ck_assert_int_eq((*root)->color, BLACK);
@@ -1606,57 +1606,57 @@ START_TEST(test_rbt_insert_6)
   node7 = malloc(sizeof(RedBlackTree));
   node8 = malloc(sizeof(RedBlackTree));
 
-  reg->key = k1;
-  node1->data = *reg;
+  item->key = k1;
+  node1->data = *item;
   node1->color = BLACK;
   node1->left = node2;
   node1->right = node3;
   node1->p = nil;
 
-  reg->key = k2;
-  node2->data = *reg;
+  item->key = k2;
+  node2->data = *item;
   node2->color = RED;
   node2->left = node4;
   node2->right = node5;
   node2->p = node1;
 
-  reg->key = k3;
-  node3->data = *reg;
+  item->key = k3;
+  node3->data = *item;
   node3->color = BLACK;
   node3->left = nil;
   node3->right = node6;
   node3->p = node1;
 
-  reg->key = k4;
-  node4->data = *reg;
+  item->key = k4;
+  node4->data = *item;
   node4->color = BLACK;
   node4->left = nil;
   node4->right = nil;
   node4->p = node2;
 
-  reg->key = k5;
-  node5->data = *reg;
+  item->key = k5;
+  node5->data = *item;
   node5->color = BLACK;
   node5->left = node7;
   node5->right = node8;
   node5->p = node2;
 
-  reg->key = k6;
-  node6->data = *reg;
+  item->key = k6;
+  node6->data = *item;
   node6->color = RED;
   node6->left = nil;
   node6->right = nil;
   node6->p = node3;
 
-  reg->key = k7;
-  node7->data = *reg;
+  item->key = k7;
+  node7->data = *item;
   node7->color = RED;
   node7->left = nil;
   node7->right = nil;
   node7->p = node5;
 
-  reg->key = k8;
-  node8->data = *reg;
+  item->key = k8;
+  node8->data = *item;
   node8->color = RED;
   node8->left = nil;
   node8->right = nil;
@@ -1771,8 +1771,8 @@ START_TEST(test_rbt_insert_6)
   ck_assert_int_eq((*root)->left->right->right->p == node5, true);
   ck_assert_int_eq((*root)->left->right->right == node8, true);
 
-  reg->key = k9;
-  node9 = rb_insert(root, nil, *reg, compare);
+  item->key = k9;
+  node9 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq((*root)->data.key, 7);
   ck_assert_int_eq((*root)->color, BLACK);
@@ -1927,8 +1927,8 @@ START_TEST(test_rbt_insert_7)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, true);
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -1939,8 +1939,8 @@ START_TEST(test_rbt_insert_7)
   ck_assert_int_eq((*root)->right == nil, true);
   ck_assert_int_eq((*root)->p == nil, true);
 
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -1957,8 +1957,8 @@ START_TEST(test_rbt_insert_7)
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node1, true);
 
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -1981,8 +1981,8 @@ START_TEST(test_rbt_insert_7)
   ck_assert_int_eq((*root)->right->right == nil, true);
   ck_assert_int_eq((*root)->right->p == node2, true);
 
-  reg->key = k4;
-  node4 = rb_insert(root, nil, *reg, compare);
+  item->key = k4;
+  node4 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2042,8 +2042,8 @@ START_TEST(test_rbt_insert_8)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, true);
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2055,8 +2055,8 @@ START_TEST(test_rbt_insert_8)
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2075,8 +2075,8 @@ START_TEST(test_rbt_insert_8)
   ck_assert_int_eq((*root)->left->p == node1, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2128,8 +2128,8 @@ START_TEST(test_rbt_insert_9)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, true);
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2141,8 +2141,8 @@ START_TEST(test_rbt_insert_9)
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2161,8 +2161,8 @@ START_TEST(test_rbt_insert_9)
   ck_assert_int_eq((*root)->left->p == node1, true);
   ck_assert_int_eq((*root)->left == node2, true);
 
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2214,8 +2214,8 @@ START_TEST(test_rbt_insert_10)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, true);
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2227,8 +2227,8 @@ START_TEST(test_rbt_insert_10)
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2247,8 +2247,8 @@ START_TEST(test_rbt_insert_10)
   ck_assert_int_eq((*root)->right->p == node1, true);
   ck_assert_int_eq((*root)->right == node2, true);
 
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2300,8 +2300,8 @@ START_TEST(test_rbt_insert_11)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, true);
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2313,8 +2313,8 @@ START_TEST(test_rbt_insert_11)
   ck_assert_int_eq((*root)->p == nil, true);
   ck_assert_int_eq((*root) == node1, true);
 
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2333,8 +2333,8 @@ START_TEST(test_rbt_insert_11)
   ck_assert_int_eq((*root)->right->p == node1, true);
   ck_assert_int_eq((*root)->right == node2, true);
 
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2382,8 +2382,8 @@ START_TEST(test_rbt_delete_1)
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, true);
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2424,12 +2424,12 @@ START_TEST(test_rbt_delete_2)
   k2 = 25;
   k3 = 10;
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2497,12 +2497,12 @@ START_TEST(test_rbt_delete_3)
   k2 = 25;
   k3 = 10;
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2575,14 +2575,14 @@ START_TEST(test_rbt_delete_4)
   k3 = 30;
   k4 = 15;
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
-  reg->key = k4;
-  node4 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
+  item->key = k4;
+  node4 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2670,14 +2670,14 @@ START_TEST(test_rbt_delete_5)
   k3 = 30;
   k4 = 15;
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
-  reg->key = k4;
-  node4 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
+  item->key = k4;
+  node4 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2765,14 +2765,14 @@ START_TEST(test_rbt_delete_6)
   k3 = 30;
   k4 = 5;
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
-  reg->key = k4;
-  node4 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
+  item->key = k4;
+  node4 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2861,18 +2861,18 @@ START_TEST(test_rbt_delete_7)
   k5 = 15;
   k6 = 17;
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
-  reg->key = k4;
-  node4 = rb_insert(root, nil, *reg, compare);
-  reg->key = k5;
-  node5 = rb_insert(root, nil, *reg, compare);
-  reg->key = k6;
-  node6 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
+  item->key = k4;
+  node4 = rb_insert(root, nil, *item, compare);
+  item->key = k5;
+  node5 = rb_insert(root, nil, *item, compare);
+  item->key = k6;
+  node6 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -2991,18 +2991,18 @@ START_TEST(test_rbt_delete_8)
   k5 = 5;
   k6 = 7;
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
-  reg->key = k4;
-  node4 = rb_insert(root, nil, *reg, compare);
-  reg->key = k5;
-  node5 = rb_insert(root, nil, *reg, compare);
-  reg->key = k6;
-  node6 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
+  item->key = k4;
+  node4 = rb_insert(root, nil, *item, compare);
+  item->key = k5;
+  node5 = rb_insert(root, nil, *item, compare);
+  item->key = k6;
+  node6 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -3199,18 +3199,18 @@ START_TEST(test_rbt_delete_9)
   k5 = 150;
   k6 = 400;
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
-  reg->key = k4;
-  node4 = rb_insert(root, nil, *reg, compare);
-  reg->key = k5;
-  node5 = rb_insert(root, nil, *reg, compare);
-  reg->key = k6;
-  node6 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
+  item->key = k4;
+  node4 = rb_insert(root, nil, *item, compare);
+  item->key = k5;
+  node5 = rb_insert(root, nil, *item, compare);
+  item->key = k6;
+  node6 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -3327,16 +3327,16 @@ START_TEST(test_rbt_delete_10)
   k4 = 5;
   k5 = 10;
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
-  reg->key = k4;
-  node4 = rb_insert(root, nil, *reg, compare);
-  reg->key = k5;
-  node5 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
+  item->key = k4;
+  node4 = rb_insert(root, nil, *item, compare);
+  item->key = k5;
+  node5 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -3466,18 +3466,18 @@ START_TEST(test_rbt_delete_11)
   k5 = 425;
   k6 = 200;
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
-  reg->key = k4;
-  node4 = rb_insert(root, nil, *reg, compare);
-  reg->key = k5;
-  node5 = rb_insert(root, nil, *reg, compare);
-  reg->key = k6;
-  node6 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
+  item->key = k4;
+  node4 = rb_insert(root, nil, *item, compare);
+  item->key = k5;
+  node5 = rb_insert(root, nil, *item, compare);
+  item->key = k6;
+  node6 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);
@@ -3594,16 +3594,16 @@ START_TEST(test_rbt_delete_12)
   k4 = 2;
   k5 = 1;
 
-  reg->key = k1;
-  node1 = rb_insert(root, nil, *reg, compare);
-  reg->key = k2;
-  node2 = rb_insert(root, nil, *reg, compare);
-  reg->key = k3;
-  node3 = rb_insert(root, nil, *reg, compare);
-  reg->key = k4;
-  node4 = rb_insert(root, nil, *reg, compare);
-  reg->key = k5;
-  node5 = rb_insert(root, nil, *reg, compare);
+  item->key = k1;
+  node1 = rb_insert(root, nil, *item, compare);
+  item->key = k2;
+  node2 = rb_insert(root, nil, *item, compare);
+  item->key = k3;
+  node3 = rb_insert(root, nil, *item, compare);
+  item->key = k4;
+  node4 = rb_insert(root, nil, *item, compare);
+  item->key = k5;
+  node5 = rb_insert(root, nil, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == nil, false);

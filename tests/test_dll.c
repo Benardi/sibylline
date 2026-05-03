@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-Item* reg;
+Item* item;
 DoublyLinkedList** head;
 
 void setup(void);
@@ -51,13 +51,13 @@ static int compare_int_impl(int k1, int k2)
 
 void setup(void)
 {
-  reg = malloc(sizeof(Item));
+  item = malloc(sizeof(Item));
   head = malloc(sizeof(DoublyLinkedList*));
 }
 
 void teardown(void)
 {
-  free(reg);
+  free(item);
   free(head);
 }
 
@@ -69,8 +69,8 @@ START_TEST(test_dll_insert_1)
   k1 = -150;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -150);
   ck_assert_int_eq(node1 == NULL, false);
@@ -96,10 +96,10 @@ START_TEST(test_dll_insert_2)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   /* Test collateral effect */
   ck_assert_int_eq((*head)->data.key, 30);
@@ -143,14 +143,14 @@ START_TEST(test_dll_insert_3)
   k4 = 0;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
-  reg->key = k4;
-  node4 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
+  item->key = k4;
+  node4 = dll_insert(head, *item);
 
   /* Test collateral effect */
   ck_assert_int_eq((*head)->data.key, 0);
@@ -216,14 +216,14 @@ START_TEST(test_dll_search_1)
   k5 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
-  reg->key = k4;
-  node4 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
+  item->key = k4;
+  node4 = dll_insert(head, *item);
   retrieved = dll_search(head, k5, compare_int);
 
   ck_assert_int_eq(retrieved == NULL, false);
@@ -257,14 +257,14 @@ START_TEST(test_dll_search_2)
   k5 = 25;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
-  reg->key = k4;
-  node4 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
+  item->key = k4;
+  node4 = dll_insert(head, *item);
   retrieved = dll_search(head, k5, compare_int);
 
   ck_assert_int_eq(retrieved == NULL, true);
@@ -296,18 +296,18 @@ START_TEST(test_dll_search_3)
   k7 = -67;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
-  reg->key = k4;
-  node4 = dll_insert(head, *reg);
-  reg->key = k5;
-  node5 = dll_insert(head, *reg);
-  reg->key = k6;
-  node6 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
+  item->key = k4;
+  node4 = dll_insert(head, *item);
+  item->key = k5;
+  node5 = dll_insert(head, *item);
+  item->key = k6;
+  node6 = dll_insert(head, *item);
   retrieved = dll_search(head, k7, compare_int);
 
   ck_assert_int_eq(retrieved == NULL, false);
@@ -349,18 +349,18 @@ START_TEST(test_dll_search_4)
   k7 = -189;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
-  reg->key = k4;
-  node4 = dll_insert(head, *reg);
-  reg->key = k5;
-  node5 = dll_insert(head, *reg);
-  reg->key = k6;
-  node6 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
+  item->key = k4;
+  node4 = dll_insert(head, *item);
+  item->key = k5;
+  node5 = dll_insert(head, *item);
+  item->key = k6;
+  node6 = dll_insert(head, *item);
   retrieved = dll_search(head, k7, compare_int);
 
   ck_assert_int_eq(retrieved == NULL, false);
@@ -392,10 +392,10 @@ START_TEST(test_dll_delete_1)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -67);
   ck_assert_int_eq(node1 == NULL, false);
@@ -437,10 +437,10 @@ START_TEST(test_dll_delete_2)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -67);
   ck_assert_int_eq(node1 == NULL, false);
@@ -480,8 +480,8 @@ START_TEST(test_dll_delete_3)
   k1 = -67;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
 
   ck_assert_int_eq((*head)->data.key, -67);
 
@@ -515,12 +515,12 @@ START_TEST(test_dll_delete_4)
   k3 = 150;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
 
   ck_assert_int_eq((*head)->data.key, 150);
   ck_assert_int_eq((*head)->prev == NULL, true);
@@ -582,12 +582,12 @@ START_TEST(test_dll_delete_5)
   k4 = 75;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
 
   node = dll_search(head, k4, compare_int);
 
@@ -624,12 +624,12 @@ START_TEST(test_dll_delete_6)
   k5 = 25;
 
   *head = NULL;
-  reg->key = k1;
-  dll_insert(head, *reg);
-  reg->key = k2;
-  node3 = dll_insert(head, *reg);
-  reg->key = k3;
-  dll_insert(head, *reg);
+  item->key = k1;
+  dll_insert(head, *item);
+  item->key = k2;
+  node3 = dll_insert(head, *item);
+  item->key = k3;
+  dll_insert(head, *item);
 
   node1 = dll_search(head, k4, compare_int);
   dll_delete(head, node1);
@@ -657,10 +657,10 @@ START_TEST(test_dll_get_nth_1)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -67);
   ck_assert_int_eq(node1 == NULL, false);
@@ -706,10 +706,10 @@ START_TEST(test_dll_get_nth_2)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -67);
   ck_assert_int_eq(node1 == NULL, false);
@@ -754,10 +754,10 @@ START_TEST(test_dll_get_nth_3)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -67);
   ck_assert_int_eq(node1 == NULL, false);
@@ -798,10 +798,10 @@ START_TEST(test_dll_get_nth_4)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -67);
   ck_assert_int_eq(node1 == NULL, false);
@@ -840,8 +840,8 @@ START_TEST(test_dll_get_nth_5)
   k1 = -67;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
 
   ck_assert_int_eq((*head)->data.key, -67);
 
@@ -880,12 +880,12 @@ START_TEST(test_dll_get_nth_6)
   k3 = 150;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
 
   ck_assert_int_eq((*head)->data.key, 150);
   ck_assert_int_eq((*head)->prev == NULL, true);
@@ -939,12 +939,12 @@ START_TEST(test_dll_get_nth_7)
   k4 = 75123;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
 
   node = dll_search(head, k4, compare_int_impl);
 
@@ -985,10 +985,10 @@ START_TEST(test_dll_get_by_idx_1)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -67);
   ck_assert_int_eq(node1 == NULL, false);
@@ -1033,10 +1033,10 @@ START_TEST(test_dll_get_by_idx_2)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -67);
   ck_assert_int_eq(node1 == NULL, false);
@@ -1081,10 +1081,10 @@ START_TEST(test_dll_get_by_idx_3)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -67);
   ck_assert_int_eq(node1 == NULL, false);
@@ -1125,10 +1125,10 @@ START_TEST(test_dll_get_by_idx_4)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -67);
   ck_assert_int_eq(node1 == NULL, false);
@@ -1169,10 +1169,10 @@ START_TEST(test_dll_get_by_idx_5)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -67);
   ck_assert_int_eq(node1 == NULL, false);
@@ -1217,10 +1217,10 @@ START_TEST(test_dll_get_by_idx_6)
   k2 = 30;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
 
   ck_assert_int_eq(node1->data.key, -67);
   ck_assert_int_eq(node1 == NULL, false);
@@ -1271,16 +1271,16 @@ START_TEST(test_dll_get_by_idx_7)
   k5 = 34;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
-  reg->key = k4;
-  node4 = dll_insert(head, *reg);
-  reg->key = k5;
-  node5 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
+  item->key = k4;
+  node4 = dll_insert(head, *item);
+  item->key = k5;
+  node5 = dll_insert(head, *item);
 
   ck_assert_int_eq((*head)->data.key, 34);
   ck_assert_int_eq((*head)->prev == NULL, true);
@@ -1364,16 +1364,16 @@ START_TEST(test_dll_get_by_idx_8)
   k5 = 34;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
-  reg->key = k4;
-  node4 = dll_insert(head, *reg);
-  reg->key = k5;
-  node5 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
+  item->key = k4;
+  node4 = dll_insert(head, *item);
+  item->key = k5;
+  node5 = dll_insert(head, *item);
 
   ck_assert_int_eq((*head)->data.key, 34);
   ck_assert_int_eq((*head)->prev == NULL, true);
@@ -1457,16 +1457,16 @@ START_TEST(test_dll_get_by_idx_9)
   k5 = 34;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
-  reg->key = k4;
-  node4 = dll_insert(head, *reg);
-  reg->key = k5;
-  node5 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
+  item->key = k4;
+  node4 = dll_insert(head, *item);
+  item->key = k5;
+  node5 = dll_insert(head, *item);
 
   ck_assert_int_eq((*head)->data.key, 34);
   ck_assert_int_eq((*head)->prev == NULL, true);
@@ -1550,16 +1550,16 @@ START_TEST(test_dll_get_by_idx_10)
   k5 = 34;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = dll_insert(head, *reg);
-  reg->key = k2;
-  node2 = dll_insert(head, *reg);
-  reg->key = k3;
-  node3 = dll_insert(head, *reg);
-  reg->key = k4;
-  node4 = dll_insert(head, *reg);
-  reg->key = k5;
-  node5 = dll_insert(head, *reg);
+  item->key = k1;
+  node1 = dll_insert(head, *item);
+  item->key = k2;
+  node2 = dll_insert(head, *item);
+  item->key = k3;
+  node3 = dll_insert(head, *item);
+  item->key = k4;
+  node4 = dll_insert(head, *item);
+  item->key = k5;
+  node5 = dll_insert(head, *item);
 
   ck_assert_int_eq((*head)->data.key, 34);
   ck_assert_int_eq((*head)->prev == NULL, true);
@@ -1638,18 +1638,18 @@ START_TEST(test_dll_free_list_1)
   k6 = -189;
 
   *head = NULL;
-  reg->key = k1;
-  dll_insert(head, *reg);
-  reg->key = k2;
-  dll_insert(head, *reg);
-  reg->key = k3;
-  dll_insert(head, *reg);
-  reg->key = k4;
-  dll_insert(head, *reg);
-  reg->key = k5;
-  dll_insert(head, *reg);
-  reg->key = k6;
-  dll_insert(head, *reg);
+  item->key = k1;
+  dll_insert(head, *item);
+  item->key = k2;
+  dll_insert(head, *item);
+  item->key = k3;
+  dll_insert(head, *item);
+  item->key = k4;
+  dll_insert(head, *item);
+  item->key = k5;
+  dll_insert(head, *item);
+  item->key = k6;
+  dll_insert(head, *item);
 
   dll_free_list(head);
 }
@@ -1666,16 +1666,16 @@ START_TEST(test_dll_free_list_2)
   k5 = 34;
 
   *head = NULL;
-  reg->key = k1;
-  dll_insert(head, *reg);
-  reg->key = k2;
-  dll_insert(head, *reg);
-  reg->key = k3;
-  dll_insert(head, *reg);
-  reg->key = k4;
-  dll_insert(head, *reg);
-  reg->key = k5;
-  dll_insert(head, *reg);
+  item->key = k1;
+  dll_insert(head, *item);
+  item->key = k2;
+  dll_insert(head, *item);
+  item->key = k3;
+  dll_insert(head, *item);
+  item->key = k4;
+  dll_insert(head, *item);
+  item->key = k5;
+  dll_insert(head, *item);
 
   dll_free_list(head);
 }
@@ -1691,14 +1691,14 @@ START_TEST(test_dll_free_list_3)
   k4 = 0;
 
   *head = NULL;
-  reg->key = k1;
-  dll_insert(head, *reg);
-  reg->key = k2;
-  dll_insert(head, *reg);
-  reg->key = k3;
-  dll_insert(head, *reg);
-  reg->key = k4;
-  dll_insert(head, *reg);
+  item->key = k1;
+  dll_insert(head, *item);
+  item->key = k2;
+  dll_insert(head, *item);
+  item->key = k3;
+  dll_insert(head, *item);
+  item->key = k4;
+  dll_insert(head, *item);
 
   dll_free_list(head);
 }

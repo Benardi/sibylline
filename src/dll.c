@@ -1,11 +1,11 @@
 #include <dll.h>
 #include <stdlib.h>
 
-DoublyLinkedList* dll_insert(DoublyLinkedList** head, Item reg)
+DoublyLinkedList* dll_insert(DoublyLinkedList** head, Item item)
 {
   DoublyLinkedList* node;
   node = malloc(sizeof(DoublyLinkedList));
-  node->data = reg;
+  node->data = item;
   node->next = *head;
   node->prev = NULL;
 

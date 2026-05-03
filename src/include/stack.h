@@ -60,7 +60,7 @@ bool stack_full(Stack* stk);
  * @param stk Pointer to Stack
  * @return Whether element could be pushed
  */
-bool push(Stack* stk, Item reg);
+bool push(Stack* stk, Item item);
 
 /** @brief Removes element from stack and returns it.
  *

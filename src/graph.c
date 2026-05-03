@@ -8,13 +8,13 @@ void bfs(DoublyLinkedList*** adj_list, ColoredNode* vrtxs[], int length,
 {
   Queue q;
   int i, inf;
-  Item* reg;
+  Item* item;
   ColoredNode* crt;
   ColoredNode* adj;
   DoublyLinkedList* node;
 
   inf = INF;
-  reg = malloc(sizeof(Item));
+  item = malloc(sizeof(Item));
 
   for (i = 0; i < length; i++)
     {
@@ -32,13 +32,13 @@ void bfs(DoublyLinkedList*** adj_list, ColoredNode* vrtxs[], int length,
 
   init_queue(&q, length + 1);
 
-  reg->value = root;
-  enqueue(&q, *reg);
+  item->value = root;
+  enqueue(&q, *item);
 
   while (queue_empty(&q) == false)
     {
-      dequeue(&q, reg);
-      crt = reg->value;
+      dequeue(&q, item);
+      crt = item->value;
 
       node = (*adj_list[crt->id]);
 
@@ -52,8 +52,8 @@ void bfs(DoublyLinkedList*** adj_list, ColoredNode* vrtxs[], int length,
               adj->dist = crt->dist + 1;
               adj->p = crt;
 
-              reg->value = adj;
-              enqueue(&q, *reg);
+              item->value = adj;
+              enqueue(&q, *item);
             }
 
           node = node->next;
@@ -62,7 +62,7 @@ void bfs(DoublyLinkedList*** adj_list, ColoredNode* vrtxs[], int length,
       crt->color = BLACK;
     }
 
-  free(reg);
+  free(item);
   free(q.array);
 }
 

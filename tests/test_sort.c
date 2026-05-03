@@ -4671,7 +4671,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_1)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4694,18 +4694,18 @@ START_TEST(test_insertion_sort_dll_1)
   k6 = 3;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -4729,7 +4729,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_2)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
 
@@ -4741,8 +4741,8 @@ START_TEST(test_insertion_sort_dll_2)
   *head = NULL;
 
   k1 = 5;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -4756,7 +4756,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_3)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4789,28 +4789,28 @@ START_TEST(test_insertion_sort_dll_3)
   k11 = -200;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
-  reg.key = k7;
-  node7 = dll_insert(head, reg);
-  reg.key = k8;
-  node8 = dll_insert(head, reg);
-  reg.key = k9;
-  node9 = dll_insert(head, reg);
-  reg.key = k10;
-  node10 = dll_insert(head, reg);
-  reg.key = k11;
-  node11 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
+  item.key = k7;
+  node7 = dll_insert(head, item);
+  item.key = k8;
+  node8 = dll_insert(head, item);
+  item.key = k9;
+  node9 = dll_insert(head, item);
+  item.key = k10;
+  node10 = dll_insert(head, item);
+  item.key = k11;
+  node11 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -4850,7 +4850,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_4)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4881,26 +4881,26 @@ START_TEST(test_insertion_sort_dll_4)
   k10 = 9;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
-  reg.key = k7;
-  node7 = dll_insert(head, reg);
-  reg.key = k8;
-  node8 = dll_insert(head, reg);
-  reg.key = k9;
-  node9 = dll_insert(head, reg);
-  reg.key = k10;
-  node10 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
+  item.key = k7;
+  node7 = dll_insert(head, item);
+  item.key = k8;
+  node8 = dll_insert(head, item);
+  item.key = k9;
+  node9 = dll_insert(head, item);
+  item.key = k10;
+  node10 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -4935,7 +4935,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_5)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4966,26 +4966,26 @@ START_TEST(test_insertion_sort_dll_5)
   k10 = 0;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
-  reg.key = k7;
-  node7 = dll_insert(head, reg);
-  reg.key = k8;
-  node8 = dll_insert(head, reg);
-  reg.key = k9;
-  node9 = dll_insert(head, reg);
-  reg.key = k10;
-  node10 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
+  item.key = k7;
+  node7 = dll_insert(head, item);
+  item.key = k8;
+  node8 = dll_insert(head, item);
+  item.key = k9;
+  node9 = dll_insert(head, item);
+  item.key = k10;
+  node10 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -5020,7 +5020,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_6)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5047,22 +5047,22 @@ START_TEST(test_insertion_sort_dll_6)
   k8 = 6;
 
   *head = NULL;
-  reg.key = k8; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k7; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k6;
-  node3 = dll_insert(head, reg);
-  reg.key = k5;
-  node4 = dll_insert(head, reg);
-  reg.key = k4;
-  node5 = dll_insert(head, reg);
-  reg.key = k3;
-  node6 = dll_insert(head, reg);
-  reg.key = k2;
-  node7 = dll_insert(head, reg);
-  reg.key = k1;
-  node8 = dll_insert(head, reg);
+  item.key = k8; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k7; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k6;
+  node3 = dll_insert(head, item);
+  item.key = k5;
+  node4 = dll_insert(head, item);
+  item.key = k4;
+  node5 = dll_insert(head, item);
+  item.key = k3;
+  node6 = dll_insert(head, item);
+  item.key = k2;
+  node7 = dll_insert(head, item);
+  item.key = k1;
+  node8 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -5090,7 +5090,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_7)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5117,22 +5117,22 @@ START_TEST(test_insertion_sort_dll_7)
   k8 = 6;
 
   *head = NULL;
-  reg.key = k8; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k7; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k6;
-  node3 = dll_insert(head, reg);
-  reg.key = k5;
-  node4 = dll_insert(head, reg);
-  reg.key = k4;
-  node5 = dll_insert(head, reg);
-  reg.key = k3;
-  node6 = dll_insert(head, reg);
-  reg.key = k2;
-  node7 = dll_insert(head, reg);
-  reg.key = k1;
-  node8 = dll_insert(head, reg);
+  item.key = k8; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k7; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k6;
+  node3 = dll_insert(head, item);
+  item.key = k5;
+  node4 = dll_insert(head, item);
+  item.key = k4;
+  node5 = dll_insert(head, item);
+  item.key = k3;
+  node6 = dll_insert(head, item);
+  item.key = k2;
+  node7 = dll_insert(head, item);
+  item.key = k1;
+  node8 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -5160,7 +5160,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_8)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5187,22 +5187,22 @@ START_TEST(test_insertion_sort_dll_8)
   k8 = 6;
 
   *head = NULL;
-  reg.key = k8; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k7; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k6;
-  node3 = dll_insert(head, reg);
-  reg.key = k5;
-  node4 = dll_insert(head, reg);
-  reg.key = k4;
-  node5 = dll_insert(head, reg);
-  reg.key = k3;
-  node6 = dll_insert(head, reg);
-  reg.key = k2;
-  node7 = dll_insert(head, reg);
-  reg.key = k1;
-  node8 = dll_insert(head, reg);
+  item.key = k8; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k7; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k6;
+  node3 = dll_insert(head, item);
+  item.key = k5;
+  node4 = dll_insert(head, item);
+  item.key = k4;
+  node5 = dll_insert(head, item);
+  item.key = k3;
+  node6 = dll_insert(head, item);
+  item.key = k2;
+  node7 = dll_insert(head, item);
+  item.key = k1;
+  node8 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -5230,7 +5230,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_9)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5269,34 +5269,34 @@ START_TEST(test_insertion_sort_dll_9)
   k14 = 570;
 
   *head = NULL;
-  reg.key = k14; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k13; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k12;
-  node3 = dll_insert(head, reg);
-  reg.key = k11;
-  node4 = dll_insert(head, reg);
-  reg.key = k10;
-  node5 = dll_insert(head, reg);
-  reg.key = k9;
-  node6 = dll_insert(head, reg);
-  reg.key = k8;
-  node7 = dll_insert(head, reg);
-  reg.key = k7;
-  node8 = dll_insert(head, reg);
-  reg.key = k6;
-  node9 = dll_insert(head, reg);
-  reg.key = k5;
-  node10 = dll_insert(head, reg);
-  reg.key = k4;
-  node11 = dll_insert(head, reg);
-  reg.key = k3;
-  node12 = dll_insert(head, reg);
-  reg.key = k2;
-  node13 = dll_insert(head, reg);
-  reg.key = k1;
-  node14 = dll_insert(head, reg);
+  item.key = k14; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k13; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k12;
+  node3 = dll_insert(head, item);
+  item.key = k11;
+  node4 = dll_insert(head, item);
+  item.key = k10;
+  node5 = dll_insert(head, item);
+  item.key = k9;
+  node6 = dll_insert(head, item);
+  item.key = k8;
+  node7 = dll_insert(head, item);
+  item.key = k7;
+  node8 = dll_insert(head, item);
+  item.key = k6;
+  node9 = dll_insert(head, item);
+  item.key = k5;
+  node10 = dll_insert(head, item);
+  item.key = k4;
+  node11 = dll_insert(head, item);
+  item.key = k3;
+  node12 = dll_insert(head, item);
+  item.key = k2;
+  node13 = dll_insert(head, item);
+  item.key = k1;
+  node14 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -5351,7 +5351,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_10)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5390,34 +5390,34 @@ START_TEST(test_insertion_sort_dll_10)
   k14 = 570;
 
   *head = NULL;
-  reg.key = k14; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k13; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k12;
-  node3 = dll_insert(head, reg);
-  reg.key = k11;
-  node4 = dll_insert(head, reg);
-  reg.key = k10;
-  node5 = dll_insert(head, reg);
-  reg.key = k9;
-  node6 = dll_insert(head, reg);
-  reg.key = k8;
-  node7 = dll_insert(head, reg);
-  reg.key = k7;
-  node8 = dll_insert(head, reg);
-  reg.key = k6;
-  node9 = dll_insert(head, reg);
-  reg.key = k5;
-  node10 = dll_insert(head, reg);
-  reg.key = k4;
-  node11 = dll_insert(head, reg);
-  reg.key = k3;
-  node12 = dll_insert(head, reg);
-  reg.key = k2;
-  node13 = dll_insert(head, reg);
-  reg.key = k1;
-  node14 = dll_insert(head, reg);
+  item.key = k14; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k13; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k12;
+  node3 = dll_insert(head, item);
+  item.key = k11;
+  node4 = dll_insert(head, item);
+  item.key = k10;
+  node5 = dll_insert(head, item);
+  item.key = k9;
+  node6 = dll_insert(head, item);
+  item.key = k8;
+  node7 = dll_insert(head, item);
+  item.key = k7;
+  node8 = dll_insert(head, item);
+  item.key = k6;
+  node9 = dll_insert(head, item);
+  item.key = k5;
+  node10 = dll_insert(head, item);
+  item.key = k4;
+  node11 = dll_insert(head, item);
+  item.key = k3;
+  node12 = dll_insert(head, item);
+  item.key = k2;
+  node13 = dll_insert(head, item);
+  item.key = k1;
+  node14 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -5472,7 +5472,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_11)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5507,30 +5507,30 @@ START_TEST(test_insertion_sort_dll_11)
   k12 = -3;
 
   *head = NULL;
-  reg.key = k12; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k11; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k10;
-  node3 = dll_insert(head, reg);
-  reg.key = k9;
-  node4 = dll_insert(head, reg);
-  reg.key = k8;
-  node5 = dll_insert(head, reg);
-  reg.key = k7;
-  node6 = dll_insert(head, reg);
-  reg.key = k6;
-  node7 = dll_insert(head, reg);
-  reg.key = k5;
-  node8 = dll_insert(head, reg);
-  reg.key = k4;
-  node9 = dll_insert(head, reg);
-  reg.key = k3;
-  node10 = dll_insert(head, reg);
-  reg.key = k2;
-  node11 = dll_insert(head, reg);
-  reg.key = k1;
-  node12 = dll_insert(head, reg);
+  item.key = k12; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k11; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k10;
+  node3 = dll_insert(head, item);
+  item.key = k9;
+  node4 = dll_insert(head, item);
+  item.key = k8;
+  node5 = dll_insert(head, item);
+  item.key = k7;
+  node6 = dll_insert(head, item);
+  item.key = k6;
+  node7 = dll_insert(head, item);
+  item.key = k5;
+  node8 = dll_insert(head, item);
+  item.key = k4;
+  node9 = dll_insert(head, item);
+  item.key = k3;
+  node10 = dll_insert(head, item);
+  item.key = k2;
+  node11 = dll_insert(head, item);
+  item.key = k1;
+  node12 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -5575,7 +5575,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_12)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5598,18 +5598,18 @@ START_TEST(test_insertion_sort_dll_12)
   k6 = 3;
 
   *head = NULL;
-  reg.key = k6; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k5; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k4;
-  node3 = dll_insert(head, reg);
-  reg.key = k3;
-  node4 = dll_insert(head, reg);
-  reg.key = k2;
-  node5 = dll_insert(head, reg);
-  reg.key = k1;
-  node6 = dll_insert(head, reg);
+  item.key = k6; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k5; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k4;
+  node3 = dll_insert(head, item);
+  item.key = k3;
+  node4 = dll_insert(head, item);
+  item.key = k2;
+  node5 = dll_insert(head, item);
+  item.key = k1;
+  node6 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -5632,7 +5632,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_13)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   int k1;
@@ -5644,8 +5644,8 @@ START_TEST(test_insertion_sort_dll_13)
   k1 = 5;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -5658,7 +5658,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_14)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5691,28 +5691,28 @@ START_TEST(test_insertion_sort_dll_14)
   k11 = -200;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
-  reg.key = k7;
-  node7 = dll_insert(head, reg);
-  reg.key = k8;
-  node8 = dll_insert(head, reg);
-  reg.key = k9;
-  node9 = dll_insert(head, reg);
-  reg.key = k10;
-  node10 = dll_insert(head, reg);
-  reg.key = k11;
-  node11 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
+  item.key = k7;
+  node7 = dll_insert(head, item);
+  item.key = k8;
+  node8 = dll_insert(head, item);
+  item.key = k9;
+  node9 = dll_insert(head, item);
+  item.key = k10;
+  node10 = dll_insert(head, item);
+  item.key = k11;
+  node11 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -5752,7 +5752,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_15)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5783,26 +5783,26 @@ START_TEST(test_insertion_sort_dll_15)
   k10 = 9;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
-  reg.key = k7;
-  node7 = dll_insert(head, reg);
-  reg.key = k8;
-  node8 = dll_insert(head, reg);
-  reg.key = k9;
-  node9 = dll_insert(head, reg);
-  reg.key = k10;
-  node10 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
+  item.key = k7;
+  node7 = dll_insert(head, item);
+  item.key = k8;
+  node8 = dll_insert(head, item);
+  item.key = k9;
+  node9 = dll_insert(head, item);
+  item.key = k10;
+  node10 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_int_dll);
 
@@ -5837,7 +5837,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_16)
 {
-  Item reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5868,26 +5868,26 @@ START_TEST(test_insertion_sort_dll_16)
   k10 = 0;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
-  reg.key = k7;
-  node7 = dll_insert(head, reg);
-  reg.key = k8;
-  node8 = dll_insert(head, reg);
-  reg.key = k9;
-  node9 = dll_insert(head, reg);
-  reg.key = k10;
-  node10 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
+  item.key = k7;
+  node7 = dll_insert(head, item);
+  item.key = k8;
+  node8 = dll_insert(head, item);
+  item.key = k9;
+  node9 = dll_insert(head, item);
+  item.key = k10;
+  node10 = dll_insert(head, item);
 
   insertion_sort_dll(head, start, end, compare_float_dll);
 

@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-Item* reg;
+Item* item;
 CircularDoublyLinkedList* nil;
 
 void setup(void);
@@ -33,12 +33,12 @@ static int compare(int k1, int k2)
 void setup(void)
 {
   nil = malloc(sizeof(CircularDoublyLinkedList));
-  reg = malloc(sizeof(Item));
+  item = malloc(sizeof(Item));
 }
 
 void teardown(void)
 {
-  free(reg);
+  free(item);
   free(nil);
 }
 
@@ -57,8 +57,8 @@ START_TEST(test_cdll_insert_1)
 
   k1 = 17;
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
 
   ck_assert_int_eq(nil->prev == node1, true);
   ck_assert_int_eq(nil->next == node1, true);
@@ -83,10 +83,10 @@ START_TEST(test_cdll_insert_2)
   k2 = -9;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
-  reg->key = k2;
-  node2 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
+  item->key = k2;
+  node2 = cdll_insert(nil, *item);
 
   ck_assert_int_eq(nil->next == node2, true);
   ck_assert_int_eq(nil->prev == node1, true);
@@ -124,12 +124,12 @@ START_TEST(test_cdll_insert_3)
   k3 = 0;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
-  reg->key = k2;
-  node2 = cdll_insert(nil, *reg);
-  reg->key = k3;
-  node3 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
+  item->key = k2;
+  node2 = cdll_insert(nil, *item);
+  item->key = k3;
+  node3 = cdll_insert(nil, *item);
 
   ck_assert_int_eq(nil->next == node3, true);
   ck_assert_int_eq(nil->prev == node1, true);
@@ -172,8 +172,8 @@ START_TEST(test_cdll_search_1)
   k1 = 17;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
   retrieved = cdll_search(nil, k1, compare);
 
   ck_assert_int_eq(nil->prev == node1, true);
@@ -205,8 +205,8 @@ START_TEST(test_cdll_search_2)
   k2 = 25;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
   retrieved = cdll_search(nil, k2, compare);
 
   ck_assert_int_eq(nil->prev == node1, true);
@@ -238,10 +238,10 @@ START_TEST(test_cdll_search_3)
   k3 = -9;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
-  reg->key = k2;
-  node2 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
+  item->key = k2;
+  node2 = cdll_insert(nil, *item);
   retrieved = cdll_search(nil, k3, compare);
 
   ck_assert_int_eq(nil->next == node2, true);
@@ -287,10 +287,10 @@ START_TEST(test_cdll_search_4)
   k3 = 17;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
-  reg->key = k2;
-  node2 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
+  item->key = k2;
+  node2 = cdll_insert(nil, *item);
   retrieved = cdll_search(nil, k3, compare);
 
   ck_assert_int_eq(nil->next == node2, true);
@@ -337,10 +337,10 @@ START_TEST(test_cdll_search_5)
   k3 = -22;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
-  reg->key = k2;
-  node2 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
+  item->key = k2;
+  node2 = cdll_insert(nil, *item);
   retrieved = cdll_search(nil, k3, compare);
 
   ck_assert_int_eq(nil->next == node2, true);
@@ -391,12 +391,12 @@ START_TEST(test_cdll_search_6)
   k4 = 0;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
-  reg->key = k2;
-  node2 = cdll_insert(nil, *reg);
-  reg->key = k3;
-  node3 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
+  item->key = k2;
+  node2 = cdll_insert(nil, *item);
+  item->key = k3;
+  node3 = cdll_insert(nil, *item);
   retrieved = cdll_search(nil, k4, compare);
 
   ck_assert_int_eq(nil->next == node3, true);
@@ -452,12 +452,12 @@ START_TEST(test_cdll_search_7)
   k4 = 214350;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
-  reg->key = k2;
-  node2 = cdll_insert(nil, *reg);
-  reg->key = k3;
-  node3 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
+  item->key = k2;
+  node2 = cdll_insert(nil, *item);
+  item->key = k3;
+  node3 = cdll_insert(nil, *item);
   retrieved = cdll_search(nil, k4, compare);
 
   ck_assert_int_eq(nil->next == node3, true);
@@ -519,12 +519,12 @@ START_TEST(test_cdll_search_8)
   k4 = 5;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
-  reg->key = k2;
-  node2 = cdll_insert(nil, *reg);
-  reg->key = k3;
-  node3 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
+  item->key = k2;
+  node2 = cdll_insert(nil, *item);
+  item->key = k3;
+  node3 = cdll_insert(nil, *item);
   retrieved = cdll_search(nil, k4, compare);
 
   ck_assert_int_eq(nil->next == node3, true);
@@ -575,8 +575,8 @@ START_TEST(test_cdll_delete_1)
   k1 = 17;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
 
   ck_assert_int_eq(nil->prev == node1, true);
   ck_assert_int_eq(nil->next == node1, true);
@@ -607,10 +607,10 @@ START_TEST(test_cdll_delete_2)
   k2 = -9;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
-  reg->key = k2;
-  node2 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
+  item->key = k2;
+  node2 = cdll_insert(nil, *item);
 
   ck_assert_int_eq(nil->next == node2, true);
   ck_assert_int_eq(nil->prev == node1, true);
@@ -661,10 +661,10 @@ START_TEST(test_cdll_delete_3)
   k2 = -9;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
-  reg->key = k2;
-  node2 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
+  item->key = k2;
+  node2 = cdll_insert(nil, *item);
 
   ck_assert_int_eq(nil->next == node2, true);
   ck_assert_int_eq(nil->prev == node1, true);
@@ -717,12 +717,12 @@ START_TEST(test_cdll_delete_4)
   k3 = 0;
 
   cdll_init(nil);
-  reg->key = k1;
-  node1 = cdll_insert(nil, *reg);
-  reg->key = k2;
-  node2 = cdll_insert(nil, *reg);
-  reg->key = k3;
-  node3 = cdll_insert(nil, *reg);
+  item->key = k1;
+  node1 = cdll_insert(nil, *item);
+  item->key = k2;
+  node2 = cdll_insert(nil, *item);
+  item->key = k3;
+  node3 = cdll_insert(nil, *item);
 
   ck_assert_int_eq(nil->next == node3, true);
   ck_assert_int_eq(nil->prev == node1, true);

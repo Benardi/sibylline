@@ -26,11 +26,11 @@ typedef struct CircularSinglyLinkedList
  * pointer to added node.
  *
  * @param tail Double pointer to tail of Circular Singly Linked List.
- * @param reg Item of inserted node.
+ * @param item Item of inserted node.
  * @return Pointer to inserted node.
  */
 CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
-                                            Item reg);
+                                            Item item);
 
 /** @brief Inserts node at end of Circular Singly Linked List.
  *
@@ -40,11 +40,11 @@ CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
  * pointer with new tail of the linked list.
  *
  * @param tail Double pointer to tail of Circular Singly Linked List.
- * @param reg Item of inserted node.
+ * @param item Item of inserted node.
  * @return Pointer to inserted node.
  */
 CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
-                                          Item reg);
+                                          Item item);
 
 /** @brief Retrieves node from Circular Singly Linked List via key.
  *

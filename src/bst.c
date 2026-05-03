@@ -32,7 +32,7 @@ void preorder_tree_walk(BinarySearchTree* node)
     }
 }
 
-BinarySearchTree* tree_insert(BinarySearchTree** root, Item reg,
+BinarySearchTree* tree_insert(BinarySearchTree** root, Item item,
                               int (*compare)(int, int))
 {
   BinarySearchTree* node;
@@ -40,7 +40,7 @@ BinarySearchTree* tree_insert(BinarySearchTree** root, Item reg,
   BinarySearchTree* current;
 
   node = malloc(sizeof(BinarySearchTree));
-  node->data = reg;
+  node->data = item;
   node->right = NULL;
   node->left = NULL;
   node->p = NULL;

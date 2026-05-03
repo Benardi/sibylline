@@ -3,12 +3,12 @@
 #include <stdlib.h>
 
 CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
-                                            Item reg)
+                                            Item item)
 {
   CircularSinglyLinkedList* node;
 
   node = malloc(sizeof(CircularSinglyLinkedList));
-  node->data = reg;
+  node->data = item;
 
   if ((*tail) == NULL)
     {
@@ -25,12 +25,12 @@ CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
 }
 
 CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
-                                          Item reg)
+                                          Item item)
 {
   CircularSinglyLinkedList* node;
 
   node = malloc(sizeof(CircularSinglyLinkedList));
-  node->data = reg;
+  node->data = item;
 
   if ((*tail) == NULL)
     {

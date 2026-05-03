@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-Item* reg;
+Item* item;
 SinglyLinkedList** head;
 
 void setup(void);
@@ -32,13 +32,13 @@ static int compare(int k1, int k2)
 
 void setup(void)
 {
-  reg = malloc(sizeof(Item));
+  item = malloc(sizeof(Item));
   head = malloc(sizeof(SinglyLinkedList*));
 }
 
 void teardown(void)
 {
-  free(reg);
+  free(item);
   free(head);
 }
 
@@ -50,8 +50,8 @@ START_TEST(test_sll_insert_1)
   k1 = 200;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -76,10 +76,10 @@ START_TEST(test_sll_insert_2)
   k2 = 250;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -114,14 +114,14 @@ START_TEST(test_sll_insert_3)
   k4 = -730;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
-  reg->key = k3;
-  node3 = sll_insert(head, *reg);
-  reg->key = k4;
-  node4 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
+  item->key = k3;
+  node3 = sll_insert(head, *item);
+  item->key = k4;
+  node4 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -182,8 +182,8 @@ START_TEST(test_sll_search_2)
   k1 = 200;
   k2 = 200;
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
   retrieved = sll_search(head, k2, compare);
 
   ck_assert_int_eq(head == NULL, false);
@@ -214,8 +214,8 @@ START_TEST(test_sll_search_3)
   k2 = -35;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
   node2 = sll_search(head, k2, compare);
 
   ck_assert_int_eq(head == NULL, false);
@@ -246,10 +246,10 @@ START_TEST(test_sll_search_4)
   k3 = 200;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
   retrieved = sll_search(head, k3, compare);
 
   ck_assert_int_eq(head == NULL, false);
@@ -289,10 +289,10 @@ START_TEST(test_sll_search_5)
   k3 = 250;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
   retrieved = sll_search(head, k3, compare);
 
   ck_assert_int_eq(head == NULL, false);
@@ -331,10 +331,10 @@ START_TEST(test_sll_search_6)
   k3 = 0;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
   retrieved = sll_search(head, k3, compare);
 
   ck_assert_int_eq(head == NULL, false);
@@ -374,14 +374,14 @@ START_TEST(test_sll_search_7)
   k5 = 10;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
-  reg->key = k3;
-  node3 = sll_insert(head, *reg);
-  reg->key = k4;
-  node4 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
+  item->key = k3;
+  node3 = sll_insert(head, *item);
+  item->key = k4;
+  node4 = sll_insert(head, *item);
   retrieved = sll_search(head, k5, compare);
 
   ck_assert_int_eq(head == NULL, false);
@@ -433,14 +433,14 @@ START_TEST(test_sll_search_8)
   k5 = 33;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
-  reg->key = k3;
-  node3 = sll_insert(head, *reg);
-  reg->key = k4;
-  node4 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
+  item->key = k3;
+  node3 = sll_insert(head, *item);
+  item->key = k4;
+  node4 = sll_insert(head, *item);
   retrieved = sll_search(head, k5, compare);
 
   ck_assert_int_eq(head == NULL, false);
@@ -496,14 +496,14 @@ START_TEST(test_sll_search_9)
   k5 = 200;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
-  reg->key = k3;
-  node3 = sll_insert(head, *reg);
-  reg->key = k4;
-  node4 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
+  item->key = k3;
+  node3 = sll_insert(head, *item);
+  item->key = k4;
+  node4 = sll_insert(head, *item);
   retrieved = sll_search(head, k5, compare);
 
   ck_assert_int_eq(head == NULL, false);
@@ -551,8 +551,8 @@ START_TEST(test_sll_delete_1)
   k1 = 200;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -582,10 +582,10 @@ START_TEST(test_sll_delete_2)
   k2 = 250;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -624,10 +624,10 @@ START_TEST(test_sll_delete_3)
   k2 = 250;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -666,10 +666,10 @@ START_TEST(test_sll_delete_4)
   k2 = 250;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -706,10 +706,10 @@ START_TEST(test_sll_delete_5)
   k2 = 250;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -750,14 +750,14 @@ START_TEST(test_sll_delete_6)
   k4 = -730;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
-  reg->key = k3;
-  node3 = sll_insert(head, *reg);
-  reg->key = k4;
-  node4 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
+  item->key = k3;
+  node3 = sll_insert(head, *item);
+  item->key = k4;
+  node4 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -827,14 +827,14 @@ START_TEST(test_sll_delete_7)
   k4 = -730;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
-  reg->key = k3;
-  node3 = sll_insert(head, *reg);
-  reg->key = k4;
-  node4 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
+  item->key = k3;
+  node3 = sll_insert(head, *item);
+  item->key = k4;
+  node4 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -904,14 +904,14 @@ START_TEST(test_sll_delete_8)
   k4 = -730;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
-  reg->key = k3;
-  node3 = sll_insert(head, *reg);
-  reg->key = k4;
-  node4 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
+  item->key = k3;
+  node3 = sll_insert(head, *item);
+  item->key = k4;
+  node4 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -981,14 +981,14 @@ START_TEST(test_sll_delete_9)
   k4 = -730;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
-  reg->key = k3;
-  node3 = sll_insert(head, *reg);
-  reg->key = k4;
-  node4 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
+  item->key = k3;
+  node3 = sll_insert(head, *item);
+  item->key = k4;
+  node4 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -1058,14 +1058,14 @@ START_TEST(test_sll_delete_10)
   k4 = -730;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
-  reg->key = k3;
-  node3 = sll_insert(head, *reg);
-  reg->key = k4;
-  node4 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
+  item->key = k3;
+  node3 = sll_insert(head, *item);
+  item->key = k4;
+  node4 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -1133,14 +1133,14 @@ START_TEST(test_sll_delete_11)
   k4 = -730;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
-  reg->key = k3;
-  node3 = sll_insert(head, *reg);
-  reg->key = k4;
-  node4 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
+  item->key = k3;
+  node3 = sll_insert(head, *item);
+  item->key = k4;
+  node4 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);
@@ -1208,14 +1208,14 @@ START_TEST(test_sll_delete_12)
   k4 = -730;
 
   *head = NULL;
-  reg->key = k1;
-  node1 = sll_insert(head, *reg);
-  reg->key = k2;
-  node2 = sll_insert(head, *reg);
-  reg->key = k3;
-  node3 = sll_insert(head, *reg);
-  reg->key = k4;
-  node4 = sll_insert(head, *reg);
+  item->key = k1;
+  node1 = sll_insert(head, *item);
+  item->key = k2;
+  node2 = sll_insert(head, *item);
+  item->key = k3;
+  node3 = sll_insert(head, *item);
+  item->key = k4;
+  node4 = sll_insert(head, *item);
 
   ck_assert_int_eq(head == NULL, false);
   ck_assert_int_eq((*head) == NULL, false);

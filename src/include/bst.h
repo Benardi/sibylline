@@ -81,11 +81,11 @@ BinarySearchTree* tree_maximum(BinarySearchTree* root);
  * it's the same as the second parameter it should return 0.
  *
  * @param node Pointer to pointer to root of tree.
- * @param reg Item with key and satellite data of inserted node.
+ * @param item Item with key and satellite data of inserted node.
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to inserted node.
  */
-BinarySearchTree* tree_insert(BinarySearchTree** root, Item reg,
+BinarySearchTree* tree_insert(BinarySearchTree** root, Item item,
                               int (*compare)(int, int));
 
 /** @brief Searches Binary Search Tree recursively for node of matching key.

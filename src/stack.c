@@ -37,7 +37,7 @@ bool stack_full(Stack* stk)
     }
 }
 
-bool push(Stack* stk, Item reg)
+bool push(Stack* stk, Item item)
 {
   if (stack_full(stk))
     {
@@ -46,7 +46,7 @@ bool push(Stack* stk, Item reg)
   else
     {
       stk->top = stk->top + 1;
-      stk->array[stk->top] = reg;
+      stk->array[stk->top] = item;
       return true;
     }
 }

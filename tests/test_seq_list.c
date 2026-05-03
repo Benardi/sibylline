@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 SeqList* sl;
-Item* reg;
+Item* item;
 
 void setup(void);
 void teardown(void);
@@ -33,13 +33,13 @@ static int compare(int k1, int k2)
 
 void setup(void)
 {
-  reg = malloc(sizeof(Item));
+  item = malloc(sizeof(Item));
   sl = malloc(sizeof(SeqList));
 }
 
 void teardown(void)
 {
-  free(reg);
+  free(item);
   free(sl);
 }
 
@@ -143,8 +143,8 @@ START_TEST(test_insert_elem_1)
 
   init_seq_list(sl, max_n_elems);
 
-  reg->key = k1;
-  result = insert_elem(sl, *reg, 0);
+  item->key = k1;
+  result = insert_elem(sl, *item, 0);
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(sl->n_elems, 1);
@@ -165,11 +165,11 @@ START_TEST(test_insert_elem_2)
 
   init_seq_list(sl, max_n_elems);
 
-  reg->key = k1;
-  result1 = insert_elem(sl, *reg, 0);
+  item->key = k1;
+  result1 = insert_elem(sl, *item, 0);
 
-  reg->key = k2;
-  result2 = insert_elem(sl, *reg, 1);
+  item->key = k2;
+  result2 = insert_elem(sl, *item, 1);
 
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, true);
@@ -192,11 +192,11 @@ START_TEST(test_insert_elem_3)
 
   init_seq_list(sl, max_n_elems);
 
-  reg->key = k1;
-  result1 = insert_elem(sl, *reg, 0);
+  item->key = k1;
+  result1 = insert_elem(sl, *item, 0);
 
-  reg->key = k2;
-  result2 = insert_elem(sl, *reg, 2);
+  item->key = k2;
+  result2 = insert_elem(sl, *item, 2);
 
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, false);
@@ -216,8 +216,8 @@ START_TEST(test_insert_elem_4)
 
   init_seq_list(sl, max_n_elems);
 
-  reg->key = k1;
-  result = insert_elem(sl, *reg, -1);
+  item->key = k1;
+  result = insert_elem(sl, *item, -1);
 
   ck_assert_int_eq(result, false);
   ck_assert_int_eq(sl->n_elems, 0);
@@ -235,8 +235,8 @@ START_TEST(test_insert_sorted_1)
 
   init_seq_list(sl, max_n_elems);
 
-  reg->key = k1;
-  result = insert_sorted(sl, *reg, compare);
+  item->key = k1;
+  result = insert_sorted(sl, *item, compare);
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(sl->n_elems, 1);
@@ -257,11 +257,11 @@ START_TEST(test_insert_sorted_2)
   k1 = 7;
   k2 = -8;
 
-  reg->key = k1;
-  result2 = insert_sorted(sl, *reg, compare);
+  item->key = k1;
+  result2 = insert_sorted(sl, *item, compare);
 
-  reg->key = k2;
-  result1 = insert_sorted(sl, *reg, compare);
+  item->key = k2;
+  result1 = insert_sorted(sl, *item, compare);
 
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, true);
@@ -284,11 +284,11 @@ START_TEST(test_insert_sorted_3)
 
   init_seq_list(sl, max_n_elems);
 
-  reg->key = k1;
-  result1 = insert_sorted(sl, *reg, compare);
+  item->key = k1;
+  result1 = insert_sorted(sl, *item, compare);
 
-  reg->key = k2;
-  result2 = insert_sorted(sl, *reg, compare);
+  item->key = k2;
+  result2 = insert_sorted(sl, *item, compare);
 
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, true);
@@ -313,14 +313,14 @@ START_TEST(test_insert_sorted_4)
 
   init_seq_list(sl, max_n_elems);
 
-  reg->key = k1;
-  result1 = insert_sorted(sl, *reg, compare);
+  item->key = k1;
+  result1 = insert_sorted(sl, *item, compare);
 
-  reg->key = k2;
-  result2 = insert_sorted(sl, *reg, compare);
+  item->key = k2;
+  result2 = insert_sorted(sl, *item, compare);
 
-  reg->key = k3;
-  result3 = insert_sorted(sl, *reg, compare);
+  item->key = k3;
+  result3 = insert_sorted(sl, *item, compare);
 
   ck_assert_int_eq(result1, true);
   ck_assert_int_eq(result2, true);

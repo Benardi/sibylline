@@ -56,7 +56,7 @@ int sentinel_search(SeqList* sl, int k,
     }
 }
 
-bool insert_sorted(SeqList* sl, Item reg,
+bool insert_sorted(SeqList* sl, Item item,
                    int (*compare)(int, int))
 {
   int pos;
@@ -68,13 +68,13 @@ bool insert_sorted(SeqList* sl, Item reg,
 
   pos = sl->n_elems;
 
-  while (pos > 0 && compare(sl->array[pos - 1].key, reg.key) == 1)
+  while (pos > 0 && compare(sl->array[pos - 1].key, item.key) == 1)
     {
       sl->array[pos] = sl->array[pos - 1];
       pos--;
     }
 
-  sl->array[pos] = reg;
+  sl->array[pos] = item;
   sl->n_elems++;
 
   return true;
@@ -110,7 +110,7 @@ int binary_search(SeqList* sl, int k,
   return -1;
 }
 
-bool insert_elem(SeqList* sl, Item reg, int i)
+bool insert_elem(SeqList* sl, Item item, int i)
 {
   int j;
   if (sl->n_elems == sl->max_n_elems || i < 0 || i > sl->n_elems)
@@ -123,7 +123,7 @@ bool insert_elem(SeqList* sl, Item reg, int i)
         {
           sl->array[j] = sl->array[j - 1];
         }
-      sl->array[i] = reg;
+      sl->array[i] = item;
       sl->n_elems++;
       return true;
     }

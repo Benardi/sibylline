@@ -336,18 +336,18 @@ void insertion_sort_gnrc(ExtendedItem array[], int start, int end,
                          int (*compare)(union Key, union Key))
 {
   int j, i;
-  ExtendedItem reg;
+  ExtendedItem item;
 
   for (j = start + 1; j <= end; j++)
     {
-      reg = array[j];
+      item = array[j];
       i = j - 1; /* last element of sorted deck */
-      while (i > (start - 1) && compare(array[i].key, reg.key) == 1)
+      while (i > (start - 1) && compare(array[i].key, item.key) == 1)
         {
           array[i + 1] = array[i];
           i = i - 1;
         }
-      array[i + 1] = reg;
+      array[i + 1] = item;
     }
 }
 
@@ -355,7 +355,7 @@ void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
                         int (*compare)(int, int))
 {
   int j, i, k;
-  Item reg;
+  Item item;
   DoublyLinkedList* current;
 
   k = start + 1;
@@ -364,19 +364,19 @@ void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
   for (j = start + 1; j <= end; j++)
     {
       current = dll_get_by_idx(current, k, j);
-      reg = current->data;
+      item = current->data;
       k = j;
 
       i = j - 1; /* last element of sorted deck */
       while (i > (start - 1) &&
-             compare(dll_get_by_idx(current, k, i)->data.key, reg.key) == 1)
+             compare(dll_get_by_idx(current, k, i)->data.key, item.key) == 1)
         {
           dll_get_by_idx(current, k, i + 1)->data =
               dll_get_by_idx(current, k, i)->data;
           i = i - 1;
         }
 
-      dll_get_by_idx(current, k, i + 1)->data = reg;
+      dll_get_by_idx(current, k, i + 1)->data = item;
     }
 }
 

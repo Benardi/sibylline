@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-Item* reg;
+Item* item;
 CircularSinglyLinkedList** tail;
 
 void setup(void);
@@ -32,13 +32,13 @@ static int compare(int k1, int k2)
 
 void setup(void)
 {
-  reg = malloc(sizeof(Item));
+  item = malloc(sizeof(Item));
   tail = malloc(sizeof(CircularSinglyLinkedList*));
 }
 
 void teardown(void)
 {
-  free(reg);
+  free(item);
   free(tail);
 }
 
@@ -50,8 +50,8 @@ START_TEST(test_csll_insert_begin_1)
   k1 = 15;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -78,10 +78,10 @@ START_TEST(test_csll_insert_begin_2)
   k2 = -25;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -125,12 +125,12 @@ START_TEST(test_csll_insert_begin_3)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -185,8 +185,8 @@ START_TEST(test_csll_insert_end_1)
   k1 = 15;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_end(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_end(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -213,10 +213,10 @@ START_TEST(test_csll_insert_end_2)
   k2 = -25;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_end(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_end(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_end(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_end(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -261,12 +261,12 @@ START_TEST(test_csll_insert_end_3)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_end(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_end(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_end(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_end(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_end(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_end(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -344,12 +344,12 @@ START_TEST(test_csll_search_2)
   k4 = 15;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -420,12 +420,12 @@ START_TEST(test_csll_search_3)
   k4 = -25;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -496,12 +496,12 @@ START_TEST(test_csll_search_4)
   k4 = -15;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -566,12 +566,12 @@ START_TEST(test_csll_search_5)
   k4 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -641,12 +641,12 @@ START_TEST(test_csll_search_6)
   k4 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_end(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_end(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_end(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_end(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_end(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_end(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -721,12 +721,12 @@ START_TEST(test_csll_search_7)
   k4 = -25;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_end(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_end(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_end(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_end(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_end(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_end(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -800,12 +800,12 @@ START_TEST(test_csll_search_8)
   k4 = 15;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_end(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_end(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_end(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_end(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_end(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_end(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -879,12 +879,12 @@ START_TEST(test_csll_search_9)
   k4 = 5;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_end(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_end(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_end(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_end(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_end(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_end(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -945,8 +945,8 @@ START_TEST(test_csll_delete_1)
   k1 = 15;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -976,8 +976,8 @@ START_TEST(test_csll_delete_2)
   k1 = 15;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_end(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_end(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1011,12 +1011,12 @@ START_TEST(test_csll_delete_3)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1102,12 +1102,12 @@ START_TEST(test_csll_delete_4)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1195,12 +1195,12 @@ START_TEST(test_csll_delete_5)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1277,12 +1277,12 @@ START_TEST(test_csll_delete_6)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1359,12 +1359,12 @@ START_TEST(test_csll_delete_7)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1441,12 +1441,12 @@ START_TEST(test_csll_delete_8)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1523,12 +1523,12 @@ START_TEST(test_csll_delete_9)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1594,12 +1594,12 @@ START_TEST(test_csll_delete_10)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1665,12 +1665,12 @@ START_TEST(test_csll_delete_11)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1736,12 +1736,12 @@ START_TEST(test_csll_delete_12)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1807,12 +1807,12 @@ START_TEST(test_csll_delete_13)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1878,12 +1878,12 @@ START_TEST(test_csll_insert_begin_end_1)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_begin(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_end(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_begin(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_begin(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_end(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_begin(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);
@@ -1942,12 +1942,12 @@ START_TEST(test_csll_insert_begin_end_2)
   k3 = 0;
 
   *tail = NULL;
-  reg->key = k1;
-  node1 = csll_insert_end(tail, *reg);
-  reg->key = k2;
-  node2 = csll_insert_begin(tail, *reg);
-  reg->key = k3;
-  node3 = csll_insert_end(tail, *reg);
+  item->key = k1;
+  node1 = csll_insert_end(tail, *item);
+  item->key = k2;
+  node2 = csll_insert_begin(tail, *item);
+  item->key = k3;
+  node3 = csll_insert_end(tail, *item);
 
   ck_assert_int_eq(tail == NULL, false);
   ck_assert_int_eq((*tail) == NULL, false);

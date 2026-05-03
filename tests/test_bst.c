@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-Item* reg;
+Item* item;
 BinarySearchTree** root;
 
 void setup(void);
@@ -32,13 +32,13 @@ static int compare(int k1, int k2)
 
 void setup(void)
 {
-  reg = malloc(sizeof(Item));
+  item = malloc(sizeof(Item));
   root = malloc(sizeof(BinarySearchTree*));
 }
 
 void teardown(void)
 {
-  free(reg);
+  free(item);
   free(root);
 }
 
@@ -50,8 +50,8 @@ START_TEST(test_bst_insert_1)
   (*root) = NULL;
 
   k = 10;
-  reg->key = k;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -80,10 +80,10 @@ START_TEST(test_bst_insert_2)
   k1 = 5;
   k2 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -124,10 +124,10 @@ START_TEST(test_bst_insert_3)
   k1 = 10;
   k2 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -170,12 +170,12 @@ START_TEST(test_bst_insert_4)
   k2 = 10;
   k3 = 15;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -229,12 +229,12 @@ START_TEST(test_bst_insert_5)
   k2 = 15;
   k3 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -286,20 +286,20 @@ START_TEST(test_bst_insert_6)
   k6 = 4;
   k7 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -409,24 +409,24 @@ START_TEST(test_bst_insert_7)
   k8 = 17;
   k9 = 13;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
-  node8 = tree_insert(root, *reg, compare);
-  reg->key = k9;
-  node9 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
+  node8 = tree_insert(root, *item, compare);
+  item->key = k9;
+  node9 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -552,18 +552,18 @@ START_TEST(test_bst_insert_8)
   k5 = 5;
   k6 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -658,20 +658,20 @@ START_TEST(test_bst_insert_9)
   k6 = 7;
   k7 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -777,20 +777,20 @@ START_TEST(test_bst_insert_10)
   k6 = 100;
   k7 = 150;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -901,20 +901,20 @@ START_TEST(test_bst_insert_11)
   k6 = 10;
   k7 = -30;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -1011,7 +1011,7 @@ START_TEST(test_bst_tree_minimum_1)
   (*root) = NULL;
 
   k = 10;
-  reg->key = k;
+  item->key = k;
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, true);
@@ -1033,8 +1033,8 @@ START_TEST(test_bst_tree_minimum_2)
   (*root) = NULL;
 
   k = 10;
-  reg->key = k;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -1084,20 +1084,20 @@ START_TEST(test_bst_tree_minimum_3)
   k6 = 7;
   k7 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -1214,20 +1214,20 @@ START_TEST(test_bst_tree_minimum_4)
   k6 = 4;
   k7 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -1336,12 +1336,12 @@ START_TEST(test_bst_tree_minimum_5)
   k2 = 10;
   k3 = 15;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -1412,18 +1412,18 @@ START_TEST(test_bst_tree_minimum_6)
   k5 = 5;
   k6 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -1533,24 +1533,24 @@ START_TEST(test_bst_tree_minimum_7)
   k8 = 17;
   k9 = 13;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
-  node8 = tree_insert(root, *reg, compare);
-  reg->key = k9;
-  node9 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
+  node8 = tree_insert(root, *item, compare);
+  item->key = k9;
+  node9 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -1689,20 +1689,20 @@ START_TEST(test_bst_tree_minimum_8)
   k6 = 100;
   k7 = 150;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -1824,20 +1824,20 @@ START_TEST(test_bst_tree_minimum_9)
   k6 = 10;
   k7 = -30;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -1963,8 +1963,8 @@ START_TEST(test_bst_tree_maximum_2)
 
   k1 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -2014,20 +2014,20 @@ START_TEST(test_bst_tree_maximum_3)
   k6 = 7;
   k7 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -2144,20 +2144,20 @@ START_TEST(test_bst_tree_maximum_4)
   k6 = 4;
   k7 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -2266,12 +2266,12 @@ START_TEST(test_bst_tree_maximum_5)
   k2 = 10;
   k3 = 15;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -2342,18 +2342,18 @@ START_TEST(test_bst_tree_maximum_6)
   k5 = 5;
   k6 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -2463,24 +2463,24 @@ START_TEST(test_bst_tree_maximum_7)
   k8 = 17;
   k9 = 13;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
-  node8 = tree_insert(root, *reg, compare);
-  reg->key = k9;
-  node9 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
+  node8 = tree_insert(root, *item, compare);
+  item->key = k9;
+  node9 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -2619,20 +2619,20 @@ START_TEST(test_bst_tree_maximum_8)
   k6 = 100;
   k7 = 150;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -2754,20 +2754,20 @@ START_TEST(test_bst_tree_maximum_9)
   k6 = 10;
   k7 = -30;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -2896,8 +2896,8 @@ START_TEST(test_bst_tree_search_2)
 
   k1 = 10;
   k2 = 10;
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -2934,8 +2934,8 @@ START_TEST(test_bst_tree_search_3)
   k1 = 10;
   k2 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -2973,8 +2973,8 @@ START_TEST(test_bst_tree_search_4)
   k1 = 10;
   k2 = 9;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -3007,8 +3007,8 @@ START_TEST(test_bst_tree_search_5)
   k1 = 10;
   k2 = -20;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -3043,10 +3043,10 @@ START_TEST(test_bst_tree_search_6)
   k2 = 5;
   k3 = 7;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -3093,10 +3093,10 @@ START_TEST(test_bst_tree_search_7)
   k2 = 5;
   k3 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -3148,10 +3148,10 @@ START_TEST(test_bst_tree_search_8)
   k2 = 5;
   k3 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -3205,12 +3205,12 @@ START_TEST(test_bst_tree_search_9)
   k3 = 10;
   k4 = 15;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -3265,12 +3265,12 @@ START_TEST(test_bst_tree_search_10)
   k3 = 10;
   k4 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -3333,20 +3333,20 @@ START_TEST(test_bst_tree_search_11)
   k7 = 5;
   k8 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -3462,20 +3462,20 @@ START_TEST(test_bst_tree_search_12)
   k7 = 5;
   k8 = 12;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -3591,21 +3591,21 @@ START_TEST(test_bst_tree_search_13)
   k7 = 5;
   k8 = -7;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -3721,21 +3721,21 @@ START_TEST(test_bst_tree_search_14)
   k7 = 5;
   k8 = 4;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -3851,20 +3851,20 @@ START_TEST(test_bst_tree_search_15)
   k7 = 5;
   k8 = 15;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -3980,20 +3980,20 @@ START_TEST(test_bst_tree_search_16)
   k7 = 5;
   k8 = -3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -4109,20 +4109,20 @@ START_TEST(test_bst_tree_search_17)
   k7 = 5;
   k8 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -4239,21 +4239,21 @@ START_TEST(test_bst_tree_search_18)
   k7 = 5;
   k8 = -5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -4365,20 +4365,20 @@ START_TEST(test_bst_tree_search_19)
   k7 = 5;
   k8 = 17;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -4490,20 +4490,20 @@ START_TEST(test_bst_tree_search_20)
   k7 = 5;
   k8 = 2;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -4615,20 +4615,20 @@ START_TEST(test_bst_tree_search_21)
   k7 = 5;
   k8 = 7;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -4740,20 +4740,20 @@ START_TEST(test_bst_tree_search_22)
   k7 = 5;
   k8 = -12;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -4863,18 +4863,18 @@ START_TEST(test_bst_tree_search_23)
   k6 = 3;
   k7 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -4977,18 +4977,18 @@ START_TEST(test_bst_tree_search_24)
   k6 = 3;
   k7 = 4;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -5089,20 +5089,20 @@ START_TEST(test_bst_tree_search_25)
   k7 = 150;
   k8 = -5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -5224,20 +5224,20 @@ START_TEST(test_bst_tree_search_26)
   k7 = 150;
   k8 = 25;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -5359,20 +5359,20 @@ START_TEST(test_bst_tree_search_27)
   k7 = 150;
   k8 = 150;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -5494,20 +5494,20 @@ START_TEST(test_bst_tree_search_28)
   k7 = -30;
   k8 = 100;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -5628,20 +5628,20 @@ START_TEST(test_bst_tree_search_29)
   k7 = -30;
   k8 = 40;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -5762,20 +5762,20 @@ START_TEST(test_bst_tree_search_30)
   k7 = -30;
   k8 = -30;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -5894,18 +5894,18 @@ START_TEST(test_bst_tree_search_31)
   k6 = 3;
   k7 = 9;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6011,8 +6011,8 @@ START_TEST(test_bst_iterative_tree_search_2)
   (*root) = NULL;
 
   key = 10;
-  reg->key = key;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = key;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6047,8 +6047,8 @@ START_TEST(test_bst_iterative_tree_search_3)
   (*root) = NULL;
 
   k = 10;
-  reg->key = k;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6085,8 +6085,8 @@ START_TEST(test_bst_iterative_tree_search_4)
 
   k1 = 10;
   k2 = 9;
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6119,8 +6119,8 @@ START_TEST(test_bst_iterative_tree_search_5)
   k1 = 10;
   k2 = -20;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6155,11 +6155,11 @@ START_TEST(test_bst_iterative_tree_search_6)
   k2 = 5;
   k3 = 7;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
 
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6205,10 +6205,10 @@ START_TEST(test_bst_iterative_tree_search_7)
   k2 = 5;
   k3 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6260,10 +6260,10 @@ START_TEST(test_bst_iterative_tree_search_8)
   k2 = 5;
   k3 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6317,12 +6317,12 @@ START_TEST(test_bst_iterative_tree_search_9)
   k3 = 10;
   k4 = 15;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6377,12 +6377,12 @@ START_TEST(test_bst_iterative_tree_search_10)
   k3 = 10;
   k4 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6444,20 +6444,20 @@ START_TEST(test_bst_iterative_tree_search_11)
   k6 = 4;
   k7 = 5;
   k8 = 5;
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6573,20 +6573,20 @@ START_TEST(test_bst_iterative_tree_search_12)
   k7 = 5;
   k8 = 12;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6702,20 +6702,20 @@ START_TEST(test_bst_iterative_tree_search_13)
   k7 = 5;
   k8 = -7;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6831,20 +6831,20 @@ START_TEST(test_bst_iterative_tree_search_14)
   k7 = 5;
   k8 = 4;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -6960,20 +6960,20 @@ START_TEST(test_bst_iterative_tree_search_15)
   k7 = 5;
   k8 = 15;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -7089,20 +7089,20 @@ START_TEST(test_bst_iterative_tree_search_16)
   k7 = 5;
   k8 = -3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -7218,20 +7218,20 @@ START_TEST(test_bst_iterative_tree_search_17)
   k7 = 5;
   k8 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -7348,20 +7348,20 @@ START_TEST(test_bst_iterative_tree_search_18)
   k7 = 5;
   k8 = -5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -7473,20 +7473,20 @@ START_TEST(test_bst_iterative_tree_search_19)
   k7 = 5;
   k8 = 17;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -7598,20 +7598,20 @@ START_TEST(test_bst_iterative_tree_search_20)
   k7 = 5;
   k8 = 2;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -7723,20 +7723,20 @@ START_TEST(test_bst_iterative_tree_search_21)
   k7 = 5;
   k8 = 7;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -7848,20 +7848,20 @@ START_TEST(test_bst_iterative_tree_search_22)
   k7 = 5;
   k8 = -12;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -7971,18 +7971,18 @@ START_TEST(test_bst_iterative_tree_search_23)
   k6 = 3;
   k7 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -8085,18 +8085,18 @@ START_TEST(test_bst_iterative_tree_search_24)
   k6 = 3;
   k7 = 4;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -8197,20 +8197,20 @@ START_TEST(test_bst_iterative_tree_search_25)
   k7 = 150;
   k8 = -5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -8332,20 +8332,20 @@ START_TEST(test_bst_iterative_tree_search_26)
   k7 = 150;
   k8 = 25;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -8467,20 +8467,20 @@ START_TEST(test_bst_iterative_tree_search_27)
   k7 = 150;
   k8 = 150;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -8602,20 +8602,20 @@ START_TEST(test_bst_iterative_tree_search_28)
   k7 = -30;
   k8 = 100;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -8736,20 +8736,20 @@ START_TEST(test_bst_iterative_tree_search_29)
   k7 = -30;
   k8 = 40;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -8870,20 +8870,20 @@ START_TEST(test_bst_iterative_tree_search_30)
   k7 = -30;
   k8 = -30;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9002,18 +9002,18 @@ START_TEST(test_bst_iterative_tree_search_31)
   k6 = 3;
   k7 = 9;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9115,8 +9115,8 @@ START_TEST(test_bst_tree_successor_2)
   (*root) = NULL;
 
   k = 10;
-  reg->key = k;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9150,10 +9150,10 @@ START_TEST(test_bst_tree_successor_3)
   k1 = 5;
   k2 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9203,10 +9203,10 @@ START_TEST(test_bst_tree_successor_4)
   k1 = 5;
   k2 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9252,10 +9252,10 @@ START_TEST(test_bst_tree_successor_5)
   k1 = 10;
   k2 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9301,10 +9301,10 @@ START_TEST(test_bst_tree_successor_6)
   k1 = 10;
   k2 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9356,12 +9356,12 @@ START_TEST(test_bst_tree_successor_7)
   k2 = 15;
   k3 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9414,12 +9414,12 @@ START_TEST(test_bst_tree_successor_8)
   k2 = 15;
   k3 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9468,12 +9468,12 @@ START_TEST(test_bst_tree_successor_9)
   k2 = 15;
   k3 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9534,20 +9534,20 @@ START_TEST(test_bst_tree_successor_10)
   k6 = 4;
   k7 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9662,20 +9662,20 @@ START_TEST(test_bst_tree_successor_11)
   k6 = 4;
   k7 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9794,24 +9794,24 @@ START_TEST(test_bst_tree_successor_12)
   k8 = 17;
   k9 = 13;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
-  node8 = tree_insert(root, *reg, compare);
-  reg->key = k9;
-  node9 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
+  node8 = tree_insert(root, *item, compare);
+  item->key = k9;
+  node9 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -9952,24 +9952,24 @@ START_TEST(test_bst_tree_successor_13)
   k8 = 17;
   k9 = 13;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
-  node8 = tree_insert(root, *reg, compare);
-  reg->key = k9;
-  node9 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
+  node8 = tree_insert(root, *item, compare);
+  item->key = k9;
+  node9 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -10110,24 +10110,24 @@ START_TEST(test_bst_tree_successor_14)
   k8 = 17;
   k9 = 13;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
-  node8 = tree_insert(root, *reg, compare);
-  reg->key = k9;
-  node9 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
+  node8 = tree_insert(root, *item, compare);
+  item->key = k9;
+  node9 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -10262,18 +10262,18 @@ START_TEST(test_bst_tree_successor_15)
   k5 = 5;
   k6 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -10377,20 +10377,20 @@ START_TEST(test_bst_tree_successor_16)
   k6 = 7;
   k7 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -10501,20 +10501,20 @@ START_TEST(test_bst_tree_successor_17)
   k6 = 100;
   k7 = 150;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -10630,20 +10630,20 @@ START_TEST(test_bst_tree_successor_18)
   k6 = 100;
   k7 = 150;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -10763,20 +10763,20 @@ START_TEST(test_bst_tree_successor_19)
   k6 = 10;
   k7 = -30;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -10891,20 +10891,20 @@ START_TEST(test_bst_tree_successor_20)
   k6 = 10;
   k7 = -30;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11026,8 +11026,8 @@ START_TEST(test_bst_tree_predecessor_2)
 
   k1 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11061,10 +11061,10 @@ START_TEST(test_bst_tree_predecessor_3)
   k1 = 5;
   k2 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11110,10 +11110,10 @@ START_TEST(test_bst_tree_predecessor_4)
   k1 = 5;
   k2 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11163,10 +11163,10 @@ START_TEST(test_bst_tree_predecessor_5)
   k1 = 10;
   k2 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11216,10 +11216,10 @@ START_TEST(test_bst_tree_predecessor_6)
   k1 = 10;
   k2 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11267,12 +11267,12 @@ START_TEST(test_bst_tree_predecessor_7)
   k2 = 15;
   k3 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11321,12 +11321,12 @@ START_TEST(test_bst_tree_predecessor_8)
   k2 = 15;
   k3 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11379,12 +11379,12 @@ START_TEST(test_bst_tree_predecessor_9)
   k2 = 15;
   k3 = 10;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11445,20 +11445,20 @@ START_TEST(test_bst_tree_predecessor_10)
   k6 = 4;
   k7 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11573,20 +11573,20 @@ START_TEST(test_bst_tree_predecessor_11)
   k6 = 4;
   k7 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11697,20 +11697,20 @@ START_TEST(test_bst_tree_predecessor_12)
   k6 = 4;
   k7 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11829,24 +11829,24 @@ START_TEST(test_bst_tree_predecessor_13)
   k8 = 17;
   k9 = 13;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
-  node8 = tree_insert(root, *reg, compare);
-  reg->key = k9;
-  node9 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
+  node8 = tree_insert(root, *item, compare);
+  item->key = k9;
+  node9 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -11987,24 +11987,24 @@ START_TEST(test_bst_tree_predecessor_14)
   k8 = 17;
   k9 = 13;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
-  node8 = tree_insert(root, *reg, compare);
-  reg->key = k9;
-  node9 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
+  node8 = tree_insert(root, *item, compare);
+  item->key = k9;
+  node9 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -12139,18 +12139,18 @@ START_TEST(test_bst_tree_predecessor_15)
   k5 = 5;
   k6 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -12254,20 +12254,20 @@ START_TEST(test_bst_tree_predecessor_16)
   k6 = 7;
   k7 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -12382,20 +12382,20 @@ START_TEST(test_bst_tree_predecessor_17)
   k6 = 100;
   k7 = 150;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -12515,20 +12515,20 @@ START_TEST(test_bst_tree_predecessor_18)
   k6 = 100;
   k7 = 150;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -12644,20 +12644,20 @@ START_TEST(test_bst_tree_predecessor_19)
   k6 = 10;
   k7 = -30;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -12776,20 +12776,20 @@ START_TEST(test_bst_tree_predecessor_20)
   k6 = 10;
   k7 = -30;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -12896,8 +12896,8 @@ START_TEST(test_bst_tree_delete_1)
 
   k = 10;
 
-  reg->key = k;
-  node1 = tree_insert(root, *reg, compare);
+  item->key = k;
+  node1 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -12943,10 +12943,10 @@ START_TEST(test_bst_tree_delete_2)
   k1 = 10;
   k2 = 15;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -13014,10 +13014,10 @@ START_TEST(test_bst_tree_delete_3)
 
   k1 = 8;
   k2 = 5;
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -13084,12 +13084,12 @@ START_TEST(test_bst_tree_delete_4)
   k1 = 10;
   k2 = 15;
   k3 = 20;
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -13185,12 +13185,12 @@ START_TEST(test_bst_tree_delete_5)
   k2 = 5;
   k3 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -13285,16 +13285,16 @@ START_TEST(test_bst_tree_delete_6)
   k4 = 18;
   k5 = 33;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -13409,16 +13409,16 @@ START_TEST(test_bst_tree_delete_7)
   k4 = 0;
   k5 = 4;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -13568,22 +13568,22 @@ START_TEST(test_bst_tree_delete_8)
   k7 = 25;
   k8 = 40;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
-  node8 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
+  node8 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -13798,28 +13798,28 @@ START_TEST(test_bst_tree_delete_9)
   k10 = 17;
   k11 = 23;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
-  reg->key = k8;
-  node8 = tree_insert(root, *reg, compare);
-  reg->key = k9;
-  node9 = tree_insert(root, *reg, compare);
-  reg->key = k10;
-  node10 = tree_insert(root, *reg, compare);
-  reg->key = k11;
-  node11 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
+  item->key = k8;
+  node8 = tree_insert(root, *item, compare);
+  item->key = k9;
+  node9 = tree_insert(root, *item, compare);
+  item->key = k10;
+  node10 = tree_insert(root, *item, compare);
+  item->key = k11;
+  node11 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -14087,18 +14087,18 @@ START_TEST(test_bst_tree_delete_10)
   k5 = 5;
   k6 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -14263,20 +14263,20 @@ START_TEST(test_bst_tree_delete_11)
   k6 = 7;
   k7 = 3;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);
@@ -14472,20 +14472,20 @@ START_TEST(test_bst_tree_delete_12)
   k6 = 4;
   k7 = 5;
 
-  reg->key = k1;
-  node1 = tree_insert(root, *reg, compare);
-  reg->key = k2;
-  node2 = tree_insert(root, *reg, compare);
-  reg->key = k3;
-  node3 = tree_insert(root, *reg, compare);
-  reg->key = k4;
-  node4 = tree_insert(root, *reg, compare);
-  reg->key = k5;
-  node5 = tree_insert(root, *reg, compare);
-  reg->key = k6;
-  node6 = tree_insert(root, *reg, compare);
-  reg->key = k7;
-  node7 = tree_insert(root, *reg, compare);
+  item->key = k1;
+  node1 = tree_insert(root, *item, compare);
+  item->key = k2;
+  node2 = tree_insert(root, *item, compare);
+  item->key = k3;
+  node3 = tree_insert(root, *item, compare);
+  item->key = k4;
+  node4 = tree_insert(root, *item, compare);
+  item->key = k5;
+  node5 = tree_insert(root, *item, compare);
+  item->key = k6;
+  node6 = tree_insert(root, *item, compare);
+  item->key = k7;
+  node7 = tree_insert(root, *item, compare);
 
   ck_assert_int_eq(root == NULL, false);
   ck_assert_int_eq((*root) == NULL, false);

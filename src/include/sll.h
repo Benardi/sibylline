@@ -27,10 +27,10 @@ typedef struct SinglyLinkedList
  * the Singly Linked List.
  *
  * @param head Double pointer to head of Singly Linked List.
- * @param reg Item of inserted node.
+ * @param item Item of inserted node.
  * @return Pointer to inserted node.
  */
-SinglyLinkedList* sll_insert(SinglyLinkedList** head, Item reg);
+SinglyLinkedList* sll_insert(SinglyLinkedList** head, Item item);
 
 /** @brief Retrieves node from Singly Linked List via key.
  *

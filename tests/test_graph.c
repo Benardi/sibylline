@@ -12,7 +12,7 @@ START_TEST(test_build_adj_list_1)
 {
   int i, length;
   int k0, k1, k2, k3, k4;
-  Item reg;
+  Item item;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -30,38 +30,38 @@ START_TEST(test_build_adj_list_1)
       *adj_list[i] = NULL;
     }
 
-  reg.key = k4;
-  dll_insert(adj_list[0], reg);
-  reg.key = k1;
-  dll_insert(adj_list[0], reg);
+  item.key = k4;
+  dll_insert(adj_list[0], item);
+  item.key = k1;
+  dll_insert(adj_list[0], item);
 
-  reg.key = k3;
-  dll_insert(adj_list[1], reg);
-  reg.key = k2;
-  dll_insert(adj_list[1], reg);
-  reg.key = k4;
-  dll_insert(adj_list[1], reg);
-  reg.key = k0;
-  dll_insert(adj_list[1], reg);
+  item.key = k3;
+  dll_insert(adj_list[1], item);
+  item.key = k2;
+  dll_insert(adj_list[1], item);
+  item.key = k4;
+  dll_insert(adj_list[1], item);
+  item.key = k0;
+  dll_insert(adj_list[1], item);
 
-  reg.key = k3;
-  dll_insert(adj_list[2], reg);
-  reg.key = k1;
-  dll_insert(adj_list[2], reg);
+  item.key = k3;
+  dll_insert(adj_list[2], item);
+  item.key = k1;
+  dll_insert(adj_list[2], item);
 
-  reg.key = k2;
-  dll_insert(adj_list[3], reg);
-  reg.key = k4;
-  dll_insert(adj_list[3], reg);
-  reg.key = k1;
-  dll_insert(adj_list[3], reg);
+  item.key = k2;
+  dll_insert(adj_list[3], item);
+  item.key = k4;
+  dll_insert(adj_list[3], item);
+  item.key = k1;
+  dll_insert(adj_list[3], item);
 
-  reg.key = k1;
-  dll_insert(adj_list[4], reg);
-  reg.key = k0;
-  dll_insert(adj_list[4], reg);
-  reg.key = k3;
-  dll_insert(adj_list[4], reg);
+  item.key = k1;
+  dll_insert(adj_list[4], item);
+  item.key = k0;
+  dll_insert(adj_list[4], item);
+  item.key = k3;
+  dll_insert(adj_list[4], item);
 
   ck_assert_int_eq((*adj_list[0])->data.key, 1);
   ck_assert_int_eq((*adj_list[0])->next->data.key, 4);
@@ -96,7 +96,7 @@ START_TEST(test_build_adj_list_2)
 {
   int i, length;
   int k1, k3, k4, k5;
-  Item reg;
+  Item item;
   DoublyLinkedList*** adj_list;
 
   length = 6;
@@ -113,27 +113,27 @@ START_TEST(test_build_adj_list_2)
       *adj_list[i] = NULL;
     }
 
-  reg.key = k3;
-  dll_insert(adj_list[0], reg);
-  reg.key = k1;
-  dll_insert(adj_list[0], reg);
+  item.key = k3;
+  dll_insert(adj_list[0], item);
+  item.key = k1;
+  dll_insert(adj_list[0], item);
 
-  reg.key = k4;
-  dll_insert(adj_list[1], reg);
+  item.key = k4;
+  dll_insert(adj_list[1], item);
 
-  reg.key = k4;
-  dll_insert(adj_list[2], reg);
-  reg.key = k5;
-  dll_insert(adj_list[2], reg);
+  item.key = k4;
+  dll_insert(adj_list[2], item);
+  item.key = k5;
+  dll_insert(adj_list[2], item);
 
-  reg.key = k1;
-  dll_insert(adj_list[3], reg);
+  item.key = k1;
+  dll_insert(adj_list[3], item);
 
-  reg.key = k3;
-  dll_insert(adj_list[4], reg);
+  item.key = k3;
+  dll_insert(adj_list[4], item);
 
-  reg.key = k5;
-  dll_insert(adj_list[5], reg);
+  item.key = k5;
+  dll_insert(adj_list[5], item);
 
   ck_assert_int_eq((*adj_list[0])->data.key, 1);
   ck_assert_int_eq((*adj_list[0])->next->data.key, 3);
@@ -163,7 +163,7 @@ START_TEST(test_build_adj_list_3)
 {
   int i, length;
   ColoredNode node1, node3, node4, node5;
-  Item reg;
+  Item item;
   DoublyLinkedList*** adj_list;
 
   length = 6;
@@ -184,27 +184,27 @@ START_TEST(test_build_adj_list_3)
       *adj_list[i] = NULL;
     }
 
-  reg.value = &node3;
-  dll_insert(adj_list[0], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[0], reg);
+  item.value = &node3;
+  dll_insert(adj_list[0], item);
+  item.value = &node1;
+  dll_insert(adj_list[0], item);
 
-  reg.value = &node4;
-  dll_insert(adj_list[1], reg);
+  item.value = &node4;
+  dll_insert(adj_list[1], item);
 
-  reg.value = &node4;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node5;
-  dll_insert(adj_list[2], reg);
+  item.value = &node4;
+  dll_insert(adj_list[2], item);
+  item.value = &node5;
+  dll_insert(adj_list[2], item);
 
-  reg.value = &node1;
-  dll_insert(adj_list[3], reg);
+  item.value = &node1;
+  dll_insert(adj_list[3], item);
 
-  reg.value = &node3;
-  dll_insert(adj_list[4], reg);
+  item.value = &node3;
+  dll_insert(adj_list[4], item);
 
-  reg.value = &node5;
-  dll_insert(adj_list[5], reg);
+  item.value = &node5;
+  dll_insert(adj_list[5], item);
 
   ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.value)->id, 1);
   ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.value)->id, 3);
@@ -401,7 +401,7 @@ START_TEST(test_bfs_1)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4, node5;
-  Item reg;
+  Item item;
   DoublyLinkedList*** adj_list;
 
   length = 6;
@@ -428,27 +428,27 @@ START_TEST(test_bfs_1)
       *adj_list[i] = NULL;
     }
 
-  reg.value = &node3;
-  dll_insert(adj_list[0], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[0], reg);
+  item.value = &node3;
+  dll_insert(adj_list[0], item);
+  item.value = &node1;
+  dll_insert(adj_list[0], item);
 
-  reg.value = &node4;
-  dll_insert(adj_list[1], reg);
+  item.value = &node4;
+  dll_insert(adj_list[1], item);
 
-  reg.value = &node4;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node5;
-  dll_insert(adj_list[2], reg);
+  item.value = &node4;
+  dll_insert(adj_list[2], item);
+  item.value = &node5;
+  dll_insert(adj_list[2], item);
 
-  reg.value = &node1;
-  dll_insert(adj_list[3], reg);
+  item.value = &node1;
+  dll_insert(adj_list[3], item);
 
-  reg.value = &node3;
-  dll_insert(adj_list[4], reg);
+  item.value = &node3;
+  dll_insert(adj_list[4], item);
 
-  reg.value = &node5;
-  dll_insert(adj_list[5], reg);
+  item.value = &node5;
+  dll_insert(adj_list[5], item);
 
   ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.value)->id, 1);
   ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.value)->id, 3);
@@ -508,7 +508,7 @@ START_TEST(test_bfs_2)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4;
-  Item reg;
+  Item item;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -533,38 +533,38 @@ START_TEST(test_bfs_2)
       *adj_list[i] = NULL;
     }
 
-  reg.value = &node4;
-  dll_insert(adj_list[0], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[0], reg);
+  item.value = &node4;
+  dll_insert(adj_list[0], item);
+  item.value = &node1;
+  dll_insert(adj_list[0], item);
 
-  reg.value = &node3;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node4;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node0;
-  dll_insert(adj_list[1], reg);
+  item.value = &node3;
+  dll_insert(adj_list[1], item);
+  item.value = &node2;
+  dll_insert(adj_list[1], item);
+  item.value = &node4;
+  dll_insert(adj_list[1], item);
+  item.value = &node0;
+  dll_insert(adj_list[1], item);
 
-  reg.value = &node3;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[2], reg);
+  item.value = &node3;
+  dll_insert(adj_list[2], item);
+  item.value = &node1;
+  dll_insert(adj_list[2], item);
 
-  reg.value = &node2;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node4;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[3], reg);
+  item.value = &node2;
+  dll_insert(adj_list[3], item);
+  item.value = &node4;
+  dll_insert(adj_list[3], item);
+  item.value = &node1;
+  dll_insert(adj_list[3], item);
 
-  reg.value = &node1;
-  dll_insert(adj_list[4], reg);
-  reg.value = &node0;
-  dll_insert(adj_list[4], reg);
-  reg.value = &node3;
-  dll_insert(adj_list[4], reg);
+  item.value = &node1;
+  dll_insert(adj_list[4], item);
+  item.value = &node0;
+  dll_insert(adj_list[4], item);
+  item.value = &node3;
+  dll_insert(adj_list[4], item);
 
   ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.value)->id, 1);
   ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.value)->id, 4);
@@ -631,7 +631,7 @@ START_TEST(test_bfs_3)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4, node5, node6, node7;
-  Item reg;
+  Item item;
   DoublyLinkedList*** adj_list;
 
   length = 8;
@@ -662,53 +662,53 @@ START_TEST(test_bfs_3)
       *adj_list[i] = NULL;
     }
 
-  reg.value = &node4;
-  dll_insert(adj_list[0], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[0], reg);
+  item.value = &node4;
+  dll_insert(adj_list[0], item);
+  item.value = &node1;
+  dll_insert(adj_list[0], item);
 
-  reg.value = &node5;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node0;
-  dll_insert(adj_list[1], reg);
+  item.value = &node5;
+  dll_insert(adj_list[1], item);
+  item.value = &node0;
+  dll_insert(adj_list[1], item);
 
-  reg.value = &node6;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node5;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node3;
-  dll_insert(adj_list[2], reg);
+  item.value = &node6;
+  dll_insert(adj_list[2], item);
+  item.value = &node5;
+  dll_insert(adj_list[2], item);
+  item.value = &node3;
+  dll_insert(adj_list[2], item);
 
-  reg.value = &node7;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node6;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[3], reg);
+  item.value = &node7;
+  dll_insert(adj_list[3], item);
+  item.value = &node6;
+  dll_insert(adj_list[3], item);
+  item.value = &node2;
+  dll_insert(adj_list[3], item);
 
-  reg.value = &node0;
-  dll_insert(adj_list[4], reg);
+  item.value = &node0;
+  dll_insert(adj_list[4], item);
 
-  reg.value = &node6;
-  dll_insert(adj_list[5], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[5], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[5], reg);
+  item.value = &node6;
+  dll_insert(adj_list[5], item);
+  item.value = &node2;
+  dll_insert(adj_list[5], item);
+  item.value = &node1;
+  dll_insert(adj_list[5], item);
 
-  reg.value = &node7;
-  dll_insert(adj_list[6], reg);
-  reg.value = &node5;
-  dll_insert(adj_list[6], reg);
-  reg.value = &node3;
-  dll_insert(adj_list[6], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[6], reg);
+  item.value = &node7;
+  dll_insert(adj_list[6], item);
+  item.value = &node5;
+  dll_insert(adj_list[6], item);
+  item.value = &node3;
+  dll_insert(adj_list[6], item);
+  item.value = &node2;
+  dll_insert(adj_list[6], item);
 
-  reg.value = &node6;
-  dll_insert(adj_list[7], reg);
-  reg.value = &node3;
-  dll_insert(adj_list[7], reg);
+  item.value = &node6;
+  dll_insert(adj_list[7], item);
+  item.value = &node3;
+  dll_insert(adj_list[7], item);
 
   ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.value)->id, 1);
   ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.value)->id, 4);
@@ -836,7 +836,7 @@ START_TEST(test_bfs_5)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4;
-  Item reg;
+  Item item;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -861,50 +861,50 @@ START_TEST(test_bfs_5)
       *adj_list[i] = NULL;
     }
 
-  reg.value = &node4;
-  dll_insert(adj_list[0], reg);
-  reg.value = &node3;
-  dll_insert(adj_list[0], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[0], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[0], reg);
+  item.value = &node4;
+  dll_insert(adj_list[0], item);
+  item.value = &node3;
+  dll_insert(adj_list[0], item);
+  item.value = &node2;
+  dll_insert(adj_list[0], item);
+  item.value = &node1;
+  dll_insert(adj_list[0], item);
 
-  reg.value = &node4;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node3;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node0;
-  dll_insert(adj_list[1], reg);
+  item.value = &node4;
+  dll_insert(adj_list[1], item);
+  item.value = &node3;
+  dll_insert(adj_list[1], item);
+  item.value = &node2;
+  dll_insert(adj_list[1], item);
+  item.value = &node0;
+  dll_insert(adj_list[1], item);
 
-  reg.value = &node4;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node3;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node0;
-  dll_insert(adj_list[2], reg);
+  item.value = &node4;
+  dll_insert(adj_list[2], item);
+  item.value = &node3;
+  dll_insert(adj_list[2], item);
+  item.value = &node1;
+  dll_insert(adj_list[2], item);
+  item.value = &node0;
+  dll_insert(adj_list[2], item);
 
-  reg.value = &node4;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node0;
-  dll_insert(adj_list[3], reg);
+  item.value = &node4;
+  dll_insert(adj_list[3], item);
+  item.value = &node2;
+  dll_insert(adj_list[3], item);
+  item.value = &node1;
+  dll_insert(adj_list[3], item);
+  item.value = &node0;
+  dll_insert(adj_list[3], item);
 
-  reg.value = &node3;
-  dll_insert(adj_list[4], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[4], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[4], reg);
-  reg.value = &node0;
-  dll_insert(adj_list[4], reg);
+  item.value = &node3;
+  dll_insert(adj_list[4], item);
+  item.value = &node2;
+  dll_insert(adj_list[4], item);
+  item.value = &node1;
+  dll_insert(adj_list[4], item);
+  item.value = &node0;
+  dll_insert(adj_list[4], item);
 
   ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.value)->id, 1);
   ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->next->data.value)->id, 2);
@@ -955,7 +955,7 @@ START_TEST(test_bfs_6)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4;
-  Item reg;
+  Item item;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -980,34 +980,34 @@ START_TEST(test_bfs_6)
       *adj_list[i] = NULL;
     }
 
-  reg.value = &node1;
-  dll_insert(adj_list[0], reg);
+  item.value = &node1;
+  dll_insert(adj_list[0], item);
 
-  reg.value = &node4;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node3;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node0;
-  dll_insert(adj_list[1], reg);
+  item.value = &node4;
+  dll_insert(adj_list[1], item);
+  item.value = &node3;
+  dll_insert(adj_list[1], item);
+  item.value = &node2;
+  dll_insert(adj_list[1], item);
+  item.value = &node0;
+  dll_insert(adj_list[1], item);
 
-  reg.value = &node3;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[2], reg);
+  item.value = &node3;
+  dll_insert(adj_list[2], item);
+  item.value = &node1;
+  dll_insert(adj_list[2], item);
 
-  reg.value = &node4;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[3], reg);
+  item.value = &node4;
+  dll_insert(adj_list[3], item);
+  item.value = &node2;
+  dll_insert(adj_list[3], item);
+  item.value = &node1;
+  dll_insert(adj_list[3], item);
 
-  reg.value = &node3;
-  dll_insert(adj_list[4], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[4], reg);
+  item.value = &node3;
+  dll_insert(adj_list[4], item);
+  item.value = &node1;
+  dll_insert(adj_list[4], item);
 
   ck_assert_int_eq(((ColoredNode*)(*adj_list[0])->data.value)->id, 1);
 
@@ -1071,7 +1071,7 @@ START_TEST(test_dfs_1)
   int i, length;
   TimedNode** vrtxs;
   TimedNode node0, node1, node2, node3, node4, node5;
-  Item reg;
+  Item item;
   DoublyLinkedList*** adj_list;
 
   length = 6;
@@ -1098,27 +1098,27 @@ START_TEST(test_dfs_1)
       *adj_list[i] = NULL;
     }
 
-  reg.value = &node3;
-  dll_insert(adj_list[0], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[0], reg);
+  item.value = &node3;
+  dll_insert(adj_list[0], item);
+  item.value = &node1;
+  dll_insert(adj_list[0], item);
 
-  reg.value = &node4;
-  dll_insert(adj_list[1], reg);
+  item.value = &node4;
+  dll_insert(adj_list[1], item);
 
-  reg.value = &node4;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node5;
-  dll_insert(adj_list[2], reg);
+  item.value = &node4;
+  dll_insert(adj_list[2], item);
+  item.value = &node5;
+  dll_insert(adj_list[2], item);
 
-  reg.value = &node1;
-  dll_insert(adj_list[3], reg);
+  item.value = &node1;
+  dll_insert(adj_list[3], item);
 
-  reg.value = &node3;
-  dll_insert(adj_list[4], reg);
+  item.value = &node3;
+  dll_insert(adj_list[4], item);
 
-  reg.value = &node5;
-  dll_insert(adj_list[5], reg);
+  item.value = &node5;
+  dll_insert(adj_list[5], item);
 
   ck_assert_int_eq(((TimedNode*)(*adj_list[0])->data.value)->id, 1);
   ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->data.value)->id, 3);
@@ -1169,7 +1169,7 @@ START_TEST(test_dfs_2)
   int i, length;
   TimedNode** vrtxs;
   TimedNode node0, node1, node2, node3, node4;
-  Item reg;
+  Item item;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -1194,38 +1194,38 @@ START_TEST(test_dfs_2)
       *adj_list[i] = NULL;
     }
 
-  reg.value = &node4;
-  dll_insert(adj_list[0], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[0], reg);
+  item.value = &node4;
+  dll_insert(adj_list[0], item);
+  item.value = &node1;
+  dll_insert(adj_list[0], item);
 
-  reg.value = &node3;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node4;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node0;
-  dll_insert(adj_list[1], reg);
+  item.value = &node3;
+  dll_insert(adj_list[1], item);
+  item.value = &node2;
+  dll_insert(adj_list[1], item);
+  item.value = &node4;
+  dll_insert(adj_list[1], item);
+  item.value = &node0;
+  dll_insert(adj_list[1], item);
 
-  reg.value = &node3;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[2], reg);
+  item.value = &node3;
+  dll_insert(adj_list[2], item);
+  item.value = &node1;
+  dll_insert(adj_list[2], item);
 
-  reg.value = &node2;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node4;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[3], reg);
+  item.value = &node2;
+  dll_insert(adj_list[3], item);
+  item.value = &node4;
+  dll_insert(adj_list[3], item);
+  item.value = &node1;
+  dll_insert(adj_list[3], item);
 
-  reg.value = &node1;
-  dll_insert(adj_list[4], reg);
-  reg.value = &node0;
-  dll_insert(adj_list[4], reg);
-  reg.value = &node3;
-  dll_insert(adj_list[4], reg);
+  item.value = &node1;
+  dll_insert(adj_list[4], item);
+  item.value = &node0;
+  dll_insert(adj_list[4], item);
+  item.value = &node3;
+  dll_insert(adj_list[4], item);
 
   ck_assert_int_eq(((TimedNode*)(*adj_list[0])->data.value)->id, 1);
   ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->data.value)->id, 4);
@@ -1277,7 +1277,7 @@ START_TEST(test_dfs_3)
   int i, length;
   TimedNode** vrtxs;
   TimedNode node0, node1, node2, node3, node4, node5, node6, node7;
-  Item reg;
+  Item item;
   DoublyLinkedList*** adj_list;
 
   length = 8;
@@ -1308,53 +1308,53 @@ START_TEST(test_dfs_3)
       *adj_list[i] = NULL;
     }
 
-  reg.value = &node4;
-  dll_insert(adj_list[0], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[0], reg);
+  item.value = &node4;
+  dll_insert(adj_list[0], item);
+  item.value = &node1;
+  dll_insert(adj_list[0], item);
 
-  reg.value = &node5;
-  dll_insert(adj_list[1], reg);
-  reg.value = &node0;
-  dll_insert(adj_list[1], reg);
+  item.value = &node5;
+  dll_insert(adj_list[1], item);
+  item.value = &node0;
+  dll_insert(adj_list[1], item);
 
-  reg.value = &node6;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node5;
-  dll_insert(adj_list[2], reg);
-  reg.value = &node3;
-  dll_insert(adj_list[2], reg);
+  item.value = &node6;
+  dll_insert(adj_list[2], item);
+  item.value = &node5;
+  dll_insert(adj_list[2], item);
+  item.value = &node3;
+  dll_insert(adj_list[2], item);
 
-  reg.value = &node7;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node6;
-  dll_insert(adj_list[3], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[3], reg);
+  item.value = &node7;
+  dll_insert(adj_list[3], item);
+  item.value = &node6;
+  dll_insert(adj_list[3], item);
+  item.value = &node2;
+  dll_insert(adj_list[3], item);
 
-  reg.value = &node0;
-  dll_insert(adj_list[4], reg);
+  item.value = &node0;
+  dll_insert(adj_list[4], item);
 
-  reg.value = &node6;
-  dll_insert(adj_list[5], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[5], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[5], reg);
+  item.value = &node6;
+  dll_insert(adj_list[5], item);
+  item.value = &node2;
+  dll_insert(adj_list[5], item);
+  item.value = &node1;
+  dll_insert(adj_list[5], item);
 
-  reg.value = &node7;
-  dll_insert(adj_list[6], reg);
-  reg.value = &node5;
-  dll_insert(adj_list[6], reg);
-  reg.value = &node3;
-  dll_insert(adj_list[6], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[6], reg);
+  item.value = &node7;
+  dll_insert(adj_list[6], item);
+  item.value = &node5;
+  dll_insert(adj_list[6], item);
+  item.value = &node3;
+  dll_insert(adj_list[6], item);
+  item.value = &node2;
+  dll_insert(adj_list[6], item);
 
-  reg.value = &node6;
-  dll_insert(adj_list[7], reg);
-  reg.value = &node3;
-  dll_insert(adj_list[7], reg);
+  item.value = &node6;
+  dll_insert(adj_list[7], item);
+  item.value = &node3;
+  dll_insert(adj_list[7], item);
 
   ck_assert_int_eq(((TimedNode*)(*adj_list[0])->data.value)->id, 1);
   ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->data.value)->id, 4);
@@ -1462,7 +1462,7 @@ START_TEST(test_dfs_5)
   int i, length;
   TimedNode** vrtxs;
   TimedNode node0, node1, node2, node3, node4, node5;
-  Item reg;
+  Item item;
   DoublyLinkedList*** adj_list;
 
   length = 6;
@@ -1489,18 +1489,18 @@ START_TEST(test_dfs_5)
       *adj_list[i] = NULL;
     }
 
-  reg.value = &node3;
-  dll_insert(adj_list[0], reg);
-  reg.value = &node2;
-  dll_insert(adj_list[0], reg);
-  reg.value = &node1;
-  dll_insert(adj_list[0], reg);
+  item.value = &node3;
+  dll_insert(adj_list[0], item);
+  item.value = &node2;
+  dll_insert(adj_list[0], item);
+  item.value = &node1;
+  dll_insert(adj_list[0], item);
 
-  reg.value = &node4;
-  dll_insert(adj_list[1], reg);
+  item.value = &node4;
+  dll_insert(adj_list[1], item);
 
-  reg.value = &node5;
-  dll_insert(adj_list[2], reg);
+  item.value = &node5;
+  dll_insert(adj_list[2], item);
 
   ck_assert_int_eq(((TimedNode*)(*adj_list[0])->data.value)->id, 1);
   ck_assert_int_eq(((TimedNode*)(*adj_list[0])->next->data.value)->id, 2);
