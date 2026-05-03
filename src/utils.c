@@ -30,9 +30,9 @@ void swap(int array[], int pos1, int pos2)
   array[pos2] = temp;
 }
 
-void swap_reg(Register array[], int pos1, int pos2)
+void swap_reg(ExtendedItem array[], int pos1, int pos2)
 {
-  Register temp;
+  ExtendedItem temp;
 
   temp = array[pos1];
   array[pos1] = array[pos2];

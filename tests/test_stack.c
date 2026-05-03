@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 Stack* stk;
-IntRegister* reg;
+Item* reg;
 
 int i;
 
@@ -14,7 +14,7 @@ Suite* make_test_suite(void);
 
 void setup(void)
 {
-  reg = malloc(sizeof(IntRegister));
+  reg = malloc(sizeof(Item));
   stk = malloc(sizeof(Stack));
 }
 
@@ -198,15 +198,15 @@ START_TEST(test_stack_pop_3)
 {
   int k1, k2;
   bool result1, result2, result3;
-  IntRegister* el1;
-  IntRegister* el2;
+  Item* el1;
+  Item* el2;
   int length = 20;
 
   k1 = 7;
   k2 = -5;
 
-  el1 = malloc(sizeof(IntRegister));
-  el2 = malloc(sizeof(IntRegister));
+  el1 = malloc(sizeof(Item));
+  el2 = malloc(sizeof(Item));
 
   init_stack(stk, length);
   reg->key = k1;

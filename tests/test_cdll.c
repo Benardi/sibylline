@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-IntRegister* reg;
+Item* reg;
 CircularDoublyLinkedList* nil;
 
 void setup(void);
@@ -33,7 +33,7 @@ static int compare(int k1, int k2)
 void setup(void)
 {
   nil = malloc(sizeof(CircularDoublyLinkedList));
-  reg = malloc(sizeof(IntRegister));
+  reg = malloc(sizeof(Item));
 }
 
 void teardown(void)

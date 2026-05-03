@@ -8,13 +8,13 @@ void bfs(DoublyLinkedList*** adj_list, ColoredNode* vrtxs[], int length,
 {
   Queue q;
   int i, inf;
-  IntRegister* reg;
+  Item* reg;
   ColoredNode* crt;
   ColoredNode* adj;
   DoublyLinkedList* node;
 
   inf = INF;
-  reg = malloc(sizeof(IntRegister));
+  reg = malloc(sizeof(Item));
 
   for (i = 0; i < length; i++)
     {

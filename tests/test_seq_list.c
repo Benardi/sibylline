@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 SeqList* sl;
-IntRegister* reg;
+Item* reg;
 
 void setup(void);
 void teardown(void);
@@ -33,7 +33,7 @@ static int compare(int k1, int k2)
 
 void setup(void)
 {
-  reg = malloc(sizeof(IntRegister));
+  reg = malloc(sizeof(Item));
   sl = malloc(sizeof(SeqList));
 }
 

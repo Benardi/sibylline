@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-IntRegister* reg;
+Item* reg;
 RedBlackTree** root;
 
 void setup(void);
@@ -13,7 +13,7 @@ Suite* make_test_suite(void);
 
 void setup(void)
 {
-  reg = malloc(sizeof(IntRegister));
+  reg = malloc(sizeof(Item));
   root = malloc(sizeof(RedBlackTree*));
 }
 

@@ -49,7 +49,7 @@ END_TEST
 
 START_TEST(test_insert1_capacity1)
 {
-  IntRegister el;
+  Item el;
   int capacity = 1;
 
   el.key = 5;
@@ -66,7 +66,7 @@ END_TEST
 
 START_TEST(test_insert3_capacity1)
 {
-  IntRegister el;
+  Item el;
   int capacity = 1;
 
   init_list(list, capacity);
@@ -90,7 +90,7 @@ END_TEST
 
 START_TEST(test_insert4_capacity5)
 {
-  IntRegister el;
+  Item el;
   int capacity = 5;
 
   init_list(list, capacity);
@@ -118,7 +118,7 @@ END_TEST
 
 START_TEST(test_insert_at_capacity1)
 {
-  IntRegister el;
+  Item el;
   int capacity = 1;
 
   el.key = 5;
@@ -135,7 +135,7 @@ END_TEST
 
 START_TEST(test_insert_twice_at_capacity1)
 {
-  IntRegister el;
+  Item el;
   int capacity = 1;
 
   init_list(list, capacity);
@@ -155,7 +155,7 @@ END_TEST
 
 START_TEST(test_insert_at_capacity5)
 {
-  IntRegister el;
+  Item el;
   int capacity = 5;
 
   init_list(list, capacity);
@@ -188,7 +188,7 @@ END_TEST
 
 START_TEST(test_insert_at_last_index)
 {
-  IntRegister el;
+  Item el;
   int capacity = 5;
   int index = 4;
 
@@ -222,7 +222,7 @@ END_TEST
 
 START_TEST(test_set_success)
 {
-  IntRegister el;
+  Item el;
   int capacity = 4;
   bool result;
 
@@ -250,7 +250,7 @@ END_TEST
 
 START_TEST(test_set_head_fail)
 {
-  IntRegister el;
+  Item el;
   int capacity = 4;
   bool result;
 
@@ -274,7 +274,7 @@ END_TEST
 
 START_TEST(test_set_tail_fail)
 {
-  IntRegister el;
+  Item el;
   int capacity = 4;
   bool result;
 
@@ -298,8 +298,8 @@ END_TEST
 
 START_TEST(test_get_success)
 {
-  IntRegister el;
-  IntRegister* result;
+  Item el;
+  Item* result;
   int capacity = 4;
 
   init_list(list, capacity);
@@ -326,8 +326,8 @@ END_TEST
 
 START_TEST(test_get_head_fail)
 {
-  IntRegister el;
-  IntRegister* result;
+  Item el;
+  Item* result;
   int capacity = 4;
 
   init_list(list, capacity);
@@ -353,8 +353,8 @@ END_TEST
 
 START_TEST(test_get_tail_fail)
 {
-  IntRegister el;
-  IntRegister* result;
+  Item el;
+  Item* result;
   int capacity = 4;
 
   init_list(list, capacity);
@@ -380,7 +380,7 @@ END_TEST
 
 START_TEST(test_contains_success)
 {
-  IntRegister el;
+  Item el;
   bool result;
   int capacity = 10;
   int identifier;
@@ -413,7 +413,7 @@ END_TEST
 
 START_TEST(test_contains_fail)
 {
-  IntRegister el;
+  Item el;
   int capacity = 10;
   bool result;
   int identifier;
@@ -446,7 +446,7 @@ END_TEST
 
 START_TEST(test_shift_left_2el_array)
 {
-  IntRegister el;
+  Item el;
   bool result;
   int index = 0;
   int capacity = 5;
@@ -470,7 +470,7 @@ END_TEST
 
 START_TEST(test_shift_left_2nd_el_in_4_el_array)
 {
-  IntRegister el;
+  Item el;
   bool result;
   int index = 1;
   int capacity = 5;
@@ -502,7 +502,7 @@ END_TEST
 
 START_TEST(test_shift_left_fail_head)
 {
-  IntRegister el;
+  Item el;
   bool result;
   int index = -1;
   int capacity = 5;
@@ -534,7 +534,7 @@ END_TEST
 
 START_TEST(test_shift_left_fail_tail)
 {
-  IntRegister el;
+  Item el;
   bool result;
   int index = 4;
   int capacity = 5;
@@ -566,7 +566,7 @@ END_TEST
 
 START_TEST(test_shift_right_2nd_el_in_4_el_array)
 {
-  IntRegister el;
+  Item el;
   int index = 1;
   int capacity = 5;
 
@@ -598,7 +598,7 @@ END_TEST
 
 START_TEST(test_shift_right_1st_el_in_4_el_filled_array)
 {
-  IntRegister el;
+  Item el;
   int index = 0;
   int capacity = 4;
 
@@ -630,7 +630,7 @@ END_TEST
 
 START_TEST(test_discard_head_4_el)
 {
-  IntRegister el;
+  Item el;
   bool result;
   int index = 0;
   int capacity = 5;
@@ -662,7 +662,7 @@ END_TEST
 
 START_TEST(test_discard_tail_1_el)
 {
-  IntRegister el;
+  Item el;
   bool result;
   int index = 0;
   int capacity = 5;
@@ -682,7 +682,7 @@ END_TEST
 
 START_TEST(test_discard_tail_4_el)
 {
-  IntRegister el;
+  Item el;
   bool result;
   int index = 3;
   int capacity = 5;
@@ -714,7 +714,7 @@ END_TEST
 
 START_TEST(test_discard_idx_1_twice_5_el)
 {
-  IntRegister el;
+  Item el;
   bool result_1, result_2;
   int index = 1;
   int capacity = 5;
@@ -751,7 +751,7 @@ END_TEST
 
 START_TEST(test_index_of_success)
 {
-  IntRegister el;
+  Item el;
   int identifier;
   int result, capacity;
 
@@ -789,7 +789,7 @@ END_TEST
 
 START_TEST(test_index_of_failure)
 {
-  IntRegister el;
+  Item el;
   int identifier;
   int result, capacity;
 

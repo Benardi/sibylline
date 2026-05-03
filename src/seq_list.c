@@ -6,7 +6,7 @@ void init_seq_list(SeqList* sl, int max_n_elems)
 {
   sl->n_elems = 0;
   sl->max_n_elems = max_n_elems;
-  sl->array = malloc((max_n_elems + 1) * sizeof(IntRegister));
+  sl->array = malloc((max_n_elems + 1) * sizeof(Item));
 }
 
 void reinit_seq_list(SeqList* sl)
@@ -56,7 +56,7 @@ int sentinel_search(SeqList* sl, int k,
     }
 }
 
-bool insert_sorted(SeqList* sl, IntRegister reg,
+bool insert_sorted(SeqList* sl, Item reg,
                    int (*compare)(int, int))
 {
   int pos;
@@ -110,7 +110,7 @@ int binary_search(SeqList* sl, int k,
   return -1;
 }
 
-bool insert_elem(SeqList* sl, IntRegister reg, int i)
+bool insert_elem(SeqList* sl, Item reg, int i)
 {
   int j;
   if (sl->n_elems == sl->max_n_elems || i < 0 || i > sl->n_elems)

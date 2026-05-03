@@ -223,7 +223,7 @@ void bubble_sort(int array[], int start, int end)
     }
 }
 
-void heap_sort(Register array[], int length,
+void heap_sort(ExtendedItem array[], int length,
                int (*compare)(union Key, union Key))
 {
   int i, heap_size;
@@ -332,11 +332,11 @@ void radix_sort(int array[], int* out, int length, int max_decimal_place)
   free(temp);
 }
 
-void insertion_sort_gnrc(Register array[], int start, int end,
+void insertion_sort_gnrc(ExtendedItem array[], int start, int end,
                          int (*compare)(union Key, union Key))
 {
   int j, i;
-  Register reg;
+  ExtendedItem reg;
 
   for (j = start + 1; j <= end; j++)
     {
@@ -355,7 +355,7 @@ void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
                         int (*compare)(int, int))
 {
   int j, i, k;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList* current;
 
   k = start + 1;
@@ -403,7 +403,7 @@ static int compare_float(int k1, int k2)
   return result;
 }
 
-void bucket_sort(Register array[], int length)
+void bucket_sort(ExtendedItem array[], int length)
 {
   float temp;
   int i, j, pos;
@@ -411,7 +411,7 @@ void bucket_sort(Register array[], int length)
   DoublyLinkedList*** buckets;
   DoublyLinkedList** head;
   DoublyLinkedList* node;
-  IntRegister ireg;
+  Item ireg;
 
   buckets = malloc(length * sizeof(DoublyLinkedList**));
   buckets_size = malloc(length * sizeof(int));

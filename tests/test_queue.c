@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 Queue* q;
-IntRegister* el;
+Item* el;
 int i;
 
 void setup(void);
@@ -16,7 +16,7 @@ int length = 20;
 void setup(void)
 {
   q = malloc(sizeof(Queue));
-  el = malloc(sizeof(IntRegister));
+  el = malloc(sizeof(Item));
 }
 
 void teardown(void)

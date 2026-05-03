@@ -32,7 +32,7 @@ void preorder_tree_walk(BinarySearchTree* node)
     }
 }
 
-BinarySearchTree* tree_insert(BinarySearchTree** root, IntRegister reg,
+BinarySearchTree* tree_insert(BinarySearchTree** root, Item reg,
                               int (*compare)(int, int))
 {
   BinarySearchTree* node;

@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-IntRegister* reg;
+Item* reg;
 BinarySearchTree** root;
 
 void setup(void);
@@ -32,7 +32,7 @@ static int compare(int k1, int k2)
 
 void setup(void)
 {
-  reg = malloc(sizeof(IntRegister));
+  reg = malloc(sizeof(Item));
   root = malloc(sizeof(BinarySearchTree*));
 }
 

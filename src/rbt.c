@@ -132,7 +132,7 @@ static void rb_insert_fixup(RedBlackTree** root, RedBlackTree* nil,
   (*root)->color = BLACK;
 }
 
-RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, IntRegister reg,
+RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Item reg,
                         int (*compare)(int, int))
 {
   RedBlackTree* node;

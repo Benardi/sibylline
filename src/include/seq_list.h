@@ -10,12 +10,12 @@
 #ifndef SEQ_LIST_H
 #define SEQ_LIST_H
 
-#include <register.h>
+#include <item.h>
 #include <stdbool.h>
 
 typedef struct
 {
-  IntRegister* array; /* Array that stores the elements */
+  Item* array; /* Array that stores the elements */
   int max_n_elems;
   int n_elems; /* Current number of elements in Sequential List */
 } SeqList;
@@ -60,7 +60,7 @@ int size(SeqList* sl);
  * @param i Position where to insert
  * @return Whether element could be inserted
  */
-bool insert_elem(SeqList* sl, IntRegister reg, int i);
+bool insert_elem(SeqList* sl, Item reg, int i);
 
 /** @brief Inserts register in Sequential List whilst ensuring the List stays
  * sorted.
@@ -77,14 +77,14 @@ bool insert_elem(SeqList* sl, IntRegister reg, int i);
  * @param compare Pointer to function that compares two union Keys.
  * @return Whether element could be inserted
  */
-bool insert_sorted(SeqList* sl, IntRegister reg,
+bool insert_sorted(SeqList* sl, Item reg,
                    int (*compare)(int, int));
 
 /** @brief Sequentially searchs a Sequential List and returns
  * index of first occurrence.
  *
  * Sequentially iterates over Sequential List in ascending order of index.
- * Returns index of first occurrence that matches given Register key, else
+ * Returns index of first occurrence that matches given ExtendedItem key, else
  * returns -1. The employed compare function must receive two union Keys
  * as parameters and return an integer as result. If first parameter is
  * bigger it should return 1, if first parameter is smaller it should
@@ -102,7 +102,7 @@ int seq_search(SeqList* sl, int key,
  * is sorted.
  *
  * Performs binary search on a sorted Sequential List. Returns index of first
- * matched occurrence of given Register key, else returns -1. The employed
+ * matched occurrence of given ExtendedItem key, else returns -1. The employed
  * compare function must receive two union Keys as parameters and return
  * an integer as result. If first parameter is bigger it should return 1,
  * if first parameter is smaller it should return -1, if it's the same as the
@@ -121,7 +121,7 @@ int binary_search(SeqList* sl, int k,
  *
  * Sequentially iterates over Sequential List in ascending order of index.
  * Sentinel is appended to List to allow a more efficient search. Returns
- * index of first occurrence that matches given Register key, else returns -1.
+ * index of first occurrence that matches given ExtendedItem key, else returns -1.
  * The employed compare function must receive two union Keys as parameters
  * and return an integer as result. If first parameter is bigger it should
  * return 1, if first parameter is smaller it should return -1, if it's the
@@ -139,7 +139,7 @@ int sentinel_search(SeqList* sl, int k,
  * occurrence.
  *
  * Sequentially iterates over Sequential List in ascending order of index.
- * Removes first occurrence that matches given Register key and shifts
+ * Removes first occurrence that matches given ExtendedItem key and shifts
  * remaining elements to the right to keep Sequential List contiguous.
  * Else, keeps Sequential List untouched. The employed compare function must
  * receive two union Keys as parameters and return an integer as result.

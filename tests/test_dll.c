@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-IntRegister* reg;
+Item* reg;
 DoublyLinkedList** head;
 
 void setup(void);
@@ -51,7 +51,7 @@ static int compare_int_impl(int k1, int k2)
 
 void setup(void)
 {
-  reg = malloc(sizeof(IntRegister));
+  reg = malloc(sizeof(Item));
   head = malloc(sizeof(DoublyLinkedList*));
 }
 

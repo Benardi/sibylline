@@ -10,13 +10,13 @@
 #ifndef SLL_H
 #define SLL_H
 
-#include <register.h>
+#include <item.h>
 #include <stddef.h>
 
 typedef struct SinglyLinkedList
 {
   struct SinglyLinkedList* next;
-  IntRegister data;
+  Item data;
 } SinglyLinkedList;
 
 /** @brief Inserts node at front of Singly Linked List.
@@ -27,10 +27,10 @@ typedef struct SinglyLinkedList
  * the Singly Linked List.
  *
  * @param head Double pointer to head of Singly Linked List.
- * @param reg Register of inserted node.
+ * @param reg ExtendedItem of inserted node.
  * @return Pointer to inserted node.
  */
-SinglyLinkedList* sll_insert(SinglyLinkedList** head, IntRegister reg);
+SinglyLinkedList* sll_insert(SinglyLinkedList** head, Item reg);
 
 /** @brief Retrieves node from Singly Linked List via key.
  *
@@ -42,7 +42,7 @@ SinglyLinkedList* sll_insert(SinglyLinkedList** head, IntRegister reg);
  * second parameter it should return 0.
  *
  * @param head Double pointer to head of Singly Linked List.
- * @param key Key for Register of inserted node.
+ * @param key Key for ExtendedItem of inserted node.
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to retrieved node.
  */

@@ -5,7 +5,7 @@ void init_stack(Stack* stk, int length)
 {
   stk->top = -1;
   stk->length = length;
-  stk->array = malloc(stk->length * sizeof(IntRegister));
+  stk->array = malloc(stk->length * sizeof(Item));
 }
 
 void reinit_stack(Stack* stk)
@@ -37,7 +37,7 @@ bool stack_full(Stack* stk)
     }
 }
 
-bool push(Stack* stk, IntRegister reg)
+bool push(Stack* stk, Item reg)
 {
   if (stack_full(stk))
     {
@@ -51,7 +51,7 @@ bool push(Stack* stk, IntRegister reg)
     }
 }
 
-bool pop(Stack* stk, IntRegister* removed)
+bool pop(Stack* stk, Item* removed)
 {
   if (stack_empty(stk))
     {

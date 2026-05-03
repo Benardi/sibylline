@@ -1,7 +1,7 @@
 #include <sll.h>
 #include <stdlib.h>
 
-SinglyLinkedList* sll_insert(SinglyLinkedList** head, IntRegister reg)
+SinglyLinkedList* sll_insert(SinglyLinkedList** head, Item reg)
 {
   SinglyLinkedList* node;
   node = malloc(sizeof(SinglyLinkedList));

@@ -110,11 +110,11 @@ END_TEST
 
 START_TEST(test_swap_reg_1)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6;
   int length = 6;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 5;
   k2.i = 2;
@@ -145,11 +145,11 @@ END_TEST
 
 START_TEST(test_swap_reg_2)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6;
   int length = 6;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 5;
   k2.i = 2;
@@ -180,11 +180,11 @@ END_TEST
 
 START_TEST(test_swap_reg_3)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6;
   int length = 6;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 5;
   k2.i = 2;
@@ -215,11 +215,11 @@ END_TEST
 
 START_TEST(test_swap_reg_4)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6;
   int length = 6;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 5;
   k2.i = 2;
@@ -250,11 +250,11 @@ END_TEST
 
 START_TEST(test_swap_reg_5)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6;
   int length = 6;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 5;
   k2.i = -10;
@@ -285,11 +285,11 @@ END_TEST
 
 START_TEST(test_swap_reg_6)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6;
   int length = 6;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 5;
   k2.i = -10;
@@ -320,11 +320,11 @@ END_TEST
 
 START_TEST(test_swap_reg_7)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
   int length = 11;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = -50;
   k2.i = 0;

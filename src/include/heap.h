@@ -12,7 +12,7 @@
 
 #include <limits.h>
 #include <math.h>
-#include <register.h>
+#include <item.h>
 #include <stdbool.h>
 
 #define MINUS_INF INT_MIN
@@ -31,13 +31,13 @@
  * parameter is smaller it should return -1, if it's the same as the second
  * parameter it should return 0.
  *
- * @param array Array of Registers containing heap elements.
+ * @param array Array of ExtendedItems containing heap elements.
  * @param heap_size Number of elements considered to be in the heap.
  * @param i Index in array for given heap element
  * @param compare Pointer to function that compares two union Keys.
  * @return Void.
  */
-void max_heapify(Register array[], int heap_size, int i,
+void max_heapify(ExtendedItem array[], int heap_size, int i,
                  int (*compare)(union Key, union Key));
 
 /** @brief Produces a max-heap from an unordered input array.
@@ -49,12 +49,12 @@ void max_heapify(Register array[], int heap_size, int i,
  * parameter is smaller it should return -1, if it's the same as the second
  * parameter it should return 0.
  *
- * @param array Array of Registers containing heap elements.
+ * @param array Array of ExtendedItems containing heap elements.
  * @param length Number of elements in given array.
  * @param compare Pointer to function that compares two union Keys.
  * @return Void.
  */
-void build_max_heap(Register array[], int length,
+void build_max_heap(ExtendedItem array[], int length,
                     int (*compare)(union Key, union Key));
 
 #endif

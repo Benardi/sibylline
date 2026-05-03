@@ -5,17 +5,17 @@ void init_list(ArrayList* list, int capacity)
 {
   list->size = 0;
   list->capacity = capacity;
-  list->array = malloc(capacity * sizeof(IntRegister));
+  list->array = malloc(capacity * sizeof(Item));
 }
 
 static void increase_capacity(ArrayList* list, int factor)
 {
   int i;
-  IntRegister* new_array;
-  IntRegister* old_array;
+  Item* new_array;
+  Item* old_array;
 
   old_array = list->array;
-  new_array = malloc(factor * list->capacity * sizeof(IntRegister));
+  new_array = malloc(factor * list->capacity * sizeof(Item));
 
   for (i = 0; i < list->capacity; i++)
     {
@@ -26,7 +26,7 @@ static void increase_capacity(ArrayList* list, int factor)
   free(old_array);
 }
 
-void insert(ArrayList* list, IntRegister element)
+void insert(ArrayList* list, Item element)
 {
   if (list->size == list->capacity)
     {
@@ -37,7 +37,7 @@ void insert(ArrayList* list, IntRegister element)
   list->size = list->size + 1;
 }
 
-bool insert_at(ArrayList* list, IntRegister element, int index)
+bool insert_at(ArrayList* list, Item element, int index)
 {
   bool result;
 
@@ -59,7 +59,7 @@ bool insert_at(ArrayList* list, IntRegister element, int index)
   return result;
 }
 
-bool set(ArrayList* list, IntRegister element, int index)
+bool set(ArrayList* list, Item element, int index)
 {
   bool result;
   if ((index > -1) && (index < list->capacity))
@@ -74,9 +74,9 @@ bool set(ArrayList* list, IntRegister element, int index)
   return result;
 }
 
-IntRegister* get(ArrayList* list, int index)
+Item* get(ArrayList* list, int index)
 {
-  IntRegister* target;
+  Item* target;
   if ((index > -1) && (index < list->capacity))
     {
       target = &(list->array[index]);

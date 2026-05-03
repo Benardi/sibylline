@@ -6,7 +6,7 @@ void init_queue(Queue* q, int length)
   q->head = 0;
   q->tail = 0;
   q->length = length;
-  q->array = malloc(length * sizeof(IntRegister));
+  q->array = malloc(length * sizeof(Item));
 }
 
 void reinit_queue(Queue* q)
@@ -25,7 +25,7 @@ bool queue_full(Queue* q)
   return q->head == ((q->tail + 1) % (q->length));
 }
 
-bool enqueue(Queue* q, IntRegister reg)
+bool enqueue(Queue* q, Item reg)
 {
   if (queue_full(q))
     {
@@ -47,7 +47,7 @@ bool enqueue(Queue* q, IntRegister reg)
     }
 }
 
-bool dequeue(Queue* q, IntRegister* removed)
+bool dequeue(Queue* q, Item* removed)
 {
   if (queue_empty(q))
     {

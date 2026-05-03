@@ -12,7 +12,7 @@ START_TEST(test_build_adj_list_1)
 {
   int i, length;
   int k0, k1, k2, k3, k4;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -96,7 +96,7 @@ START_TEST(test_build_adj_list_2)
 {
   int i, length;
   int k1, k3, k4, k5;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
@@ -163,7 +163,7 @@ START_TEST(test_build_adj_list_3)
 {
   int i, length;
   ColoredNode node1, node3, node4, node5;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
@@ -401,7 +401,7 @@ START_TEST(test_bfs_1)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4, node5;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
@@ -508,7 +508,7 @@ START_TEST(test_bfs_2)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -631,7 +631,7 @@ START_TEST(test_bfs_3)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4, node5, node6, node7;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList*** adj_list;
 
   length = 8;
@@ -836,7 +836,7 @@ START_TEST(test_bfs_5)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -955,7 +955,7 @@ START_TEST(test_bfs_6)
   int i, length;
   ColoredNode** vrtxs;
   ColoredNode node0, node1, node2, node3, node4;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -1071,7 +1071,7 @@ START_TEST(test_dfs_1)
   int i, length;
   TimedNode** vrtxs;
   TimedNode node0, node1, node2, node3, node4, node5;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
@@ -1169,7 +1169,7 @@ START_TEST(test_dfs_2)
   int i, length;
   TimedNode** vrtxs;
   TimedNode node0, node1, node2, node3, node4;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList*** adj_list;
 
   length = 5;
@@ -1277,7 +1277,7 @@ START_TEST(test_dfs_3)
   int i, length;
   TimedNode** vrtxs;
   TimedNode node0, node1, node2, node3, node4, node5, node6, node7;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList*** adj_list;
 
   length = 8;
@@ -1462,7 +1462,7 @@ START_TEST(test_dfs_5)
   int i, length;
   TimedNode** vrtxs;
   TimedNode node0, node1, node2, node3, node4, node5;
-  IntRegister reg;
+  Item reg;
   DoublyLinkedList*** adj_list;
 
   length = 6;
