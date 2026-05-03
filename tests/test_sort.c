@@ -4821,8 +4821,8 @@ START_TEST(test_insertion_sort_dll_3)
   ck_assert_int_eq((*head)->next->next->next->next->data.key, 0);
   ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 15);
   ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 30);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key, 50);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   50);
   ck_assert_int_eq(
       (*head)->next->next->next->next->next->next->next->next->data.key, 75);
   ck_assert_int_eq(
@@ -4911,8 +4911,8 @@ START_TEST(test_insertion_sort_dll_4)
   ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
   ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
   ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key, 7);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   7);
   ck_assert_int_eq(
       (*head)->next->next->next->next->next->next->next->next->data.key, 8);
   ck_assert_int_eq(
@@ -4996,8 +4996,8 @@ START_TEST(test_insertion_sort_dll_5)
   ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
   ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
   ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key, 7);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   7);
   ck_assert_int_eq(
       (*head)->next->next->next->next->next->next->next->next->data.key, 8);
   ck_assert_int_eq(
@@ -5073,8 +5073,8 @@ START_TEST(test_insertion_sort_dll_6)
   ck_assert_int_eq((*head)->next->next->next->next->data.key, 3);
   ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
   ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key, 7);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   7);
 
   free(node8);
   free(node7);
@@ -5143,8 +5143,8 @@ START_TEST(test_insertion_sort_dll_7)
   ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
   ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
   ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 7);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key, 6);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   6);
 
   free(node8);
   free(node7);
@@ -5213,8 +5213,8 @@ START_TEST(test_insertion_sort_dll_8)
   ck_assert_int_eq((*head)->next->next->next->next->data.key, 3);
   ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
   ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 7);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key, 6);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   6);
 
   free(node8);
   free(node7);
@@ -5307,8 +5307,8 @@ START_TEST(test_insertion_sort_dll_9)
   ck_assert_int_eq((*head)->next->next->next->next->data.key, 0);
   ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 2);
   ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 3);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   4);
   ck_assert_int_eq(
       (*head)->next->next->next->next->next->next->next->next->data.key, 30);
   ck_assert_int_eq(
@@ -5428,8 +5428,8 @@ START_TEST(test_insertion_sort_dll_10)
   ck_assert_int_eq((*head)->next->next->next->next->data.key, -80);
   ck_assert_int_eq((*head)->next->next->next->next->next->data.key, -7);
   ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 3);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   4);
   ck_assert_int_eq(
       (*head)->next->next->next->next->next->next->next->next->data.key, 30);
   ck_assert_int_eq(
@@ -5541,8 +5541,8 @@ START_TEST(test_insertion_sort_dll_11)
   ck_assert_int_eq((*head)->next->next->next->next->data.key, -15);
   ck_assert_int_eq((*head)->next->next->next->next->next->data.key, -3);
   ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 3);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key, 15);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   15);
   ck_assert_int_eq(
       (*head)->next->next->next->next->next->next->next->next->data.key, 20);
   ck_assert_int_eq(
@@ -5723,8 +5723,8 @@ START_TEST(test_insertion_sort_dll_14)
   ck_assert_int_eq((*head)->next->next->next->next->data.key, 0);
   ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 15);
   ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 30);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key, 50);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   50);
   ck_assert_int_eq(
       (*head)->next->next->next->next->next->next->next->next->data.key, 75);
   ck_assert_int_eq(
@@ -5813,8 +5813,8 @@ START_TEST(test_insertion_sort_dll_15)
   ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
   ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
   ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key, 7);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   7);
   ck_assert_int_eq(
       (*head)->next->next->next->next->next->next->next->next->data.key, 8);
   ck_assert_int_eq(
@@ -5898,8 +5898,8 @@ START_TEST(test_insertion_sort_dll_16)
   ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
   ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
   ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key, 7);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   7);
   ck_assert_int_eq(
       (*head)->next->next->next->next->next->next->next->next->data.key, 8);
   ck_assert_int_eq(

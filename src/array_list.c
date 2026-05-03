@@ -88,8 +88,7 @@ Item* get(ArrayList* list, int index)
   return target;
 }
 
-bool contains(ArrayList* list, int identifier,
-              int (*compare_to)(int, int))
+bool contains(ArrayList* list, int identifier, int (*compare_to)(int, int))
 {
   int i;
   bool result = false;
@@ -162,8 +161,7 @@ bool discard(ArrayList* list, int index)
   return result;
 }
 
-int index_of(ArrayList* list, int identifier,
-             int (*compare_to)(int, int))
+int index_of(ArrayList* list, int identifier, int (*compare_to)(int, int))
 {
   int index = -1;
   int i;

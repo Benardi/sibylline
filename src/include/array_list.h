@@ -98,8 +98,7 @@ Item* get(ArrayList* list, int index);
  * @param compare Pointer to function that compares two union Keys.
  * @return Whether element is in ArrayList.
  */
-bool contains(ArrayList* list, int identifier,
-              int (*compare_to)(int, int));
+bool contains(ArrayList* list, int identifier, int (*compare_to)(int, int));
 
 /*
  * @brief Moves elements to the left starting at given index.
@@ -156,7 +155,6 @@ bool discard(ArrayList* list, int index);
  * @param compare Pointer to function that compares two union Keys.
  * @return Index of match in ArrayList.
  */
-int index_of(ArrayList* list, int identifier,
-             int (*compare_to)(int, int));
+int index_of(ArrayList* list, int identifier, int (*compare_to)(int, int));
 
 #endif

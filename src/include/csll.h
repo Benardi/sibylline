@@ -60,8 +60,7 @@ CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to retrieved node.
  */
-CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail,
-                                      int key,
+CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail, int key,
                                       int (*compare)(int, int));
 
 /** @brief Deletes given node from Circular Singly Linked List.

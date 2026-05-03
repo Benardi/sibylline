@@ -7,8 +7,7 @@ void cdll_init(CircularDoublyLinkedList* nil)
   nil->prev = nil;
 }
 
-CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
-                                      Item item)
+CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil, Item item)
 {
   CircularDoublyLinkedList* node;
   node = malloc(sizeof(CircularDoublyLinkedList));
@@ -22,8 +21,7 @@ CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
   return node;
 }
 
-CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil,
-                                      int key,
+CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil, int key,
                                       int (*compare)(int, int))
 {
   CircularDoublyLinkedList* node;

@@ -43,8 +43,7 @@ void cdll_init(CircularDoublyLinkedList* nil);
  * @param item Item of inserted node.
  * @return Pointer to inserted node.
  */
-CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
-                                      Item item);
+CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil, Item item);
 
 /** @brief Retrieves node in Circular Doubly Linked List via key.
  *
@@ -63,8 +62,7 @@ CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to retrieved node.
  */
-CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil,
-                                      int key,
+CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil, int key,
                                       int (*compare)(int, int));
 
 /** @brief Deletes given node from Circular Doubly Linked List.

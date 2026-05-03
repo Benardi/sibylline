@@ -77,8 +77,7 @@ bool insert_elem(SeqList* sl, Item item, int i);
  * @param compare Pointer to function that compares two union Keys.
  * @return Whether element could be inserted
  */
-bool insert_sorted(SeqList* sl, Item item,
-                   int (*compare)(int, int));
+bool insert_sorted(SeqList* sl, Item item, int (*compare)(int, int));
 
 /** @brief Sequentially searchs a Sequential List and returns
  * index of first occurrence.
@@ -95,8 +94,7 @@ bool insert_sorted(SeqList* sl, Item item,
  * @param compare Pointer to function that compares two union Keys.
  * @return Index of first match
  */
-int seq_search(SeqList* sl, int key,
-               int (*compare)(int, int));
+int seq_search(SeqList* sl, int key, int (*compare)(int, int));
 
 /** @brief Performs binary search on a Sequential List under the assumption it
  * is sorted.
@@ -113,8 +111,7 @@ int seq_search(SeqList* sl, int key,
  * @param compare Pointer to function that compares two union Keys.
  * @return Index of first match
  */
-int binary_search(SeqList* sl, int k,
-                  int (*compare)(int, int));
+int binary_search(SeqList* sl, int k, int (*compare)(int, int));
 
 /** @brief Sequentially searchs a Sequential List and returns index of first
  * occurrence.
@@ -132,8 +129,7 @@ int binary_search(SeqList* sl, int k,
  * @param compare Pointer to function that compares two union Keys.
  * @return Index of first match
  */
-int sentinel_search(SeqList* sl, int k,
-                    int (*compare)(int, int));
+int sentinel_search(SeqList* sl, int k, int (*compare)(int, int));
 
 /** @brief Sequentially searchs a Sequential List and removes first
  * occurrence.
@@ -152,8 +148,7 @@ int sentinel_search(SeqList* sl, int k,
  * @param compare Pointer to function that compares two union Keys.
  * @return Wheter element could be removed
  */
-bool remove_elem(SeqList* sl, int key,
-                 int (*compare)(int, int));
+bool remove_elem(SeqList* sl, int key, int (*compare)(int, int));
 
 /** @brief Prints elements in Sequential List
  *

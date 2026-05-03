@@ -36,8 +36,7 @@ int seq_search(SeqList* sl, int key, int (*compare)(int, int))
   return -1;
 }
 
-int sentinel_search(SeqList* sl, int k,
-                    int (*compare)(int, int))
+int sentinel_search(SeqList* sl, int k, int (*compare)(int, int))
 {
   int i = 0;
   sl->array[sl->n_elems].key = k;
@@ -56,8 +55,7 @@ int sentinel_search(SeqList* sl, int k,
     }
 }
 
-bool insert_sorted(SeqList* sl, Item item,
-                   int (*compare)(int, int))
+bool insert_sorted(SeqList* sl, Item item, int (*compare)(int, int))
 {
   int pos;
 
@@ -80,8 +78,7 @@ bool insert_sorted(SeqList* sl, Item item,
   return true;
 }
 
-int binary_search(SeqList* sl, int k,
-                  int (*compare)(int, int))
+int binary_search(SeqList* sl, int k, int (*compare)(int, int))
 {
   int left, right, middle;
   left = 0;
@@ -129,8 +126,7 @@ bool insert_elem(SeqList* sl, Item item, int i)
     }
 }
 
-bool remove_elem(SeqList* sl, int key,
-                 int (*compare)(int, int))
+bool remove_elem(SeqList* sl, int key, int (*compare)(int, int))
 {
   int pos, j;
   pos = seq_search(sl, key, compare);

@@ -21,11 +21,13 @@
  *
  * @param array Array of ExtendedItems containing heap elements.
  * @param heap_size Pointer that contains number of elements in heap.
- * @param extracted Pointer where to store ExtendedItem containing maximum value.
+ * @param extracted Pointer where to store ExtendedItem containing maximum
+ * value.
  * @param compare Pointer to function that compares two union Keys.
  * @return Whether extraction was successful.
  */
-bool heap_extract_max(ExtendedItem array[], int* heap_size, ExtendedItem* extracted,
+bool heap_extract_max(ExtendedItem array[], int* heap_size,
+                      ExtendedItem* extracted,
                       int (*compare)(union Key, union Key));
 
 /** @brief Gets maximum value / priority in Max Priority Queue (max-heap).

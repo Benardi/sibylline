@@ -7,7 +7,8 @@ ExtendedItem heap_maximum(ExtendedItem array[])
   return array[0];
 }
 
-bool heap_extract_max(ExtendedItem array[], int* heap_size, ExtendedItem* extracted,
+bool heap_extract_max(ExtendedItem array[], int* heap_size,
+                      ExtendedItem* extracted,
                       int (*compare)(union Key, union Key))
 {
   ExtendedItem max;

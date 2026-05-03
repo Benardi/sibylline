@@ -10,9 +10,9 @@
 #ifndef HEAP_H
 #define HEAP_H
 
+#include <item.h>
 #include <limits.h>
 #include <math.h>
-#include <item.h>
 #include <stdbool.h>
 
 #define MINUS_INF INT_MIN

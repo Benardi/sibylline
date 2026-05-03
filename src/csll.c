@@ -47,8 +47,7 @@ CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
   return node;
 }
 
-CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail,
-                                      int key,
+CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail, int key,
                                       int (*compare)(int, int))
 {
   if ((*tail) == NULL)

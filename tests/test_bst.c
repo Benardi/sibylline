@@ -832,8 +832,8 @@ START_TEST(test_bst_insert_10)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -955,8 +955,7 @@ START_TEST(test_bst_insert_11)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
@@ -1744,8 +1743,8 @@ START_TEST(test_bst_tree_minimum_8)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -1878,8 +1877,7 @@ START_TEST(test_bst_tree_minimum_9)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
@@ -2674,8 +2672,8 @@ START_TEST(test_bst_tree_maximum_8)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -2808,8 +2806,7 @@ START_TEST(test_bst_tree_maximum_9)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
@@ -5144,8 +5141,8 @@ START_TEST(test_bst_tree_search_25)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -5279,8 +5276,8 @@ START_TEST(test_bst_tree_search_26)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -5414,8 +5411,8 @@ START_TEST(test_bst_tree_search_27)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -5548,8 +5545,7 @@ START_TEST(test_bst_tree_search_28)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
@@ -5682,8 +5678,7 @@ START_TEST(test_bst_tree_search_29)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
@@ -5816,8 +5811,7 @@ START_TEST(test_bst_tree_search_30)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
@@ -8252,8 +8246,8 @@ START_TEST(test_bst_iterative_tree_search_25)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -8387,8 +8381,8 @@ START_TEST(test_bst_iterative_tree_search_26)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -8522,8 +8516,8 @@ START_TEST(test_bst_iterative_tree_search_27)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -8656,8 +8650,7 @@ START_TEST(test_bst_iterative_tree_search_28)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
@@ -8790,8 +8783,7 @@ START_TEST(test_bst_iterative_tree_search_29)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
@@ -8924,8 +8916,7 @@ START_TEST(test_bst_iterative_tree_search_30)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
@@ -10556,8 +10547,8 @@ START_TEST(test_bst_tree_successor_17)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -10685,8 +10676,8 @@ START_TEST(test_bst_tree_successor_18)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -10817,8 +10808,7 @@ START_TEST(test_bst_tree_successor_19)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
@@ -10945,8 +10935,7 @@ START_TEST(test_bst_tree_successor_20)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
@@ -12437,8 +12426,8 @@ START_TEST(test_bst_tree_predecessor_17)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -12570,8 +12559,8 @@ START_TEST(test_bst_tree_predecessor_18)
       (*root)->right->right->right->right->right->right->left == NULL, true);
   ck_assert_int_eq(
       (*root)->right->right->right->right->right->right->right == NULL, true);
-  ck_assert_int_eq(
-      (*root)->right->right->right->right->right->right->data.key, 150);
+  ck_assert_int_eq((*root)->right->right->right->right->right->right->data.key,
+                   150);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, true);
@@ -12698,8 +12687,7 @@ START_TEST(test_bst_tree_predecessor_19)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
@@ -12830,8 +12818,7 @@ START_TEST(test_bst_tree_predecessor_20)
                    true);
   ck_assert_int_eq((*root)->left->left->left->left->left->left->right == NULL,
                    true);
-  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key,
-                   -30);
+  ck_assert_int_eq((*root)->left->left->left->left->left->left->data.key, -30);
 
   ck_assert_int_eq(node1->p == NULL, true);
   ck_assert_int_eq(node1->left == NULL, false);
