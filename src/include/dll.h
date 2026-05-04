@@ -10,7 +10,7 @@
 #ifndef DLL_H
 #define DLL_H
 
-#include <register.h>
+#include <item.h>
 #include <stdbool.h>
 #include <stddef.h>
 
@@ -18,7 +18,7 @@ typedef struct DoublyLinkedList
 {
   struct DoublyLinkedList* prev;
   struct DoublyLinkedList* next;
-  Register data;
+  Item data;
 } DoublyLinkedList;
 
 /** @brief Inserts node at front of Doubly Linked List.
@@ -29,10 +29,10 @@ typedef struct DoublyLinkedList
  * the linked list.
  *
  * @param head Double pointer to head of Doubly Linked List.
- * @param reg Register of inserted node.
+ * @param item Item of inserted node.
  * @return Pointer to inserted node.
  */
-DoublyLinkedList* dll_insert(DoublyLinkedList** head, Register reg);
+DoublyLinkedList* dll_insert(DoublyLinkedList** head, Item item);
 
 /** @brief Retrieves node from Doubly Linked List via key.
  *
@@ -44,12 +44,12 @@ DoublyLinkedList* dll_insert(DoublyLinkedList** head, Register reg);
  * parameter it should return 0.
  *
  * @param head Double pointer to head of Doubly Linked List.
- * @param key Key for Register of inserted node.
+ * @param key Key for Item of inserted node.
  * @param compare_to Pointer to comparator for union Keys.
  * @return Pointer to retrieved node.
  */
-DoublyLinkedList* dll_search(DoublyLinkedList** head, union Key search_key,
-                             int (*compare)(union Key, union Key));
+DoublyLinkedList* dll_search(DoublyLinkedList** head, int search_key,
+                             int (*compare)(int, int));
 
 /** @brief Deletes given node from Doubly Linked List.
  *

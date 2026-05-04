@@ -10,12 +10,12 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include <register.h>
+#include <item.h>
 #include <stdbool.h>
 
 typedef struct
 {
-  Register* array;
+  Item* array;
   int length;
   int top;
 } Stack;
@@ -60,7 +60,7 @@ bool stack_full(Stack* stk);
  * @param stk Pointer to Stack
  * @return Whether element could be pushed
  */
-bool push(Stack* stk, Register reg);
+bool push(Stack* stk, Item item);
 
 /** @brief Removes element from stack and returns it.
  *
@@ -72,6 +72,6 @@ bool push(Stack* stk, Register reg);
  * @param removed Pointer to hold value of removed element
  * @return Whether an element could be popped
  */
-bool pop(Stack* stk, Register* removed);
+bool pop(Stack* stk, Item* removed);
 
 #endif

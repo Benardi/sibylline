@@ -9,6 +9,8 @@ int seed = 23;
 Suite* make_test_suite(void);
 int compare_int(union Key k1, union Key k2);
 int compare_float(union Key k1, union Key k2);
+int compare_int_dll(int k1, int k2);
+int compare_float_dll(int k1, int k2);
 
 int compare_int(union Key k1, union Key k2)
 {
@@ -48,7 +50,49 @@ int compare_float(union Key k1, union Key k2)
   return result;
 }
 
-static void init_heap(Register* array, int* values, int length, union Key k)
+int compare_int_dll(int k1, int k2)
+{
+  int result;
+
+  if (k1 > k2)
+    {
+      result = 1;
+    }
+  else if (k1 < k2)
+    {
+      result = -1;
+    }
+  else
+    {
+      result = 0;
+    }
+  return result;
+}
+
+int compare_float_dll(int k1, int k2)
+{
+  int result;
+  union Key a, b;
+
+  a.i = k1;
+  b.i = k2;
+
+  if (a.f > b.f)
+    {
+      result = 1;
+    }
+  else if (a.f < b.f)
+    {
+      result = -1;
+    }
+  else
+    {
+      result = 0;
+    }
+  return result;
+}
+
+static void init_heap(ExtendedItem* array, int* values, int length, union Key k)
 {
   int i;
   for (i = 0; i < length; i++)
@@ -2866,11 +2910,11 @@ START_TEST(test_heap_sort_1)
   int i;
   union Key k = {0};
   int length = 6;
-  Register* array;
+  ExtendedItem* array;
   int values[] = {5, 2, 4, 6, 1, 3};
   int expected[] = {1, 2, 3, 4, 5, 6};
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   init_heap(array, values, length, k);
   heap_sort(array, length, compare_int);
@@ -2886,12 +2930,12 @@ END_TEST
 
 START_TEST(test_heap_sort_2)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k = {0};
   int length = 1;
   int values[] = {5};
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   init_heap(array, values, length, k);
   heap_sort(array, length, compare_int);
@@ -2907,11 +2951,11 @@ START_TEST(test_heap_sort_3)
   int i;
   union Key k = {0};
   int length = 11;
-  Register* array;
+  ExtendedItem* array;
   int values[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
   int expected[] = {-200, -20, -10, -5, 0, 15, 30, 50, 75, 100, 200};
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   init_heap(array, values, length, k);
   heap_sort(array, length, compare_int);
@@ -2930,11 +2974,11 @@ START_TEST(test_heap_sort_4)
   int i;
   union Key k = {0};
   int length = 10;
-  Register* array;
+  ExtendedItem* array;
   int values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
   int expected[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   init_heap(array, values, length, k);
   heap_sort(array, length, compare_int);
@@ -2953,11 +2997,11 @@ START_TEST(test_heap_sort_5)
   int i;
   union Key k = {0};
   int length = 10;
-  Register* array;
+  ExtendedItem* array;
   int values[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
   int expected[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   init_heap(array, values, length, k);
   heap_sort(array, length, compare_int);
@@ -2976,11 +3020,11 @@ START_TEST(test_heap_sort_6)
   int i;
   union Key k = {0};
   int length = 6;
-  Register* array;
+  ExtendedItem* array;
   int values[] = {2, 4, 5, 1, 2, 3, 7, 6};
   int expected[] = {1, 2, 2, 3, 4, 5, 7, 6};
 
-  array = malloc((length + 2) * sizeof(Register));
+  array = malloc((length + 2) * sizeof(ExtendedItem));
 
   init_heap(array, values, length + 2, k);
   heap_sort(array, length, compare_int);
@@ -2999,12 +3043,12 @@ START_TEST(test_heap_sort_7)
   int i;
   union Key k = {0};
   int length = 14;
-  Register* array;
+  ExtendedItem* array;
   int values[] = {0, 2, 3, 4, 55, 300, 700, -200, -100, -80, -7, 30, 150, 570};
   int expected[] = {-200, -100, -80, -7,  0,   2,   3,
                     4,    30,   55,  150, 300, 570, 700};
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   init_heap(array, values, length, k);
   heap_sort(array, length, compare_int);
@@ -3021,13 +3065,13 @@ END_TEST
 START_TEST(test_heap_sort_8)
 {
   int i;
-  Register* array;
+  ExtendedItem* array;
   union Key k = {0};
   int length = 12;
   int values[] = {3, 15, 20, 30, 50, 75, -75, -50, -30, -20, -15, -3};
   int expected[] = {-75, -50, -30, -20, -15, -3, 3, 15, 20, 30, 50, 75};
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   init_heap(array, values, length, k);
   heap_sort(array, length, compare_int);
@@ -3046,11 +3090,11 @@ START_TEST(test_heap_sort_9)
   int i;
   union Key k = {0};
   int length = 6;
-  Register* array;
+  ExtendedItem* array;
   int values[] = {5, 2, 4, 6, 1, 3};
   int expected[] = {1, 2, 3, 4, 5, 6};
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   init_heap(array, values, length, k);
   heap_sort(array, length, compare_int);
@@ -3069,11 +3113,11 @@ START_TEST(test_heap_sort_10)
   int i;
   union Key k = {0};
   int length = 11;
-  Register* array;
+  ExtendedItem* array;
   int values[] = {-10, 15, -5, -20, 50, 0, 100, 75, 30, 200, -200};
   int expected[] = {-200, -20, -10, -5, 0, 15, 30, 50, 75, 100, 200};
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   init_heap(array, values, length, k);
   heap_sort(array, length, compare_int);
@@ -3091,12 +3135,12 @@ START_TEST(test_heap_sort_11)
 {
   int i;
   union Key k = {0};
-  Register* array;
+  ExtendedItem* array;
   int length = 10;
   int values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
   int expected[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   init_heap(array, values, length, k);
   heap_sort(array, length, compare_int);
@@ -3113,13 +3157,13 @@ END_TEST
 START_TEST(test_heap_sort_12)
 {
   int i;
-  Register* array;
+  ExtendedItem* array;
   union Key k = {0};
   int length = 10;
   int values[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
   int expected[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   init_heap(array, values, length, k);
   heap_sort(array, length, compare_int);
@@ -3904,7 +3948,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_1)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6;
   int length = 6;
   int start = 0;
@@ -3917,7 +3961,7 @@ START_TEST(test_insertion_sort_gnrc_1)
   k5.i = 1;
   k6.i = 3;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   array[0].key = k1;
   array[1].key = k2;
@@ -3941,13 +3985,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_2)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1;
   int length = 1;
   int start = 0;
   int end = 0;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 5;
   array[0].key = k1;
@@ -3962,13 +4006,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_3)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
   int length = 11;
   int start = 0;
   int end = 10;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = -10;
   k2.i = 15;
@@ -4014,13 +4058,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_4)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   int length = 10;
   int start = 0;
   int end = 9;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 0;
   k2.i = 1;
@@ -4063,13 +4107,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_5)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   int length = 10;
   int start = 0;
   int end = 9;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 9;
   k2.i = 8;
@@ -4112,13 +4156,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_6)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8;
   int length = 8;
   int start = 2;
   int end = 7;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 2;
   k2.i = 4;
@@ -4155,13 +4199,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_7)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8;
   int length = 8;
   int start = 0;
   int end = 5;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 2;
   k2.i = 4;
@@ -4198,13 +4242,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_8)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8;
   int length = 8;
   int start = 2;
   int end = 5;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 2;
   k2.i = 4;
@@ -4241,13 +4285,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_9)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
   int length = 14;
   int start = 0;
   int end = 13;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 0;
   k2.i = 2;
@@ -4302,13 +4346,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_10)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
   int length = 14;
   int start = 2;
   int end = 11;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 0;
   k2.i = 2;
@@ -4363,13 +4407,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_11)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12;
   int length = 12;
   int start = 0;
   int end = 11;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 3;
   k2.i = 15;
@@ -4418,13 +4462,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_12)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6;
   int length = 6;
   int start = 0;
   int end = 5;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 5;
   k2.i = 2;
@@ -4455,13 +4499,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_13)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1;
   int length = 1;
   int start = 0;
   int end = 0;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 5;
 
@@ -4477,13 +4521,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_14)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
   int length = 11;
   int start = 0;
   int end = 10;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = -10;
   k2.i = 15;
@@ -4529,13 +4573,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_15)
 {
-  Register* array;
+  ExtendedItem* array;
   int length = 10;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   int start = 0;
   int end = 9;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 0;
   k2.i = 1;
@@ -4578,13 +4622,13 @@ END_TEST
 
 START_TEST(test_insertion_sort_gnrc_16)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   int length = 10;
   int start = 0;
   int end = 9;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 9;
   k2.i = 8;
@@ -4627,7 +4671,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_1)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4636,42 +4680,42 @@ START_TEST(test_insertion_sort_dll_1)
   DoublyLinkedList* node5;
   DoublyLinkedList* node6;
 
-  union Key k1, k2, k3, k4, k5, k6;
+  int k1, k2, k3, k4, k5, k6;
   int start = 0;
   int end = 5;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 5;
-  k2.i = 2;
-  k3.i = 4;
-  k4.i = 6;
-  k5.i = 1;
-  k6.i = 3;
+  k1 = 5;
+  k2 = 2;
+  k3 = 4;
+  k4 = 6;
+  k5 = 1;
+  k6 = 3;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 1);
+  ck_assert_int_eq((*head)->data.key, 1);
 
-  ck_assert_int_eq((*head)->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 6);
 
   free(node1);
   free(node2);
@@ -4685,25 +4729,25 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_2)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
 
-  union Key k1;
+  int k1;
   int start = 0;
   int end = 0;
 
   head = malloc(sizeof(DoublyLinkedList*));
   *head = NULL;
 
-  k1.i = 5;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
+  k1 = 5;
+  item.key = k1;
+  node1 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 5);
-  ck_assert_int_eq(node1->data.key.i, 5);
+  ck_assert_int_eq((*head)->data.key, 5);
+  ck_assert_int_eq(node1->data.key, 5);
 
   free(node1);
   free(head);
@@ -4712,7 +4756,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_3)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4726,67 +4770,67 @@ START_TEST(test_insertion_sort_dll_3)
   DoublyLinkedList* node10;
   DoublyLinkedList* node11;
 
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
   int start = 0;
   int end = 10;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = -10;
-  k2.i = 15;
-  k3.i = -5;
-  k4.i = -20;
-  k5.i = 50;
-  k6.i = 0;
-  k7.i = 100;
-  k8.i = 75;
-  k9.i = 30;
-  k10.i = 200;
-  k11.i = -200;
+  k1 = -10;
+  k2 = 15;
+  k3 = -5;
+  k4 = -20;
+  k5 = 50;
+  k6 = 0;
+  k7 = 100;
+  k8 = 75;
+  k9 = 30;
+  k10 = 200;
+  k11 = -200;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
-  reg.key = k7;
-  node7 = dll_insert(head, reg);
-  reg.key = k8;
-  node8 = dll_insert(head, reg);
-  reg.key = k9;
-  node9 = dll_insert(head, reg);
-  reg.key = k10;
-  node10 = dll_insert(head, reg);
-  reg.key = k11;
-  node11 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
+  item.key = k7;
+  node7 = dll_insert(head, item);
+  item.key = k8;
+  node8 = dll_insert(head, item);
+  item.key = k9;
+  node9 = dll_insert(head, item);
+  item.key = k10;
+  node10 = dll_insert(head, item);
+  item.key = k11;
+  node11 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, -200);
-  ck_assert_int_eq((*head)->next->data.key.i, -20);
-  ck_assert_int_eq((*head)->next->next->data.key.i, -10);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, -5);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 15);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 30);
+  ck_assert_int_eq((*head)->data.key, -200);
+  ck_assert_int_eq((*head)->next->data.key, -20);
+  ck_assert_int_eq((*head)->next->next->data.key, -10);
+  ck_assert_int_eq((*head)->next->next->next->data.key, -5);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 0);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 15);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 30);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   50);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 50);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 75);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 75);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       100);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->data.key.i,
+                       ->next->data.key,
                    200);
 
   free(node11);
@@ -4806,7 +4850,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_4)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4819,60 +4863,60 @@ START_TEST(test_insertion_sort_dll_4)
   DoublyLinkedList* node9;
   DoublyLinkedList* node10;
 
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   int start = 0;
   int end = 9;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 0;
-  k2.i = 1;
-  k3.i = 2;
-  k4.i = 3;
-  k5.i = 4;
-  k6.i = 5;
-  k7.i = 6;
-  k8.i = 7;
-  k9.i = 8;
-  k10.i = 9;
+  k1 = 0;
+  k2 = 1;
+  k3 = 2;
+  k4 = 3;
+  k5 = 4;
+  k6 = 5;
+  k7 = 6;
+  k8 = 7;
+  k9 = 8;
+  k10 = 9;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
-  reg.key = k7;
-  node7 = dll_insert(head, reg);
-  reg.key = k8;
-  node8 = dll_insert(head, reg);
-  reg.key = k9;
-  node9 = dll_insert(head, reg);
-  reg.key = k10;
-  node10 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
+  item.key = k7;
+  node7 = dll_insert(head, item);
+  item.key = k8;
+  node8 = dll_insert(head, item);
+  item.key = k9;
+  node9 = dll_insert(head, item);
+  item.key = k10;
+  node10 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 0);
+  ck_assert_int_eq((*head)->next->data.key, 1);
+  ck_assert_int_eq((*head)->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   7);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 7);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 8);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 8);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       9);
 
   free(node10);
@@ -4891,7 +4935,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_5)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4903,61 +4947,61 @@ START_TEST(test_insertion_sort_dll_5)
   DoublyLinkedList* node8;
   DoublyLinkedList* node9;
   DoublyLinkedList* node10;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
 
   int start = 0;
   int end = 9;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 9;
-  k2.i = 8;
-  k3.i = 7;
-  k4.i = 6;
-  k5.i = 5;
-  k6.i = 4;
-  k7.i = 3;
-  k8.i = 2;
-  k9.i = 1;
-  k10.i = 0;
+  k1 = 9;
+  k2 = 8;
+  k3 = 7;
+  k4 = 6;
+  k5 = 5;
+  k6 = 4;
+  k7 = 3;
+  k8 = 2;
+  k9 = 1;
+  k10 = 0;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
-  reg.key = k7;
-  node7 = dll_insert(head, reg);
-  reg.key = k8;
-  node8 = dll_insert(head, reg);
-  reg.key = k9;
-  node9 = dll_insert(head, reg);
-  reg.key = k10;
-  node10 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
+  item.key = k7;
+  node7 = dll_insert(head, item);
+  item.key = k8;
+  node8 = dll_insert(head, item);
+  item.key = k9;
+  node9 = dll_insert(head, item);
+  item.key = k10;
+  node10 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 0);
+  ck_assert_int_eq((*head)->next->data.key, 1);
+  ck_assert_int_eq((*head)->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   7);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 7);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 8);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 8);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       9);
 
   free(node10);
@@ -4976,7 +5020,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_6)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -4986,51 +5030,51 @@ START_TEST(test_insertion_sort_dll_6)
   DoublyLinkedList* node6;
   DoublyLinkedList* node7;
   DoublyLinkedList* node8;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8;
+  int k1, k2, k3, k4, k5, k6, k7, k8;
 
   int start = 2;
   int end = 7;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 2;
-  k2.i = 4;
-  k3.i = 1;
-  k4.i = 5;
-  k5.i = 7;
-  k6.i = 2;
-  k7.i = 3;
-  k8.i = 6;
+  k1 = 2;
+  k2 = 4;
+  k3 = 1;
+  k4 = 5;
+  k5 = 7;
+  k6 = 2;
+  k7 = 3;
+  k8 = 6;
 
   *head = NULL;
-  reg.key = k8; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k7; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k6;
-  node3 = dll_insert(head, reg);
-  reg.key = k5;
-  node4 = dll_insert(head, reg);
-  reg.key = k4;
-  node5 = dll_insert(head, reg);
-  reg.key = k3;
-  node6 = dll_insert(head, reg);
-  reg.key = k2;
-  node7 = dll_insert(head, reg);
-  reg.key = k1;
-  node8 = dll_insert(head, reg);
+  item.key = k8; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k7; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k6;
+  node3 = dll_insert(head, item);
+  item.key = k5;
+  node4 = dll_insert(head, item);
+  item.key = k4;
+  node5 = dll_insert(head, item);
+  item.key = k3;
+  node6 = dll_insert(head, item);
+  item.key = k2;
+  node7 = dll_insert(head, item);
+  item.key = k1;
+  node8 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 6);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 7);
+  ck_assert_int_eq((*head)->data.key, 2);
+  ck_assert_int_eq((*head)->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->data.key, 1);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   7);
 
   free(node8);
   free(node7);
@@ -5046,7 +5090,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_7)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5056,51 +5100,51 @@ START_TEST(test_insertion_sort_dll_7)
   DoublyLinkedList* node6;
   DoublyLinkedList* node7;
   DoublyLinkedList* node8;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8;
+  int k1, k2, k3, k4, k5, k6, k7, k8;
 
   int start = 0;
   int end = 5;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 2;
-  k2.i = 4;
-  k3.i = 5;
-  k4.i = 1;
-  k5.i = 2;
-  k6.i = 3;
-  k7.i = 7;
-  k8.i = 6;
+  k1 = 2;
+  k2 = 4;
+  k3 = 5;
+  k4 = 1;
+  k5 = 2;
+  k6 = 3;
+  k7 = 7;
+  k8 = 6;
 
   *head = NULL;
-  reg.key = k8; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k7; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k6;
-  node3 = dll_insert(head, reg);
-  reg.key = k5;
-  node4 = dll_insert(head, reg);
-  reg.key = k4;
-  node5 = dll_insert(head, reg);
-  reg.key = k3;
-  node6 = dll_insert(head, reg);
-  reg.key = k2;
-  node7 = dll_insert(head, reg);
-  reg.key = k1;
-  node8 = dll_insert(head, reg);
+  item.key = k8; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k7; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k6;
+  node3 = dll_insert(head, item);
+  item.key = k5;
+  node4 = dll_insert(head, item);
+  item.key = k4;
+  node5 = dll_insert(head, item);
+  item.key = k3;
+  node6 = dll_insert(head, item);
+  item.key = k2;
+  node7 = dll_insert(head, item);
+  item.key = k1;
+  node8 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 7);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 1);
+  ck_assert_int_eq((*head)->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 7);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   6);
 
   free(node8);
   free(node7);
@@ -5116,7 +5160,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_8)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5126,51 +5170,51 @@ START_TEST(test_insertion_sort_dll_8)
   DoublyLinkedList* node6;
   DoublyLinkedList* node7;
   DoublyLinkedList* node8;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8;
+  int k1, k2, k3, k4, k5, k6, k7, k8;
 
   int start = 2;
   int end = 5;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 2;
-  k2.i = 4;
-  k3.i = 1;
-  k4.i = 5;
-  k5.i = 2;
-  k6.i = 3;
-  k7.i = 7;
-  k8.i = 6;
+  k1 = 2;
+  k2 = 4;
+  k3 = 1;
+  k4 = 5;
+  k5 = 2;
+  k6 = 3;
+  k7 = 7;
+  k8 = 6;
 
   *head = NULL;
-  reg.key = k8; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k7; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k6;
-  node3 = dll_insert(head, reg);
-  reg.key = k5;
-  node4 = dll_insert(head, reg);
-  reg.key = k4;
-  node5 = dll_insert(head, reg);
-  reg.key = k3;
-  node6 = dll_insert(head, reg);
-  reg.key = k2;
-  node7 = dll_insert(head, reg);
-  reg.key = k1;
-  node8 = dll_insert(head, reg);
+  item.key = k8; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k7; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k6;
+  node3 = dll_insert(head, item);
+  item.key = k5;
+  node4 = dll_insert(head, item);
+  item.key = k4;
+  node5 = dll_insert(head, item);
+  item.key = k3;
+  node6 = dll_insert(head, item);
+  item.key = k2;
+  node7 = dll_insert(head, item);
+  item.key = k1;
+  node8 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 7);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 2);
+  ck_assert_int_eq((*head)->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->data.key, 1);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 7);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   6);
 
   free(node8);
   free(node7);
@@ -5186,7 +5230,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_9)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5202,89 +5246,89 @@ START_TEST(test_insertion_sort_dll_9)
   DoublyLinkedList* node12;
   DoublyLinkedList* node13;
   DoublyLinkedList* node14;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
 
   int start = 0;
   int end = 13;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 0;
-  k2.i = 2;
-  k3.i = 3;
-  k4.i = 4;
-  k5.i = 55;
-  k6.i = 300;
-  k7.i = 700;
-  k8.i = -200;
-  k9.i = -100;
-  k10.i = -80;
-  k11.i = -7;
-  k12.i = 30;
-  k13.i = 150;
-  k14.i = 570;
+  k1 = 0;
+  k2 = 2;
+  k3 = 3;
+  k4 = 4;
+  k5 = 55;
+  k6 = 300;
+  k7 = 700;
+  k8 = -200;
+  k9 = -100;
+  k10 = -80;
+  k11 = -7;
+  k12 = 30;
+  k13 = 150;
+  k14 = 570;
 
   *head = NULL;
-  reg.key = k14; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k13; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k12;
-  node3 = dll_insert(head, reg);
-  reg.key = k11;
-  node4 = dll_insert(head, reg);
-  reg.key = k10;
-  node5 = dll_insert(head, reg);
-  reg.key = k9;
-  node6 = dll_insert(head, reg);
-  reg.key = k8;
-  node7 = dll_insert(head, reg);
-  reg.key = k7;
-  node8 = dll_insert(head, reg);
-  reg.key = k6;
-  node9 = dll_insert(head, reg);
-  reg.key = k5;
-  node10 = dll_insert(head, reg);
-  reg.key = k4;
-  node11 = dll_insert(head, reg);
-  reg.key = k3;
-  node12 = dll_insert(head, reg);
-  reg.key = k2;
-  node13 = dll_insert(head, reg);
-  reg.key = k1;
-  node14 = dll_insert(head, reg);
+  item.key = k14; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k13; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k12;
+  node3 = dll_insert(head, item);
+  item.key = k11;
+  node4 = dll_insert(head, item);
+  item.key = k10;
+  node5 = dll_insert(head, item);
+  item.key = k9;
+  node6 = dll_insert(head, item);
+  item.key = k8;
+  node7 = dll_insert(head, item);
+  item.key = k7;
+  node8 = dll_insert(head, item);
+  item.key = k6;
+  node9 = dll_insert(head, item);
+  item.key = k5;
+  node10 = dll_insert(head, item);
+  item.key = k4;
+  node11 = dll_insert(head, item);
+  item.key = k3;
+  node12 = dll_insert(head, item);
+  item.key = k2;
+  node13 = dll_insert(head, item);
+  item.key = k1;
+  node14 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, -200);
-  ck_assert_int_eq((*head)->next->data.key.i, -100);
-  ck_assert_int_eq((*head)->next->next->data.key.i, -80);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, -7);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 3);
+  ck_assert_int_eq((*head)->data.key, -200);
+  ck_assert_int_eq((*head)->next->data.key, -100);
+  ck_assert_int_eq((*head)->next->next->data.key, -80);
+  ck_assert_int_eq((*head)->next->next->next->data.key, -7);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 0);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   4);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 4);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 30);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 30);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       55);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->data.key.i,
+                       ->next->data.key,
                    150);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->data.key.i,
+                       ->next->next->data.key,
                    300);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->next->data.key.i,
+                       ->next->next->next->data.key,
                    570);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->next->next->data.key.i,
+                       ->next->next->next->next->data.key,
                    700);
 
   free(node14);
@@ -5307,7 +5351,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_10)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5323,89 +5367,89 @@ START_TEST(test_insertion_sort_dll_10)
   DoublyLinkedList* node12;
   DoublyLinkedList* node13;
   DoublyLinkedList* node14;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
 
   int start = 2;
   int end = 11;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 0;
-  k2.i = 2;
-  k3.i = 3;
-  k4.i = 4;
-  k5.i = 55;
-  k6.i = 300;
-  k7.i = 700;
-  k8.i = -200;
-  k9.i = -100;
-  k10.i = -80;
-  k11.i = -7;
-  k12.i = 30;
-  k13.i = 150;
-  k14.i = 570;
+  k1 = 0;
+  k2 = 2;
+  k3 = 3;
+  k4 = 4;
+  k5 = 55;
+  k6 = 300;
+  k7 = 700;
+  k8 = -200;
+  k9 = -100;
+  k10 = -80;
+  k11 = -7;
+  k12 = 30;
+  k13 = 150;
+  k14 = 570;
 
   *head = NULL;
-  reg.key = k14; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k13; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k12;
-  node3 = dll_insert(head, reg);
-  reg.key = k11;
-  node4 = dll_insert(head, reg);
-  reg.key = k10;
-  node5 = dll_insert(head, reg);
-  reg.key = k9;
-  node6 = dll_insert(head, reg);
-  reg.key = k8;
-  node7 = dll_insert(head, reg);
-  reg.key = k7;
-  node8 = dll_insert(head, reg);
-  reg.key = k6;
-  node9 = dll_insert(head, reg);
-  reg.key = k5;
-  node10 = dll_insert(head, reg);
-  reg.key = k4;
-  node11 = dll_insert(head, reg);
-  reg.key = k3;
-  node12 = dll_insert(head, reg);
-  reg.key = k2;
-  node13 = dll_insert(head, reg);
-  reg.key = k1;
-  node14 = dll_insert(head, reg);
+  item.key = k14; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k13; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k12;
+  node3 = dll_insert(head, item);
+  item.key = k11;
+  node4 = dll_insert(head, item);
+  item.key = k10;
+  node5 = dll_insert(head, item);
+  item.key = k9;
+  node6 = dll_insert(head, item);
+  item.key = k8;
+  node7 = dll_insert(head, item);
+  item.key = k7;
+  node8 = dll_insert(head, item);
+  item.key = k6;
+  node9 = dll_insert(head, item);
+  item.key = k5;
+  node10 = dll_insert(head, item);
+  item.key = k4;
+  node11 = dll_insert(head, item);
+  item.key = k3;
+  node12 = dll_insert(head, item);
+  item.key = k2;
+  node13 = dll_insert(head, item);
+  item.key = k1;
+  node14 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->data.key.i, -200);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, -100);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, -80);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, -7);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 3);
+  ck_assert_int_eq((*head)->data.key, 0);
+  ck_assert_int_eq((*head)->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->data.key, -200);
+  ck_assert_int_eq((*head)->next->next->next->data.key, -100);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, -80);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, -7);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   4);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 4);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 30);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 30);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       55);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->data.key.i,
+                       ->next->data.key,
                    300);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->data.key.i,
+                       ->next->next->data.key,
                    700);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->next->data.key.i,
+                       ->next->next->next->data.key,
                    150);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->next->next->data.key.i,
+                       ->next->next->next->next->data.key,
                    570);
 
   free(node14);
@@ -5428,7 +5472,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_11)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5442,75 +5486,75 @@ START_TEST(test_insertion_sort_dll_11)
   DoublyLinkedList* node10;
   DoublyLinkedList* node11;
   DoublyLinkedList* node12;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12;
 
   int start = 0;
   int end = 11;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 3;
-  k2.i = 15;
-  k3.i = 20;
-  k4.i = 30;
-  k5.i = 50;
-  k6.i = 75;
-  k7.i = -75;
-  k8.i = -50;
-  k9.i = -30;
-  k10.i = -20;
-  k11.i = -15;
-  k12.i = -3;
+  k1 = 3;
+  k2 = 15;
+  k3 = 20;
+  k4 = 30;
+  k5 = 50;
+  k6 = 75;
+  k7 = -75;
+  k8 = -50;
+  k9 = -30;
+  k10 = -20;
+  k11 = -15;
+  k12 = -3;
 
   *head = NULL;
-  reg.key = k12; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k11; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k10;
-  node3 = dll_insert(head, reg);
-  reg.key = k9;
-  node4 = dll_insert(head, reg);
-  reg.key = k8;
-  node5 = dll_insert(head, reg);
-  reg.key = k7;
-  node6 = dll_insert(head, reg);
-  reg.key = k6;
-  node7 = dll_insert(head, reg);
-  reg.key = k5;
-  node8 = dll_insert(head, reg);
-  reg.key = k4;
-  node9 = dll_insert(head, reg);
-  reg.key = k3;
-  node10 = dll_insert(head, reg);
-  reg.key = k2;
-  node11 = dll_insert(head, reg);
-  reg.key = k1;
-  node12 = dll_insert(head, reg);
+  item.key = k12; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k11; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k10;
+  node3 = dll_insert(head, item);
+  item.key = k9;
+  node4 = dll_insert(head, item);
+  item.key = k8;
+  node5 = dll_insert(head, item);
+  item.key = k7;
+  node6 = dll_insert(head, item);
+  item.key = k6;
+  node7 = dll_insert(head, item);
+  item.key = k5;
+  node8 = dll_insert(head, item);
+  item.key = k4;
+  node9 = dll_insert(head, item);
+  item.key = k3;
+  node10 = dll_insert(head, item);
+  item.key = k2;
+  node11 = dll_insert(head, item);
+  item.key = k1;
+  node12 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, -75);
-  ck_assert_int_eq((*head)->next->data.key.i, -50);
-  ck_assert_int_eq((*head)->next->next->data.key.i, -30);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, -20);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, -15);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, -3);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 3);
+  ck_assert_int_eq((*head)->data.key, -75);
+  ck_assert_int_eq((*head)->next->data.key, -50);
+  ck_assert_int_eq((*head)->next->next->data.key, -30);
+  ck_assert_int_eq((*head)->next->next->next->data.key, -20);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, -15);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, -3);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   15);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 15);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 20);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 20);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       30);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->data.key.i,
+                       ->next->data.key,
                    50);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->next->data.key.i,
+                       ->next->next->data.key,
                    75);
 
   free(node12);
@@ -5531,7 +5575,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_12)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5539,42 +5583,42 @@ START_TEST(test_insertion_sort_dll_12)
   DoublyLinkedList* node4;
   DoublyLinkedList* node5;
   DoublyLinkedList* node6;
-  union Key k1, k2, k3, k4, k5, k6;
+  int k1, k2, k3, k4, k5, k6;
 
   int start = 0;
   int end = 5;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 5;
-  k2.i = 2;
-  k3.i = 4;
-  k4.i = 6;
-  k5.i = 1;
-  k6.i = 3;
+  k1 = 5;
+  k2 = 2;
+  k3 = 4;
+  k4 = 6;
+  k5 = 1;
+  k6 = 3;
 
   *head = NULL;
-  reg.key = k6; /* we put in reverse order */
-  node1 = dll_insert(head, reg);
-  reg.key = k5; /* because the dll pushes nodes */
-  node2 = dll_insert(head, reg);
-  reg.key = k4;
-  node3 = dll_insert(head, reg);
-  reg.key = k3;
-  node4 = dll_insert(head, reg);
-  reg.key = k2;
-  node5 = dll_insert(head, reg);
-  reg.key = k1;
-  node6 = dll_insert(head, reg);
+  item.key = k6; /* we put in reverse order */
+  node1 = dll_insert(head, item);
+  item.key = k5; /* because the dll pushes nodes */
+  node2 = dll_insert(head, item);
+  item.key = k4;
+  node3 = dll_insert(head, item);
+  item.key = k3;
+  node4 = dll_insert(head, item);
+  item.key = k2;
+  node5 = dll_insert(head, item);
+  item.key = k1;
+  node6 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 1);
+  ck_assert_int_eq((*head)->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 6);
 
   free(node6);
   free(node5);
@@ -5588,24 +5632,24 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_13)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
-  union Key k1;
+  int k1;
   int start = 0;
   int end = 0;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 5;
+  k1 = 5;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 5);
+  ck_assert_int_eq((*head)->data.key, 5);
 
   free(node1);
   free(head);
@@ -5614,7 +5658,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_14)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5627,68 +5671,68 @@ START_TEST(test_insertion_sort_dll_14)
   DoublyLinkedList* node9;
   DoublyLinkedList* node10;
   DoublyLinkedList* node11;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
 
   int start = 0;
   int end = 10;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = -10;
-  k2.i = 15;
-  k3.i = -5;
-  k4.i = -20;
-  k5.i = 50;
-  k6.i = 0;
-  k7.i = 100;
-  k8.i = 75;
-  k9.i = 30;
-  k10.i = 200;
-  k11.i = -200;
+  k1 = -10;
+  k2 = 15;
+  k3 = -5;
+  k4 = -20;
+  k5 = 50;
+  k6 = 0;
+  k7 = 100;
+  k8 = 75;
+  k9 = 30;
+  k10 = 200;
+  k11 = -200;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
-  reg.key = k7;
-  node7 = dll_insert(head, reg);
-  reg.key = k8;
-  node8 = dll_insert(head, reg);
-  reg.key = k9;
-  node9 = dll_insert(head, reg);
-  reg.key = k10;
-  node10 = dll_insert(head, reg);
-  reg.key = k11;
-  node11 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
+  item.key = k7;
+  node7 = dll_insert(head, item);
+  item.key = k8;
+  node8 = dll_insert(head, item);
+  item.key = k9;
+  node9 = dll_insert(head, item);
+  item.key = k10;
+  node10 = dll_insert(head, item);
+  item.key = k11;
+  node11 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, -200);
-  ck_assert_int_eq((*head)->next->data.key.i, -20);
-  ck_assert_int_eq((*head)->next->next->data.key.i, -10);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, -5);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 15);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 30);
+  ck_assert_int_eq((*head)->data.key, -200);
+  ck_assert_int_eq((*head)->next->data.key, -20);
+  ck_assert_int_eq((*head)->next->next->data.key, -10);
+  ck_assert_int_eq((*head)->next->next->next->data.key, -5);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 0);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 15);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 30);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   50);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 50);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 75);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 75);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       100);
   ck_assert_int_eq((*head)
                        ->next->next->next->next->next->next->next->next->next
-                       ->next->data.key.i,
+                       ->next->data.key,
                    200);
 
   free(node11);
@@ -5708,7 +5752,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_15)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5720,61 +5764,61 @@ START_TEST(test_insertion_sort_dll_15)
   DoublyLinkedList* node8;
   DoublyLinkedList* node9;
   DoublyLinkedList* node10;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
 
   int start = 0;
   int end = 9;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 0;
-  k2.i = 1;
-  k3.i = 2;
-  k4.i = 3;
-  k5.i = 4;
-  k6.i = 5;
-  k7.i = 6;
-  k8.i = 7;
-  k9.i = 8;
-  k10.i = 9;
+  k1 = 0;
+  k2 = 1;
+  k3 = 2;
+  k4 = 3;
+  k5 = 4;
+  k6 = 5;
+  k7 = 6;
+  k8 = 7;
+  k9 = 8;
+  k10 = 9;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
-  reg.key = k7;
-  node7 = dll_insert(head, reg);
-  reg.key = k8;
-  node8 = dll_insert(head, reg);
-  reg.key = k9;
-  node9 = dll_insert(head, reg);
-  reg.key = k10;
-  node10 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
+  item.key = k7;
+  node7 = dll_insert(head, item);
+  item.key = k8;
+  node8 = dll_insert(head, item);
+  item.key = k9;
+  node9 = dll_insert(head, item);
+  item.key = k10;
+  node10 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_int);
+  insertion_sort_dll(head, start, end, compare_int_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 0);
+  ck_assert_int_eq((*head)->next->data.key, 1);
+  ck_assert_int_eq((*head)->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   7);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 7);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 8);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 8);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       9);
 
   free(node10);
@@ -5793,7 +5837,7 @@ END_TEST
 
 START_TEST(test_insertion_sort_dll_16)
 {
-  Register reg;
+  Item item;
   DoublyLinkedList** head;
   DoublyLinkedList* node1;
   DoublyLinkedList* node2;
@@ -5805,61 +5849,61 @@ START_TEST(test_insertion_sort_dll_16)
   DoublyLinkedList* node8;
   DoublyLinkedList* node9;
   DoublyLinkedList* node10;
-  union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
+  int k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
 
   int start = 0;
   int end = 9;
 
   head = malloc(sizeof(DoublyLinkedList*));
 
-  k1.i = 9;
-  k2.i = 8;
-  k3.i = 7;
-  k4.i = 6;
-  k5.i = 5;
-  k6.i = 4;
-  k7.i = 3;
-  k8.i = 2;
-  k9.i = 1;
-  k10.i = 0;
+  k1 = 9;
+  k2 = 8;
+  k3 = 7;
+  k4 = 6;
+  k5 = 5;
+  k6 = 4;
+  k7 = 3;
+  k8 = 2;
+  k9 = 1;
+  k10 = 0;
 
   *head = NULL;
-  reg.key = k1;
-  node1 = dll_insert(head, reg);
-  reg.key = k2;
-  node2 = dll_insert(head, reg);
-  reg.key = k3;
-  node3 = dll_insert(head, reg);
-  reg.key = k4;
-  node4 = dll_insert(head, reg);
-  reg.key = k5;
-  node5 = dll_insert(head, reg);
-  reg.key = k6;
-  node6 = dll_insert(head, reg);
-  reg.key = k7;
-  node7 = dll_insert(head, reg);
-  reg.key = k8;
-  node8 = dll_insert(head, reg);
-  reg.key = k9;
-  node9 = dll_insert(head, reg);
-  reg.key = k10;
-  node10 = dll_insert(head, reg);
+  item.key = k1;
+  node1 = dll_insert(head, item);
+  item.key = k2;
+  node2 = dll_insert(head, item);
+  item.key = k3;
+  node3 = dll_insert(head, item);
+  item.key = k4;
+  node4 = dll_insert(head, item);
+  item.key = k5;
+  node5 = dll_insert(head, item);
+  item.key = k6;
+  node6 = dll_insert(head, item);
+  item.key = k7;
+  node7 = dll_insert(head, item);
+  item.key = k8;
+  node8 = dll_insert(head, item);
+  item.key = k9;
+  node9 = dll_insert(head, item);
+  item.key = k10;
+  node10 = dll_insert(head, item);
 
-  insertion_sort_dll(head, start, end, compare_float);
+  insertion_sort_dll(head, start, end, compare_float_dll);
 
-  ck_assert_int_eq((*head)->data.key.i, 0);
-  ck_assert_int_eq((*head)->next->data.key.i, 1);
-  ck_assert_int_eq((*head)->next->next->data.key.i, 2);
-  ck_assert_int_eq((*head)->next->next->next->data.key.i, 3);
-  ck_assert_int_eq((*head)->next->next->next->next->data.key.i, 4);
-  ck_assert_int_eq((*head)->next->next->next->next->next->data.key.i, 5);
-  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key.i, 6);
+  ck_assert_int_eq((*head)->data.key, 0);
+  ck_assert_int_eq((*head)->next->data.key, 1);
+  ck_assert_int_eq((*head)->next->next->data.key, 2);
+  ck_assert_int_eq((*head)->next->next->next->data.key, 3);
+  ck_assert_int_eq((*head)->next->next->next->next->data.key, 4);
+  ck_assert_int_eq((*head)->next->next->next->next->next->data.key, 5);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->data.key, 6);
+  ck_assert_int_eq((*head)->next->next->next->next->next->next->next->data.key,
+                   7);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->data.key.i, 7);
+      (*head)->next->next->next->next->next->next->next->next->data.key, 8);
   ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->data.key.i, 8);
-  ck_assert_int_eq(
-      (*head)->next->next->next->next->next->next->next->next->next->data.key.i,
+      (*head)->next->next->next->next->next->next->next->next->next->data.key,
       9);
 
   free(node10);
@@ -5878,7 +5922,7 @@ END_TEST
 
 START_TEST(test_bucket_sort_1)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6;
   int length = 6;
 
@@ -5889,7 +5933,7 @@ START_TEST(test_bucket_sort_1)
   k5.f = 0.1;
   k6.f = 0.3;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   array[0].key = k1;
   array[1].key = k2;
@@ -5913,13 +5957,13 @@ END_TEST
 
 START_TEST(test_bucket_sort_2)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1;
   int length = 1;
 
   k1.f = 0.5;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   array[0].key = k1;
 
@@ -5933,7 +5977,7 @@ END_TEST
 
 START_TEST(test_bucket_sort_3)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
   int length = 11;
 
@@ -5949,7 +5993,7 @@ START_TEST(test_bucket_sort_3)
   k10.f = 0.2;
   k11.f = 0.002;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   array[0].key = k1;
   array[1].key = k2;
@@ -5983,7 +6027,7 @@ END_TEST
 
 START_TEST(test_bucket_sort_4)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   int length = 10;
 
@@ -5998,7 +6042,7 @@ START_TEST(test_bucket_sort_4)
   k9.f = 0.8;
   k10.f = 0.9;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   array[0].key = k1;
   array[1].key = k2;
@@ -6030,7 +6074,7 @@ END_TEST
 
 START_TEST(test_bucket_sort_5)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
   int length = 10;
 
@@ -6045,7 +6089,7 @@ START_TEST(test_bucket_sort_5)
   k9.f = 0.1;
   k10.f = 0;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   array[0].key = k1;
   array[1].key = k2;
@@ -6077,7 +6121,7 @@ END_TEST
 
 START_TEST(test_bucket_sort_6)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8;
   int length = 6;
 
@@ -6090,7 +6134,7 @@ START_TEST(test_bucket_sort_6)
   k7.f = 0.7;
   k8.f = 0.6;
 
-  array = malloc((length + 2) * sizeof(Register));
+  array = malloc((length + 2) * sizeof(ExtendedItem));
 
   array[0].key = k1;
   array[1].key = k2;
@@ -6118,7 +6162,7 @@ END_TEST
 
 START_TEST(test_bucket_sort_7)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14;
   int length = 14;
 
@@ -6137,7 +6181,7 @@ START_TEST(test_bucket_sort_7)
   k13.f = 0.15;
   k14.f = 0.57;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   array[0].key = k1;
   array[1].key = k2;
@@ -6177,7 +6221,7 @@ END_TEST
 
 START_TEST(test_bucket_sort_8)
 {
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12;
   int length = 12;
 
@@ -6194,7 +6238,7 @@ START_TEST(test_bucket_sort_8)
   k11.f = 0.15;
   k12.f = 0.01;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   array[0].key = k1;
   array[1].key = k2;

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 Stack* stk;
-Register* reg;
+Item* item;
 
 int i;
 
@@ -14,13 +14,13 @@ Suite* make_test_suite(void);
 
 void setup(void)
 {
-  reg = malloc(sizeof(Register));
+  item = malloc(sizeof(Item));
   stk = malloc(sizeof(Stack));
 }
 
 void teardown(void)
 {
-  free(reg);
+  free(item);
   free(stk);
 }
 
@@ -65,13 +65,13 @@ END_TEST
 
 START_TEST(test_stack_empty_3)
 {
-  union Key k1;
+  int k1;
   int length = 5;
 
-  k1.i = 10;
-  reg->key = k1;
+  k1 = 10;
+  item->key = k1;
   init_stack(stk, length);
-  stk->array[0] = *reg;
+  stk->array[0] = *item;
   stk->top = 0;
   ck_assert_int_eq(stack_empty(stk), false);
 
@@ -81,13 +81,13 @@ END_TEST
 
 START_TEST(test_stack_empty_4)
 {
-  union Key k1;
+  int k1;
   int length = 10;
 
-  k1.i = 10;
-  reg->key = k1;
+  k1 = 10;
+  item->key = k1;
   init_stack(stk, length);
-  stk->array[0] = *reg;
+  stk->array[0] = *item;
   stk->top = 0;
   reinit_stack(stk);
   ck_assert_int_eq(stack_empty(stk), true);
@@ -109,13 +109,13 @@ END_TEST
 
 START_TEST(test_stack_full_2)
 {
-  union Key k1;
+  int k1;
   int length = 10;
 
-  k1.i = -10;
-  reg->key = k1;
+  k1 = -10;
+  item->key = k1;
   init_stack(stk, length);
-  push(stk, *reg);
+  push(stk, *item);
   ck_assert_int_eq(stack_full(stk), false);
 
   free(stk->array);
@@ -124,30 +124,30 @@ END_TEST
 
 START_TEST(test_stack_full_3)
 {
-  union Key k1;
+  int k1;
   int length = 20;
   bool result = true;
 
-  k1.i = -10;
-  reg->key = k1;
+  k1 = -10;
+  item->key = k1;
   init_stack(stk, length);
 
   /* Filling up the stack */
   for (i = 0; i < stk->length - 1; i++)
     {
-      result = result && push(stk, *reg);
+      result = result && push(stk, *item);
     }
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(stack_full(stk), false);
 
   /* Last available position */
-  result = push(stk, *reg);
+  result = push(stk, *item);
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(stack_full(stk), true);
 
   /* Stack overflow */
-  result = push(stk, *reg);
+  result = push(stk, *item);
   ck_assert_int_eq(result, false);
   ck_assert_int_eq(stack_full(stk), true);
 
@@ -161,7 +161,7 @@ START_TEST(test_stack_pop_1)
   int length = 5;
 
   init_stack(stk, length);
-  result = pop(stk, reg);
+  result = pop(stk, item);
 
   ck_assert_int_eq(result, false);
 
@@ -171,24 +171,24 @@ END_TEST
 
 START_TEST(test_stack_pop_2)
 {
-  union Key k1;
+  int k1;
   bool result1, result2, result3;
   int length = 20;
 
-  k1.i = 7;
+  k1 = 7;
 
   init_stack(stk, length);
-  result1 = pop(stk, reg); /* Doesn't write to pointer address*/
-  reg->key = k1;
-  push(stk, *reg);
-  result2 = pop(stk, reg); /* Writes to pointer address*/
-  result3 = pop(stk, reg); /* Doesn't write to pointer address*/
+  result1 = pop(stk, item); /* Doesn't write to pointer address*/
+  item->key = k1;
+  push(stk, *item);
+  result2 = pop(stk, item); /* Writes to pointer address*/
+  result3 = pop(stk, item); /* Doesn't write to pointer address*/
 
   ck_assert_int_eq(result1, false);
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(result3, false);
 
-  ck_assert_int_eq(reg->key.i, 7);
+  ck_assert_int_eq(item->key, 7);
 
   free(stk->array);
 }
@@ -196,23 +196,23 @@ END_TEST
 
 START_TEST(test_stack_pop_3)
 {
-  union Key k1, k2;
+  int k1, k2;
   bool result1, result2, result3;
-  Register* el1;
-  Register* el2;
+  Item* el1;
+  Item* el2;
   int length = 20;
 
-  k1.i = 7;
-  k2.i = -5;
+  k1 = 7;
+  k2 = -5;
 
-  el1 = malloc(sizeof(Register));
-  el2 = malloc(sizeof(Register));
+  el1 = malloc(sizeof(Item));
+  el2 = malloc(sizeof(Item));
 
   init_stack(stk, length);
-  reg->key = k1;
-  push(stk, *reg);
-  reg->key = k2;
-  push(stk, *reg);
+  item->key = k1;
+  push(stk, *item);
+  item->key = k2;
+  push(stk, *item);
 
   result1 = pop(stk, el1);
   result2 = pop(stk, el2);
@@ -222,8 +222,8 @@ START_TEST(test_stack_pop_3)
   ck_assert_int_eq(result2, true);
   ck_assert_int_eq(result3, false);
 
-  ck_assert_int_eq(el1->key.i, -5);
-  ck_assert_int_eq(el2->key.i, 7);
+  ck_assert_int_eq(el1->key, -5);
+  ck_assert_int_eq(el2->key, 7);
 
   free(el1);
   free(el2);

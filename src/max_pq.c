@@ -2,15 +2,16 @@
 #include <max_pq.h>
 #include <utils.h>
 
-Register heap_maximum(Register array[])
+ExtendedItem heap_maximum(ExtendedItem array[])
 {
   return array[0];
 }
 
-bool heap_extract_max(Register array[], int* heap_size, Register* extracted,
+bool heap_extract_max(ExtendedItem array[], int* heap_size,
+                      ExtendedItem* extracted,
                       int (*compare)(union Key, union Key))
 {
-  Register max;
+  ExtendedItem max;
 
   if ((*heap_size) < 1)
     {
@@ -28,7 +29,7 @@ bool heap_extract_max(Register array[], int* heap_size, Register* extracted,
     }
 }
 
-bool heap_increase_key(Register array[], int i, union Key key,
+bool heap_increase_key(ExtendedItem array[], int i, union Key key,
                        int (*compare)(union Key, union Key))
 {
   if (compare(key, array[i].key) == -1)
@@ -48,7 +49,7 @@ bool heap_increase_key(Register array[], int i, union Key key,
     }
 }
 
-void max_heap_insert(Register array[], union Key key, int* heap_size,
+void max_heap_insert(ExtendedItem array[], union Key key, int* heap_size,
                      int (*compare)(union Key, union Key))
 {
   int inf = MINUS_INF;

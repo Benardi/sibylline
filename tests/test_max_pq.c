@@ -29,14 +29,14 @@ START_TEST(test_heap_increase_key_1)
   bool result;
   int i;
   union Key key;
-  Register* array;
+  ExtendedItem* array;
   int length = 9;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
 
   i = 5;
   key.i = 40;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 50;
   k2.i = 30;
@@ -80,14 +80,14 @@ START_TEST(test_heap_increase_key_2)
   bool result;
   int i;
   union Key key;
-  Register* array;
+  ExtendedItem* array;
   int length = 10;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10;
 
   i = 8;
   key.i = 15;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 16;
   k2.i = 14;
@@ -134,14 +134,14 @@ START_TEST(test_heap_increase_key_3)
   bool result;
   int i;
   union Key key;
-  Register* array;
+  ExtendedItem* array;
   int length = 15;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14, k15;
 
   i = 8;
   key.i = 100;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 70;
   k2.i = 63;
@@ -203,14 +203,14 @@ START_TEST(test_heap_increase_key_4)
   bool result;
   int i;
   union Key key;
-  Register* array;
+  ExtendedItem* array;
   int length = 10;
   union Key k1, k2, k3, k4, k5, k6, k7;
 
   i = 2;
   key.i = 30;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 33;
   k2.i = 29;
@@ -248,14 +248,14 @@ START_TEST(test_heap_increase_key_5)
   bool result;
   int i;
   union Key key;
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7;
   int length = 7;
 
   i = 2;
   key.i = 0;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 33;
   k2.i = 29;
@@ -293,14 +293,14 @@ START_TEST(test_heap_increase_key_6)
   bool result;
   int i;
   union Key key;
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14, k15;
   int length = 15;
 
   i = 0;
   key.i = 100;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 70;
   k2.i = 63;
@@ -361,7 +361,7 @@ START_TEST(test_heap_increase_key_7)
 {
   bool result;
   int i;
-  Register* array;
+  ExtendedItem* array;
   union Key key, k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14,
       k15;
   int length = 15;
@@ -369,7 +369,7 @@ START_TEST(test_heap_increase_key_7)
   i = 0;
   key.i = 68;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 70;
   k2.i = 63;
@@ -430,7 +430,7 @@ START_TEST(test_heap_increase_key_8)
 {
   bool result;
   int i;
-  Register* array;
+  ExtendedItem* array;
   union Key key, k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14,
       k15;
   int length = 15;
@@ -438,7 +438,7 @@ START_TEST(test_heap_increase_key_8)
   i = 3;
   key.i = 49;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 70;
   k2.i = 63;
@@ -500,14 +500,14 @@ START_TEST(test_heap_increase_key_9)
   bool result;
   int i;
   union Key key;
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14, k15;
   int length = 15;
 
   i = 9;
   key.i = 0;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 70;
   k2.i = 63;
@@ -568,11 +568,11 @@ START_TEST(test_max_heap_insert_1)
 {
   union Key key;
   int* heap_size;
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3;
   int length = 3;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
 
   k1.i = 0;
@@ -602,11 +602,11 @@ START_TEST(test_max_heap_insert_2)
 {
   union Key key1, key2;
   int* heap_size;
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3;
   int length = 3;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
 
   k1.i = 0;
@@ -643,12 +643,12 @@ END_TEST
 START_TEST(test_max_heap_insert_3)
 {
   int* heap_size;
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3;
   union Key key1, key2, key3;
   int length = 3;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
 
   k1.i = 0;
@@ -693,12 +693,12 @@ END_TEST
 START_TEST(test_max_heap_insert_4)
 {
   int* heap_size;
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5;
   union Key key1, key2, key3, key4, key5;
   int length = 5;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
 
   k1.i = 0;
@@ -742,11 +742,11 @@ START_TEST(test_max_heap_insert_5)
 {
   union Key key;
   int* heap_size;
-  Register* array;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
   int length = 9;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
 
   k1.i = 56;
@@ -792,12 +792,12 @@ END_TEST
 
 START_TEST(test_heap_maximum_1)
 {
-  Register maximum;
-  Register* array;
+  ExtendedItem maximum;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
   int length = 9;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 50;
   k2.i = 30;
@@ -829,12 +829,12 @@ END_TEST
 
 START_TEST(test_heap_maximum_2)
 {
-  Register maximum;
-  Register* array;
+  ExtendedItem maximum;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
   int length = 9;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 56;
   k2.i = 28;
@@ -866,12 +866,12 @@ END_TEST
 
 START_TEST(test_heap_maximum_3)
 {
-  Register maximum;
-  Register* array;
+  ExtendedItem maximum;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12, k13, k14, k15;
   int length = 15;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
 
   k1.i = 70;
   k2.i = 63;
@@ -917,13 +917,13 @@ START_TEST(test_heap_extract_max_1)
 {
   bool result;
   int* heap_size;
-  Register* extracted;
-  Register* array;
+  ExtendedItem* extracted;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
   int length = 9;
 
-  array = malloc(length * sizeof(Register));
-  extracted = malloc(sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
+  extracted = malloc(sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
 
   k1.i = 50;
@@ -973,13 +973,13 @@ START_TEST(test_heap_extract_max_2)
 {
   bool result;
   int* heap_size;
-  Register* extracted;
-  Register* array;
+  ExtendedItem* extracted;
+  ExtendedItem* array;
   union Key k1;
 
-  array = malloc(sizeof(Register));
+  array = malloc(sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
-  extracted = malloc(sizeof(Register));
+  extracted = malloc(sizeof(ExtendedItem));
 
   k1.i = 34;
 
@@ -1005,13 +1005,13 @@ START_TEST(test_heap_extract_max_3)
 {
   bool result;
   int* heap_size;
-  Register* extracted;
-  Register* array;
+  ExtendedItem* extracted;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
   int length = 9;
 
-  array = malloc(length * sizeof(Register));
-  extracted = malloc(sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
+  extracted = malloc(sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
 
   k1.i = 50;
@@ -1062,13 +1062,13 @@ START_TEST(test_heap_extract_max_4)
 {
   bool result;
   int* heap_size;
-  Register* extracted;
-  Register* array;
+  ExtendedItem* extracted;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
   int length = 9;
 
-  array = malloc(length * sizeof(Register));
-  extracted = malloc(sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
+  extracted = malloc(sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
 
   k1.i = 35;
@@ -1119,13 +1119,13 @@ START_TEST(test_heap_extract_max_5)
 {
   bool result;
   int* heap_size;
-  Register* extracted;
-  Register* array;
+  ExtendedItem* extracted;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
   int length = 9;
 
-  array = malloc(length * sizeof(Register));
-  extracted = malloc(sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
+  extracted = malloc(sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
 
   k1.i = 30;
@@ -1176,14 +1176,14 @@ START_TEST(test_heap_extract_max_6)
 {
   bool result;
   int* heap_size;
-  Register* extracted;
-  Register* array;
+  ExtendedItem* extracted;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
   int length = 9;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
-  extracted = malloc(sizeof(Register));
+  extracted = malloc(sizeof(ExtendedItem));
 
   k1.i = 26;
   k2.i = 20;
@@ -1233,13 +1233,13 @@ START_TEST(test_heap_extract_max_7)
 {
   bool result;
   int* heap_size;
-  Register* extracted;
-  Register* array;
+  ExtendedItem* extracted;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
   int length = 9;
 
-  array = malloc(length * sizeof(Register));
-  extracted = malloc(sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
+  extracted = malloc(sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
 
   k1.i = 22;
@@ -1290,14 +1290,14 @@ START_TEST(test_heap_extract_max_8)
 {
   bool result;
   int* heap_size;
-  Register* extracted;
-  Register* array;
+  ExtendedItem* extracted;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
   int length = 9;
 
-  array = malloc(length * sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
-  extracted = malloc(sizeof(Register));
+  extracted = malloc(sizeof(ExtendedItem));
 
   k1.i = 20;
   k2.i = 13;
@@ -1378,13 +1378,13 @@ START_TEST(test_heap_extract_max_9)
 {
   bool result;
   int* heap_size;
-  Register* extracted;
-  Register* array;
+  ExtendedItem* extracted;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
   int length = 9;
 
-  array = malloc(length * sizeof(Register));
-  extracted = malloc(sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
+  extracted = malloc(sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
 
   k1.i = 13;
@@ -1450,13 +1450,13 @@ START_TEST(test_heap_extract_max_10)
 {
   bool result;
   int* heap_size;
-  Register* extracted;
-  Register* array;
+  ExtendedItem* extracted;
+  ExtendedItem* array;
   union Key k1, k2, k3, k4, k5, k6, k7, k8, k9;
   int length = 9;
 
-  array = malloc(length * sizeof(Register));
-  extracted = malloc(sizeof(Register));
+  array = malloc(length * sizeof(ExtendedItem));
+  extracted = malloc(sizeof(ExtendedItem));
   heap_size = malloc(sizeof(int));
 
   k1.i = 13;

@@ -10,13 +10,13 @@
 #ifndef CSLL_H
 #define CSLL_H
 
-#include <register.h>
+#include <item.h>
 #include <stddef.h>
 
 typedef struct CircularSinglyLinkedList
 {
   struct CircularSinglyLinkedList* next;
-  Register data;
+  Item data;
 } CircularSinglyLinkedList;
 
 /** @brief Inserts node at front of Circular Singly Linked List.
@@ -26,11 +26,11 @@ typedef struct CircularSinglyLinkedList
  * pointer to added node.
  *
  * @param tail Double pointer to tail of Circular Singly Linked List.
- * @param reg Register of inserted node.
+ * @param item Item of inserted node.
  * @return Pointer to inserted node.
  */
 CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
-                                            Register reg);
+                                            Item item);
 
 /** @brief Inserts node at end of Circular Singly Linked List.
  *
@@ -40,11 +40,11 @@ CircularSinglyLinkedList* csll_insert_begin(CircularSinglyLinkedList** tail,
  * pointer with new tail of the linked list.
  *
  * @param tail Double pointer to tail of Circular Singly Linked List.
- * @param reg Register of inserted node.
+ * @param item Item of inserted node.
  * @return Pointer to inserted node.
  */
 CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
-                                          Register reg);
+                                          Item item);
 
 /** @brief Retrieves node from Circular Singly Linked List via key.
  *
@@ -56,13 +56,12 @@ CircularSinglyLinkedList* csll_insert_end(CircularSinglyLinkedList** tail,
  * second parameter it should return 0.
  *
  * @param tail Double pointer to tail of Circular Singly Linked List.
- * @param key Key for Register of inserted node.
+ * @param key Key for Item of inserted node.
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to retrieved node.
  */
-CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail,
-                                      union Key key,
-                                      int (*compare)(union Key, union Key));
+CircularSinglyLinkedList* csll_search(CircularSinglyLinkedList** tail, int key,
+                                      int (*compare)(int, int));
 
 /** @brief Deletes given node from Circular Singly Linked List.
  *

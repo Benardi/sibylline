@@ -10,12 +10,12 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include <register.h>
+#include <item.h>
 #include <stdbool.h>
 
 typedef struct
 {
-  Register* array;
+  Item* array;
   int length;
   int head;
   int tail;
@@ -64,7 +64,7 @@ bool queue_full(Queue* q);
  * @param q Queue as a pointer
  * @return Whether element could be enqueued
  */
-bool enqueue(Queue* q, Register reg);
+bool enqueue(Queue* q, Item item);
 
 /** @brief Removes head of queue and returns it.
  *
@@ -76,6 +76,6 @@ bool enqueue(Queue* q, Register reg);
  * @param removed Pointer to hold value of removed element
  * @return Whether an element could be dequeued
  */
-bool dequeue(Queue* q, Register* removed);
+bool dequeue(Queue* q, Item* removed);
 
 #endif

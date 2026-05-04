@@ -10,7 +10,7 @@
 #ifndef RBT_H
 #define RBT_H
 
-#include <register.h>
+#include <item.h>
 
 typedef enum Color
 {
@@ -23,7 +23,7 @@ typedef struct RedBlackTree
   struct RedBlackTree* p;
   struct RedBlackTree* left;
   struct RedBlackTree* right;
-  Register data;
+  Item data;
   Color color;
 
 } RedBlackTree;
@@ -76,9 +76,9 @@ void right_rotate(RedBlackTree** root, RedBlackTree* nil, RedBlackTree* node);
  */
 RedBlackTree* rb_tree_minimum(RedBlackTree* root, RedBlackTree* nil);
 
-/** @brief Inserts node with given Register/Key in Red Black Tree.
+/** @brief Inserts node with given Item/Key in Red Black Tree.
  *
- * Inserts node with provided Register/Key in Red Black Tree. Insertion is
+ * Inserts node with provided Item/Key in Red Black Tree. Insertion is
  * done as to ensure properties of Red Black Tree. Returns pointer to
  * inserted node. The employed compare function must receive two void
  * pointers as parameters and return an integer as result. If first parameter
@@ -87,12 +87,12 @@ RedBlackTree* rb_tree_minimum(RedBlackTree* root, RedBlackTree* nil);
  *
  * @param root Pointer to pointer to root of tree.
  * @param nil Pointer to node used as nil/sentinel.
- * @param reg Register with key and satellite data of inserted node.
+ * @param item Item with key and satellite data of inserted node.
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to inserted node.
  */
-RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Register reg,
-                        int (*compare)(union Key, union Key));
+RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Item item,
+                        int (*compare)(int, int));
 
 /** @brief Removes given node from Red Black Tree.
  *

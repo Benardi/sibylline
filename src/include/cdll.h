@@ -10,14 +10,14 @@
 #ifndef CDLL_H
 #define CDLL_H
 
-#include <register.h>
+#include <item.h>
 #include <stddef.h>
 
 typedef struct CircularDoublyLinkedList
 {
   struct CircularDoublyLinkedList* prev;
   struct CircularDoublyLinkedList* next;
-  Register data;
+  Item data;
 } CircularDoublyLinkedList;
 
 /** @brief Inits nil node to create valid Circular Doubly Linked List.
@@ -40,11 +40,10 @@ void cdll_init(CircularDoublyLinkedList* nil);
  * pointer to inserted node.
  *
  * @param nil Pointer to nil node.
- * @param reg Register of inserted node.
+ * @param item Item of inserted node.
  * @return Pointer to inserted node.
  */
-CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
-                                      Register reg);
+CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil, Item item);
 
 /** @brief Retrieves node in Circular Doubly Linked List via key.
  *
@@ -59,13 +58,12 @@ CircularDoublyLinkedList* cdll_insert(CircularDoublyLinkedList* nil,
  *
  *
  * @param nil Pointer to nil node.
- * @param key Key for Register of inserted node.
+ * @param key Key for Item of inserted node.
  * @param compare Pointer to function that compares two union Keys.
  * @return Pointer to retrieved node.
  */
-CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil,
-                                      union Key key,
-                                      int (*compare)(union Key, union Key));
+CircularDoublyLinkedList* cdll_search(CircularDoublyLinkedList* nil, int key,
+                                      int (*compare)(int, int));
 
 /** @brief Deletes given node from Circular Doubly Linked List.
  *

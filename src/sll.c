@@ -1,19 +1,19 @@
 #include <sll.h>
 #include <stdlib.h>
 
-SinglyLinkedList* sll_insert(SinglyLinkedList** head, Register reg)
+SinglyLinkedList* sll_insert(SinglyLinkedList** head, Item item)
 {
   SinglyLinkedList* node;
   node = malloc(sizeof(SinglyLinkedList));
-  node->data = reg;
+  node->data = item;
   node->next = (*head);
 
   (*head) = node;
   return node;
 }
 
-SinglyLinkedList* sll_search(SinglyLinkedList** head, union Key key,
-                             int (*compare)(union Key, union Key))
+SinglyLinkedList* sll_search(SinglyLinkedList** head, int key,
+                             int (*compare)(int, int))
 {
   SinglyLinkedList* node;
 

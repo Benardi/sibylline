@@ -7,7 +7,7 @@ void inorder_tree_walk(BinarySearchTree* node)
   if (node != NULL)
     {
       inorder_tree_walk(node->left);
-      printf("%d \n", (node->data.key.i));
+      printf("%d \n", (node->data.key));
       inorder_tree_walk(node->right);
     }
 }
@@ -18,7 +18,7 @@ void postorder_tree_walk(BinarySearchTree* node)
     {
       postorder_tree_walk(node->left);
       postorder_tree_walk(node->right);
-      printf("%d \n", (node->data.key.i));
+      printf("%d \n", (node->data.key));
     }
 }
 
@@ -26,21 +26,21 @@ void preorder_tree_walk(BinarySearchTree* node)
 {
   if (node != NULL)
     {
-      printf("%d \n", (node->data.key.i));
+      printf("%d \n", (node->data.key));
       preorder_tree_walk(node->left);
       preorder_tree_walk(node->right);
     }
 }
 
-BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg,
-                              int (*compare)(union Key, union Key))
+BinarySearchTree* tree_insert(BinarySearchTree** root, Item item,
+                              int (*compare)(int, int))
 {
   BinarySearchTree* node;
   BinarySearchTree* parent;
   BinarySearchTree* current;
 
   node = malloc(sizeof(BinarySearchTree));
-  node->data = reg;
+  node->data = item;
   node->right = NULL;
   node->left = NULL;
   node->p = NULL;
@@ -82,8 +82,8 @@ BinarySearchTree* tree_insert(BinarySearchTree** root, Register reg,
   return node;
 }
 
-BinarySearchTree* tree_search(BinarySearchTree* node, union Key key,
-                              int (*compare)(union Key, union Key))
+BinarySearchTree* tree_search(BinarySearchTree* node, int key,
+                              int (*compare)(int, int))
 {
   if ((node == NULL) || (compare(key, node->data.key) == 0))
     {
@@ -102,8 +102,8 @@ BinarySearchTree* tree_search(BinarySearchTree* node, union Key key,
     }
 }
 
-BinarySearchTree* iterative_tree_search(BinarySearchTree* root, union Key key,
-                                        int (*compare)(union Key, union Key))
+BinarySearchTree* iterative_tree_search(BinarySearchTree* root, int key,
+                                        int (*compare)(int, int))
 {
   BinarySearchTree* node;
 

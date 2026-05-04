@@ -21,11 +21,11 @@ void teardown(void)
   free(list);
 }
 
-static int compare_to(union Key k1, union Key k2)
+static int compare_to(int k1, int k2)
 {
   int result;
 
-  if (k1.i == k2.i)
+  if (k1 == k2)
     {
       result = 1;
     }
@@ -49,257 +49,221 @@ END_TEST
 
 START_TEST(test_insert1_capacity1)
 {
-  Register el;
-  union Key k;
+  Item el;
   int capacity = 1;
 
-  k.i = 5;
+  el.key = 5;
 
   init_list(list, capacity);
 
-  el.key = k;
   insert(list, el);
 
   ck_assert_int_eq(list->size, 1);
   ck_assert_int_eq(list->capacity, 1);
-  ck_assert_int_eq(list->array[0].key.i, 5);
+  ck_assert_int_eq(list->array[0].key, 5);
 }
 END_TEST
 
 START_TEST(test_insert3_capacity1)
 {
-  Register el;
+  Item el;
   int capacity = 1;
-  union Key k1, k2, k3;
 
   init_list(list, capacity);
 
-  k1.i = 5;
-  el.key = k1;
+  el.key = 5;
   insert(list, el);
 
-  k2.i = 15;
-  el.key = k2;
+  el.key = 15;
   insert(list, el);
 
-  k3.i = -10;
-  el.key = k3;
+  el.key = -10;
   insert(list, el);
 
   ck_assert_int_eq(list->size, 3);
   ck_assert_int_eq(list->capacity, 4);
-  ck_assert_int_eq(list->array[0].key.i, 5);
-  ck_assert_int_eq(list->array[1].key.i, 15);
-  ck_assert_int_eq(list->array[2].key.i, -10);
+  ck_assert_int_eq(list->array[0].key, 5);
+  ck_assert_int_eq(list->array[1].key, 15);
+  ck_assert_int_eq(list->array[2].key, -10);
 }
 END_TEST
 
 START_TEST(test_insert4_capacity5)
 {
-  Register el;
+  Item el;
   int capacity = 5;
-  union Key k1, k2, k3, k4;
 
   init_list(list, capacity);
 
-  k1.i = 5;
-  el.key = k1;
+  el.key = 5;
   insert(list, el);
 
-  k2.i = 15;
-  el.key = k2;
+  el.key = 15;
   insert(list, el);
 
-  k3.i = -10;
-  el.key = k3;
+  el.key = -10;
   insert(list, el);
 
-  k4.i = -15;
-  el.key = k4;
+  el.key = -15;
   insert(list, el);
 
   ck_assert_int_eq(list->size, 4);
   ck_assert_int_eq(list->capacity, 5);
-  ck_assert_int_eq(list->array[0].key.i, 5);
-  ck_assert_int_eq(list->array[1].key.i, 15);
-  ck_assert_int_eq(list->array[2].key.i, -10);
-  ck_assert_int_eq(list->array[3].key.i, -15);
+  ck_assert_int_eq(list->array[0].key, 5);
+  ck_assert_int_eq(list->array[1].key, 15);
+  ck_assert_int_eq(list->array[2].key, -10);
+  ck_assert_int_eq(list->array[3].key, -15);
 }
 END_TEST
 
 START_TEST(test_insert_at_capacity1)
 {
-  Register el;
+  Item el;
   int capacity = 1;
-  union Key k;
-  k.i = 5;
+
+  el.key = 5;
 
   init_list(list, capacity);
 
-  el.key = k;
   insert_at(list, el, 0);
 
   ck_assert_int_eq(list->size, 1);
   ck_assert_int_eq(list->capacity, 1);
-  ck_assert_int_eq(list->array[0].key.i, 5);
+  ck_assert_int_eq(list->array[0].key, 5);
 }
 END_TEST
 
 START_TEST(test_insert_twice_at_capacity1)
 {
-  Register el;
+  Item el;
   int capacity = 1;
-  union Key k1, k2;
-  k1.i = 5;
-  k2.i = 20;
 
   init_list(list, capacity);
 
-  el.key = k1;
+  el.key = 5;
   insert_at(list, el, 0);
 
-  el.key = k2;
+  el.key = 20;
   insert_at(list, el, 0);
 
   ck_assert_int_eq(list->size, 2);
   ck_assert_int_eq(list->capacity, 2);
-  ck_assert_int_eq(list->array[0].key.i, 20);
-  ck_assert_int_eq(list->array[1].key.i, 5);
+  ck_assert_int_eq(list->array[0].key, 20);
+  ck_assert_int_eq(list->array[1].key, 5);
 }
 END_TEST
 
 START_TEST(test_insert_at_capacity5)
 {
-  Register el;
+  Item el;
   int capacity = 5;
-  union Key k, k1, k2, k3, k4;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 1;
-  el.key = k1;
+  el.key = 1;
   list->array[0] = el;
 
-  k2.i = 3;
-  el.key = k2;
+  el.key = 3;
   list->array[1] = el;
 
-  k3.i = 4;
-  el.key = k3;
+  el.key = 4;
   list->array[2] = el;
 
-  k4.i = 5;
-  el.key = k4;
+  el.key = 5;
   list->array[3] = el;
 
-  k.i = 2;
-  el.key = k;
+  el.key = 2;
   insert_at(list, el, 1);
 
   ck_assert_int_eq(list->size, 5);
   ck_assert_int_eq(list->capacity, 5);
-  ck_assert_int_eq(list->array[0].key.i, 1);
-  ck_assert_int_eq(list->array[1].key.i, 2);
-  ck_assert_int_eq(list->array[2].key.i, 3);
-  ck_assert_int_eq(list->array[3].key.i, 4);
-  ck_assert_int_eq(list->array[4].key.i, 5);
+  ck_assert_int_eq(list->array[0].key, 1);
+  ck_assert_int_eq(list->array[1].key, 2);
+  ck_assert_int_eq(list->array[2].key, 3);
+  ck_assert_int_eq(list->array[3].key, 4);
+  ck_assert_int_eq(list->array[4].key, 5);
 }
 END_TEST
 
 START_TEST(test_insert_at_last_index)
 {
-  Register el;
+  Item el;
   int capacity = 5;
-  union Key k, k1, k2, k3, k4;
   int index = 4;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 1;
-  el.key = k1;
+  el.key = 1;
   list->array[0] = el;
 
-  k2.i = 3;
-  el.key = k2;
+  el.key = 3;
   list->array[1] = el;
 
-  k3.i = 4;
-  el.key = k3;
+  el.key = 4;
   list->array[2] = el;
 
-  k4.i = 5;
-  el.key = k4;
+  el.key = 5;
   list->array[3] = el;
 
-  k.i = 12;
-  el.key = k;
+  el.key = 12;
   insert_at(list, el, index);
 
   ck_assert_int_eq(list->size, 5);
   ck_assert_int_eq(list->capacity, 5);
-  ck_assert_int_eq(list->array[0].key.i, 1);
-  ck_assert_int_eq(list->array[1].key.i, 3);
-  ck_assert_int_eq(list->array[2].key.i, 4);
-  ck_assert_int_eq(list->array[3].key.i, 5);
-  ck_assert_int_eq(list->array[4].key.i, 12);
+  ck_assert_int_eq(list->array[0].key, 1);
+  ck_assert_int_eq(list->array[1].key, 3);
+  ck_assert_int_eq(list->array[2].key, 4);
+  ck_assert_int_eq(list->array[3].key, 5);
+  ck_assert_int_eq(list->array[4].key, 12);
 }
 END_TEST
 
 START_TEST(test_set_success)
 {
-  Register el;
+  Item el;
   int capacity = 4;
-  union Key k1, k2, k3, k4;
   bool result;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 5;
-  el.key = k1;
+  el.key = 5;
   list->array[0] = el;
 
-  k2.i = 15;
-  el.key = k2;
+  el.key = 15;
   list->array[1] = el;
 
-  k3.i = -10;
-  el.key = k3;
+  el.key = -10;
   list->array[2] = el;
 
-  k4.i = 25;
-  el.key = k4;
+  el.key = 25;
   list->array[3] = el;
 
   result = set(list, el, 3);
 
-  ck_assert_int_eq(list->array[3].key.i, 25);
+  ck_assert_int_eq(list->array[3].key, 25);
   ck_assert_int_eq(result, true);
 }
 END_TEST
 
 START_TEST(test_set_head_fail)
 {
-  Register el;
+  Item el;
   int capacity = 4;
-  union Key k1, k2, k3;
   bool result;
 
   init_list(list, capacity);
   list->size = 3;
 
-  k1.i = 5;
-  el.key = k1;
+  el.key = 5;
   list->array[0] = el;
 
-  k2.i = 15;
-  el.key = k2;
+  el.key = 15;
   list->array[1] = el;
 
-  k3.i = -10;
-  el.key = k3;
+  el.key = -10;
   list->array[2] = el;
 
   result = set(list, el, -1);
@@ -310,24 +274,20 @@ END_TEST
 
 START_TEST(test_set_tail_fail)
 {
-  Register el;
+  Item el;
   int capacity = 4;
-  union Key k1, k2, k3;
   bool result;
 
   init_list(list, capacity);
   list->size = 3;
 
-  k1.i = 5;
-  el.key = k1;
+  el.key = 5;
   list->array[0] = el;
 
-  k2.i = 15;
-  el.key = k2;
+  el.key = 15;
   list->array[1] = el;
 
-  k3.i = -10;
-  el.key = k3;
+  el.key = -10;
   list->array[2] = el;
 
   result = set(list, el, 4);
@@ -338,61 +298,51 @@ END_TEST
 
 START_TEST(test_get_success)
 {
-  Register el;
-  Register* result;
+  Item el;
+  Item* result;
   int capacity = 4;
-  union Key k1, k2, k3, k4;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 25;
-  el.key = k1;
+  el.key = 25;
   list->array[0] = el;
 
-  k2.i = 35;
-  el.key = k2;
+  el.key = 35;
   list->array[1] = el;
 
-  k3.i = -20;
-  el.key = k3;
+  el.key = -20;
   list->array[2] = el;
 
-  k4.i = 58;
-  el.key = k4;
+  el.key = 58;
   list->array[3] = el;
 
   result = get(list, 1);
 
   ck_assert_int_eq(result == &list->array[1], true);
-  ck_assert_int_eq(result->key.i, 35);
+  ck_assert_int_eq(result->key, 35);
 }
 END_TEST
 
 START_TEST(test_get_head_fail)
 {
-  Register el;
-  Register* result;
+  Item el;
+  Item* result;
   int capacity = 4;
-  union Key k1, k2, k3, k4;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 25;
-  el.key = k1;
+  el.key = 25;
   list->array[0] = el;
 
-  k2.i = 35;
-  el.key = k2;
+  el.key = 35;
   list->array[1] = el;
 
-  k3.i = -20;
-  el.key = k3;
+  el.key = -20;
   list->array[2] = el;
 
-  k4.i = 58;
-  el.key = k4;
+  el.key = 58;
   list->array[3] = el;
 
   result = get(list, -1);
@@ -403,28 +353,23 @@ END_TEST
 
 START_TEST(test_get_tail_fail)
 {
-  Register el;
-  Register* result;
+  Item el;
+  Item* result;
   int capacity = 4;
-  union Key k1, k2, k3, k4;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 25;
-  el.key = k1;
+  el.key = 25;
   list->array[0] = el;
 
-  k2.i = 35;
-  el.key = k2;
+  el.key = 35;
   list->array[1] = el;
 
-  k3.i = -20;
-  el.key = k3;
+  el.key = -20;
   list->array[2] = el;
 
-  k4.i = 58;
-  el.key = k4;
+  el.key = 58;
   list->array[3] = el;
 
   result = get(list, 4);
@@ -435,36 +380,30 @@ END_TEST
 
 START_TEST(test_contains_success)
 {
-  Register el;
+  Item el;
   bool result;
   int capacity = 10;
-  union Key identifier;
-  union Key k1, k2, k3, k4, k5;
+  int identifier;
 
   init_list(list, capacity);
   list->size = 5;
 
-  k1.i = 5;
-  el.key = k1;
+  el.key = 5;
   list->array[0] = el;
 
-  k2.i = 15;
-  el.key = k2;
+  el.key = 15;
   list->array[1] = el;
 
-  k3.i = -10;
-  el.key = k3;
+  el.key = -10;
   list->array[2] = el;
 
-  k4.i = 25;
-  el.key = k4;
+  el.key = 25;
   list->array[3] = el;
 
-  k5.i = 32;
-  el.key = k5;
+  el.key = 32;
   list->array[4] = el;
 
-  identifier.i = -10;
+  identifier = -10;
 
   result = contains(list, identifier, compare_to);
 
@@ -474,36 +413,30 @@ END_TEST
 
 START_TEST(test_contains_fail)
 {
-  Register el;
+  Item el;
   int capacity = 10;
   bool result;
-  union Key identifier;
-  union Key k1, k2, k3, k4, k5;
+  int identifier;
 
   init_list(list, capacity);
   list->size = 5;
 
-  k1.i = 5;
-  el.key = k1;
+  el.key = 5;
   list->array[0] = el;
 
-  k2.i = 15;
-  el.key = k2;
+  el.key = 15;
   list->array[1] = el;
 
-  k3.i = -10;
-  el.key = k3;
+  el.key = -10;
   list->array[2] = el;
 
-  k4.i = 25;
-  el.key = k4;
+  el.key = 25;
   list->array[3] = el;
 
-  k5.i = 32;
-  el.key = k5;
+  el.key = 32;
   list->array[4] = el;
 
-  identifier.i = 48;
+  identifier = 48;
 
   result = contains(list, identifier, compare_to);
 
@@ -513,266 +446,231 @@ END_TEST
 
 START_TEST(test_shift_left_2el_array)
 {
-  Register el;
+  Item el;
   bool result;
-  union Key k1, k2;
   int index = 0;
   int capacity = 5;
 
   init_list(list, capacity);
   list->size = 2;
 
-  k1.i = 1;
-  el.key = k1;
+  el.key = 1;
   list->array[0] = el;
 
-  k2.i = 2;
-  el.key = k2;
+  el.key = 2;
   list->array[1] = el;
 
   result = shift_left(list, index);
 
   ck_assert_int_eq(result, true);
-  ck_assert_int_eq(list->array[0].key.i, 2);
-  ck_assert_int_eq(list->array[1].key.i, 2);
+  ck_assert_int_eq(list->array[0].key, 2);
+  ck_assert_int_eq(list->array[1].key, 2);
 }
 END_TEST
 
 START_TEST(test_shift_left_2nd_el_in_4_el_array)
 {
-  Register el;
+  Item el;
   bool result;
   int index = 1;
   int capacity = 5;
-  union Key k1, k2, k3, k4;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 1;
-  el.key = k1;
+  el.key = 1;
   list->array[0] = el;
 
-  k2.i = 2;
-  el.key = k2;
+  el.key = 2;
   list->array[1] = el;
 
-  k3.i = 3;
-  el.key = k3;
+  el.key = 3;
   list->array[2] = el;
 
-  k4.i = 4;
-  el.key = k4;
+  el.key = 4;
   list->array[3] = el;
 
   result = shift_left(list, index);
 
   ck_assert_int_eq(result, true);
-  ck_assert_int_eq(list->array[0].key.i, 1);
-  ck_assert_int_eq(list->array[1].key.i, 3);
-  ck_assert_int_eq(list->array[2].key.i, 4);
-  ck_assert_int_eq(list->array[3].key.i, 4);
+  ck_assert_int_eq(list->array[0].key, 1);
+  ck_assert_int_eq(list->array[1].key, 3);
+  ck_assert_int_eq(list->array[2].key, 4);
+  ck_assert_int_eq(list->array[3].key, 4);
 }
 END_TEST
 
 START_TEST(test_shift_left_fail_head)
 {
-  Register el;
+  Item el;
   bool result;
   int index = -1;
   int capacity = 5;
-  union Key k1, k2, k3, k4;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 1;
-  el.key = k1;
+  el.key = 1;
   list->array[0] = el;
 
-  k2.i = 2;
-  el.key = k2;
+  el.key = 2;
   list->array[1] = el;
 
-  k3.i = 3;
-  el.key = k3;
+  el.key = 3;
   list->array[2] = el;
 
-  k4.i = 4;
-  el.key = k4;
+  el.key = 4;
   list->array[3] = el;
 
   result = shift_left(list, index);
 
   ck_assert_int_eq(result, false);
-  ck_assert_int_eq(list->array[0].key.i, 1);
-  ck_assert_int_eq(list->array[1].key.i, 2);
-  ck_assert_int_eq(list->array[2].key.i, 3);
-  ck_assert_int_eq(list->array[3].key.i, 4);
+  ck_assert_int_eq(list->array[0].key, 1);
+  ck_assert_int_eq(list->array[1].key, 2);
+  ck_assert_int_eq(list->array[2].key, 3);
+  ck_assert_int_eq(list->array[3].key, 4);
 }
 END_TEST
 
 START_TEST(test_shift_left_fail_tail)
 {
-  Register el;
+  Item el;
   bool result;
   int index = 4;
   int capacity = 5;
-  union Key k1, k2, k3, k4;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 1;
-  el.key = k1;
+  el.key = 1;
   list->array[0] = el;
 
-  k2.i = 2;
-  el.key = k2;
+  el.key = 2;
   list->array[1] = el;
 
-  k3.i = 3;
-  el.key = k3;
+  el.key = 3;
   list->array[2] = el;
 
-  k4.i = 4;
-  el.key = k4;
+  el.key = 4;
   list->array[3] = el;
 
   result = shift_left(list, index);
 
   ck_assert_int_eq(result, false);
-  ck_assert_int_eq(list->array[0].key.i, 1);
-  ck_assert_int_eq(list->array[1].key.i, 2);
-  ck_assert_int_eq(list->array[2].key.i, 3);
-  ck_assert_int_eq(list->array[3].key.i, 4);
+  ck_assert_int_eq(list->array[0].key, 1);
+  ck_assert_int_eq(list->array[1].key, 2);
+  ck_assert_int_eq(list->array[2].key, 3);
+  ck_assert_int_eq(list->array[3].key, 4);
 }
 END_TEST
 
 START_TEST(test_shift_right_2nd_el_in_4_el_array)
 {
-  Register el;
-  union Key k1, k2, k3, k4;
+  Item el;
   int index = 1;
   int capacity = 5;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 1;
-  el.key = k1;
+  el.key = 1;
   list->array[0] = el;
 
-  k2.i = 2;
-  el.key = k2;
+  el.key = 2;
   list->array[1] = el;
 
-  k3.i = 3;
-  el.key = k3;
+  el.key = 3;
   list->array[2] = el;
 
-  k4.i = 4;
-  el.key = k4;
+  el.key = 4;
   list->array[3] = el;
 
   shift_right(list, index);
 
   ck_assert_int_eq(list->capacity, 5);
-  ck_assert_int_eq(list->array[0].key.i, 1);
-  ck_assert_int_eq(list->array[1].key.i, 2);
-  ck_assert_int_eq(list->array[2].key.i, 2);
-  ck_assert_int_eq(list->array[3].key.i, 3);
-  ck_assert_int_eq(list->array[4].key.i, 4);
+  ck_assert_int_eq(list->array[0].key, 1);
+  ck_assert_int_eq(list->array[1].key, 2);
+  ck_assert_int_eq(list->array[2].key, 2);
+  ck_assert_int_eq(list->array[3].key, 3);
+  ck_assert_int_eq(list->array[4].key, 4);
 }
 END_TEST
 
 START_TEST(test_shift_right_1st_el_in_4_el_filled_array)
 {
-  Register el;
-  union Key k1, k2, k3, k4;
+  Item el;
   int index = 0;
   int capacity = 4;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 1;
-  el.key = k1;
+  el.key = 1;
   list->array[0] = el;
 
-  k2.i = 2;
-  el.key = k2;
+  el.key = 2;
   list->array[1] = el;
 
-  k3.i = 3;
-  el.key = k3;
+  el.key = 3;
   list->array[2] = el;
 
-  k4.i = 4;
-  el.key = k4;
+  el.key = 4;
   list->array[3] = el;
 
   shift_right(list, index);
 
   ck_assert_int_eq(list->capacity, 8);
-  ck_assert_int_eq(list->array[0].key.i, 1);
-  ck_assert_int_eq(list->array[1].key.i, 1);
-  ck_assert_int_eq(list->array[2].key.i, 2);
-  ck_assert_int_eq(list->array[3].key.i, 3);
-  ck_assert_int_eq(list->array[4].key.i, 4);
+  ck_assert_int_eq(list->array[0].key, 1);
+  ck_assert_int_eq(list->array[1].key, 1);
+  ck_assert_int_eq(list->array[2].key, 2);
+  ck_assert_int_eq(list->array[3].key, 3);
+  ck_assert_int_eq(list->array[4].key, 4);
 }
 END_TEST
 
 START_TEST(test_discard_head_4_el)
 {
-  Register el;
+  Item el;
   bool result;
-  union Key k1, k2, k3, k4;
   int index = 0;
   int capacity = 5;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 1;
-  el.key = k1;
+  el.key = 1;
   list->array[0] = el;
 
-  k2.i = 2;
-  el.key = k2;
+  el.key = 2;
   list->array[1] = el;
 
-  k3.i = 3;
-  el.key = k3;
+  el.key = 3;
   list->array[2] = el;
 
-  k4.i = 4;
-  el.key = k4;
+  el.key = 4;
   list->array[3] = el;
 
   result = discard(list, index);
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(list->size, 3);
-  ck_assert_int_eq(list->array[0].key.i, 2);
-  ck_assert_int_eq(list->array[1].key.i, 3);
-  ck_assert_int_eq(list->array[2].key.i, 4);
+  ck_assert_int_eq(list->array[0].key, 2);
+  ck_assert_int_eq(list->array[1].key, 3);
+  ck_assert_int_eq(list->array[2].key, 4);
 }
 END_TEST
 
 START_TEST(test_discard_tail_1_el)
 {
-  Register el;
+  Item el;
   bool result;
-  union Key k1;
   int index = 0;
   int capacity = 5;
 
   init_list(list, capacity);
   list->size = 1;
 
-  k1.i = 15;
-  el.key = k1;
+  el.key = 15;
   list->array[0] = el;
 
   result = discard(list, index);
@@ -784,70 +682,59 @@ END_TEST
 
 START_TEST(test_discard_tail_4_el)
 {
-  Register el;
+  Item el;
   bool result;
-  union Key k1, k2, k3, k4;
   int index = 3;
   int capacity = 5;
 
   init_list(list, capacity);
   list->size = 4;
 
-  k1.i = 1;
-  el.key = k1;
+  el.key = 1;
   list->array[0] = el;
 
-  k2.i = 2;
-  el.key = k2;
+  el.key = 2;
   list->array[1] = el;
 
-  k3.i = 3;
-  el.key = k3;
+  el.key = 3;
   list->array[2] = el;
 
-  k4.i = 4;
-  el.key = k4;
+  el.key = 4;
   list->array[3] = el;
 
   result = discard(list, index);
 
   ck_assert_int_eq(result, true);
   ck_assert_int_eq(list->size, 3);
-  ck_assert_int_eq(list->array[0].key.i, 1);
-  ck_assert_int_eq(list->array[1].key.i, 2);
-  ck_assert_int_eq(list->array[2].key.i, 3);
+  ck_assert_int_eq(list->array[0].key, 1);
+  ck_assert_int_eq(list->array[1].key, 2);
+  ck_assert_int_eq(list->array[2].key, 3);
 }
 END_TEST
 
 START_TEST(test_discard_idx_1_twice_5_el)
 {
-  Register el;
+  Item el;
   bool result_1, result_2;
-  union Key k1, k2, k3, k4, k5;
   int index = 1;
   int capacity = 5;
 
   init_list(list, capacity);
   list->size = 5;
 
-  k1.i = 10;
-  el.key = k1;
+  el.key = 10;
   list->array[0] = el;
 
-  k2.i = 20;
-  el.key = k2;
+  el.key = 20;
   list->array[1] = el;
 
-  k3.i = 30;
-  el.key = k3;
+  el.key = 30;
   list->array[2] = el;
 
-  k4.i = 1;
-  el.key = k4;
+  el.key = 1;
   list->array[3] = el;
 
-  k5.i = 2;
-  el.key = k5;
+  el.key = 2;
   list->array[4] = el;
 
   result_1 = discard(list, index);
@@ -856,97 +743,85 @@ START_TEST(test_discard_idx_1_twice_5_el)
   ck_assert_int_eq(result_1, true);
   ck_assert_int_eq(result_2, true);
   ck_assert_int_eq(list->size, 3);
-  ck_assert_int_eq(list->array[0].key.i, 10);
-  ck_assert_int_eq(list->array[1].key.i, 1);
-  ck_assert_int_eq(list->array[2].key.i, 2);
+  ck_assert_int_eq(list->array[0].key, 10);
+  ck_assert_int_eq(list->array[1].key, 1);
+  ck_assert_int_eq(list->array[2].key, 2);
 }
 END_TEST
 
 START_TEST(test_index_of_success)
 {
-  Register el;
-  union Key identifier;
+  Item el;
+  int identifier;
   int result, capacity;
-  union Key k1, k2, k3, k4, k5;
 
   capacity = 7;
   init_list(list, capacity);
   list->size = 5;
 
-  k1.i = 10;
-  el.key = k1;
+  el.key = 10;
   list->array[0] = el;
 
-  k2.i = 20;
-  el.key = k2;
+  el.key = 20;
   list->array[1] = el;
 
-  k3.i = 30;
-  el.key = k3;
+  el.key = 30;
   list->array[2] = el;
 
-  k4.i = 1;
-  el.key = k4;
+  el.key = 1;
   list->array[3] = el;
 
-  k5.i = 2;
-  el.key = k5;
+  el.key = 2;
   list->array[4] = el;
 
-  identifier.i = 30;
+  identifier = 30;
   result = index_of(list, identifier, compare_to);
 
   ck_assert_int_eq(result, 2);
   ck_assert_int_eq(list->size, 5);
-  ck_assert_int_eq(list->array[0].key.i, 10);
-  ck_assert_int_eq(list->array[1].key.i, 20);
-  ck_assert_int_eq(list->array[2].key.i, 30);
-  ck_assert_int_eq(list->array[3].key.i, 1);
-  ck_assert_int_eq(list->array[4].key.i, 2);
+  ck_assert_int_eq(list->array[0].key, 10);
+  ck_assert_int_eq(list->array[1].key, 20);
+  ck_assert_int_eq(list->array[2].key, 30);
+  ck_assert_int_eq(list->array[3].key, 1);
+  ck_assert_int_eq(list->array[4].key, 2);
 }
 END_TEST
 
 START_TEST(test_index_of_failure)
 {
-  Register el;
-  union Key identifier;
+  Item el;
+  int identifier;
   int result, capacity;
-  union Key k1, k2, k3, k4, k5;
 
   capacity = 7;
   init_list(list, capacity);
   list->size = 5;
 
-  k1.i = 10;
-  el.key = k1;
+  el.key = 10;
   list->array[0] = el;
 
-  k2.i = 20;
-  el.key = k2;
+  el.key = 20;
   list->array[1] = el;
 
-  k3.i = 30;
-  el.key = k3;
+  el.key = 30;
   list->array[2] = el;
 
-  k4.i = 1;
-  el.key = k4;
+  el.key = 1;
   list->array[3] = el;
 
-  k5.i = 2;
-  el.key = k5;
+  el.key = 2;
   list->array[4] = el;
 
-  identifier.i = 100;
+  identifier = 100;
   result = index_of(list, identifier, compare_to);
 
   ck_assert_int_eq(result, -1);
   ck_assert_int_eq(list->size, 5);
-  ck_assert_int_eq(list->array[0].key.i, 10);
-  ck_assert_int_eq(list->array[1].key.i, 20);
-  ck_assert_int_eq(list->array[2].key.i, 30);
-  ck_assert_int_eq(list->array[3].key.i, 1);
-  ck_assert_int_eq(list->array[4].key.i, 2);
+  ck_assert_int_eq(list->array[0].key, 10);
+  ck_assert_int_eq(list->array[1].key, 20);
+  ck_assert_int_eq(list->array[2].key, 30);
+  ck_assert_int_eq(list->array[3].key, 1);
+  ck_assert_int_eq(list->array[4].key, 2);
 }
 END_TEST
 

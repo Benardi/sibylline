@@ -10,7 +10,7 @@
 #define SORT_H
 
 #include <dll.h>
-#include <register.h>
+#include <item.h>
 
 /** @brief Sorts given array via Insertion Sort procedure.
  *
@@ -32,13 +32,13 @@ void insertion_sort(int array[], int start, int end);
  * bigger it should return 1, if first parameter is smaller it should
  * return -1, if it's the same as the second parameter it should return 0.
  *
- * @param array Array of Registers to be sorted
+ * @param array Array of ExtendedItems to be sorted
  * @param start Position of first array element to be sorted.
  * @param end Position of last array element to be sorted.
  * @param compare Pointer to function that compares two union Keys.
  * @return Void
  */
-void insertion_sort_gnrc(Register array[], int start, int end,
+void insertion_sort_gnrc(ExtendedItem array[], int start, int end,
                          int (*compare)(union Key, union Key));
 
 /** @brief Combines two sorted sequences into a sorted one.
@@ -179,12 +179,12 @@ void bubble_sort(int array[], int start, int end);
  * Applies the Heap Sort procedure to sort all elements
  * in array in ascending order.
  *
- * @param array Array of Registers numbers to be sorted
+ * @param array Array of ExtendedItems numbers to be sorted
  * @param length Number of elements in array.
  * @param compare Pointer to function that compares two union Keys.
  * @return Void
  */
-void heap_sort(Register array[], int length,
+void heap_sort(ExtendedItem array[], int length,
                int (*compare)(union Key, union Key));
 
 /** @brief Sorts given array via Counting Sort procedure.
@@ -245,17 +245,17 @@ void radix_sort(int array[], int* out, int length, int max_decimal_place);
  * @return Void
  */
 void insertion_sort_dll(DoublyLinkedList** head, int start, int end,
-                        int (*compare)(union Key, union Key));
+                        int (*compare)(int, int));
 
-/** @brief Sorts array of Registers via Bucket Sort procedure.
+/** @brief Sorts array of ExtendedItems via Bucket Sort procedure.
  *
  * Applies Insertion Sort procedure to sort elements in Doubly Linked List
  * in ascending order.
  *
- * @param array Array of Registers to be sorted
+ * @param array Array of ExtendedItems to be sorted
  * @param length Number of elements in array.
  * @return Void
  */
-void bucket_sort(Register array[], int length);
+void bucket_sort(ExtendedItem array[], int length);
 
 #endif

@@ -1,7 +1,7 @@
 #include <heap.h>
 #include <utils.h>
 
-void max_heapify(Register array[], int heap_size, int i,
+void max_heapify(ExtendedItem array[], int heap_size, int i,
                  int (*compare)(union Key, union Key))
 {
   int left, right, largest;
@@ -27,7 +27,7 @@ void max_heapify(Register array[], int heap_size, int i,
     }
 }
 
-void build_max_heap(Register array[], int length,
+void build_max_heap(ExtendedItem array[], int length,
                     int (*compare)(union Key, union Key))
 {
   int heap_size, i;

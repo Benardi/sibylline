@@ -132,15 +132,15 @@ static void rb_insert_fixup(RedBlackTree** root, RedBlackTree* nil,
   (*root)->color = BLACK;
 }
 
-RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Register reg,
-                        int (*compare)(union Key, union Key))
+RedBlackTree* rb_insert(RedBlackTree** root, RedBlackTree* nil, Item item,
+                        int (*compare)(int, int))
 {
   RedBlackTree* node;
   RedBlackTree* parent;
   RedBlackTree* current;
 
   node = malloc(sizeof(RedBlackTree));
-  node->data = reg;
+  node->data = item;
   node->color = RED;
   node->right = nil;
   node->left = nil;
